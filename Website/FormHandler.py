@@ -8,7 +8,7 @@ def index():
 
 @app.route('/', methods=['POST'])
 def submit():
-    search = request.form[search]
+    search = request.form["search"]
     return render_template('index.html', alert_message=search)
 
 if __name__ == '__main__':  

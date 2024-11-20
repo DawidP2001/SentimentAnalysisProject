@@ -1,0 +1,21 @@
+nav {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+#navTitle{
+  padding: 5px;
+}
+
+#navLinks {
+  
+}
+#navLinks a{
+  padding: 5px;
+  color: white;
+}
