@@ -1,6 +1,7 @@
 # Got this code from https://scrapfly.io/blog/how-to-scrape-twitter/
 
 from playwright.sync_api import sync_playwright
+import Parse
 
 
 def scrape_tweet(url: str) -> dict:
@@ -19,7 +20,7 @@ def scrape_tweet(url: str) -> dict:
         return response
 
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=False)
+        browser = pw.chromium.launch(headless=True)
         context = browser.new_context(viewport={"width": 1920, "height": 1080})
         page = context.new_page()
 
@@ -38,4 +39,6 @@ def scrape_tweet(url: str) -> dict:
 
 
 if __name__ == "__main__":
-    print(scrape_tweet("https://twitter.com/Scrapfly_dev/status/1664267318053179398"))
+    rawData = scrape_tweet("https://twitter.com/Scrapfly_dev/status/1664267318053179398")
+    data = Parse.parse_tweet(rawData)
+    print(data['text'])
