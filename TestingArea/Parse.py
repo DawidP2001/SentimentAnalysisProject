@@ -43,7 +43,6 @@ def parse_tweet(data: Dict) -> Dict:
             result["poll"]["ended"] = value["boolean_value"]
         elif "duration_minutes" in key:
             result["poll"]["duration"] = value["string_value"]
-    user_data = jmespath.search("core.user_results.result", data)
 
     return result
 
@@ -65,7 +64,7 @@ def scrape_profile(url: str) -> dict:
         return response
 
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=False)
+        browser = pw.chromium.launch(headless=True)
         context = browser.new_context(viewport={"width": 1920, "height": 1080})
         page = context.new_page()
 
@@ -81,4 +80,7 @@ def scrape_profile(url: str) -> dict:
             data = xhr.json()
             return data['data']['user']['result']
 
-
+if __name__ == '__main__':  
+   data = scrape_profile("https://twitter.com/Scrapfly_dev/status/1664267318053179398")
+   result = parse_tweet(data)
+   print(result)
