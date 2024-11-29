@@ -19,3 +19,27 @@ nav {
   padding: 5px;
   color: white;
 }
+#content {
+  height: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#content #searchBar {
+  margin: auto;
+  background-color: lightblue;
+}
+#content #searchBar input {
+  margin: 5px;
+}
+
+#searchBar form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically (optional) */
+}
+
+#sumbitBtn {
+  align-self: flex-end;
+} 
