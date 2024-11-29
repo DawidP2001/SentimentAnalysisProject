@@ -1,6 +1,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
   </head>
   <body>
@@ -17,19 +18,12 @@
       </div>
     </nav>
     <div id="content">
-      <div id="searchBar">
-        <form action="post">
-          <label for="search">Topic:</label>
-          <input id='search' name='search' type="text">
-          <label for="search">Subreddit:</label>
-          <input id="subredditSearch" name='subredditSearch' type='text'>
-          <label for="search">From:</label>
-          <input id="startDateSearch" name="startDateSearch" type="date">
-          <label for="search">To:</label>
-          <input id="endDateSearch" name="endDateSearch" type="date">
-          <input id="sumbitBtn" type="submit">
-        </form>
-      </div>
+    {% if form %}
+      {% extends "form.html" %}
+    {% endif %}
+    {% if charts %}
+      {% extends "charts.html" %}
+    {% endif %}
     </div>
   </body>
 </html>

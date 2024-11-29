@@ -1,4 +1,3 @@
-import requests
 import praw
 import os
 from dotenv import load_dotenv
