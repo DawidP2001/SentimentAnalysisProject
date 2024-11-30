@@ -1,8 +1,10 @@
 <div id="test">aaaaaa</div>
-<canvas id="myChart" width="400" height="200"></canvas>
-<script>      
-    displayPieChart("{{ session.resultArray[0] }}", "{{ session.resultArray[1] }}", "{{ session.resultArray[2] }}")
-</script>
+<div id="pieChartSection">
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <script>      
+        displayPieChart("{{ session.resultArray[0] }}", "{{ session.resultArray[1] }}", "{{ session.resultArray[2] }}")
+    </script>
+</div>
 <div id="buttonSection">
     <button type="button">View More Graphs</button>
     <button type="button">View Specific Posts</button>
