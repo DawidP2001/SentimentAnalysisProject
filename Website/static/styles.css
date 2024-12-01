@@ -7,23 +7,26 @@ nav {
   justify-content: space-between; 
   align-items: center;
 }
-
+body {
+  overflow-y: auto;
+}
 #navTitle{
   padding: 5px;
 }
 
-#navLinks {
-  
-}
 #navLinks a{
   padding: 5px;
   color: white;
 }
 #content {
-  height: 75%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: auto;
+  height: auto;
+  border: 1px solid black;
+  flex: 1;
 }
 #content #searchBar {
   margin: auto;
@@ -43,3 +46,11 @@ nav {
 #sumbitBtn {
   align-self: flex-end;
 } 
+#moreChartSection {
+  margin: 10px;
+  border: 1px solid black;
+  display: inline;
+}
+#viewPostsSection {
+  display: none;
+}

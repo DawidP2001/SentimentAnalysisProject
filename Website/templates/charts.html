@@ -1,11 +1,51 @@
-<div id="test">aaaaaa</div>
 <div id="pieChartSection">
     <canvas id="myChart" width="400" height="200"></canvas>
     <script>      
-        displayPieChart("{{ session.resultArray[0] }}", "{{ session.resultArray[1] }}", "{{ session.resultArray[2] }}")
+        displayPieChart(
+            "{{ session.postTitleSentimentCount[0] }}", 
+            "{{ session.postTitleSentimentCount[1] }}", 
+            "{{ session.postTitleSentimentCount[2] }}",
+            "{{ session.search }}"
+        );
     </script>
 </div>
 <div id="buttonSection">
-    <button type="button">View More Graphs</button>
-    <button type="button">View Specific Posts</button>
+    <button onclick="moreGraphsClicked()">View More Graphs</button>
+    <button onclick="viewPostsClicked()">View Specific Posts</button>
+</div>
+<div id="moreChartSection">
+     <!-- Bar Chart for Subreddits -->
+    <div id="subredditBarChartSection">
+        <canvas id="subredditBarChart" width="400" height="200"></canvas>
+        <script>      
+            displaySubredditBarChart(
+                "{{ session.subKeyList }}",
+                "{{ session.subItemList }}"
+            );
+        </script>
+    </div>
+    <!-- Sentiment Over Time       -->
+    <div id="sentimentOverTimeSection">
+        <canvas id="sentimentOverTimeLineGraph" width="400" height="200"></canvas>
+        <script>      
+            sentimentOverTimeLineGraph();
+        </script>
+    </div>
+    <!-- Top Keywords by Sentimnet -->
+    <div id="topKeywordsBySentimentSection">
+        <canvas id="topKeywordsBySentimentBarChart" width="400" height="200"></canvas>
+        <script>      
+            topKeywordsBySentimentBarChart();
+        </script>
+    </div>
+    <!-- Sentiment vs. Engagement  -->
+    <div id="sentimentVSEngagementSection">
+        <canvas id="sentimentVSEngagementScatterGraph" width="400" height="200"></canvas>
+        <script>      
+            sentimentVSEngagementSection();
+        </script>
+    </div>
+</div>
+<div id="viewPostsSection">
+    <h1>In Progress</h1>
 </div>
