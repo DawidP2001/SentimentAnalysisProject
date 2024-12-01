@@ -1,3 +1,4 @@
+// This is a simple Pie Chart that displays the proportion of sentiment for the querry user made
 function displayPieChart(positiveValue, neutralValue, negativeValue, searchTopic){
   
   var xValues = ["Positive", "Neutral", "Negative"];
@@ -163,4 +164,8 @@ function viewPostsClicked(){
   postSection = document.getElementById("viewPostsSection")
   chartsSection.style.display = "none"
   postSection.style.display = "block"
+}
+
+function postButtonClicked(){
+  
 }
