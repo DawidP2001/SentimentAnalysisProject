@@ -12,9 +12,19 @@ reddit = praw.Reddit(
     user_agent="SentimentAnalysisTool/v1.0 by xxx_madlad_xxx"
 )
 
-def extractData(query: str):
+def queryAPI(query: str):
     results = reddit.subreddit("all").search(query, limit=10)
+    return results
+
+def extractPostTitles(results):
     resultList = []
     for post in results:
         resultList.append(post.title)
+    return resultList
+
+# This function extracts the subreddits from the results of the query
+def extractPostSubreddits(results):
+    resultList = []
+    for post in results:
+        resultList.append(post.subreddit)
     return resultList
