@@ -7,24 +7,24 @@ nav {
   justify-content: space-between; 
   align-items: center;
 }
-
+body {
+  overflow-y: auto;
+}
 #navTitle{
   padding: 5px;
 }
 
-#navLinks {
-  
-}
 #navLinks a{
   padding: 5px;
   color: white;
 }
 #content {
-  height: 75%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-height: 100vh;
+  border: 1px solid black;
 }
 #content #searchBar {
   margin: auto;
@@ -47,4 +47,5 @@ nav {
 #moreChartSection {
   margin: 10px;
   border: 1px solid black;
+  min-height: 100px;
 }

@@ -16,9 +16,10 @@ def queryAPI(query: str):
     results = reddit.subreddit("all").search(query, limit=10)
     return results
 
-def extractPostTitles(results):
+# This function extracts the titles of the posts from query
+def extractPostTitles(query):
     resultList = []
-    for post in results:
+    for post in query:
         resultList.append(post.title)
     return resultList
 
