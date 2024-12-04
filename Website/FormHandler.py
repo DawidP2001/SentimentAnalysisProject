@@ -19,7 +19,7 @@ def index():
 
 @app.route('/showCharts', methods=['POST'])
 def submit():
-    session['search'] = request.form["search"] # This contains the topic from the search
+    session['search'] = request.form["searchTopic"] # This contains the topic from the search
     rawData = Reddit.queryAPI(session['search']) # Contains all the raw data from the query to the Reddit Api
     subreddits = Reddit.extractPostSubreddits(rawData)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subreddits))

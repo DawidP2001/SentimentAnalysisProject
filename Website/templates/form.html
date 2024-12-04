@@ -1,13 +1,53 @@
-<div id="searchBar">
-    <form action="/showCharts" method="post">
-        <label for="search">Topic:</label>
-        <input id='search' name='search' type="text">
-        <label for="search">Subreddit:</label>
-        <input id="subredditSearch" name='subredditSearch' type='text'>
-        <label for="search">From:</label>
-        <input id="startDateSearch" name="startDateSearch" type="date">
-        <label for="search">To:</label>
-        <input id="endDateSearch" name="endDateSearch" type="date">
-        <input id="sumbitBtn" type="submit">
-    </form>
+<h1>Select the Search Option:</h1>
+<div id="formSection">
+    <div class="tabSection">
+        <button class="tab" onclick="openCity(event, 'searchBarTopic')">Topic</button>
+        <button class="tab" onclick="openCity(event, 'searchBarUser')">User</button>
+    </div>
+
+    <div id="searchBarTopic" class="tabContent">
+        <form class='searchForm' action="/showCharts" method="post">
+            <table class="formTable">
+                <tr>
+                    <td><label for="searchTopic">Topic:</label></td>
+                    <td><input id='searchTopic' name='searchTopic' type="text"></td>
+                </tr>
+                <tr>
+                    <td><label for="subredditSearchTopic">Subreddit:</label></td>
+                    <td><input id="subredditSearchTopic" name='subredditSearchTopic' type='text'></td>
+                </tr>
+                <tr>
+                    <td><label for="fromDateTopic">From:</label></td>
+                    <td><input id="fromDateTopic" name="fromDateTopic" type="date"></td>
+                </tr>
+                <tr>
+                    <td><label for="toDateTopic">To:</label></td>
+                    <td><input id="toDateTopic" name="toDateTopic" type="date"></td>
+                </tr>
+                <tr>
+                    <td class="submitBtnCell" colspan="2"><input id="sumbitBtnTopic"  type="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="searchBarUser" class="tabContent">
+        <form action="/showCharts" method="post">
+                <tr>
+                    <td><label for="searchUser">User:</label></label></td>
+                    <td><input id='searchUser' name='searchUser' type="text"></td>
+                </tr>
+                <tr>
+                    <td><label for="fromDateUser">From:</label></label></td>
+                    <td><input id="fromDateUser" name="fromDateUser" type="date"></td>
+                </tr>
+                <tr>
+                    <td><label for="toDateUser">To:</label></td>
+                    <td><input id="toDateUser" name="toDateUser" type="date"></td>
+                </tr>
+                <tr>
+                    <td class="submitBtnCell" colspan="2"><input id="sumbitBtnUser" type="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>

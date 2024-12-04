@@ -172,3 +172,15 @@ function postButtonClicked(){
   expandableArea.style.flexDirection = "row";
   expandableArea.style.justifyContent = "space-around";
 }
+
+// This section is responsible for displaying the form associated with a tab
+function openCity(evt, section) {
+  tabcontent = document.getElementsByClassName("tabContent");
+  tab = document.getElementsByClassName("tab");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+    tab[i].className = tab[i].className.replace(" active", "");
+  }
+  document.getElementById(section).style.display = "block";
+  evt.currentTarget.className += " active";
+}

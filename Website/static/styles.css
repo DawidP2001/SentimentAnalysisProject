@@ -1,3 +1,4 @@
+/* The style for the navigation bar */
 nav {
   margin: 0;
   padding: 0;
@@ -7,6 +8,7 @@ nav {
   justify-content: space-between; 
   align-items: center;
 }
+
 body {
   overflow-y: auto;
 }
@@ -28,24 +30,78 @@ body {
   border: 1px solid black;
   flex: 1;
 }
-#content #searchBar {
-  margin: auto;
-  background-color: lightblue;
-}
-#content #searchBar input {
-  margin: 5px;
-}
+/*
+//////////////////////////////////
 
-#searchBar form {
+Section for only the form page
+
+//////////////////////////////////
+*/
+
+#formSection{
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   flex-direction: column;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically (optional) */
+  border: 1px solid black;
+  padding: 0;
+  margin-top: 50px;
 }
-
+/*This is the submit button for the forms*/
 #sumbitBtn {
   align-self: flex-end;
 } 
+
+/* This is to style divs that contain tabs within them */
+.tabSection {
+  width: 100%;
+}
+
+.tabSection button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  width: 50%;
+}
+.tabSection button:hover {
+  background-color: #ddd;
+}
+
+.tabSection button.active {
+  background-color: #ccc;
+}
+
+.tabContent {
+  display: none;
+  padding: 6px 12px;
+}
+
+.submitBtnCell {
+  text-align: center;
+}
+
+.searchForm{
+  border-spacing: 10px;
+}
+.tabContent{
+  border: 1px solid blakc;
+}
+
+.formTable {
+  border-spacing: 10px;
+}
+/*
+//////////////////////////////////
+
+Section for only the chart page
+
+//////////////////////////////////
+*/
 #moreChartSection {
   margin: 10px;
   border: 1px solid black;
