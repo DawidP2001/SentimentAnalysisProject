@@ -54,3 +54,7 @@ body {
 #viewPostsSection {
   display: none;
 }
+#expandablePostDetails {
+  display: none;
+  border: 1 solid black;
+}

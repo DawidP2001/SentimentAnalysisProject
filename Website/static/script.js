@@ -150,22 +150,25 @@ function sentimentVSEngagementSection(){
   });
 }
 
-// This function is called when the view more grpahs button is clicked
+// This function is called when the view more grpahs button is cl;icked
 function moreGraphsClicked(){
-  chartsSection = document.getElementById("moreChartSection")
-  postSection = document.getElementById("viewPostsSection")
-  chartsSection.style.display = "block"
-  postSection.style.display = "none"
+  chartsSection = document.getElementById("moreChartSection");
+  postSection = document.getElementById("viewPostsSection");
+  chartsSection.style.display = "block";
+  postSection.style.display = "none";
 }
 
 // This function is called when the view specific posts button is clicked
 function viewPostsClicked(){
-  chartsSection = document.getElementById("moreChartSection")
-  postSection = document.getElementById("viewPostsSection")
-  chartsSection.style.display = "none"
-  postSection.style.display = "block"
+  chartsSection = document.getElementById("moreChartSection");
+  postSection = document.getElementById("viewPostsSection");
+  chartsSection.style.display = "none";
+  postSection.style.display = "block";
 }
 
 function postButtonClicked(){
-  
+  expandableArea = document.getElementById("expandablePostDetails");
+  expandableArea.style.display = "flex";
+  expandableArea.style.flexDirection = "row";
+  expandableArea.style.justifyContent = "space-around";
 }
