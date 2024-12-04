@@ -1,7 +1,6 @@
 from collections import Counter
 
 def countLables(values):
-    print(type(values))
     resultArray = [0,0,0]
     for value in values:
         if(value['label'] == 'POSITIVE'):
