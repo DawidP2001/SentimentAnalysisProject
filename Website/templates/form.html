@@ -1,10 +1,9 @@
-<h1>Select the Search Option:</h1>
 <div id="formSection">
+    <h3>Select the Search Option:</h3>
     <div class="tabSection">
-        <button class="tab" onclick="openCity(event, 'searchBarTopic')">Topic</button>
+        <button class="tab active" onclick="openCity(event, 'searchBarTopic')">Topic</button>
         <button class="tab" onclick="openCity(event, 'searchBarUser')">User</button>
     </div>
-
     <div id="searchBarTopic" class="tabContent">
         <form class='searchForm' action="/showCharts" method="post">
             <table class="formTable">
@@ -31,7 +30,8 @@
         </form>
     </div>
     <div id="searchBarUser" class="tabContent">
-        <form action="/showCharts" method="post">
+        <form class ='searchForm' action="/showCharts" method="post">
+            <table class="formTable">
                 <tr>
                     <td><label for="searchUser">User:</label></label></td>
                     <td><input id='searchUser' name='searchUser' type="text"></td>

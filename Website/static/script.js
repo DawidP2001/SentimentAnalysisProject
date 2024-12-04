@@ -175,8 +175,10 @@ function postButtonClicked(){
 
 // This section is responsible for displaying the form associated with a tab
 function openCity(evt, section) {
+  document.getElementById("searchBarTopic").style.display = "none";
   tabcontent = document.getElementsByClassName("tabContent");
   tab = document.getElementsByClassName("tab");
+  // Hides other tab content and turns off the active element
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
     tab[i].className = tab[i].className.replace(" active", "");

@@ -1,25 +1,60 @@
-/* The style for the navigation bar */
+/*
+//////////////////////////////////
+
+Section for the navigation bar
+
+//////////////////////////////////
+*/
 nav {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #C6C6C6;
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
-}
-
-body {
-  overflow-y: auto;
+  border-bottom: 1px solid black;
 }
 #navTitle{
   padding: 5px;
 }
-
+#navLinks {
+  display: flex;
+  align-self: stretch;
+}
 #navLinks a{
-  padding: 5px;
+  color: black;
+  height: 100%;
+  text-align: center;
+  padding: 0px 5px;
+  display: flex;
+  align-items: center;
+}
+/* Change the color of links on hover */
+#navLinks a:hover {
+  background-color: #FF5700;
+  color: black;
+}
+/* Add a color to the active/current link */
+#navLinks a.active {
+  background-color: #FF5700;
   color: white;
 }
+
+/*
+//////////////////////////////////
+
+Section for elements on multiple pages
+
+//////////////////////////////////
+*/
+
+body {
+  overflow-y: auto;
+  background: linear-gradient(to bottom, #FF8b60, #C6C6C6, #9494FF);
+  margin: 0;
+}
+
 #content {
   display: flex;
   flex-direction: column;
@@ -27,7 +62,6 @@ body {
   align-items: center;
   width: auto;
   height: auto;
-  border: 1px solid black;
   flex: 1;
 }
 /*
@@ -47,15 +81,19 @@ Section for only the form page
   border: 1px solid black;
   padding: 0;
   margin-top: 50px;
+  background: #EFF7FF;
 }
 /*This is the submit button for the forms*/
 #sumbitBtn {
   align-self: flex-end;
 } 
-
+#searchBarTopic{
+  display: block;
+}
 /* This is to style divs that contain tabs within them */
 .tabSection {
   width: 100%;
+  border-bottom: 1px solid gray;
 }
 
 .tabSection button {
