@@ -29,3 +29,11 @@ def extractPostSubreddits(results):
     for post in results:
         resultList.append(post.subreddit)
     return resultList
+
+def extractData(results):
+    titleList = []
+    subbredditList = []
+    for post in results:
+        titleList.append(post.title)
+        subbredditList.append(post.subreddit)
+    return titleList, subbredditList

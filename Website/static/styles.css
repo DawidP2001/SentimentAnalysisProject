@@ -220,7 +220,18 @@ canvas {
 /*
 //////////////////////////////////
 
-Section for other
+Section for viewPosts.html
 
 //////////////////////////////////
 */
+
+#sentimentPostsSection {
+  display: flex;
+}
+.sentimentSection {
+  text-align: center;
+  width: 25vw;
+}
+.sentimentSection button {
+  width: 100%;
+}

@@ -145,3 +145,41 @@
         </tr>
     </table>
 </div>
+<div id="sentimentPostsSection">
+    <div class="sentimentSection">
+        <h1>Positive Section</h1>
+{% for entry in session.positiveSentimentList %}
+        <div>
+            <button>
+                Text: {{ entry['Text'] }}<br>
+                Sentiment: {{ entry['label'] }}<br>
+                Score: {{ entry['score'] }}<br>
+            </button>
+        </div>
+{% endfor %}
+    </div>
+    <div class="sentimentSection">
+        <h1>Neutral Section</h1>
+{% for entry in session.neutralSentimentList %}
+        <div>
+            <button>
+                Text: {{ entry['Text'] }}<br>
+                Sentiment: {{ entry['label'] }}<br>
+                Score: {{ entry['score'] }}<br>
+            </button>
+        </div>
+{% endfor %}
+    </div>
+    <div class="sentimentSection">
+        <h1>Negative Section</h1>
+{% for entry in session.negativeSentimentList %}
+        <div>
+            <button>
+                Text: {{ entry['Text'] }}<br>
+                Sentiment: {{ entry['label'] }}<br>
+                Score: {{ entry['score'] }}<br>
+            </button>
+        </div>
+{% endfor %}
+    </div>
+</div>

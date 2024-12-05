@@ -23,3 +23,17 @@ def convertSubOccurencesForJs(subredditCounter):
         itemList.append(subredditCounter[key])
 
     return keyList, itemList
+
+def seperateSentiments(sentimentList):
+    positiveSentimentList = []
+    neutralSentimentList = []
+    negativeSentimentList = []
+
+    for value in sentimentList:
+        if(value['label'] == 'POSITIVE'):
+            positiveSentimentList.append(value)
+        if(value['label'] == 'NEUTRAL'):
+            neutralSentimentList.append(value)
+        if(value['label'] == 'NEGATIVE'):
+            negativeSentimentList.append(value)
+    return positiveSentimentList, neutralSentimentList, negativeSentimentList
