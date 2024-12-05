@@ -1,7 +1,7 @@
 import Reddit as r
+import SenitmentAnalyser as s
 
 query = r.queryAPI("Poland")
-
-for submission in query:
-    print(vars(submission))
-    break  # Check attributes of the first result only
+titles = r.extractPostTitles(query)
+results = s.analyseSentiment(titles)
+print(results)
