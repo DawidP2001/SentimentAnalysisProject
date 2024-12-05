@@ -1,4 +1,10 @@
 /*
+Author: Dawid Pionk
+Date: 05/12/2024
+Description: Contains css styles for this project
+*/
+
+/*
 //////////////////////////////////
 
 Section for the navigation bar
@@ -56,6 +62,7 @@ html{
   margin: 0px;
   padding: 0px;
   font-family: 'Roboto', sans-serif;
+  scroll-behavior: smooth;
 }
 body {
   overflow-y: auto;
@@ -196,7 +203,6 @@ Section for only the chart page
 */
 #moreChartSection {
   margin: 10px;
-  border: 1px solid black;
   display: inline;
 }
 #viewPostsSection {
@@ -204,7 +210,12 @@ Section for only the chart page
 }
 #expandablePostDetails {
   display: none;
-  border: 1 solid black;
+}
+canvas {
+  width: 40vw;
+  min-width: 400px;
+  max-width: 50vw;
+  margin: 1vw;
 }
 /*
 //////////////////////////////////

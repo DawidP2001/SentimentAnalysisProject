@@ -18,7 +18,17 @@ def index():
     return render_template( 
             'index.html',
             form=True, 
-            charts=False
+            charts=False,
+            scrollToContact=False
+        )
+
+@app.route('/#contactSection')
+def indexContact():
+    return render_template( 
+            'index.html',
+            form=True, 
+            charts=False,
+            scrollToContact=True
         )
 
 @app.route('/showCharts', methods=['POST'])
@@ -38,7 +48,8 @@ def submit():
     return render_template(
             'index.html',
             form=False, 
-            charts=True
+            charts=True,
+            scrollToContact=False
         )
 
 if __name__ == '__main__':  

@@ -19,7 +19,9 @@ function displayPieChart(positiveValue, neutralValue, negativeValue, searchTopic
           display: true,
           text: `Overall Sentiment of ${searchTopic}`
         }
-      }
+      },
+      responsive: true,
+      maintainAspectRatio: false
     });
 }
 
@@ -57,7 +59,9 @@ function displaySubredditBarChart(subKeyList, subItemList){
                 beginAtZero: true
             }
         }]
-      }
+      },
+      responsive: true,
+      maintainAspectRatio: false
     }
   });
 }
@@ -81,7 +85,9 @@ function sentimentOverTimeLineGraph(){
       title: {
       display: true,
       text: `Sentiment Over Time`
-      }
+      },
+      responsive: true,
+      maintainAspectRatio: false
     }
   });
 
@@ -112,7 +118,9 @@ function topKeywordsBySentimentBarChart(){
                 beginAtZero: true
             }
         }]
-      }
+      },
+      responsive: true,
+      maintainAspectRatio: false
     }
   });
 }
@@ -145,7 +153,9 @@ function sentimentVSEngagementSection(){
       title: {
         display: true,
         text: `Sentiment VS engagementSection`
-        }
+        },
+      responsive: true,
+      maintainAspectRatio: false
     }
   });
 }
@@ -185,4 +195,9 @@ function openCity(evt, section) {
   }
   document.getElementById(section).style.display = "block";
   evt.currentTarget.className += " active";
+}
+
+function scrollToElement(evt, section){
+  element = document.getElementById(section);
+  element.scrollIntoView()
 }

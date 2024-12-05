@@ -8,17 +8,20 @@
     <title>Reddit Sentiment Analyser</title>
   </head>
   <body>
+    {% if scrollToContact %}
+      <script>scrollToElement("contactSection")</script>
+    {% endif%}
     <nav>
       <div id="navTitle">
         <img src="">
         <h1>Reddit Sentiment explorer</h1>
       </div>
       <div id="navLinks">
-        <a href="#">Home</a>
+        <a href="/">Home</a>
         <a href="#">About</a>
         <a href="#">Guide</a>
         <a href="#">FAQ</a>
-        <a href="#">Contact</a>
+        <a href="/#contactSection">Contact</a>
       </div>
     </nav>
     <div id="content">
