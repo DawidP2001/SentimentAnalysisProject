@@ -1,3 +1,7 @@
+# Author: Dawid Pionk
+# Description:
+# Date: 
+
 from flask import Flask, request, render_template, session
 from Utility import Reddit
 #from Utility import SenitmentAnalyser
@@ -11,7 +15,7 @@ app.secret_key = os.getenv("Secret_Key")
 
 @app.route('/')
 def index():
-    return render_template(
+    return render_template( 
             'index.html',
             form=True, 
             charts=False

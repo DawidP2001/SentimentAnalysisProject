@@ -9,11 +9,16 @@ nav {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #C6C6C6;
+  background-color: #f1efef;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  border-bottom: 1px solid black;
+  position: sticky;
+  top: 0;
+}
+
+nav * {
+  margin: 0px 10px;
 }
 #navTitle{
   padding: 5px;
@@ -40,7 +45,6 @@ nav {
   background-color: #FF5700;
   color: white;
 }
-
 /*
 //////////////////////////////////
 
@@ -48,13 +52,15 @@ Section for elements on multiple pages
 
 //////////////////////////////////
 */
-
+html{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Roboto', sans-serif;
+}
 body {
   overflow-y: auto;
-  background: linear-gradient(to bottom, #FF8b60, #C6C6C6, #9494FF);
   margin: 0;
 }
-
 #content {
   display: flex;
   flex-direction: column;
@@ -64,6 +70,22 @@ body {
   height: auto;
   flex: 1;
 }
+h1 {
+  margin: 5px;
+  padding: 5px;
+}
+h2 {
+  margin: 5px;
+  padding: 5px;
+}
+h3{
+  margin: 5px;
+  padding: 5px;
+}
+h4 {
+  margin: 5px;
+  padding: 5px;
+}
 /*
 //////////////////////////////////
 
@@ -71,6 +93,16 @@ Section for only the form page
 
 //////////////////////////////////
 */
+#introduction {
+  background: linear-gradient(to bottom, #FF5700, transparent);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding-bottom: 40px;
+}
 
 #formSection{
   display: flex;
@@ -78,10 +110,10 @@ Section for only the form page
   align-items: center;
   flex-grow: 1;
   flex-direction: column;
-  border: 1px solid black;
+  border: 3px solid white;
   padding: 0;
-  margin-top: 50px;
-  background: #EFF7FF;
+  box-shadow: 15px 15px 20px grey;
+  background: #FF8b60;
 }
 /*This is the submit button for the forms*/
 #sumbitBtn {
@@ -136,6 +168,28 @@ Section for only the form page
 /*
 //////////////////////////////////
 
+Section for extra information html
+
+//////////////////////////////////
+*/
+#additionalInformation{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.textArea{
+  width: 80vw;
+}
+#bottomHomePage {
+  background: linear-gradient(to bottom, transparent, #FF5700);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/*
+//////////////////////////////////
+
 Section for only the chart page
 
 //////////////////////////////////
@@ -152,3 +206,10 @@ Section for only the chart page
   display: none;
   border: 1 solid black;
 }
+/*
+//////////////////////////////////
+
+Section for other
+
+//////////////////////////////////
+*/
