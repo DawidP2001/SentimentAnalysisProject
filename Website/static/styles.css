@@ -1,22 +1,72 @@
+/*
+Author: Dawid Pionk
+Date: 05/12/2024
+Description: Contains css styles for this project
+*/
+
+/*
+//////////////////////////////////
+
+Section for the navigation bar
+
+//////////////////////////////////
+*/
 nav {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #f1efef;
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-around;
   align-items: center;
+  position: sticky;
+  top: 0;
 }
-body {
-  overflow-y: auto;
+
+nav * {
+  margin: 0px 10px;
 }
 #navTitle{
   padding: 5px;
 }
-
+#navLinks {
+  display: flex;
+  align-self: stretch;
+}
 #navLinks a{
-  padding: 5px;
+  color: black;
+  height: 100%;
+  text-align: center;
+  padding: 0px 5px;
+  display: flex;
+  align-items: center;
+}
+/* Change the color of links on hover */
+#navLinks a:hover {
+  background-color: #FF5700;
+  color: black;
+}
+/* Add a color to the active/current link */
+#navLinks a.active {
+  background-color: #FF5700;
   color: white;
+}
+/*
+//////////////////////////////////
+
+Section for elements on multiple pages
+
+//////////////////////////////////
+*/
+html{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Roboto', sans-serif;
+  scroll-behavior: smooth;
+}
+body {
+  overflow-y: auto;
+  margin: 0;
 }
 #content {
   display: flex;
@@ -25,30 +75,134 @@ body {
   align-items: center;
   width: auto;
   height: auto;
-  border: 1px solid black;
   flex: 1;
 }
-#content #searchBar {
-  margin: auto;
-  background-color: lightblue;
-}
-#content #searchBar input {
+h1 {
   margin: 5px;
+  padding: 5px;
 }
+h2 {
+  margin: 5px;
+  padding: 5px;
+}
+h3{
+  margin: 5px;
+  padding: 5px;
+}
+h4 {
+  margin: 5px;
+  padding: 5px;
+}
+/*
+//////////////////////////////////
 
-#searchBar form {
+Section for only the form page
+
+//////////////////////////////////
+*/
+#introduction {
+  background: linear-gradient(to bottom, #FF5700, transparent);
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically (optional) */
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding-bottom: 40px;
 }
 
+#formSection{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  flex-direction: column;
+  border: 3px solid white;
+  padding: 0;
+  box-shadow: 15px 15px 20px grey;
+  background: #FF8b60;
+}
+/*This is the submit button for the forms*/
 #sumbitBtn {
   align-self: flex-end;
 } 
+#searchBarTopic{
+  display: block;
+}
+/* This is to style divs that contain tabs within them */
+.tabSection {
+  width: 100%;
+  border-bottom: 1px solid gray;
+}
+
+.tabSection button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  width: 50%;
+}
+.tabSection button:hover {
+  background-color: #ddd;
+}
+
+.tabSection button.active {
+  background-color: #ccc;
+}
+
+.tabContent {
+  display: none;
+  padding: 6px 12px;
+}
+
+.submitBtnCell {
+  text-align: center;
+}
+
+.searchForm{
+  border-spacing: 10px;
+}
+.tabContent{
+  border: 1px solid blakc;
+}
+
+.formTable {
+  border-spacing: 10px;
+}
+/*
+//////////////////////////////////
+
+Section for extra information html
+
+//////////////////////////////////
+*/
+#additionalInformation{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.textArea{
+  width: 80vw;
+}
+#bottomHomePage {
+  background: linear-gradient(to bottom, transparent, #FF5700);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/*
+//////////////////////////////////
+
+Section for only the chart page
+
+//////////////////////////////////
+*/
 #moreChartSection {
   margin: 10px;
-  border: 1px solid black;
   display: inline;
 }
 #viewPostsSection {
@@ -56,5 +210,17 @@ body {
 }
 #expandablePostDetails {
   display: none;
-  border: 1 solid black;
 }
+canvas {
+  width: 40vw;
+  min-width: 400px;
+  max-width: 50vw;
+  margin: 1vw;
+}
+/*
+//////////////////////////////////
+
+Section for other
+
+//////////////////////////////////
+*/

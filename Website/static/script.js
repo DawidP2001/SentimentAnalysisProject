@@ -19,7 +19,9 @@ function displayPieChart(positiveValue, neutralValue, negativeValue, searchTopic
           display: true,
           text: `Overall Sentiment of ${searchTopic}`
         }
-      }
+      },
+      responsive: true,
+      maintainAspectRatio: false
     });
 }
 
@@ -57,7 +59,9 @@ function displaySubredditBarChart(subKeyList, subItemList){
                 beginAtZero: true
             }
         }]
-      }
+      },
+      responsive: true,
+      maintainAspectRatio: false
     }
   });
 }
@@ -81,7 +85,9 @@ function sentimentOverTimeLineGraph(){
       title: {
       display: true,
       text: `Sentiment Over Time`
-      }
+      },
+      responsive: true,
+      maintainAspectRatio: false
     }
   });
 
@@ -112,7 +118,9 @@ function topKeywordsBySentimentBarChart(){
                 beginAtZero: true
             }
         }]
-      }
+      },
+      responsive: true,
+      maintainAspectRatio: false
     }
   });
 }
@@ -145,7 +153,9 @@ function sentimentVSEngagementSection(){
       title: {
         display: true,
         text: `Sentiment VS engagementSection`
-        }
+        },
+      responsive: true,
+      maintainAspectRatio: false
     }
   });
 }
@@ -171,4 +181,23 @@ function postButtonClicked(){
   expandableArea.style.display = "flex";
   expandableArea.style.flexDirection = "row";
   expandableArea.style.justifyContent = "space-around";
+}
+
+// This section is responsible for displaying the form associated with a tab
+function openCity(evt, section) {
+  document.getElementById("searchBarTopic").style.display = "none";
+  tabcontent = document.getElementsByClassName("tabContent");
+  tab = document.getElementsByClassName("tab");
+  // Hides other tab content and turns off the active element
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+    tab[i].className = tab[i].className.replace(" active", "");
+  }
+  document.getElementById(section).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+function scrollToElement(evt, section){
+  element = document.getElementById(section);
+  element.scrollIntoView()
 }

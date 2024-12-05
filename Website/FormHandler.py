@@ -1,3 +1,7 @@
+# Author: Dawid Pionk
+# Description:
+# Date: 
+
 from flask import Flask, request, render_template, session
 from Utility import Reddit
 #from Utility import SenitmentAnalyser
@@ -11,15 +15,25 @@ app.secret_key = os.getenv("Secret_Key")
 
 @app.route('/')
 def index():
-    return render_template(
+    return render_template( 
             'index.html',
             form=True, 
-            charts=False
+            charts=False,
+            scrollToContact=False
+        )
+
+@app.route('/#contactSection')
+def indexContact():
+    return render_template( 
+            'index.html',
+            form=True, 
+            charts=False,
+            scrollToContact=True
         )
 
 @app.route('/showCharts', methods=['POST'])
 def submit():
-    session['search'] = request.form["search"] # This contains the topic from the search
+    session['search'] = request.form["searchTopic"] # This contains the topic from the search
     rawData = Reddit.queryAPI(session['search']) # Contains all the raw data from the query to the Reddit Api
     subreddits = Reddit.extractPostSubreddits(rawData)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subreddits))
@@ -34,7 +48,8 @@ def submit():
     return render_template(
             'index.html',
             form=False, 
-            charts=True
+            charts=True,
+            scrollToContact=False
         )
 
 if __name__ == '__main__':  
