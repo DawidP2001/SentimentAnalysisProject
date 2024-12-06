@@ -46,7 +46,7 @@ def submit():
 0.9826070666313171}, {'Text': 'Poland seeks British help to protect Ukraine after Trump win', 'label': 'NEGATIVE', 'score': 0.9199395775794983}]
     #########
 
-    positiveSentimentList, neutralSentimentList, negativeSentimentList  = Utils.seperateSentiments(session['sentimentList'])
+    positiveSentimentList, neutralSentimentList, negativeSentimentList  = Utils.seperateSentiments(sentimentList)
     session['sentimentList'] = sentimentList
     session['positiveSentimentList'] = positiveSentimentList
     session['neutralSentimentList'] = neutralSentimentList

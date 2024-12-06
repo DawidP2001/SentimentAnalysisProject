@@ -12,7 +12,7 @@ Description Of Project:
     VII. 
     
 2. Potential Issues:
-    I.  None Discovered
+    I.  Fix environmental variables on pythonAnywhere
     II. Fix issue with resizing 
 
 3. Ideas for potential features:
