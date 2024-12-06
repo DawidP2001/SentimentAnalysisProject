@@ -196,6 +196,7 @@ function openCity(evt, section) {
   evt.currentTarget.className += " active";
 }
 
+// This function scrolls to a given element
 function scrollToElement(evt, section){
   element = document.getElementById(section);
   element.scrollIntoView()

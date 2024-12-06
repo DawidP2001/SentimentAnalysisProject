@@ -12,7 +12,8 @@ Description Of Project:
     VII. 
     
 2. Potential Issues:
-    I. None Discovered
+    I.  None Discovered
+    II. Fix issue with resizing 
 
 3. Ideas for potential features:
     I.      Analysis for images
@@ -20,6 +21,7 @@ Description Of Project:
     III.    Accounts
     IV.     Previous Searches
     V.      Forum/Discussion Page
+    VI.     Phone website
 
 List Of Files:
 List Of technologies:
