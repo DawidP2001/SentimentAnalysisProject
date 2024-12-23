@@ -201,3 +201,10 @@ function scrollToElement(evt, section){
   element = document.getElementById(section);
   element.scrollIntoView()
 }
+
+function vibes(name){
+  var modal = document.getElementById("myModal");
+  modal.style.display = "block";
+  element = document.getElementById("authorSection");
+  element.innerHTML = "name";
+}

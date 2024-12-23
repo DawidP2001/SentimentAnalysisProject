@@ -4,7 +4,7 @@
         <h1>Positive Section</h1>
 {% for entry in session.positiveSentimentList %}
         <div>
-            <button class="modalBtn">
+            <button class="modalBtn" onclick="vibes('AAA')">
                 Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
             </button>
@@ -15,7 +15,7 @@
         <h1>Neutral Section</h1>
 {% for entry in session.neutralSentimentList %}
         <div>
-            <button class="modalBtn">
+            <button class="modalBtn" onclick="vibes('AAA')">            
                 Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
             </button>
@@ -26,7 +26,7 @@
         <h1>Negative Section</h1>
 {% for entry in session.negativeSentimentList %}
         <div>
-            <button class="modalBtn">
+            <button class="modalBtn" onclick="vibes('AAA')">
                 Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
             </button>
@@ -44,7 +44,7 @@
         <tr>
             <td>Author:</td>
             <td>
-                {{ session.authorList }}
+                <h3 id="authorSection">aaaaaa</h3>
             </td>
         </tr>
         <tr>
@@ -162,18 +162,11 @@
     </table>
   </div>
 </div>
-
 <!--Listeners for dealing with the modals-->
 <script>
 var modal = document.getElementById("myModal");
 var buttons = document.getElementsByClassName("modalBtn");
-console.log(buttons)
-for (i=0;i <buttons.length;i++){
-    buttons[i].onclick = function() {
-        modal.style.display = "block";
-    }
-}
-
+ 
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
