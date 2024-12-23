@@ -33,7 +33,9 @@ def extractPostSubreddits(results):
 def extractData(results):
     titleList = []
     subbredditList = []
+    authorList = []
     for post in results:
-        titleList.append(post.title)
-        subbredditList.append(post.subreddit)
-    return titleList, subbredditList
+        titleList.append(post['title'])
+        subbredditList.append(post['subreddit'])
+        authorList.append(post['author'])
+    return titleList, subbredditList, authorList

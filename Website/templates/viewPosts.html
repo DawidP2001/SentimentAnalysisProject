@@ -5,8 +5,7 @@
 {% for entry in session.positiveSentimentList %}
         <div>
             <button class="modalBtn">
-                Text: {{ entry['Text'] }}<br>
-                Sentiment: {{ entry['label'] }}<br>
+                Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
             </button>
         </div>
@@ -17,8 +16,7 @@
 {% for entry in session.neutralSentimentList %}
         <div>
             <button class="modalBtn">
-                Text: {{ entry['Text'] }}<br>
-                Sentiment: {{ entry['label'] }}<br>
+                Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
             </button>
         </div>
@@ -29,8 +27,7 @@
 {% for entry in session.negativeSentimentList %}
         <div>
             <button class="modalBtn">
-                Text: {{ entry['Text'] }}<br>
-                Sentiment: {{ entry['label'] }}<br>
+                Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
             </button>
         </div>
@@ -46,7 +43,9 @@
     <table>
         <tr>
             <td>Author:</td>
-            <td>c</td>
+            <td>
+                {{ session.authorList }}
+            </td>
         </tr>
         <tr>
             <td>Author Flair Text:</td>
