@@ -1,5 +1,6 @@
 from collections import Counter
 from Utility import SenitmentAnalyser as s
+import datetime
 
 def countLables(values):
     resultArray = [0,0,0]
@@ -43,7 +44,6 @@ def seperateSentimentsTest(sentimentList):
 # This function takes a list of dictionaries and seperates them into 3 lists based on their sentiment
 # Also it adds the sentiment and score to the dictionary
 def seperateSentiments(queryList):
-    print("hi")
     sentimentList = []
     for a in queryList:
         sentimentList.append(a['title'])
@@ -73,7 +73,13 @@ def dataToDictionary(submission):
     return {
         "title": submission.title,
         "subreddit": submission.subreddit.display_name,
-        "author": submission.author.name
+        "author": submission.author.name,
+        "created_utc": datetime.datetime.fromtimestamp(submission.created_utc),
+        "num_comments": submission.num_comments,
+        "over_18": submission.over_18,
+        "permalink": submission.permalink,
+        "upvotes": submission.score,
+        "upvote_ratio": submission.upvote_ratio
     }
 # This function converts the submissions into a list of dictionaries
 def createDictList(submissions):

@@ -205,7 +205,33 @@ function scrollToElement(evt, section){
 function postClicked(button){
   var modal = document.getElementById("myModal");
   modal.style.display = "block";
+
   author = button.getAttribute("data-author");
-  element = document.getElementById("authorSection");
-  element.innerHTML = author;
+  authorSection = document.getElementById("authorSection");
+  authorSection.innerHTML = author;
+
+  created = button.getAttribute("data-created");
+  creationTimeSection = document.getElementById("creationTimeSection");
+  creationTimeSection.innerHTML = created;
+
+  numComments = button.getAttribute("data-numComments");
+  numCommentsSection = document.getElementById("numCommentsSection");
+  numCommentsSection.innerHTML = numComments;
+
+  over18 = button.getAttribute("data-over18");
+  over18Section = document.getElementById("over18Section");
+  over18Section.innerHTML = over18;
+
+  permalink = button.getAttribute("data-permalink");
+  permalink = `https://www.reddit.com/${permalink}`;
+  permalinkSection = document.getElementById("permalinkSection");
+  permalinkSection.innerHTML = `<a href=${permalink}>link</>`;
+
+  score = button.getAttribute("data-upvotes");
+  scoreSection = document.getElementById("upvotesSection");
+  scoreSection.innerHTML = score;
+
+  upvoteRatio = button.getAttribute("data-upvoteRatio");
+  upvoteRatioSection = document.getElementById("upvoteRatioSection");
+  upvoteRatioSection.innerHTML = upvoteRatio;
 }

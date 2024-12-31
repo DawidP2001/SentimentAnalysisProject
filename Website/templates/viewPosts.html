@@ -4,7 +4,16 @@
         <h1>Positive Section</h1>
 {% for entry in session.positiveSentimentList %}
         <div>
-            <button class="modalBtn" data-author="{{ entry['author'] }}" onclick="postClicked(this)">
+            <button 
+            class="modalBtn" 
+            data-author="{{ entry['author'] }}" 
+            data-created="{{ entry['created_utc'] }}"
+            data-numComments="{{ entry['num_comments'] }}"
+            data-over18="{{ entry['over_18'] }}"
+            data-permalink="{{ entry['permalink'] }}"
+            data-upvotes="{{ entry['upvotes'] }}"
+            data-upvoteRatio="{{ entry['upvote_ratio'] }}"
+            onclick="postClicked(this)">
                 Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
             </button>
@@ -15,7 +24,16 @@
         <h1>Neutral Section</h1>
 {% for entry in session.neutralSentimentList %}
         <div>
-            <button class="modalBtn" data-author="{{ entry['author'] }}" onclick="postClicked(this)">           
+            <button 
+            class="modalBtn" 
+            data-author="{{ entry['author'] }}" 
+            data-created="{{ entry['created_utc'] }}"
+            data-numComments="{{ entry['num_comments'] }}"
+            data-over18="{{ entry['over_18'] }}"
+            data-permalink="{{ entry['permalink'] }}"
+            data-upvotes="{{ entry['upvotes'] }}"
+            data-upvoteRatio="{{ entry['upvote_ratio'] }}"
+            onclick="postClicked(this)">           
                 Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
             </button>
@@ -26,7 +44,16 @@
         <h1>Negative Section</h1>
 {% for entry in session.negativeSentimentList %}
         <div>
-            <button class="modalBtn" data-author="{{ entry['author'] }}" onclick="postClicked(this)">
+            <button 
+            class="modalBtn" 
+            data-author="{{ entry['author'] }}" 
+            data-created="{{ entry['created_utc'] }}"
+            data-numComments="{{ entry['num_comments'] }}"
+            data-over18="{{ entry['over_18'] }}"
+            data-permalink="{{ entry['permalink'] }}"
+            data-upvotes="{{ entry['upvotes'] }}"
+            data-upvoteRatio="{{ entry['upvote_ratio'] }}"
+            onclick="postClicked(this)">
                 Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
             </button>
@@ -44,120 +71,44 @@
         <tr>
             <td>Author:</td>
             <td>
-                <h3 id="authorSection">aaaaaa</h3>
+                <h3 id="authorSection"></h3>
             </td>
         </tr>
         <tr>
-            <td>Author Flair Text:</td>
-            <td>c</td>
+            <td>Creation Time:</td>
+            <td>
+                <h3 id="creationTimeSection"></h3>
+            </td>
         </tr>
         <tr>
-            <td>clicked</td>
-            <td>c</td>
+            <td>Number Of Comments:</td>
+            <td>
+                <h3 id="numCommentsSection"></h3>
+            </td>
         </tr>
         <tr>
-            <td>comments</td>
-            <td>c</td>
+            <td>Over 18:</td>
+            <td>
+                <h3 id="over18Section"></h3>
+            </td>
         </tr>
         <tr>
-            <td>created_utc</td>
-            <td>c</td>
+            <td>Link:</td>
+            <td>
+                <h3 id="permalinkSection"></h3>
+            </td>
         </tr>
         <tr>
-            <td>distinguished</td>
-            <td>c</td>
+            <td>Upvotes:</td>
+            <td>
+                <h3 id="upvotesSection"></h3>
+            </td>
         </tr>
         <tr>
-            <td>edited</td>
-            <td>d</td>
-        </tr>
-        <tr>
-            <td>id</td>
-            <td>i</td>
-        </tr>
-        <tr>
-            <td>is_original_content</td>
-            <td>a</td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <td>is_self</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>link_flair_template_id</td>
-            <td>aa</td>
-        </tr>
-        <tr>
-            <td>link_flair_text</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>locked</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>locked</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>name</td>
-            <td>bn</td>
-        </tr>
-        <tr>
-            <td>num_comments</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>Over 18</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>permalink</td>
-            <td>aa</td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <td>poll_data</td>
-            <td>aa</td>
-        </tr>
-        <tr>
-            <td>saved</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>score</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>selftext</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>spoiler</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>stickied</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>subreddit</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>title</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>upvote ratio</td>
-            <td>aa</td>
-        </tr>
-        <tr>
-            <td>url</td>
-            <td>url</td>
+            <td>Upvotes Ratio:</td>
+            <td>
+                <h3 id="upvoteRatioSection"></h3>
+            </td>
         </tr>
     </table>
   </div>
