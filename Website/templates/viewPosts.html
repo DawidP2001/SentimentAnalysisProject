@@ -4,7 +4,7 @@
         <h1>Positive Section</h1>
 {% for entry in session.positiveSentimentList %}
         <div>
-            <button class="modalBtn" onclick="vibes('AAA')">
+            <button class="modalBtn" data-author="{{ entry['author'] }}" onclick="postClicked(this)">
                 Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
             </button>
@@ -15,7 +15,7 @@
         <h1>Neutral Section</h1>
 {% for entry in session.neutralSentimentList %}
         <div>
-            <button class="modalBtn" onclick="vibes('AAA')">            
+            <button class="modalBtn" data-author="{{ entry['author'] }}" onclick="postClicked(this)">           
                 Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
             </button>
@@ -26,7 +26,7 @@
         <h1>Negative Section</h1>
 {% for entry in session.negativeSentimentList %}
         <div>
-            <button class="modalBtn" onclick="vibes('AAA')">
+            <button class="modalBtn" data-author="{{ entry['author'] }}" onclick="postClicked(this)">
                 Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
             </button>

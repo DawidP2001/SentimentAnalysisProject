@@ -202,9 +202,10 @@ function scrollToElement(evt, section){
   element.scrollIntoView()
 }
 
-function vibes(name){
+function postClicked(button){
   var modal = document.getElementById("myModal");
   modal.style.display = "block";
+  author = button.getAttribute("data-author");
   element = document.getElementById("authorSection");
-  element.innerHTML = "name";
+  element.innerHTML = author;
 }

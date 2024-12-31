@@ -38,7 +38,6 @@ def submit():
     datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
     titleList, subbredditList, authorList = r.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
-    
 
     #sentimentList = s.analyseSentiment(titleList) # Contains the result of sentiment analysis
 
