@@ -206,6 +206,14 @@ function postClicked(button){
   var modal = document.getElementById("myModal");
   modal.style.display = "block";
 
+  title= button.getAttribute("data-title");
+  titleSection = document.getElementById("titleSection");
+  titleSection.innerHTML = title;
+
+  score = button.getAttribute("data-score");
+  scoreSection = document.getElementById("scoreSection");
+  scoreSection.innerHTML = score;
+
   author = button.getAttribute("data-author");
   authorSection = document.getElementById("authorSection");
   authorSection.innerHTML = author;

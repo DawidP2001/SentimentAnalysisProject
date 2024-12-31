@@ -5,7 +5,9 @@
 {% for entry in session.positiveSentimentList %}
         <div>
             <button 
-            class="modalBtn" 
+            class="modalBtn"
+            data-title="{{ entry['title'] }}"
+            data-score="{{ entry['score'] }}"
             data-author="{{ entry['author'] }}" 
             data-created="{{ entry['created_utc'] }}"
             data-numComments="{{ entry['num_comments'] }}"
@@ -25,7 +27,9 @@
 {% for entry in session.neutralSentimentList %}
         <div>
             <button 
-            class="modalBtn" 
+            class="modalBtn"
+            data-title="{{ entry['title'] }}"
+            data-score="{{ entry['score'] }}"
             data-author="{{ entry['author'] }}" 
             data-created="{{ entry['created_utc'] }}"
             data-numComments="{{ entry['num_comments'] }}"
@@ -45,7 +49,9 @@
 {% for entry in session.negativeSentimentList %}
         <div>
             <button 
-            class="modalBtn" 
+            class="modalBtn"
+            data-title="{{ entry['title'] }}"
+            data-score="{{ entry['score'] }}"
             data-author="{{ entry['author'] }}" 
             data-created="{{ entry['created_utc'] }}"
             data-numComments="{{ entry['num_comments'] }}"
@@ -68,6 +74,18 @@
 <div id="myModal" class="modal">
   <div id="modelContent">
     <table>
+        <tr>
+            <td>Title:</td>
+            <td>
+                <h3 id="titleSection"></h3>
+            </td>
+        </tr>
+        <tr>
+            <td>Score:</td>
+            <td>
+                <h3 id="scoreSection"></h3>
+            </td>
+        </tr>
         <tr>
             <td>Author:</td>
             <td>
