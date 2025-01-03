@@ -19,7 +19,8 @@ def index():
             'index.html',
             form=True, 
             charts=False,
-            scrollToContact=False
+            scrollToContact=False,
+            userInformation=False
         )
 
 @app.route('/#contactSection')
@@ -28,7 +29,8 @@ def indexContact():
             'index.html',
             form=True, 
             charts=False,
-            scrollToContact=True
+            scrollToContact=False,
+            userInformation=False
         )
 
 @app.route('/showChartsGeneralSearch', methods=['POST'])
@@ -55,14 +57,15 @@ def submitTopic():
     session['subKeyList'] = keyList # Contains the keys for subbreddit chart
     session['subItemList'] = itemList # Contains the values for subbreddit chart
     session['search'] = search # Contains the search topic
-    session['postTitleSentimentCount'] = Utils.countLables(sentimentList) #Contains the count of sentiment values
+    session['postTitleSentimentCount'] =  Utils.countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList) #Contains the count of sentiment values
     session['authorList'] = authorList
 
     return render_template(
             'index.html',
             form=False, 
             charts=True,
-            scrollToContact=False
+            scrollToContact=False,
+            userInformation=False
         )
 
 @app.route('/showChartsUserSearch', methods=['POST'])
@@ -89,14 +92,15 @@ def submitUser():
     session['subKeyList'] = keyList # Contains the keys for subbreddit chart
     session['subItemList'] = itemList # Contains the values for subbreddit chart
     session['search'] = user # Contains the search topic
-    session['postTitleSentimentCount'] = Utils.countLables(sentimentList) #Contains the count of sentiment values
+    session['postTitleSentimentCount'] = Utils.countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList) #Contains the count of sentiment values
     session['authorList'] = authorList
 
     return render_template(
             'index.html',
             form=False, 
             charts=True,
-            scrollToContact=False
+            scrollToContact=False,
+            userInformation=True
         )
 
 
