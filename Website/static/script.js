@@ -244,3 +244,8 @@ function postClicked(button){
   upvoteRatioSection = document.getElementById("upvoteRatioSection");
   upvoteRatioSection.innerHTML = upvoteRatio;
 }
+
+function showLoader(){
+  loader = document.getElementById("formModal");
+  loader.style.display = "block";
+}
