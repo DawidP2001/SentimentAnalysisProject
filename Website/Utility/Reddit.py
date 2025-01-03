@@ -16,6 +16,11 @@ def queryAPI(query: str):
     results = reddit.subreddit("all").search(query, limit=10)
     return results
 
+# This function extracts data from a user search
+def queryUser(user):
+    user = reddit.redditor(user)
+    return user.submissions.new(limit=10)
+
 # This function extracts the titles of the posts from query
 def extractPostTitles(query):
     resultList = []
@@ -39,3 +44,4 @@ def extractData(results):
         subbredditList.append(post['subreddit'])
         authorList.append(post['author'])
     return titleList, subbredditList, authorList
+

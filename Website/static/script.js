@@ -19,7 +19,7 @@ function displayPieChart(positiveValue, neutralValue, negativeValue, searchTopic
           text: `Overall Sentiment of ${searchTopic}`
         }
       },
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false
     });
 }
@@ -59,7 +59,7 @@ function displaySubredditBarChart(subKeyList, subItemList){
             }
         }]
       },
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false
     }
   });
@@ -85,7 +85,7 @@ function sentimentOverTimeLineGraph(){
       display: true,
       text: `Sentiment Over Time`
       },
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false
     }
   });
@@ -118,7 +118,7 @@ function topKeywordsBySentimentBarChart(){
             }
         }]
       },
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false
     }
   });
@@ -153,7 +153,7 @@ function sentimentVSEngagementSection(){
         display: true,
         text: `Sentiment VS engagementSection`
         },
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false
     }
   });
@@ -202,6 +202,7 @@ function scrollToElement(evt, section){
   element.scrollIntoView()
 }
 
+// This function is called when the user clicks a specifc post on the view posts page
 function postClicked(button){
   var modal = document.getElementById("myModal");
   modal.style.display = "block";

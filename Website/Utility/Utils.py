@@ -2,15 +2,8 @@ from collections import Counter
 from Utility import SenitmentAnalyser as s
 import datetime
 
-def countLables(values):
-    resultArray = [0,0,0]
-    for value in values:
-        if(value['label'] == 'POSITIVE'):
-            resultArray[0] = resultArray[0]+1
-        if(value['label'] == 'NEUTRAL'):
-            resultArray[1] = resultArray[1]+1
-        if(value['label'] == 'NEGATIVE'):
-            resultArray[2] = resultArray[2]+1
+def countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList):
+    resultArray = [len(positiveSentimentList) , len(neutralSentimentList), len(negativeSentimentList)]
     return resultArray
 
 # Converts the return of the counter method into 2
