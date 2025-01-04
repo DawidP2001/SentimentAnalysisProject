@@ -36,7 +36,12 @@ def indexContact():
 @app.route('/showChartsGeneralSearch', methods=['POST'])
 def submitTopic():
     search = request.form["searchTopic"] # This contains the topic from the search
-    rawData = r.queryAPI(search) # Contains all the raw data from the query to the Reddit Api
+    subreddit = request.form["subredditSearchTopic"] # This contains the subreddit from the search
+    querySize = request.form["querySizeTopic"] # This contains the size of the query
+    if subreddit:
+        rawData = r.queryAPI(search, subreddit)
+    else:
+        rawData = r.queryAPI(search) # Contains all the raw data from the query to the Reddit Api
     datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
     titleList, subbredditList, authorList = r.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
@@ -73,6 +78,13 @@ def submitUser():
             userInformation=True
         )
 
+def submitSubrredit():
+    pass
+
+def submitPost():
+    pass
+
+# This function is used to set session variables
 def setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, search, authorList):
     session['positiveSentimentList'] = positiveSentimentList
     session['neutralSentimentList'] = neutralSentimentList
