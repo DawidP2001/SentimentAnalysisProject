@@ -8,6 +8,8 @@
         <div class="tabSection">
             <button class="tab active" onclick="openCity(event, 'searchBarTopic')">Topic</button>
             <button class="tab" onclick="openCity(event, 'searchBarUser')">User</button>
+            <button class="tab" onclick="openCity(event, 'searchBarSubreddit')">Subreddit</button>
+            <button class="tab" onclick="openCity(event, 'searchBarPost')">Posts</button>
         </div>
         <div id="searchBarTopic" class="tabContent">
             <form class='searchForm' action="/showChartsGeneralSearch" method="post">
@@ -51,6 +53,43 @@
                     </tr>
                     <tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnUser" type="submit" onclick="showLoader()"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="searchBarSubreddit" class="tabContent">
+            <form class ='searchForm' action="/showChartsUserSearch" method="post">
+                <table class="formTable">
+                    <tr>
+                        <td><label for="searchSubreddit">Subreddit</label></label></td>
+                        <td><input id='searchUser' name='searchUser' type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="fromDateSubreddit">From:</label></label></td>
+                        <td><input id="fromDateSubreddit" name="fromDateUser" type="date"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="toDateSubreddit">To:</label></td>
+                        <td><input id="toDateSubreddit" name="toDateUser" type="date"></td>
+                    </tr>
+                    <tr>
+                        <td class="submitBtnCell" colspan="2"><input id="sumbitBtnSubreddit" type="submit" onclick="showLoader()"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="searchBarPost" class="tabContent">
+            <form class ='searchForm' action="/showChartsUserSearch" method="post">
+                <table class="formTable">
+                    <tr>
+                        <td><label for="searchPost">Post:</label></label></td>
+                        <td><input id='searchPost' name='searchUser' type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="searchPost">Post ID:</label></label></td>
+                        <td><input id='searchPost' name='searchUser' type="text"></td>
+                    </tr>
+                        <td class="submitBtnCell" colspan="2"><input id="sumbitBtnPost" type="submit" onclick="showLoader()"></td>
                     </tr>
                 </table>
             </form>

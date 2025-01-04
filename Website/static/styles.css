@@ -131,6 +131,7 @@ Section for only the form page
 }
 /* This is to style divs that contain tabs within them */
 .tabSection {
+  display: flex;
   width: 100%;
   border-bottom: 1px solid gray;
 }
