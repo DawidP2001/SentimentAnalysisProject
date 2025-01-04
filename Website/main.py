@@ -38,10 +38,11 @@ def submitTopic():
     search = request.form["searchTopic"] # This contains the topic from the search
     subreddit = request.form["subredditSearchTopic"] # This contains the subreddit from the search
     querySize = request.form["querySizeTopic"] # This contains the size of the query
+    print(f"Search: {search}, Subreddit: {subreddit}, Query Size: {querySize}")
     if subreddit:
-        rawData = r.queryAPI(search, subreddit)
+        rawData = r.queryAPI(search, subreddit, querySize)
     else:
-        rawData = r.queryAPI(search) # Contains all the raw data from the query to the Reddit Api
+        rawData = r.queryAPI(search, querySize) # Contains all the raw data from the query to the Reddit Api
     datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
     titleList, subbredditList, authorList = r.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))

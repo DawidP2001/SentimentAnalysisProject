@@ -17,14 +17,14 @@ def queryAPI(query: str):
     return results
 
 def queryAPI(query: str, querySize: str):
-    qeuerySize = int(querySize)
-    results = reddit.subreddit("all").search(query, limit=querySize)
+    qeuerySizeInt = int(querySize)
+    results = reddit.subreddit("all").search(query, limit=qeuerySizeInt)
     return results
 
 # This function queries the Reddit API for a specific subreddit
 def queryAPI(query: str, subreddit: str, querySize: str):
-    qeuerySize = int(querySize)
-    results = reddit.subreddit(subreddit).search(query, limit=querySize)
+    qeuerySizeInt = int(querySize)
+    results = reddit.subreddit(subreddit).search(query, limit=qeuerySizeInt)
     return results
 
 # This function extracts data from a user search
