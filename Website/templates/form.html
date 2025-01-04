@@ -62,9 +62,8 @@
 </div>
 <script>
     var modal = document.getElementById("formModal");
-    window.onclick = function(event) {
-      if (event.target == modal) {
+    // Hide the loader before navigating to the next page
+    window.onload("beforeunload", function () {
         modal.style.display = "none";
-      }
-    }
+    });
 </script>

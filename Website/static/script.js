@@ -161,20 +161,34 @@ function sentimentVSEngagementSection(){
 
 // This function is called when the view more grpahs button is cl;icked
 function moreGraphsClicked(){
+  userInfo = document.getElementById("userInfoContainer");
   chartsSection = document.getElementById("moreChartSection");
   postSection = document.getElementById("viewPostsSection");
+  userInfo.style.display = "none";
   chartsSection.style.display = "block";
   postSection.style.display = "none";
 }
 
 // This function is called when the view specific posts button is clicked
 function viewPostsClicked(){
+  userInfo = document.getElementById("userInfoContainer");
   chartsSection = document.getElementById("moreChartSection");
   postSection = document.getElementById("viewPostsSection");
+  userInfo.style.display = "none";
   chartsSection.style.display = "none";
   postSection.style.display = "block";
 }
+// This function is called when the user clicks the extra user information button
+function userInfoButtonClicked(){
+  userInfo = document.getElementById("userInfoContainer");
+  chartsSection = document.getElementById("moreChartSection");
+  postSection = document.getElementById("viewPostsSection");
+  userInfo.style.display = "block";
+  chartsSection.style.display = "none";
+  postSection.style.display = "none";
+}
 
+// This function is called when the user clicks the post button
 function postButtonClicked(){
   expandableArea = document.getElementById("expandablePostDetails");
   expandableArea.style.display = "flex";
@@ -245,6 +259,7 @@ function postClicked(button){
   upvoteRatioSection.innerHTML = upvoteRatio;
 }
 
+// Shows the loader when the user submits a form
 function showLoader(){
   loader = document.getElementById("formModal");
   loader.style.display = "block";
