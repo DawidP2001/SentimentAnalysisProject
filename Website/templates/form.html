@@ -61,9 +61,13 @@
     <div class="loader"></div>
 </div>
 <script>
-    var modal = document.getElementById("formModal");
-    // Hide the loader before navigating to the next page
-    window.onload("beforeunload", function () {
-        modal.style.display = "none";
+    window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        // Remove the loader
+        const loader = document.getElementById('formModal');
+        if (loader) {
+            loader.style.display = 'none';
+        }
+    }
     });
 </script>
