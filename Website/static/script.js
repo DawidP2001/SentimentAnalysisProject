@@ -197,7 +197,7 @@ function postButtonClicked(){
 }
 
 // This section is responsible for displaying the form associated with a tab
-function openCity(evt, section) {
+function selectTab(evt, section) {
   document.getElementById("searchBarTopic").style.display = "none";
   tabcontent = document.getElementsByClassName("tabContent");
   tab = document.getElementsByClassName("tab");

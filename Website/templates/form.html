@@ -6,10 +6,10 @@
     <h3>Have a go below</h3>
     <div id="formSection">
         <div class="tabSection">
-            <button class="tab active" onclick="openCity(event, 'searchBarTopic')">Topic</button>
-            <button class="tab" onclick="openCity(event, 'searchBarUser')">User</button>
-            <button class="tab" onclick="openCity(event, 'searchBarSubreddit')">Subreddit</button>
-            <button class="tab" onclick="openCity(event, 'searchBarPost')">Post Comments</button>
+            <button class="tab active" onclick="selectTab(event, 'searchBarTopic')">Topic</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarUser')">User</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarSubreddit')">Subreddit</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarPost')">Post Comments</button>
         </div>
         <div id="searchBarTopic" class="tabContent">
             <form class='searchForm' action="/showChartsGeneralSearch" method="post">
@@ -23,16 +23,8 @@
                         <td><input id="subredditSearchTopic" name='subredditSearchTopic' type='text'></td>
                     </tr>
                     <tr>
-                        <td><label for="fromDateTopic">From:</label></td>
-                        <td><input id="fromDateTopic" name="fromDateTopic" type="date"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="toDateTopic">To:</label></td>
-                        <td><input id="toDateTopic" name="toDateTopic" type="date"></td>
-                    </tr>
-                    <tr>
                         <td><label for="querySizeTopic">Amount of posts to extract:</label></td>
-                        <td><input id="querySizeTopic" name="querySizeTopic" type="number" min="1" max="100"></td>
+                        <td><input id="querySizeTopic" name="querySizeTopic" type="number" min="1" max="100" value="10"></td>
                     </tr>
                     <tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnTopic"  type="submit" onclick="showLoader()"></td>
@@ -48,14 +40,6 @@
                         <td><input id='searchUser' name='searchUser' type="text"></td>
                     </tr>
                     <tr>
-                        <td><label for="fromDateUser">From:</label></label></td>
-                        <td><input id="fromDateUser" name="fromDateUser" type="date"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="toDateUser">To:</label></td>
-                        <td><input id="toDateUser" name="toDateUser" type="date"></td>
-                    </tr>
-                    <tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnUser" type="submit" onclick="showLoader()"></td>
                     </tr>
                 </table>
@@ -69,12 +53,14 @@
                         <td><input id='searchUser' name='searchUser' type="text"></td>
                     </tr>
                     <tr>
-                        <td><label for="fromDateSubreddit">From:</label></label></td>
-                        <td><input id="fromDateSubreddit" name="fromDateUser" type="date"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="toDateSubreddit">To:</label></td>
-                        <td><input id="toDateSubreddit" name="toDateUser" type="date"></td>
+                        <td><label for="typeOfSearchSubreddit">Search By:</label></td>
+                        <td>
+                            <select id="typeOfSearchSubreddit" name="typeOfSearchSubreddit">
+                                <option value="hot">Hot</option>
+                                <option value="new">New</option>
+                                <option value="top">Top</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnSubreddit" type="submit" onclick="showLoader()"></td>
