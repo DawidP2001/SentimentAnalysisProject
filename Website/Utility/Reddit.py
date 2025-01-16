@@ -11,9 +11,20 @@ reddit = praw.Reddit(
     client_secret=APP_SECRET,
     user_agent="SentimentAnalysisTool/v1.0 by xxx_madlad_xxx"
 )
-
+# This function queries the Reddit API
 def queryAPI(query: str):
     results = reddit.subreddit("all").search(query, limit=10)
+    return results
+
+def queryAPI2(query: str, querySize: str):
+    qeuerySizeInt = int(querySize)
+    results = reddit.subreddit("all").search(query, limit=qeuerySizeInt)
+    return results
+
+# This function queries the Reddit API for a specific subreddit
+def queryAPI(query: str, subreddit: str, querySize: str):
+    qeuerySizeInt = int(querySize)
+    results = reddit.subreddit(subreddit).search(query, limit=qeuerySizeInt)
     return results
 
 # This function extracts data from a user search

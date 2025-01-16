@@ -36,29 +36,24 @@ def indexContact():
 @app.route('/showChartsGeneralSearch', methods=['POST'])
 def submitTopic():
     search = request.form["searchTopic"] # This contains the topic from the search
-    rawData = r.queryAPI(search) # Contains all the raw data from the query to the Reddit Api
+    subreddit = request.form["subredditSearchTopic"] # This contains the subreddit from the search
+    querySize = request.form["querySizeTopic"] # This contains the size of the query
+    print(f"Search: {search}, Subreddit: {subreddit}, Query Size: {querySize}")
+    if subreddit != "":
+        print("Subreddit is not empty")
+        rawData = r.queryAPI(search, subreddit, querySize)
+    else:
+        print("Subredditaaasasdas")
+        print(querySize)
+        print(type(querySize))
+        rawData = r.queryAPI2(search, querySize) # Contains all the raw data from the query to the Reddit Api
     datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
     titleList, subbredditList, authorList = r.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
 
-    #sentimentList = s.analyseSentiment(titleList) # Contains the result of sentiment analysis
-
-    ######### JUST FOR TESTING
-    sentimentList = [{'Text': 'Multiple far right/facist protestors seen in Poland today.', 'label': 'NEGATIVE', 'score': 0.7135903835296631}, {'Text': 'American guy in Poland calls Indian racial slurs and most invasive species', 'label': 'NEGATIVE', 'score': 0.9918959736824036}, {'Text': 'Poland when Russia violates their airspace.', 'label': 'NEGATIVE', 'score': 0.9741829037666321}, {'Text': '“You forgot Poland”: criticism as US, UK, France and Germany meet alone to discuss Ukraine', 'label': 'NEGATIVE', 'score': 0.9898450374603271}, {'Text': 'Crowley the gnome deported from Poland and banned from entering EU for 10 years', 'label': 'NEGATIVE', 'score': 0.9892055988311768}, {'Text': 'How DID Poland become safe?', 'label': 'NEGATIVE', 'score': 0.9966275095939636}, {'Text': 'Poland tells Ukraine to exhume second world war victims even amid Russia’s invasion', 'label': 'POSITIVE', 'score': 0.969015896320343}, {'Text': 'Moving from Australia to Poland, are we crazy?', 'label': 'NEGATIVE', 'score': 0.9575971961021423}, {'Text': 'How would you describe your experiences in Poland?', 'label': 'NEGATIVE', 'score': 
-        0.9826070666313171}, {'Text': 'Poland seeks British help to protect Ukraine after Trump win', 'label': 'NEGATIVE', 'score': 0.9199395775794983}]
-    #########
-
-    #positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentimentsTest(sentimentList)
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
     
-    session['positiveSentimentList'] = positiveSentimentList
-    session['neutralSentimentList'] = neutralSentimentList
-    session['negativeSentimentList'] = negativeSentimentList
-    session['subKeyList'] = keyList # Contains the keys for subbreddit chart
-    session['subItemList'] = itemList # Contains the values for subbreddit chart
-    session['search'] = search # Contains the search topic
-    session['postTitleSentimentCount'] =  Utils.countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList) #Contains the count of sentiment values
-    session['authorList'] = authorList
+    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, search, authorList)
 
     return render_template(
             'index.html',
@@ -76,24 +71,9 @@ def submitUser():
     titleList, subbredditList, authorList = r.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
 
-    #sentimentList = s.analyseSentiment(titleList) # Contains the result of sentiment analysis
-
-    ######### JUST FOR TESTING
-    sentimentList = [{'Text': 'Multiple far right/facist protestors seen in Poland today.', 'label': 'NEGATIVE', 'score': 0.7135903835296631}, {'Text': 'American guy in Poland calls Indian racial slurs and most invasive species', 'label': 'NEGATIVE', 'score': 0.9918959736824036}, {'Text': 'Poland when Russia violates their airspace.', 'label': 'NEGATIVE', 'score': 0.9741829037666321}, {'Text': '“You forgot Poland”: criticism as US, UK, France and Germany meet alone to discuss Ukraine', 'label': 'NEGATIVE', 'score': 0.9898450374603271}, {'Text': 'Crowley the gnome deported from Poland and banned from entering EU for 10 years', 'label': 'NEGATIVE', 'score': 0.9892055988311768}, {'Text': 'How DID Poland become safe?', 'label': 'NEGATIVE', 'score': 0.9966275095939636}, {'Text': 'Poland tells Ukraine to exhume second world war victims even amid Russia’s invasion', 'label': 'POSITIVE', 'score': 0.969015896320343}, {'Text': 'Moving from Australia to Poland, are we crazy?', 'label': 'NEGATIVE', 'score': 0.9575971961021423}, {'Text': 'How would you describe your experiences in Poland?', 'label': 'NEGATIVE', 'score': 
-        0.9826070666313171}, {'Text': 'Poland seeks British help to protect Ukraine after Trump win', 'label': 'NEGATIVE', 'score': 0.9199395775794983}]
-    #########
-
-    #positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentimentsTest(sentimentList)
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
     
-    session['positiveSentimentList'] = positiveSentimentList
-    session['neutralSentimentList'] = neutralSentimentList
-    session['negativeSentimentList'] = negativeSentimentList
-    session['subKeyList'] = keyList # Contains the keys for subbreddit chart
-    session['subItemList'] = itemList # Contains the values for subbreddit chart
-    session['search'] = user # Contains the search topic
-    session['postTitleSentimentCount'] = Utils.countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList) #Contains the count of sentiment values
-    session['authorList'] = authorList
+    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, user, authorList)
 
     return render_template(
             'index.html',
@@ -102,6 +82,25 @@ def submitUser():
             scrollToContact=False,
             userInformation=True
         )
+
+@app.route('/showChartsSubredditSearch', methods=['POST'])
+def submitSubrredit():
+    pass
+
+@app.route('/showChartsPostSearch', methods=['POST'])
+def submitPost():
+    pass
+
+# This function is used to set session variables
+def setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, search, authorList):
+    session['positiveSentimentList'] = positiveSentimentList
+    session['neutralSentimentList'] = neutralSentimentList
+    session['negativeSentimentList'] = negativeSentimentList
+    session['subKeyList'] = keyList # Contains the keys for subbreddit chart
+    session['subItemList'] = itemList # Contains the values for subbreddit chart
+    session['search'] = search # Contains the search topic
+    session['postTitleSentimentCount'] = Utils.countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList) #Contains the count of sentiment values
+    session['authorList'] = authorList
 
 
 if __name__ == '__main__':  

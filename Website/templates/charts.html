@@ -13,6 +13,9 @@
 <div id="buttonSection">
     <button onclick="moreGraphsClicked()">View More Graphs</button>
     <button onclick="viewPostsClicked()">View Specific Posts</button>
+    {% if userInformation %}
+    <button onclick="userInfoButtonClicked()">View User Information</button>
+    {% endif %}
 </div>
 <div id="moreChartSection">
      <!-- Bar Chart for Subreddits -->
@@ -49,4 +52,9 @@
 </div>
 <div id="viewPostsSection">
     {% include "viewPosts.html" %}
+</div>
+<div id="userInfoContainer">
+    {% if userInformation %}
+        {% include "userInfo.html" %}
+    {% endif %}
 </div>
