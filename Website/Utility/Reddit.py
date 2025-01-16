@@ -16,7 +16,7 @@ def queryAPI(query: str):
     results = reddit.subreddit("all").search(query, limit=10)
     return results
 
-def queryAPI(query: str, querySize: str):
+def queryAPI2(query: str, querySize: str):
     qeuerySizeInt = int(querySize)
     results = reddit.subreddit("all").search(query, limit=qeuerySizeInt)
     return results
