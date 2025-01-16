@@ -41,7 +41,7 @@ def submitTopic():
     if subreddit != "":
         rawData = r.queryAPI(search, subreddit, querySize)
     else:
-        rawData = r.queryAPI(search, "", querySize) # Contains all the raw data from the query to the Reddit Api
+        rawData = r.queryAPI(search, "all", querySize) # Contains all the raw data from the query to the Reddit Api
     datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
     titleList, subbredditList, authorList = r.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))

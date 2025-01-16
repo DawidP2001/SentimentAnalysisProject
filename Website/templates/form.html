@@ -23,16 +23,6 @@
                         <td><input id="subredditSearchTopic" name='subredditSearchTopic' type='text'></td>
                     </tr>
                     <tr>
-                        <td><label for="typeOfSearchTopic">Search By:</label></td>
-                        <td>
-                            <select id="typeOfSearchTopic" name="typeOfSearchTopic">
-                                <option value="hot">Hot</option>
-                                <option value="new">New</option>
-                                <option value="top">Top</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
                         <td><label for="querySizeTopic">Amount of posts to extract:</label></td>
                         <td><input id="querySizeTopic" name="querySizeTopic" type="number" min="1" max="100"></td>
                     </tr>
@@ -61,6 +51,16 @@
                     <tr>
                         <td><label for="searchSubreddit">Subreddit</label></label></td>
                         <td><input id='searchUser' name='searchUser' type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="typeOfSearchSubreddit">Search By:</label></td>
+                        <td>
+                            <select id="typeOfSearchSubreddit" name="typeOfSearchSubreddit">
+                                <option value="hot">Hot</option>
+                                <option value="new">New</option>
+                                <option value="top">Top</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnSubreddit" type="submit" onclick="showLoader()"></td>
