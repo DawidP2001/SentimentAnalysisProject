@@ -1,5 +1,14 @@
 <!--This section contains the posts extracted from reddit and placed in a sentiment category-->>
 <div id="sentimentPostsSection">
+    <div id="sentimentPostsSortSection">
+        <input type="button" value="Sort by Score" onclick="sortPostsByScore()">
+        <input type="button" value="Sort by Date" onclick="sortPostsByDate()">
+        <div id="dateSortSection">
+            <input type="date" id="fromDate" name="fromDate">
+            <input type="date" id="toDate" name="toDate">
+            <input type="button" value="Filter by Date" onclick="filterPostsByDate()">
+        </div>
+    </div>
     <div class="sentimentSection">
         <h1>Positive Section</h1>
 {% for entry in session.positiveSentimentList %}
