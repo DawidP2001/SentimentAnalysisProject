@@ -6,10 +6,10 @@
     <h3>Have a go below</h3>
     <div id="formSection">
         <div class="tabSection">
-            <button class="tab active" onclick="openCity(event, 'searchBarTopic')">Topic</button>
-            <button class="tab" onclick="openCity(event, 'searchBarUser')">User</button>
-            <button class="tab" onclick="openCity(event, 'searchBarSubreddit')">Subreddit</button>
-            <button class="tab" onclick="openCity(event, 'searchBarPost')">Post Comments</button>
+            <button class="tab active" onclick="selectTab(event, 'searchBarTopic')">Topic</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarUser')">User</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarSubreddit')">Subreddit</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarPost')">Post Comments</button>
         </div>
         <div id="searchBarTopic" class="tabContent">
             <form class='searchForm' action="/showChartsGeneralSearch" method="post">
@@ -21,6 +21,16 @@
                     <tr>
                         <td><label for="subredditSearchTopic">Subreddit:</label></td>
                         <td><input id="subredditSearchTopic" name='subredditSearchTopic' type='text'></td>
+                    </tr>
+                    <tr>
+                        <td><label for="typeOfSearchTopic">Search By:</label></td>
+                        <td>
+                            <select id="typeOfSearchTopic" name="typeOfSearchTopic">
+                                <option value="hot">Hot</option>
+                                <option value="new">New</option>
+                                <option value="top">Top</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td><label for="querySizeTopic">Amount of posts to extract:</label></td>
