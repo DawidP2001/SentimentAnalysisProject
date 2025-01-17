@@ -22,6 +22,19 @@ def queryUser(user):
     user = reddit.redditor(user)
     return user.submissions.new(limit=10)
 
+# This function extracts specific data from a subreddit
+def querySubreddit(subreddit: str, type: str):
+    if type == "hot":
+        return reddit.subreddit(subreddit).hot(limit=10)
+    elif type == "new":
+        return reddit.subreddit(subreddit).new(limit=10)
+    elif type == "top":
+        return reddit.subreddit(subreddit).top(limit=10)
+    elif type == "controversial":
+        return reddit.subreddit(subreddit).controversial(limit=10)
+    else:
+        return reddit.subreddit(subreddit).hot(limit=10)
+
 # This function extracts the titles of the posts from query
 def extractPostTitles(query):
     resultList = []
@@ -36,6 +49,7 @@ def extractPostSubreddits(results):
         resultList.append(post.subreddit)
     return resultList
 
+# This function extracts specific information from the results of a query
 def extractData(results):
     titleList = []
     subbredditList = []

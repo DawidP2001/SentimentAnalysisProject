@@ -190,6 +190,11 @@ Section for only the form page
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* This sets the time frame on the subreddit form to be hidden at the start */
+#searchTimeFrameSubreddit {
+  display: none;
+}
 /*
 //////////////////////////////////
 

@@ -50,15 +50,25 @@
                 <table class="formTable">
                     <tr>
                         <td><label for="searchSubreddit">Subreddit</label></label></td>
-                        <td><input id='searchUser' name='searchUser' type="text"></td>
+                        <td><input id='searchSubreddit' name='searchSubreddit' type="text"></td>
                     </tr>
                     <tr>
                         <td><label for="typeOfSearchSubreddit">Search By:</label></td>
                         <td>
-                            <select id="typeOfSearchSubreddit" name="typeOfSearchSubreddit">
+                            <select id="typeOfSearchSubreddit" name="typeOfSearchSubreddit" onchange="typeOfSearchChange(this)">
                                 <option value="hot">Hot</option>
                                 <option value="new">New</option>
+                                <option value="rising">Rising</option>
                                 <option value="top">Top</option>
+                                <option value="controversial">Controversial</option>
+                            </select>
+                            <select id="searchTimeFrameSubreddit" name="searchTimeFrameSubreddit">
+                                <option value="all">All</option>
+                                <option value="year">This Year</option>
+                                <option value="month">This Month</option>
+                                <option value="week">This Week</option>
+                                <option value="day">Today</option>
+                                <option value="hour">This hour</option>
                             </select>
                         </td>
                     </tr>
