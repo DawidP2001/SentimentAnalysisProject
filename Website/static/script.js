@@ -64,7 +64,7 @@ function displaySubredditBarChart(subKeyList, subItemList){
     }
   });
 }
-
+// This function creates the line graph for the sentiment over time
 function sentimentOverTimeLineGraph(){
   var xValues = [1,2,3,4,5,6,7,8,9,10];
   var yValues = [1,2,3,4,5,4,3,2,1,0];
@@ -92,6 +92,7 @@ function sentimentOverTimeLineGraph(){
 
 }
 
+// This function creates the bar chart for the top keywords by sentiment
 function topKeywordsBySentimentBarChart(){
   var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
   var yValues = [55, 49, 44, 24, 15];
@@ -123,7 +124,7 @@ function topKeywordsBySentimentBarChart(){
     }
   });
 }
-
+// This function creates the scatter graph for sentiment vs engagement
 function sentimentVSEngagementSection(){
   const xyValues = [
     {x:50, y:7},
@@ -263,4 +264,43 @@ function postClicked(button){
 function showLoader(){
   loader = document.getElementById("formModal");
   loader.style.display = "block";
+}
+
+// This function displays the time frame dropdown list in the subreddit form
+function showTimeFrameDropDown(){
+  timeFrame = document.getElementById("searchTimeFrameSubreddit");
+  timeFrame.style.display = "inline-block";
+}
+
+// This function hides the time frame dropdown list in the subreddit form
+function hideTimeFrameDropDown(){
+  timeFrame = document.getElementById("searchTimeFrameSubreddit");
+  timeFrame.style.display = "none";
+}
+
+/** 
+ * This function handles the change in the type of search on the subreddit form
+ * It then decides to display or hide the timeframe for the search type
+ * 
+ * @param {Object} select - The select element that was changed
+*/
+function typeOfSearchChange(select){
+  selectValue = select.value;
+  switch(selectValue){
+    case "top":
+      showTimeFrameDropDown();
+      break;
+    case "new":
+      hideTimeFrameDropDown();
+      break;
+    case "hot":
+      hideTimeFrameDropDown();
+      break;
+    case "rising":
+      hideTimeFrameDropDown();
+      break;
+    case "controversial":
+      showTimeFrameDropDown();
+      break;
+  }
 }
