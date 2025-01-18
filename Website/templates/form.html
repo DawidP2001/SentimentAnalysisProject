@@ -1,3 +1,4 @@
+<!--This form -->
 <div id="introduction">
     <h1>Discover unique insights on Reddit</h1>
     <h4>
@@ -9,7 +10,8 @@
             <button class="tab active" onclick="selectTab(event, 'searchBarTopic')">Topic</button>
             <button class="tab" onclick="selectTab(event, 'searchBarUser')">User</button>
             <button class="tab" onclick="selectTab(event, 'searchBarSubreddit')">Subreddit</button>
-            <button class="tab" onclick="selectTab(event, 'searchBarPost')">Post Comments</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarPost')">Comments</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarDomain')">Domain</button>
         </div>
         <div id="searchBarTopic" class="tabContent">
             <form class='searchForm' action="/showChartsGeneralSearch" method="post">
@@ -40,13 +42,51 @@
                         <td><input id='searchUser' name='searchUser' type="text"></td>
                     </tr>
                     <tr>
+                        <td><label for="typeOfPostUser">Type of Post:</label></td>
+                        <td>
+                            <input type="radio" id="postRadioUser" name="postTypeRadioUser" value="posts" checked>
+                            <label for="postRadioUser">Posts</label><br>
+                            <input type="radio" id="commentRadioUser" name="postTypeRadioUser" value="comments">
+                            <label for="commentRadioUser">Comments</label>
+                            <input type="radio" id="bothRadioUser" name="postTypeRadioUser" value="both">
+                            <label for="bothRadioUser">Both</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Choose Type upvoted or downvoted</label></td>
+                    </tr>
+                    <tr>
+                        <td><label for="typeOfSearchUser">Search By:</label></td>
+                        <td>
+                            <select id="typeOfSearchUser" name="typeOfSearchUser" onchange="typeOfSearchChange(this)">
+                                <option value="hot">Hot</option>
+                                <option value="new">New</option>
+                                <option value="rising">Rising</option>
+                                <option value="top">Top</option>
+                                <option value="controversial">Controversial</option>
+                            </select>
+                            <select id="searchTimeFrameUser" name="searchTimeFrameUser">
+                                <option value="all">All</option>
+                                <option value="year">This Year</option>
+                                <option value="month">This Month</option>
+                                <option value="week">This Week</option>
+                                <option value="day">Today</option>
+                                <option value="hour">This hour</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="querySizeUser">Amount of posts to extract:</label></td>
+                        <td><input id="querySizeUser" name="querySizeUser" type="number" min="1" max="100" value="10"></td>
+                    </tr>
+                    <tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnUser" type="submit" onclick="showLoader()"></td>
                     </tr>
                 </table>
             </form>
         </div>
         <div id="searchBarSubreddit" class="tabContent">
-            <form class ='searchForm' action="/showChartsUserSearch" method="post">
+            <form class ='searchForm' action="/showChartsSubredditSearch" method="post">
                 <table class="formTable">
                     <tr>
                         <td><label for="searchSubreddit">Subreddit</label></label></td>
@@ -73,6 +113,10 @@
                         </td>
                     </tr>
                     <tr>
+                        <td><label for="querySizeSubreddit">Amount of posts to extract:</label></td>
+                        <td><input id="querySizeSubreddit" name="querySizeSubreddit" type="number" min="1" max="100" value="10"></td>
+                    </tr>
+                    <tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnSubreddit" type="submit" onclick="showLoader()"></td>
                     </tr>
                 </table>
@@ -82,7 +126,7 @@
             <form class ='searchForm' action="/showChartsUserSearch" method="post">
                 <table class="formTable">
                     <tr>
-                        <td><label for="searchPost">Post:</label></label></td>
+                        <td><label for="searchPost">Post Link:</label></label></td>
                         <td><input id='searchPost' name='searchUser' type="text"></td>
                     </tr>
                     <tr>
@@ -93,6 +137,27 @@
                         <td><input id='searchPost' name='searchUser' type="text"></td>
                     </tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnPost" type="submit" onclick="showLoader()"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="searchBarDomain" class="tabContent">
+            <form class='searchForm' action="/showChartsGeneralSearch" method="post">
+                <table class="formTable">
+                    <tr>
+                        <td><label for="searchTopic">Topic:</label></td>
+                        <td><input id='searchTopic' name='searchTopic' type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="subredditSearchTopic">Subreddit:</label></td>
+                        <td><input id="subredditSearchTopic" name='subredditSearchTopic' type='text'></td>
+                    </tr>
+                    <tr>
+                        <td><label for="querySizeTopic">Maximum posts to extract:</label></td>
+                        <td><input id="querySizeTopic" name="querySizeTopic" type="number" min="1" max="100" value="10"></td>
+                    </tr>
+                    <tr>
+                        <td class="submitBtnCell" colspan="2"><input id="sumbitBtnTopic"  type="submit" onclick="showLoader()"></td>
                     </tr>
                 </table>
             </form>

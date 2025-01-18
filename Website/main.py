@@ -33,16 +33,20 @@ def indexContact():
             userInformation=False
         )
 
+# This function is used to show the results of a topic search
 @app.route('/showChartsGeneralSearch', methods=['POST'])
 def submitTopic():
+    # Below extracts data from the form
     search = request.form["searchTopic"] # This contains the topic from the search
     subreddit = request.form["subredditSearchTopic"] # This contains the subreddit from the search
     querySize = request.form["querySizeTopic"] # This contains the size of the query
     if subreddit != "":
         rawData = r.queryAPI(search, subreddit, querySize)
     else:
+########### Change this so that random posts are taken from random subrreddits instead from all ##########
         rawData = r.queryAPI(search, "all", querySize) # Contains all the raw data from the query to the Reddit Api
 
+    # Below prepares the data for the page to be displayed
     datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
     titleList, subbredditList, authorList = r.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
@@ -57,10 +61,14 @@ def submitTopic():
             userInformation=False
         )
 
+# This function is used to show the results of a user search	
 @app.route('/showChartsUserSearch', methods=['POST'])
 def submitUser():
+    # Below extracts data from the form
     user = request.form["searchUser"] # This contains the topic from the search
     rawData = r.queryUser(user) # Contains all the raw data from the query to the Reddit Api
+
+    # Below prepares the data for the page to be displayed
     datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
     titleList, subbredditList, authorList = r.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
@@ -78,9 +86,14 @@ def submitUser():
 # This function is used to show the results of a subreddit search
 @app.route('/showChartsSubredditSearch', methods=['POST'])
 def submitSubrredit():
+    # Below extracts data from the form
     subreddit = request.form["searchSubreddit"] # This contains the topic from the search
     searchType = request.form["typeOfSearchSubreddit"] # This contains the subreddit from the search
-    rawData = r.querySubreddit(subreddit, searchType) # Contains all the raw data from the query to the Reddit Api
+    querySize = request.form["querySizeSubreddit"] # This contains the size of the query
+    searchTimeFrame = request.form["searchTimeFrameSubreddit"] # This contains the size of the query
+    rawData = r.querySubreddit(subreddit, searchType, querySize, searchTimeFrame) # Contains all the raw data from the query to the Reddit Api
+    
+    # Below prepares the data for the page to be displayed
     datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
     titleList, subbredditList, authorList = r.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
@@ -92,7 +105,7 @@ def submitSubrredit():
             form=False, 
             charts=True,
             scrollToContact=False,
-            userInformation=True
+            userInformation=False
         )
 
 @app.route('/showChartsPostSearch', methods=['POST'])

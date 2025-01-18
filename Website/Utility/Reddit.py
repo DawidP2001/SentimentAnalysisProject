@@ -18,22 +18,32 @@ def queryAPI(query: str, subreddit: str, querySize: str):
     return results
 
 # This function extracts data from a user search
-def queryUser(user):
+def queryUser(user, type: str, querySize: str):
     user = reddit.redditor(user)
-    return user.submissions.new(limit=10)
+    if type == "hot":
+        return user.submissions.hot(limit=10)
+    elif type == "new":
+        return user.submissions.new(limit=10)
+    elif type == "top":
+        return user.submissions.top(limit=10)
+    elif type == "controversial":
+        return user.submissions.controversial(limit=10)
+    else:
+        return user.submissions.hot(limit=10)
 
 # This function extracts specific data from a subreddit
-def querySubreddit(subreddit: str, type: str):
+def querySubreddit(subreddit: str, type: str, querySize: str, timeFrame: str):
+    querySizeInt = int(querySize)
     if type == "hot":
-        return reddit.subreddit(subreddit).hot(limit=10)
+        return reddit.subreddit(subreddit).hot(limit=querySizeInt)
     elif type == "new":
-        return reddit.subreddit(subreddit).new(limit=10)
+        return reddit.subreddit(subreddit).new(limit=querySizeInt)
     elif type == "top":
-        return reddit.subreddit(subreddit).top(limit=10)
+        return reddit.subreddit(subreddit).top(limit=querySizeInt)
     elif type == "controversial":
-        return reddit.subreddit(subreddit).controversial(limit=10)
+        return reddit.subreddit(subreddit).controversial(limit=querySizeInt)
     else:
-        return reddit.subreddit(subreddit).hot(limit=10)
+        return reddit.subreddit(subreddit).hot(limit=querySizeInt)
 
 # This function extracts the titles of the posts from query
 def extractPostTitles(query):
