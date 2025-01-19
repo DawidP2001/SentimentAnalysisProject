@@ -1,4 +1,6 @@
 from collections import Counter
+
+import praw
 from Utility import SenitmentAnalyser as s
 import datetime
 
@@ -63,17 +65,31 @@ def seperateSentiments(queryList):
 
 # This function converts the data from the submission object into a dictionary entry
 def dataToDictionary(submission):
-    return {
-        "title": submission.title,
-        "subreddit": submission.subreddit.display_name,
-        "author": submission.author.name,
-        "created_utc": datetime.datetime.fromtimestamp(submission.created_utc),
-        "num_comments": submission.num_comments,
-        "over_18": submission.over_18,
-        "permalink": submission.permalink,
-        "upvotes": submission.score,
-        "upvote_ratio": submission.upvote_ratio
-    }
+    print(type(submission))
+    if type(submission) is praw.models.reddit.submission.Submission:
+        return {
+            "title": submission.title,
+            "subreddit": submission.subreddit.display_name,
+            "author": submission.author.name,
+            "created_utc": datetime.datetime.fromtimestamp(submission.created_utc),
+            "num_comments": submission.num_comments,
+            "over_18": submission.over_18,
+            "permalink": submission.permalink,
+            "upvotes": submission.score,
+            "upvote_ratio": submission.upvote_ratio
+        }
+    if type(submission) is praw.models.reddit.comment.Comment:
+        return {
+            "title": "N/A",
+            "subreddit": submission.subreddit.display_name,
+            "author": submission.author.name,
+            "created_utc": datetime.datetime.fromtimestamp(submission.created_utc),
+            "num_comments": "N/A",
+            "over_18": "N/A",
+            "permalink": submission.permalink,
+            "upvotes": submission.score,
+            "upvote_ratio": "N/A"
+        }
 # This function converts the submissions into a list of dictionaries
 def createDictList(submissions):
     list = []

@@ -2,6 +2,7 @@
 # Description: 
 # Date: 
 
+import datetime
 from flask import Flask, request, render_template, session
 from Utility import Reddit as r
 from Utility import Utils
@@ -120,20 +121,22 @@ def submitPost():
     pass
 
 # This function is used to set session variables
-def setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, search, authorList):
+def setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, 
+                   itemList, search, authorList):
     session['positiveSentimentList'] = positiveSentimentList
     session['neutralSentimentList'] = neutralSentimentList
     session['negativeSentimentList'] = negativeSentimentList
     session['subKeyList'] = keyList # Contains the keys for subbreddit chart
     session['subItemList'] = itemList # Contains the values for subbreddit chart
     session['search'] = search # Contains the search topic
-    session['postTitleSentimentCount'] = Utils.countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList) #Contains the count of sentiment values
+    session['postTitleSentimentCount'] = Utils.countLables(positiveSentimentList, 
+                                                           neutralSentimentList, negativeSentimentList) #Contains the count of sentiment values
     session['authorList'] = authorList
 
 # Sets the session variables for redditor data
 def setRedditorData(redditor):
     session["redditorCommentKarma"] = redditor.comment_karma
-    session["redditorCreatedUTC"] = redditor.created_utc
+    session["redditorCreatedUTC"] = datetime.datetime.fromtimestamp(redditor.created_utc)
     session["redditorID"] = redditor.id
     session["redditorIsEmployee"] = redditor.is_employee
     session["redditorIsMod"] = redditor.is_mod
