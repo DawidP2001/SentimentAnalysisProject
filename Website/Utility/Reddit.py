@@ -17,9 +17,11 @@ def queryAPI(query: str, subreddit: str, querySize: str):
     results = reddit.subreddit(subreddit).search(query, limit=qeuerySizeInt)
     return results
 
+def getRedditor(userString: str):
+    return reddit.redditor(userString)
+
 # This function extracts data from a user search
-def queryUser(userString: str, typeOfPost: str, typeOfSearch: str, searchTimeFrame: str, querySize: str):
-    redditor = reddit.redditor(userString)
+def queryUser(redditor: str, typeOfPost: str, typeOfSearch: str, searchTimeFrame: str, querySize: str):
     querySizeInt = int(querySize)
     # This is for searching for redditors submissions
     if typeOfPost == "submissions":

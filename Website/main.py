@@ -71,7 +71,8 @@ def submitUser():
     searchTimeFrame = request.form["searchTimeFrameUser"] # This contains the subreddit from the search
     querySize = request.form["querySizeUser"]
     # Contains all the raw data from the query to the Reddit Api
-    rawData = r.queryUser(user, typeOfPost, typeOfSearch, searchTimeFrame, querySize) 
+    redditor = r.getRedditor(user)
+    rawData = r.queryUser(redditor, typeOfPost, typeOfSearch, searchTimeFrame, querySize) 
 
     # Below prepares the data for the page to be displayed
     datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
@@ -79,6 +80,7 @@ def submitUser():
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, user, authorList)
+    setRedditorData(redditor)
 
     return render_template(
             'index.html',
@@ -132,14 +134,17 @@ def setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimen
 # Sets the session variables for redditor data
 def setRedditorData(redditor):
     session["redditorCommentKarma"] = redditor.comment_karma
-
     session["redditorCreatedUTC"] = redditor.created_utc
-    session["redditorHasVerifiedEmail"] = redditor.has_verified_email
     session["redditorID"] = redditor.id
     session["redditorIsEmployee"] = redditor.is_employee
     session["redditorIsMod"] = redditor.is_mod
     session["redditorIsGold"] = redditor.is_gold
-    session["redditorIsSuspended"] = redditor.is_suspended
+    try:
+        session["redditorIsSuspended"] = redditor.is_suspended
+    except AttributeError:
+        session["redditorIsSuspended"] = "False"
+    finally:
+        session["redditorIsSuspended"] = "False"
     session["redditorLinkKarma"] = redditor.link_karma
     session["redditorName"] = redditor.name
 
