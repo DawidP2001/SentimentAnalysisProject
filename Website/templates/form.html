@@ -10,7 +10,7 @@
             <button class="tab active" onclick="selectTab(event, 'searchBarTopic')">Topic</button>
             <button class="tab" onclick="selectTab(event, 'searchBarUser')">User</button>
             <button class="tab" onclick="selectTab(event, 'searchBarSubreddit')">Subreddit</button>
-            <button class="tab" onclick="selectTab(event, 'searchBarPost')">Comments</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarComment')">Comments</button>
             <button class="tab" onclick="selectTab(event, 'searchBarDomain')">Domain</button>
         </div>
         <div id="searchBarTopic" class="tabContent">
@@ -117,25 +117,17 @@
                 </table>
             </form>
         </div>
-        <div id="searchBarPost" class="tabContent">
-            <form class ='searchForm' action="/showChartsUserSearch" method="post">
+        <div id="searchBarComment" class="tabContent">
+            <form class ='searchForm' action="/showChartsCommentSearch" method="post">
                 <table class="formTable">
                     <tr>
-                        <td><input type="radio "></td>
-                    </tr>
-                    <tr>
-                        <input type="radio" id="postLinkTypeSearch" name="typeSearchComments" value="link" checked>
-                        <label for="postLinkTypeSearch">Post Link</label><br>
-                        <input type="radio" id="postIDTypeSearch" name="typeSearchComments" value="comment">
-                        <label for="postIDTypeSearch">Post ID</label>
-                    </tr>
-                    <tr id="postLinkSearchRow">
-                        <td><label for="searchLinkPost">Post Link:</label></label></td>
-                        <td><input id='searchLinkPost' name='searchLinkPost' type="text"></td>
-                    </tr>
-                    <tr id="postIDSearchRow">
-                        <td><label for="searchPostID">Post ID:</label></label></td>
-                        <td><input id='searchPostID' name='searchPostID' type="text"></td>
+                        <td>
+                            <select id="typeOfSearchComment" name="typeOfSearchComment">
+                                <option value="link">Post Link</option>
+                                <option value="id">Post ID</option>
+                            </select>
+                        </td>
+                        <td><input id='searchComment' name='searchComment' type="text"></td>
                     </tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnPost" type="submit" onclick="showLoader()"></td>
                     </tr>
