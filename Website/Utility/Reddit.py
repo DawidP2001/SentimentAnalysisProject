@@ -82,3 +82,10 @@ def extractData(results):
         authorList.append(post['author'])
     return titleList, subbredditList, authorList
 
+def extractCommentData(results):
+    subbredditList = []
+    for post in results:
+       # titleList.append(post['title'])
+        subbredditList.append(post['subreddit'])
+        #authorList.append(post['author'])
+    return subbredditList

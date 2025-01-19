@@ -106,7 +106,6 @@ def submitSubrredit():
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, subreddit, authorList)
-    #setRedditorData(redditor)
 
     return render_template(
             'index.html',
