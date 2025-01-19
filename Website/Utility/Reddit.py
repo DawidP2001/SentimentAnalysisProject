@@ -19,30 +19,27 @@ def queryAPI(query: str, subreddit: str, querySize: str):
 
 # This function extracts data from a user search
 def queryUser(userString: str, typeOfPost: str, typeOfSearch: str, searchTimeFrame: str, querySize: str):
-    user = reddit.redditor(userString)
+    redditor = reddit.redditor(userString)
     querySizeInt = int(querySize)
     # This is for searching for redditors submissions
     if typeOfPost == "submissions":
         if typeOfSearch == "hot":
-            return user.submissions.hot(limit=querySizeInt)
+            return redditor.submissions.hot(limit=querySizeInt)
         elif typeOfSearch == "new":
-            return user.submissions.new(limit=querySizeInt)
+            return redditor.submissions.new(limit=querySizeInt)
         elif typeOfSearch == "top":
-            return user.submissions.top(limit=querySizeInt, time_filter=searchTimeFrame)
+            return redditor.submissions.top(limit=querySizeInt, time_filter=searchTimeFrame)
         elif typeOfSearch == "controversial":
-            return user.submissions.controversial(limit=querySizeInt, time_filter=searchTimeFrame)
+            return redditor.submissions.controversial(limit=querySizeInt, time_filter=searchTimeFrame)
         else:
-            return user.submissions.hot(limit=querySizeInt)
+            return redditor.submissions.hot(limit=querySizeInt)
     # This is for searching for redditors comments
     elif typeOfPost == "comments":
-        return user.comments.new(limit=querySizeInt)
+        return redditor.comments.new(limit=querySizeInt)
     elif typeOfPost == "upvoted":
-        return user.upvoted(limit=querySizeInt)
+        return redditor.upvoted(limit=querySizeInt)
     elif typeOfPost == "downvoted":
-        return user.downvoted(limit=querySizeInt)
-
-def setUserData(user):
-    pass
+        return redditor.downvoted(limit=querySizeInt)
     
 # This function extracts specific data from a subreddit
 def querySubreddit(subreddit: str, type: str, querySize: str, timeFrame: str):

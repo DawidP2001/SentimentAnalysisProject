@@ -104,6 +104,7 @@ def submitSubrredit():
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, subreddit, authorList)
+    #setRedditorData(redditor)
 
     return render_template(
             'index.html',
@@ -128,6 +129,19 @@ def setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimen
     session['postTitleSentimentCount'] = Utils.countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList) #Contains the count of sentiment values
     session['authorList'] = authorList
 
+# Sets the session variables for redditor data
+def setRedditorData(redditor):
+    session["redditorCommentKarma"] = redditor.comment_karma
+
+    session["redditorCreatedUTC"] = redditor.created_utc
+    session["redditorHasVerifiedEmail"] = redditor.has_verified_email
+    session["redditorID"] = redditor.id
+    session["redditorIsEmployee"] = redditor.is_employee
+    session["redditorIsMod"] = redditor.is_mod
+    session["redditorIsGold"] = redditor.is_gold
+    session["redditorIsSuspended"] = redditor.is_suspended
+    session["redditorLinkKarma"] = redditor.link_karma
+    session["redditorName"] = redditor.name
 
 if __name__ == '__main__':  
    app.run()  
