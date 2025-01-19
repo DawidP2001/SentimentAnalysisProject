@@ -66,7 +66,12 @@ def submitTopic():
 def submitUser():
     # Below extracts data from the form
     user = request.form["searchUser"] # This contains the topic from the search
-    rawData = r.queryUser(user) # Contains all the raw data from the query to the Reddit Api
+    typeOfPost = request.form["postTypeRadioUser"] # This contains the subreddit from the search
+    typeOfSearch = request.form["typeOfSearchUser"] # This contains the subreddit from the search
+    searchTimeFrame = request.form["searchTimeFrameUser"] # This contains the subreddit from the search
+    querySize = request.form["querySizeUser"]
+    # Contains all the raw data from the query to the Reddit Api
+    rawData = r.queryUser(user, typeOfPost, typeOfSearch, searchTimeFrame, querySize) 
 
     # Below prepares the data for the page to be displayed
     datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
@@ -99,6 +104,7 @@ def submitSubrredit():
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, subreddit, authorList)
+    #setRedditorData(redditor)
 
     return render_template(
             'index.html',
@@ -123,6 +129,19 @@ def setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimen
     session['postTitleSentimentCount'] = Utils.countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList) #Contains the count of sentiment values
     session['authorList'] = authorList
 
+# Sets the session variables for redditor data
+def setRedditorData(redditor):
+    session["redditorCommentKarma"] = redditor.comment_karma
+
+    session["redditorCreatedUTC"] = redditor.created_utc
+    session["redditorHasVerifiedEmail"] = redditor.has_verified_email
+    session["redditorID"] = redditor.id
+    session["redditorIsEmployee"] = redditor.is_employee
+    session["redditorIsMod"] = redditor.is_mod
+    session["redditorIsGold"] = redditor.is_gold
+    session["redditorIsSuspended"] = redditor.is_suspended
+    session["redditorLinkKarma"] = redditor.link_karma
+    session["redditorName"] = redditor.name
 
 if __name__ == '__main__':  
    app.run()  
