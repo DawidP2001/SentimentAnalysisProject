@@ -304,3 +304,13 @@ function typeOfSearchChange(select){
       break;
   }
 }
+
+function showTypeOfPostUserRow(){
+  typeOfPost = document.getElementById("typeOfPostUserRow");
+  typeOfPost.style.display = "table-row";
+}
+
+function hideTypeOfPostUserRow(){
+  typeOfPost = document.getElementById("typeOfPostUserRow");
+  typeOfPost.style.display = "none";
+}

@@ -44,26 +44,17 @@
                     <tr>
                         <td><label for="typeOfPostUser">Type of Post:</label></td>
                         <td>
-                            <input type="radio" id="postRadioUser" name="postTypeRadioUser" value="posts" checked>
+                            <input type="radio" id="postRadioUser" name="postTypeRadioUser" value="submissions" onclick="showTypeOfPostUserRow()" checked>
                             <label for="postRadioUser">Posts</label><br>
-                            <input type="radio" id="commentRadioUser" name="postTypeRadioUser" value="comments">
+                            <input type="radio" id="commentRadioUser" name="postTypeRadioUser" value="comments" onclick="showTypeOfPostUserRow()">
                             <label for="commentRadioUser">Comments</label><br>
-                            <input type="radio" id="bothRadioUser" name="postTypeRadioUser" value="both">
-                            <label for="bothRadioUser">Both</label>
+                            <input type="radio" id="upvotedRadioUser" name="postTypeRadioUser" value="upvoted" onclick="hideTypeOfPostUserRow()">
+                            <label for="upvotedRadioUser">Most Upvoted</label><br>
+                            <input type="radio" id="downvotedRadioUser" name="postTypeRadioUser" value="downvoted" onclick="hideTypeOfPostUserRow()">
+                            <label for="downvotedRadioUser">Most Downvoted</label><br>
                         </td>
                     </tr>
-                    <tr>
-                        <td><label>Choose Type upvoted or downvoted</label></td>
-                        <td>
-                            <input type="radio" id="upvotedRadioUser" name="typeVoteRadioUser" value="upvoted" checked>
-                            <label for="upvotedRadioUser">Upvoted</label><br>
-                            <input type="radio" id="downvotedRadioUser" name="typeVoteRadioUser" value="downvoted">
-                            <label for="downvotedRadioUser">Downvoted</label><br>
-                            <input type="radio" id="NeitherVotedRadioUser" name="typeVoteRadioUser" value="neither">
-                            <label for="bothVotedRadioUser">Neither</label>
-                        </td>
-                    </tr>
-                    <tr>
+                    <tr id="typeOfPostUserRow">
                         <td><label for="typeOfSearchUser">Search By:</label></td>
                         <td>
                             <select id="typeOfSearchUser" name="typeOfSearchUser" onchange="typeOfSearchChange(this)">
