@@ -57,6 +57,23 @@ def querySubreddit(subreddit: str, type: str, querySize: str, timeFrame: str):
     else:
         return reddit.subreddit(subreddit).hot(limit=querySizeInt)
 
+# This function queries the Reddit API for comments from a post
+def queryComments(searchType, contents, sortBy, querySize):
+    """
+    if searchType is "link":
+        submission = reddit.submission(url=contents)    
+    elif searchType is "id":
+        submission = reddit.submission(id=contents)
+
+    submission.comments.replace_more(limit=0)
+    submission.comment_sort = sortBy
+    """
+    pass
+
+# This function queries the Reddit API for a specific domains
+def queryDomain():
+    pass
+
 # This function extracts the titles of the posts from query
 def extractPostTitles(query):
     resultList = []

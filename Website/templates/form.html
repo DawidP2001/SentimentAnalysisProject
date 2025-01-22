@@ -131,6 +131,21 @@
                     </tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnPost" type="submit" onclick="showLoader()"></td>
                     </tr>
+                    <tr>
+                        <td><label for="sortByComments">Sort by:</label></td>
+                        <td>
+                            <select id="sortByComments" name="sortByComments">
+                                <option value="new">New</option>
+                                <option value="old">Old</option>
+                                <option value="top">Top</option>
+                                <option value="controversial">Controversial</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="querySizeComment">Amount of posts to extract:</label></td>
+                        <td><input id="querySizeComment" name="querySizeComment" type="number" min="1" max="100" value="10"></td>
+                    </tr>
                 </table>
             </form>
         </div>

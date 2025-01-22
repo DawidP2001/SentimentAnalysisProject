@@ -117,12 +117,12 @@ def submitSubrredit():
         )
 
 @app.route('/showChartsCommentSearch', methods=['POST'])
-def submitPost():
+def submitComment():
     # Below extracts data from the form
-    subreddit = request.form["searchSubreddit"] # This contains the topic from the search
-    searchType = request.form["typeOfSearchSubreddit"] # This contains the subreddit from the search
-    querySize = request.form["querySizeSubreddit"] # This contains the size of the query
-    searchTimeFrame = request.form["searchTimeFrameSubreddit"] # This contains the size of the query
+    searchType = request.form["typeOfSearchComment"] # This contains the topic from the search
+    contents = request.form["searchComment"] # This contains the subreddit from the search
+    sortBy = request.form['sortByComments'] # 
+    querySize = request.form["querySizeCommnet"] # This contains the size of the query
     rawData = r.querySubreddit(subreddit, searchType, querySize, searchTimeFrame) # Contains all the raw data from the query to the Reddit Api
     
     # Below prepares the data for the page to be displayed
