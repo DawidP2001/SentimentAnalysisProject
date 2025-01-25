@@ -118,19 +118,20 @@ def submitSubrredit():
 
 @app.route('/showChartsCommentSearch', methods=['POST'])
 def submitComment():
+    print("Comment search")
     # Below extracts data from the form
     searchType = request.form["typeOfSearchComment"] # This contains the topic from the search
     contents = request.form["searchComment"] # This contains the subreddit from the search
     sortBy = request.form['sortByComments'] # 
-    querySize = request.form["querySizeCommnet"] # This contains the size of the query
-    rawData = r.querySubreddit(subreddit, searchType, querySize, searchTimeFrame) # Contains all the raw data from the query to the Reddit Api
-    
+    querySize = request.form["querySizeComment"] # This contains the size of the query
+    rawData = r.queryComment(searchType, contents, sortBy, querySize) # Contains all the raw data from the query to the Reddit Api
+    print(rawData)
     # Below prepares the data for the page to be displayed
     datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
     titleList, subbredditList, authorList = r.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
-    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, subreddit, authorList)
+    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, contents, authorList)
 
     return render_template(
             'index.html',

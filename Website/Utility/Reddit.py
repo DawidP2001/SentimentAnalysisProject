@@ -58,17 +58,19 @@ def querySubreddit(subreddit: str, type: str, querySize: str, timeFrame: str):
         return reddit.subreddit(subreddit).hot(limit=querySizeInt)
 
 # This function queries the Reddit API for comments from a post
-def queryComments(searchType, contents, sortBy, querySize):
-    """
-    if searchType is "link":
+def queryComment(searchType, contents, sortBy, querySize):
+    if searchType == "link":
         submission = reddit.submission(url=contents)    
-    elif searchType is "id":
+    elif searchType == "id":
         submission = reddit.submission(id=contents)
 
-    submission.comments.replace_more(limit=0)
+    submission.comments.replace_more(limit=0) #This is set to 0 to remove all MoreComments objects
+    # This is done so it wouldnt dig to deep into the comments hierarchy
     submission.comment_sort = sortBy
-    """
-    pass
+    # Below returns a certain amount of comments as a flat list
+    querySizeInt = int(querySize)
+    commentsList = submission.comments.list()[:querySizeInt] 
+    return commentsList
 
 # This function queries the Reddit API for a specific domains
 def queryDomain():

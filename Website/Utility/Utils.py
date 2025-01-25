@@ -65,7 +65,6 @@ def seperateSentiments(queryList):
 
 # This function converts the data from the submission object into a dictionary entry
 def dataToDictionary(submission):
-    print(type(submission))
     if type(submission) is praw.models.reddit.submission.Submission:
         return {
             "title": submission.title,
@@ -79,10 +78,15 @@ def dataToDictionary(submission):
             "upvote_ratio": submission.upvote_ratio
         }
     if type(submission) is praw.models.reddit.comment.Comment:
+        author = "N/A"
+        try:
+            author = submission.author.name
+        except AttributeError:
+            pass
         return {
             "title": "N/A",
             "subreddit": submission.subreddit.display_name,
-            "author": submission.author.name,
+            "author": author,
             "created_utc": datetime.datetime.fromtimestamp(submission.created_utc),
             "num_comments": "N/A",
             "over_18": "N/A",
