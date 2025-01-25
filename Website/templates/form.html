@@ -10,7 +10,7 @@
             <button class="tab active" onclick="selectTab(event, 'searchBarTopic')">Topic</button>
             <button class="tab" onclick="selectTab(event, 'searchBarUser')">User</button>
             <button class="tab" onclick="selectTab(event, 'searchBarSubreddit')">Subreddit</button>
-            <button class="tab" onclick="selectTab(event, 'searchBarPost')">Comments</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarComment')">Comments</button>
             <button class="tab" onclick="selectTab(event, 'searchBarDomain')">Domain</button>
         </div>
         <div id="searchBarTopic" class="tabContent">
@@ -47,11 +47,7 @@
                             <input type="radio" id="postRadioUser" name="postTypeRadioUser" value="submissions" onclick="showTypeOfPostUserRow()" checked>
                             <label for="postRadioUser">Posts</label><br>
                             <input type="radio" id="commentRadioUser" name="postTypeRadioUser" value="comments" onclick="showTypeOfPostUserRow()">
-                            <label for="commentRadioUser">Comments</label><br>
-                            <input type="radio" id="upvotedRadioUser" name="postTypeRadioUser" value="upvoted" onclick="hideTypeOfPostUserRow()">
-                            <label for="upvotedRadioUser">Most Upvoted</label><br>
-                            <input type="radio" id="downvotedRadioUser" name="postTypeRadioUser" value="downvoted" onclick="hideTypeOfPostUserRow()">
-                            <label for="downvotedRadioUser">Most Downvoted</label><br>
+                            <label for="commentRadioUser">Comments</label>
                         </td>
                     </tr>
                     <tr id="typeOfPostUserRow">
@@ -64,7 +60,7 @@
                                 <option value="top">Top</option>
                                 <option value="controversial">Controversial</option>
                             </select>
-                            <select id="searchTimeFrameUser" name="searchTimeFrameUser">
+                            <select id="searchTimeFrameUser" class="timeFrameSearch" name="searchTimeFrameUser">
                                 <option value="all">All</option>
                                 <option value="year">This Year</option>
                                 <option value="month">This Month</option>
@@ -101,7 +97,7 @@
                                 <option value="top">Top</option>
                                 <option value="controversial">Controversial</option>
                             </select>
-                            <select id="searchTimeFrameSubreddit" name="searchTimeFrameSubreddit">
+                            <select id="searchTimeFrameSubreddit" class="timeFrameSearch" name="searchTimeFrameSubreddit">
                                 <option value="all">All</option>
                                 <option value="year">This Year</option>
                                 <option value="month">This Month</option>
@@ -121,42 +117,50 @@
                 </table>
             </form>
         </div>
-        <div id="searchBarPost" class="tabContent">
-            <form class ='searchForm' action="/showChartsUserSearch" method="post">
+        <div id="searchBarComment" class="tabContent">
+            <form class ='searchForm' action="/showChartsCommentSearch" method="post">
                 <table class="formTable">
                     <tr>
-                        <td><input type="radio "></td>
+                        <td>
+                            <select id="typeOfSearchComment" name="typeOfSearchComment">
+                                <option value="link">Post Link</option>
+                                <option value="id">Post ID</option>
+                            </select>
+                        </td>
+                        <td><input id='searchComment' name='searchComment' type="text"></td>
                     </tr>
                     <tr>
-                        <input type="radio" id="postLinkTypeSearch" name="typeSearchComments" value="link" checked>
-                        <label for="postLinkTypeSearch">Post Link</label><br>
-                        <input type="radio" id="postIDTypeSearch" name="typeSearchComments" value="comment">
-                        <label for="postIDTypeSearch">Post ID</label>
+                        <td><label for="sortByComments">Sort by:</label></td>
+                        <td>
+                            <select id="sortByComments" name="sortByComments">
+                                <option value="new">New</option>
+                                <option value="old">Old</option>
+                                <option value="top">Top</option>
+                                <option value="controversial">Controversial</option>
+                            </select>
+                        </td>
                     </tr>
-                    <tr id="postLinkSearchRow">
-                        <td><label for="searchLinkPost">Post Link:</label></label></td>
-                        <td><input id='searchLinkPost' name='searchLinkPost' type="text"></td>
+                    <tr>
+                        <td><label for="querySizeComment">Amount of posts to extract:</label></td>
+                        <td><input id="querySizeComment" name="querySizeComment" type="number" min="1" max="100" value="10"></td>
                     </tr>
-                    <tr id="postIDSearchRow">
-                        <td><label for="searchPostID">Post ID:</label></label></td>
-                        <td><input id='searchPostID' name='searchPostID' type="text"></td>
-                    </tr>
-                        <td class="submitBtnCell" colspan="2"><input id="sumbitBtnPost" type="submit" onclick="showLoader()"></td>
+                    <tr>
+                        <td class="submitBtnCell" colspan="2"><input id="sumbitBtnComment" type="submit" onclick="showLoader()"></td>
                     </tr>
                 </table>
             </form>
         </div>
         <div id="searchBarDomain" class="tabContent">
-            <form class='searchForm' action="/showChartsGeneralSearch" method="post">
+            <form class='searchForm' action="/showChartsDomainSearch" method="post">
                 <table class="formTable">
                     <tr>
-                        <td><label for="searchTopic">Link:</label></td>
-                        <td><input id='searchTopic' name='searchTopic' type="text"></td>
+                        <td><label for="searchDomain">Link:</label></td>
+                        <td><input id='searchDomain' name='searchDomain' type="text"></td>
                     </tr>
                     <tr>
-                        <td><label for="typeOfSearchSubreddit">Search By:</label></td>
+                        <td><label for="typeOfSearchDomain">Search By:</label></td>
                         <td>
-                            <select id="typeOfSearchSubreddit" name="typeOfSearchSubreddit" onchange="typeOfSearchChange(this)">
+                            <select id="typeOfSearchDomain" name="typeOfSearchDomain" onchange="typeOfSearchChange(this)">
                                 <option value="hot">Hot</option>
                                 <option value="new">New</option>
                                 <option value="rising">Rising</option>
@@ -164,7 +168,7 @@
                                 <option value="top">Top</option>
                                 <option value="controversial">Controversial</option>
                             </select>
-                            <select id="searchTimeFrameSubreddit" name="searchTimeFrameSubreddit">
+                            <select id="searchTimeFrameDomain" class="timeFrameSearch" name="searchTimeFrameDomain">
                                 <option value="all">All</option>
                                 <option value="year">This Year</option>
                                 <option value="month">This Month</option>
@@ -175,11 +179,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="querySizeTopic">Maximum posts to extract:</label></td>
-                        <td><input id="querySizeTopic" name="querySizeTopic" type="number" min="1" max="100" value="10"></td>
+                        <td><label for="querySizeDomain">Maximum posts to extract:</label></td>
+                        <td><input id="querySizeDomain" name="querySizeDomain" type="number" min="1" max="100" value="10"></td>
                     </tr>
                     <tr>
-                        <td class="submitBtnCell" colspan="2"><input id="sumbitBtnTopic"  type="submit" onclick="showLoader()"></td>
+                        <td class="submitBtnCell" colspan="2"><input id="sumbitBtnDomain"  type="submit" onclick="showLoader()"></td>
                     </tr>
                 </table>
             </form>

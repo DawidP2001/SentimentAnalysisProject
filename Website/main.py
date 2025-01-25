@@ -2,6 +2,7 @@
 # Description: 
 # Date: 
 
+import datetime
 from flask import Flask, request, render_template, session
 from Utility import Reddit as r
 from Utility import Utils
@@ -71,7 +72,8 @@ def submitUser():
     searchTimeFrame = request.form["searchTimeFrameUser"] # This contains the subreddit from the search
     querySize = request.form["querySizeUser"]
     # Contains all the raw data from the query to the Reddit Api
-    rawData = r.queryUser(user, typeOfPost, typeOfSearch, searchTimeFrame, querySize) 
+    redditor = r.getRedditor(user)
+    rawData = r.queryUser(redditor, typeOfPost, typeOfSearch, searchTimeFrame, querySize) 
 
     # Below prepares the data for the page to be displayed
     datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
@@ -79,6 +81,7 @@ def submitUser():
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, user, authorList)
+    setRedditorData(redditor)
 
     return render_template(
             'index.html',
@@ -104,7 +107,6 @@ def submitSubrredit():
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, subreddit, authorList)
-    #setRedditorData(redditor)
 
     return render_template(
             'index.html',
@@ -114,32 +116,73 @@ def submitSubrredit():
             userInformation=False
         )
 
-@app.route('/showChartsPostSearch', methods=['POST'])
-def submitPost():
-    pass
+@app.route('/showChartsCommentSearch', methods=['POST'])
+def submitComment():
+    # Below extracts data from the form
+    searchType = request.form["typeOfSearchComment"] # This contains the topic from the search
+    contents = request.form["searchComment"] # This contains the subreddit from the search
+    sortBy = request.form['sortByComments'] # 
+    querySize = request.form["querySizeComment"] # This contains the size of the query
+    rawData = r.queryComment(searchType, contents, sortBy, querySize) # Contains all the raw data from the query to the Reddit Api
+    
+    # Below prepares the data for the page to be displayed
+    datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
+    titleList, subbredditList, authorList = r.extractData(datalist)
+    keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
+    positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
+    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, contents, authorList)
+
+@app.route('/showChartsDomainSearch', methods=['POST'])
+def submitDomain():
+    # Below extracts data from the form
+    searchContents = request.form["searchDomain"] # This contains the topic from the search
+    typeOfSearch = request.form["typeOfSearchDomain"] # This contains the subreddit from the search
+    searchTimeFrame = request.form['searchTimeFrameDomain'] # 
+    querySize = request.form["querySizeDomain"] # This contains the size of the query
+    rawData = r.queryDomain(searchContents, typeOfSearch, searchTimeFrame, querySize) # Contains all the raw data from the query to the Reddit Api
+    # Below prepares the data for the page to be displayed
+    datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
+    titleList, subbredditList, authorList = r.extractData(datalist)
+    keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
+    positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
+    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, searchContents, authorList)
+
+
+    return render_template(
+            'index.html',
+            form=False, 
+            charts=True,
+            scrollToContact=False,
+            userInformation=False
+        )
 
 # This function is used to set session variables
-def setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, search, authorList):
+def setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, 
+                   itemList, search, authorList):
     session['positiveSentimentList'] = positiveSentimentList
     session['neutralSentimentList'] = neutralSentimentList
     session['negativeSentimentList'] = negativeSentimentList
     session['subKeyList'] = keyList # Contains the keys for subbreddit chart
     session['subItemList'] = itemList # Contains the values for subbreddit chart
     session['search'] = search # Contains the search topic
-    session['postTitleSentimentCount'] = Utils.countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList) #Contains the count of sentiment values
+    session['postTitleSentimentCount'] = Utils.countLables(positiveSentimentList, 
+                                                           neutralSentimentList, negativeSentimentList) #Contains the count of sentiment values
     session['authorList'] = authorList
 
 # Sets the session variables for redditor data
 def setRedditorData(redditor):
     session["redditorCommentKarma"] = redditor.comment_karma
-
-    session["redditorCreatedUTC"] = redditor.created_utc
-    session["redditorHasVerifiedEmail"] = redditor.has_verified_email
+    session["redditorCreatedUTC"] = datetime.datetime.fromtimestamp(redditor.created_utc)
     session["redditorID"] = redditor.id
     session["redditorIsEmployee"] = redditor.is_employee
     session["redditorIsMod"] = redditor.is_mod
     session["redditorIsGold"] = redditor.is_gold
-    session["redditorIsSuspended"] = redditor.is_suspended
+    try:
+        session["redditorIsSuspended"] = redditor.is_suspended
+    except AttributeError:
+        session["redditorIsSuspended"] = "False"
+    finally:
+        session["redditorIsSuspended"] = "False"
     session["redditorLinkKarma"] = redditor.link_karma
     session["redditorName"] = redditor.name
 

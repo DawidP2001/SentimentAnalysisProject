@@ -1,5 +1,15 @@
+"""
+Author: Dawid Pionk
+Date: 25/01/2025
+Description: This file contains utility functions that are used in the main.py file
+"""
+
+
 from collections import Counter
-from Utility import SenitmentAnalyser as s
+
+import praw
+#from Utility import SenitmentAnalyser as s
+from Utility import testSenitmentAnalyser as s
 import datetime
 
 def countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList):
@@ -63,17 +73,35 @@ def seperateSentiments(queryList):
 
 # This function converts the data from the submission object into a dictionary entry
 def dataToDictionary(submission):
-    return {
-        "title": submission.title,
-        "subreddit": submission.subreddit.display_name,
-        "author": submission.author.name,
-        "created_utc": datetime.datetime.fromtimestamp(submission.created_utc),
-        "num_comments": submission.num_comments,
-        "over_18": submission.over_18,
-        "permalink": submission.permalink,
-        "upvotes": submission.score,
-        "upvote_ratio": submission.upvote_ratio
-    }
+    if type(submission) is praw.models.reddit.submission.Submission:
+        return {
+            "title": submission.title,
+            "subreddit": submission.subreddit.display_name,
+            "author": submission.author.name,
+            "created_utc": datetime.datetime.fromtimestamp(submission.created_utc),
+            "num_comments": submission.num_comments,
+            "over_18": submission.over_18,
+            "permalink": submission.permalink,
+            "upvotes": submission.score,
+            "upvote_ratio": submission.upvote_ratio
+        }
+    if type(submission) is praw.models.reddit.comment.Comment:
+        author = "N/A"
+        try:
+            author = submission.author.name
+        except AttributeError:
+            pass
+        return {
+            "title": "N/A",
+            "subreddit": submission.subreddit.display_name,
+            "author": author,
+            "created_utc": datetime.datetime.fromtimestamp(submission.created_utc),
+            "num_comments": "N/A",
+            "over_18": "N/A",
+            "permalink": submission.permalink,
+            "upvotes": submission.score,
+            "upvote_ratio": "N/A"
+        }
 # This function converts the submissions into a list of dictionaries
 def createDictList(submissions):
     list = []

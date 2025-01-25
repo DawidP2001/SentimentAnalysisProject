@@ -191,8 +191,8 @@ Section for only the form page
   100% { transform: rotate(360deg); }
 }
 
-/* This sets the time frame on the subreddit form to be hidden at the start */
-#searchTimeFrameSubreddit {
+/* This sets the time frames on the form to be hidden at the start */
+.timeFrameSearch {
   display: none;
 }
 /*

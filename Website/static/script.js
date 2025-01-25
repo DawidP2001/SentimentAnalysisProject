@@ -267,14 +267,14 @@ function showLoader(){
 }
 
 // This function displays the time frame dropdown list in the subreddit form
-function showTimeFrameDropDown(){
-  timeFrame = document.getElementById("searchTimeFrameSubreddit");
+function showTimeFrameDropDown(target){
+  timeFrame = document.getElementById(target);
   timeFrame.style.display = "inline-block";
 }
 
 // This function hides the time frame dropdown list in the subreddit form
-function hideTimeFrameDropDown(){
-  timeFrame = document.getElementById("searchTimeFrameSubreddit");
+function hideTimeFrameDropDown(targets){
+  timeFrame = document.getElementById(target);
   timeFrame.style.display = "none";
 }
 
@@ -285,22 +285,29 @@ function hideTimeFrameDropDown(){
  * @param {Object} select - The select element that was changed
 */
 function typeOfSearchChange(select){
+  if (select.id == "typeOfSearchSubreddit"){
+    target = "searchTimeFrameSubreddit";
+  } else if (select.id == "typeOfSearchUser"){
+    target = "searchTimeFrameUser";
+  } else if (select.id == "typeOfSearchDomain"){
+    target = "searchTimeFrameDomain";
+  }
   selectValue = select.value;
   switch(selectValue){
     case "top":
-      showTimeFrameDropDown();
+      showTimeFrameDropDown(target);
       break;
     case "new":
-      hideTimeFrameDropDown();
+      hideTimeFrameDropDown(target);
       break;
     case "hot":
-      hideTimeFrameDropDown();
+      hideTimeFrameDropDown(target);
       break;
     case "rising":
-      hideTimeFrameDropDown();
+      hideTimeFrameDropDown(target);
       break;
     case "controversial":
-      showTimeFrameDropDown();
+      showTimeFrameDropDown(target);
       break;
   }
 }

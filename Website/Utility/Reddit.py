@@ -1,3 +1,9 @@
+"""
+Author: Dawid Pionk
+Date: 25/01/2025
+Description: This file contains functions which are used to query the Reddit API using praw
+"""
+
 import praw
 import os
 from dotenv import load_dotenv
@@ -17,9 +23,11 @@ def queryAPI(query: str, subreddit: str, querySize: str):
     results = reddit.subreddit(subreddit).search(query, limit=qeuerySizeInt)
     return results
 
+def getRedditor(userString: str):
+    return reddit.redditor(userString)
+
 # This function extracts data from a user search
-def queryUser(userString: str, typeOfPost: str, typeOfSearch: str, searchTimeFrame: str, querySize: str):
-    redditor = reddit.redditor(userString)
+def queryUser(redditor: str, typeOfPost: str, typeOfSearch: str, searchTimeFrame: str, querySize: str):
     querySizeInt = int(querySize)
     # This is for searching for redditors submissions
     if typeOfPost == "submissions":
@@ -55,6 +63,38 @@ def querySubreddit(subreddit: str, type: str, querySize: str, timeFrame: str):
     else:
         return reddit.subreddit(subreddit).hot(limit=querySizeInt)
 
+# This function queries the Reddit API for comments from a post
+def queryComment(searchType, contents, sortBy, querySize):
+    if searchType == "link":
+        submission = reddit.submission(url=contents)    
+    elif searchType == "id":
+        submission = reddit.submission(id=contents)
+
+    submission.comments.replace_more(limit=0) #This is set to 0 to remove all MoreComments objects
+    # This is done so it wouldnt dig to deep into the comments hierarchy
+    submission.comment_sort = sortBy
+    # Below returns a certain amount of comments as a flat list
+    querySizeInt = int(querySize)
+    commentsList = submission.comments.list()[:querySizeInt] 
+    return commentsList
+
+# This function queries the Reddit API for a specific domains
+def queryDomain(searchContents, typeOfSearch, searchTimeFrame, querySize):
+    querySizeInt = int(querySize)
+    match typeOfSearch:
+        case "hot":
+            return reddit.domain(searchContents).hot(limit=querySizeInt)
+        case "new":
+            return reddit.domain(searchContents).new(limit=querySizeInt)
+        case "rising":
+            return reddit.domain(searchContents).rising(limit=querySizeInt)
+        case "randomRising":
+            return reddit.domain(searchContents).random_rising(limit=querySizeInt)
+        case "top":
+            return reddit.domain(searchContents).top(time_filter=searchTimeFrame, limit=querySizeInt)
+        case "controversial":
+            return reddit.domain(searchContents).controversial(time_filter=searchTimeFrame, limit=querySizeInt)
+
 # This function extracts the titles of the posts from query
 def extractPostTitles(query):
     resultList = []
@@ -75,8 +115,8 @@ def extractData(results):
     subbredditList = []
     authorList = []
     for post in results:
-        titleList.append(post['title'])
         subbredditList.append(post['subreddit'])
+        titleList.append(post['title'])
         authorList.append(post['author'])
     return titleList, subbredditList, authorList
 
