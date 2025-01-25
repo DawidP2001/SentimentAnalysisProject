@@ -1,7 +1,15 @@
+"""
+Author: Dawid Pionk
+Date: 25/01/2025
+Description: This file contains utility functions that are used in the main.py file
+"""
+
+
 from collections import Counter
 
 import praw
-from Utility import SenitmentAnalyser as s
+#from Utility import SenitmentAnalyser as s
+from Utility import testSenitmentAnalyser as s
 import datetime
 
 def countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList):

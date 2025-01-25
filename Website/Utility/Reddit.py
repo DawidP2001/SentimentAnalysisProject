@@ -1,3 +1,9 @@
+"""
+Author: Dawid Pionk
+Date: 25/01/2025
+Description: This file contains functions which are used to query the Reddit API using praw
+"""
+
 import praw
 import os
 from dotenv import load_dotenv
@@ -73,8 +79,21 @@ def queryComment(searchType, contents, sortBy, querySize):
     return commentsList
 
 # This function queries the Reddit API for a specific domains
-def queryDomain():
-    pass
+def queryDomain(searchContents, typeOfSearch, searchTimeFrame, querySize):
+    querySizeInt = int(querySize)
+    match typeOfSearch:
+        case "hot":
+            return reddit.domain(searchContents).hot(limit=querySizeInt)
+        case "new":
+            return reddit.domain(searchContents).new(limit=querySizeInt)
+        case "rising":
+            return reddit.domain(searchContents).rising(limit=querySizeInt)
+        case "randomRising":
+            return reddit.domain(searchContents).random_rising(limit=querySizeInt)
+        case "top":
+            return reddit.domain(searchContents).top(time_filter=searchTimeFrame, limit=querySizeInt)
+        case "controversial":
+            return reddit.domain(searchContents).controversial(time_filter=searchTimeFrame, limit=querySizeInt)
 
 # This function extracts the titles of the posts from query
 def extractPostTitles(query):
