@@ -226,6 +226,14 @@ function postClicked(button){
   titleSection = document.getElementById("titleSection");
   titleSection.innerHTML = title;
 
+  subreddit = button.getAttribute("data-subreddit");
+  subredditSection = document.getElementById("subredditSection");
+  subredditSection.innerHTML = subreddit;
+
+  selfText = button.getAttribute("data-selfText");
+  selfTextSection = document.getElementById("selfTextSection");
+  selfTextSection.innerHTML = selfText;
+
   score = button.getAttribute("data-score");
   scoreSection = document.getElementById("scoreSection");
   scoreSection.innerHTML = score;

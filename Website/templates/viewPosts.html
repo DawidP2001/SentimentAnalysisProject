@@ -16,6 +16,7 @@
             <button 
             class="modalBtn"
             data-title="{{ entry['title'] }}"
+            data-subreddit="{{ entry['subreddit'] }}"
             data-score="{{ entry['score'] }}"
             data-author="{{ entry['author'] }}" 
             data-created="{{ entry['created_utc'] }}"
@@ -24,6 +25,7 @@
             data-permalink="{{ entry['permalink'] }}"
             data-upvotes="{{ entry['upvotes'] }}"
             data-upvoteRatio="{{ entry['upvote_ratio'] }}"
+            data-selfText="{{ entry['selftext'] }}"
             onclick="postClicked(this)">
                 Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
@@ -38,6 +40,7 @@
             <button 
             class="modalBtn"
             data-title="{{ entry['title'] }}"
+            data-subreddit="{{ entry['subreddit'] }}"
             data-score="{{ entry['score'] }}"
             data-author="{{ entry['author'] }}" 
             data-created="{{ entry['created_utc'] }}"
@@ -46,6 +49,7 @@
             data-permalink="{{ entry['permalink'] }}"
             data-upvotes="{{ entry['upvotes'] }}"
             data-upvoteRatio="{{ entry['upvote_ratio'] }}"
+            data-selfText="{{ entry['selftext'] }}"
             onclick="postClicked(this)">           
                 Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
@@ -60,6 +64,7 @@
             <button 
             class="modalBtn"
             data-title="{{ entry['title'] }}"
+            data-subreddit="{{ entry['subreddit'] }}"
             data-score="{{ entry['score'] }}"
             data-author="{{ entry['author'] }}" 
             data-created="{{ entry['created_utc'] }}"
@@ -68,6 +73,7 @@
             data-permalink="{{ entry['permalink'] }}"
             data-upvotes="{{ entry['upvotes'] }}"
             data-upvoteRatio="{{ entry['upvote_ratio'] }}"
+            data-selfText="{{ entry['selftext'] }}"
             onclick="postClicked(this)">
                 Text: {{ entry['title'] }}<br>
                 Score: {{ entry['score'] }}<br>
@@ -91,11 +97,15 @@
         </tr>
         <tr>
             <td>Subreddit:</td>
-            <td>Under Construction</td>
+            <td>
+                <h3 id="subredditSection"></h3>
+            </td>
         </tr>
         <tr>
             <td>Contents:</td>
-            <td>Under Construction</td>
+            <td>
+                <h3 id="selfTextSection"></h3>
+            </td>
         </tr>
         <tr>
             <td>Score:</td>

@@ -83,7 +83,8 @@ def dataToDictionary(submission):
             "over_18": submission.over_18,
             "permalink": submission.permalink,
             "upvotes": submission.score,
-            "upvote_ratio": submission.upvote_ratio
+            "upvote_ratio": submission.upvote_ratio,
+            "selftext": submission.selftext
         }
     if type(submission) is praw.models.reddit.comment.Comment:
         author = "N/A"
