@@ -231,6 +231,9 @@ function postClicked(button){
   subredditSection.innerHTML = subreddit;
 
   selfText = button.getAttribute("data-selfText");
+  if (selfText == ""){
+    selfText="N/A";
+  }
   selfTextSection = document.getElementById("selfTextSection");
   selfTextSection.innerHTML = selfText;
 

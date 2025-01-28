@@ -241,11 +241,29 @@ canvas {
 /*
 //////////////////////////////////
 
+Section for breakdown.html
+
+//////////////////////////////////
+*/
+#breakdown{
+  display: flex;
+  flex-direction: row;
+}
+/*
+//////////////////////////////////
+
 Section for viewPosts.html
 
 //////////////////////////////////
 */
-
+#sentimentPostsSortSection{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px black solid;
+  padding: 5px;
+}
 #sentimentPostsSection {
   display: flex;
 }
