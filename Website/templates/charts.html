@@ -21,7 +21,7 @@
 <div id="moreChartSection">
      <!-- Bar Chart for Subreddits -->
     <div id="subredditBarChartSection">
-        <canvas id="subredditBarChart"></canvas>
+        <canvas id="subredditBarChart" class="chart"></canvas>
         <script>      
             displaySubredditBarChart(
                 "{{ session.subKeyList }}",
@@ -31,21 +31,21 @@
     </div>
     <!-- Sentiment Over Time       -->
     <div id="sentimentOverTimeSection">
-        <canvas id="sentimentOverTimeLineGraph"></canvas>
+        <canvas id="sentimentOverTimeLineGraph" class="chart"></canvas>
         <script>      
             sentimentOverTimeLineGraph();
         </script>
     </div>
     <!-- Top Keywords by Sentimnet -->
     <div id="topKeywordsBySentimentSection">
-        <canvas id="topKeywordsBySentimentBarChart" width="400" height="200"></canvas>
+        <canvas id="topKeywordsBySentimentBarChart" class="chart"></canvas>
         <script>      
             topKeywordsBySentimentBarChart();
         </script>
     </div>
     <!-- Sentiment vs. Engagement  -->
     <div id="sentimentVSEngagementSection">
-        <canvas id="sentimentVSEngagementScatterGraph" width="400" height="200"></canvas>
+        <canvas id="sentimentVSEngagementScatterGraph" class="chart"></canvas>
         <script>      
             sentimentVSEngagementSection();
         </script>
