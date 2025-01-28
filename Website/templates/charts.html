@@ -21,7 +21,7 @@
 <div id="moreChartSection">
      <!-- Bar Chart for Subreddits -->
     <div id="subredditBarChartSection">
-        <canvas id="subredditBarChart" width="400" height="200"></canvas>
+        <canvas id="subredditBarChart"></canvas>
         <script>      
             displaySubredditBarChart(
                 "{{ session.subKeyList }}",
@@ -31,7 +31,7 @@
     </div>
     <!-- Sentiment Over Time       -->
     <div id="sentimentOverTimeSection">
-        <canvas id="sentimentOverTimeLineGraph" width="400" height="200"></canvas>
+        <canvas id="sentimentOverTimeLineGraph"></canvas>
         <script>      
             sentimentOverTimeLineGraph();
         </script>
