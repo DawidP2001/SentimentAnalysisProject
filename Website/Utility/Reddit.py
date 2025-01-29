@@ -95,6 +95,10 @@ def queryDomain(searchContents, typeOfSearch, searchTimeFrame, querySize):
         case "controversial":
             return reddit.domain(searchContents).controversial(time_filter=searchTimeFrame, limit=querySizeInt)
 
+
+#################################
+# MOVE BELOW FUNCTIONS TO UTILS
+#################################
 # This function extracts the titles of the posts from query
 def extractPostTitles(query):
     resultList = []

@@ -9,7 +9,7 @@ from collections import Counter
 
 import praw
 #from Utility import SenitmentAnalyser as s
-from Utility import testSenitmentAnalyser as s
+from Utility import SenitmentAnalyser as s
 import datetime
 
 def countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList):
