@@ -46,3 +46,21 @@
 9. How to Run:  Run main.py then go to http://127.0.0.1:5000/
 
 10. Website Link: https://dawidp.pythonanywhere.com/ 
+
+11. Citations:
+    Sentiment analaysis Pipeline:
+    @inproceedings{barbieri-etal-2020-tweeteval,
+        title = "{T}weet{E}val: Unified Benchmark and Comparative Evaluation for Tweet Classification",
+        author = "Barbieri, Francesco  and
+        Camacho-Collados, Jose  and
+        Espinosa Anke, Luis  and
+        Neves, Leonardo",
+        booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2020",
+        month = nov,
+        year = "2020",
+        address = "Online",
+        publisher = "Association for Computational Linguistics",
+        url = "https://aclanthology.org/2020.findings-emnlp.148",
+        doi = "10.18653/v1/2020.findings-emnlp.148",
+        pages = "1644--1650"
+    }
