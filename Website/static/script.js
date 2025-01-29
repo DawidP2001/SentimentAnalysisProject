@@ -19,8 +19,8 @@ function displayPieChart(positiveValue, neutralValue, negativeValue, searchTopic
           text: `Overall Sentiment of ${searchTopic}`
         }
       },
-      responsive: false,
-      maintainAspectRatio: false
+      responsive: true,
+      maintainAspectRatio: true
     });
 }
 
@@ -59,8 +59,8 @@ function displaySubredditBarChart(subKeyList, subItemList){
             }
         }]
       },
-      responsive: false,
-      maintainAspectRatio: false
+      responsive: true,
+      maintainAspectRatio: true
     }
   });
 }
@@ -85,8 +85,8 @@ function sentimentOverTimeLineGraph(){
       display: true,
       text: `Sentiment Over Time`
       },
-      responsive: false,
-      maintainAspectRatio: false
+      responsive: true,
+      maintainAspectRatio: true
     }
   });
 
@@ -119,8 +119,8 @@ function topKeywordsBySentimentBarChart(){
             }
         }]
       },
-      responsive: false,
-      maintainAspectRatio: false
+      responsive: true,
+      maintainAspectRatio: true
     }
   });
 }
@@ -154,8 +154,8 @@ function sentimentVSEngagementSection(){
         display: true,
         text: `Sentiment VS engagementSection`
         },
-      responsive: false,
-      maintainAspectRatio: false
+      responsive: true,
+      maintainAspectRatio: true
     }
   });
 }

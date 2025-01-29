@@ -9,7 +9,7 @@ from collections import Counter
 
 import praw
 #from Utility import SenitmentAnalyser as s
-from Utility import testSenitmentAnalyser as s
+from Utility import SenitmentAnalyser as s
 import datetime
 
 def countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList):
@@ -109,3 +109,29 @@ def createDictList(submissions):
     for submission in submissions:
         list.append(dataToDictionary(submission))
     return list
+
+# This function extracts the titles of the posts from query
+def extractPostTitles(query):
+    resultList = []
+    for post in query:
+        resultList.append(post.title)
+    return resultList
+
+# This function extracts the subreddits from the results of the query
+def extractPostSubreddits(results):
+    resultList = []
+    for post in results:
+        resultList.append(post.subreddit)
+    return resultList
+
+# This function extracts specific information from the results of a query
+def extractData(results):
+    titleList = []
+    subbredditList = []
+    authorList = []
+    for post in results:
+        subbredditList.append(post['subreddit'])
+        titleList.append(post['title'])
+        authorList.append(post['author'])
+    return titleList, subbredditList, authorList
+
