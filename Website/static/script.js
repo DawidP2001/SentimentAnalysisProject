@@ -1,3 +1,10 @@
+/*
+//////////////////////////////////
+
+Section for the charts displayed on the charts.html below
+
+//////////////////////////////////
+*/
 // This is a simple Pie Chart that displays the proportion of sentiment for the querry user made
 function displayPieChart(positiveValue, neutralValue, negativeValue, searchTopic){
   var xValues = ["Positive", "Neutral", "Negative"];
@@ -20,10 +27,10 @@ function displayPieChart(positiveValue, neutralValue, negativeValue, searchTopic
         }
       },
       responsive: true,
-      maintainAspectRatio: true
+      maintainAspectRatio: true,
+      devicePixelRatio: 4
     });
 }
-
 // This function creates the bar chart for the subreddit count
 function displaySubredditBarChart(subKeyList, subItemList){
   // Sets up the X axis for bar chart
@@ -60,7 +67,8 @@ function displaySubredditBarChart(subKeyList, subItemList){
         }]
       },
       responsive: true,
-      maintainAspectRatio: true
+      maintainAspectRatio: true,
+      devicePixelRatio: 4
     }
   });
 }
@@ -86,12 +94,12 @@ function sentimentOverTimeLineGraph(){
       text: `Sentiment Over Time`
       },
       responsive: true,
-      maintainAspectRatio: true
+      maintainAspectRatio: true,
+      devicePixelRatio: 4
     }
   });
 
 }
-
 // This function creates the bar chart for the top keywords by sentiment
 function topKeywordsBySentimentBarChart(){
   var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
@@ -120,7 +128,8 @@ function topKeywordsBySentimentBarChart(){
         }]
       },
       responsive: true,
-      maintainAspectRatio: true
+      maintainAspectRatio: true,
+      devicePixelRatio: 4
     }
   });
 }
@@ -155,18 +164,26 @@ function sentimentVSEngagementSection(){
         text: `Sentiment VS engagementSection`
         },
       responsive: true,
-      maintainAspectRatio: true
+      maintainAspectRatio: true,
+      devicePixelRatio: 4
     }
   });
 }
 
+/*
+//////////////////////////////////
+
+Section for other
+
+//////////////////////////////////
+*/
 // This function is called when the view more grpahs button is cl;icked
 function moreGraphsClicked(){
   userInfo = document.getElementById("userInfoContainer");
   chartsSection = document.getElementById("moreChartSection");
   postSection = document.getElementById("viewPostsSection");
   userInfo.style.display = "none";
-  chartsSection.style.display = "block";
+  chartsSection.style.display = "flex";
   postSection.style.display = "none";
 }
 

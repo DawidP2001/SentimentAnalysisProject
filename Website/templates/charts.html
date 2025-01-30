@@ -20,7 +20,7 @@
 </div>
 <div id="moreChartSection">
      <!-- Bar Chart for Subreddits -->
-    <div id="subredditBarChartSection">
+    <div id="subredditBarChartSection" class="chartContainer">
         <canvas id="subredditBarChart" class="chart"></canvas>
         <script>      
             displaySubredditBarChart(
@@ -30,25 +30,29 @@
         </script>
     </div>
     <!-- Sentiment Over Time       -->
-    <div id="sentimentOverTimeSection">
+    <div id="sentimentOverTimeSection" class="chartContainer">
         <canvas id="sentimentOverTimeLineGraph" class="chart"></canvas>
         <script>      
             sentimentOverTimeLineGraph();
         </script>
     </div>
     <!-- Top Keywords by Sentimnet -->
-    <div id="topKeywordsBySentimentSection">
+    <div id="topKeywordsBySentimentSection" class="chartContainer">
         <canvas id="topKeywordsBySentimentBarChart" class="chart"></canvas>
         <script>      
             topKeywordsBySentimentBarChart();
         </script>
     </div>
     <!-- Sentiment vs. Engagement  -->
-    <div id="sentimentVSEngagementSection">
+    <div id="sentimentVSEngagementSection" class="chartContainer">
         <canvas id="sentimentVSEngagementScatterGraph" class="chart"></canvas>
         <script>      
             sentimentVSEngagementSection();
         </script>
+    </div>
+    <!-- Sentiment vs. Engagement  -->
+    <div id="sentimentVSEngagementSection" class="chartContainer">
+        <h1>Add the wordcloud here</h1>
     </div>
 </div>
 <div id="viewPostsSection">

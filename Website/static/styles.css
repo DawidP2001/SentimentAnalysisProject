@@ -226,7 +226,19 @@ Section for only the chart page
 */
 #moreChartSection {
   margin: 10px;
-  display: inline;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+}
+#moreChartSection h2 {
+  margin: 10px;
 }
 #viewPostsSection {
   display: none;
@@ -234,10 +246,7 @@ Section for only the chart page
 #expandablePostDetails {
   display: none;
 }
-canvas {
-  width: 400px;
-  height: 400px;
-}
+
 #subredditBarChart{
   height: 600px;
   width: 600px;
