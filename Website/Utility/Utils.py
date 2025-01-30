@@ -20,6 +20,7 @@ def countLables(positiveSentimentList, neutralSentimentList, negativeSentimentLi
 # lists that can be then passed into the javascript function
 # used to display the bar chart for unique subreddits
 def convertSubOccurencesForJs(subredditCounter):
+    maxSize = 25 # Used to set the max size of the subreddit list
     keys = subredditCounter.keys()
     keyList = []
     itemList = []
@@ -27,6 +28,7 @@ def convertSubOccurencesForJs(subredditCounter):
         keyList.append(key)
         itemList.append(subredditCounter[key])
     keyList, itemList = sortSubredditOccurences(keyList, itemList)
+    keyList, itemList = reduceSizeOfSubredditList(keyList, itemList, maxSize)
     return keyList, itemList
 # Sorts the items in the lists in descending order
 def sortSubredditOccurences(keyList, itemList):
@@ -40,7 +42,12 @@ def sortSubredditOccurences(keyList, itemList):
                 keyList[i] = keyList[j]
                 keyList[j] = temp
     return keyList, itemList
-
+# This function reduces the size of the subreddit list to a specific size
+def reduceSizeOfSubredditList(keyList, itemList, size):
+    if len(keyList) > size:
+        keyList = keyList[:size]
+        itemList = itemList[:size]
+    return keyList, itemList
 # This function takes a list of dictionaries and seperates them into 3 lists based on their sentiment
 # Also it adds the sentiment and score to the dictionary
 def seperateSentiments(queryList):
