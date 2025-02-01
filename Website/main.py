@@ -52,6 +52,10 @@ def submitTopic():
     titleList, subbredditList, authorList = Utils.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
+    # This section below gets the variables used for the breakdown table
+    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
+        positiveSentimentList, neutralSentimentList, negativeSentimentList)
+    
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, search, authorList)
 
     return render_template(
@@ -59,7 +63,11 @@ def submitTopic():
             form=False, 
             charts=True,
             scrollToContact=False,
-            userInformation=False
+            userInformation=False,
+            positiveBreakdownData=positiveBreakdownData,
+            neutralBreakdownData=neutralBreakdownData,
+            negativeBreakdownData=negativeBreakdownData
+            
         )
 
 # This function is used to show the results of a user search	
@@ -80,6 +88,9 @@ def submitUser():
     titleList, subbredditList, authorList = Utils.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
+    # This section below gets the variables used for the breakdown table
+    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
+        positiveSentimentList, neutralSentimentList, negativeSentimentList)
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, user, authorList)
     setRedditorData(redditor)
 
@@ -88,7 +99,10 @@ def submitUser():
             form=False, 
             charts=True,
             scrollToContact=False,
-            userInformation=True
+            userInformation=True,
+            positiveBreakdownData=positiveBreakdownData,
+            neutralBreakdownData=neutralBreakdownData,
+            negativeBreakdownData=negativeBreakdownData
         )
 
 # This function is used to show the results of a subreddit search
@@ -106,6 +120,9 @@ def submitSubrredit():
     titleList, subbredditList, authorList = Utils.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
+    # This section below gets the variables used for the breakdown table
+    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
+        positiveSentimentList, neutralSentimentList, negativeSentimentList)
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, subreddit, authorList)
 
     return render_template(
@@ -113,7 +130,10 @@ def submitSubrredit():
             form=False, 
             charts=True,
             scrollToContact=False,
-            userInformation=False
+            userInformation=False,
+            positiveBreakdownData=positiveBreakdownData,
+            neutralBreakdownData=neutralBreakdownData,
+            negativeBreakdownData=negativeBreakdownData
         )
 
 @app.route('/showChartsCommentSearch', methods=['POST'])
@@ -130,6 +150,9 @@ def submitComment():
     titleList, subbredditList, authorList = Utils.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
+    # This section below gets the variables used for the breakdown table
+    poisitiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
+        positiveSentimentList, neutralSentimentList, negativeSentimentList)
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, contents, authorList)
 
 @app.route('/showChartsDomainSearch', methods=['POST'])
@@ -145,6 +168,9 @@ def submitDomain():
     titleList, subbredditList, authorList = Utils.extractData(datalist)
     keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
     positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
+    # This section below gets the variables used for the breakdown table
+    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
+        positiveSentimentList, neutralSentimentList, negativeSentimentList)
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, searchContents, authorList)
 
 
@@ -153,7 +179,10 @@ def submitDomain():
             form=False, 
             charts=True,
             scrollToContact=False,
-            userInformation=False
+            userInformation=False,
+            positiveBreakdownData=positiveBreakdownData,
+            neutralBreakdownData=neutralBreakdownData,
+            negativeBreakdownData=negativeBreakdownData
         )
 
 # This function is used to set session variables

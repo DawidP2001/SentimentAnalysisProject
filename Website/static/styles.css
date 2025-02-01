@@ -260,7 +260,21 @@ Section for breakdown.html
 */
 #breakdown{
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+#breakdownTable{
+  border: solid 1px black;
+}
+#breakdownTable td{
+  border: solid 1px black;
+}
+#breakdownTable th{
+  border: solid 1px black;
+}
+#breadownTable tr{
+  border: solid 1px black;
 }
 /*
 //////////////////////////////////
