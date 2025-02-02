@@ -195,16 +195,30 @@ def setBreakDownData(list, numberOfSubmissions):
         averageNumOfComments += i['num_comments'] + 1
         averageNumberOfUpvotes += i['upvotes']
         averageUpvoteRatio += i['upvote_ratio']
+
+    # This section I get the average for some of the numerical values
     averageScore = averageScore / numberOfElements
     averageNumOfComments = averageNumOfComments / numberOfElements
-    averageNumberOfUpvotes = averageNumberOfUpvotes / numberOfElements
-    averageUpvoteRatio = averageUpvoteRatio / numberOfElements
+    averageNumberOfUpvotes = (averageNumberOfUpvotes / numberOfElements) * 100
+    averageUpvoteRatio = (averageUpvoteRatio / numberOfElements) * 100
+    # Here I get round up some of the numerical values
+    percentageOfOverall = round(percentageOfOverall, 0)
+    averageScore = round(averageScore, 2)
+    averageNumOfComments = round(averageNumOfComments, 0)
+    averageNumberOfUpvotes = round(averageNumberOfUpvotes, 0)
+    averageUpvoteRatio = round(averageUpvoteRatio, 0)
+
+    #Here I Convert from float to int to remove the decimal point
+    percentageOfOverall = int(percentageOfOverall)
+    averageNumOfComments = int(averageNumOfComments)
+    averageNumberOfUpvotes = int(averageNumberOfUpvotes)
+    averageUpvoteRatio = int(averageUpvoteRatio)
     breakdownMap = {
         "PercentageOfOverall": percentageOfOverall,
         "AverageScore": averageScore,
         "AverageNumOfComments": averageNumOfComments,
         "MostCommonWord": mostCommonWord,
-        "AverageNumberOfUpvotes": averageUpvoteRatio,
+        "AverageNumberOfUpvotes": averageNumberOfUpvotes,
         "AverageUpvoteRatio": averageUpvoteRatio,
         "MostCommonSubreddit": mostCommonSubreddit
     }
