@@ -171,10 +171,12 @@ function sentimentVSEngagementSection(){
 }
 
 // This function creates the word cloud for the top keywords
-function displayWordCloud(){
+function displayWordCloud(wordCloudData){
   // List of words
-  var myWords = [{word: "Running", size: "10"}, {word: "Surfing", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"} ]
-            
+  wordCloudData = wordCloudData.replace(/&#34;/g, '"');
+  console.log(wordCloudData);
+  var myWords = JSON.parse(wordCloudData);
+
   // set the dimensions and margins of the graph
   var margin = {top: 10, right: 10, bottom: 10, left: 10},
       width = 450 - margin.left - margin.right,

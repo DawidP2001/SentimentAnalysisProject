@@ -55,7 +55,7 @@ def submitTopic():
     # This section below gets the variables used for the breakdown table
     positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
         positiveSentimentList, neutralSentimentList, negativeSentimentList)
-    
+    wordCloudData = Utils.getDataForWordCloud(positiveSentimentList, neutralSentimentList, negativeSentimentList)
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, search, authorList)
 
     return render_template(
@@ -66,8 +66,8 @@ def submitTopic():
             userInformation=False,
             positiveBreakdownData=positiveBreakdownData,
             neutralBreakdownData=neutralBreakdownData,
-            negativeBreakdownData=negativeBreakdownData
-            
+            negativeBreakdownData=negativeBreakdownData,
+            wordCloudData=wordCloudData
         )
 
 # This function is used to show the results of a user search	
