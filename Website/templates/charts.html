@@ -1,3 +1,7 @@
+<!--
+    This pie chart displays what is the divide between the positive,
+    neutral and negative posts
+-->
 <div id="pieChartSection">
     <h1>Below is the breakdown of the sentiment of {{ session.search }}</h1>
     <canvas id="myChart" width="400" height="200"></canvas>
@@ -10,6 +14,7 @@
         );
     </script>
 </div>
+<!--This section displays the breakdown of the sentiment of the posts-->
 {% include "breakdown.html" %}
 <div id="buttonSection">
     <button onclick="moreGraphsClicked()">View More Graphs</button>
@@ -18,6 +23,7 @@
     <button onclick="userInfoButtonClicked()">View User Information</button>
     {% endif %}
 </div>
+<!--This section displays the more detailed graphs-->
 <div id="moreChartSection">
      <!-- Bar Chart for Subreddits -->
     <div id="subredditBarChartSection" class="chartContainer">
@@ -50,14 +56,22 @@
             sentimentVSEngagementSection();
         </script>
     </div>
-    <!-- Sentiment vs. Engagement  -->
-    <div id="sentimentVSEngagementSection" class="chartContainer">
-        <h1>Add the wordcloud here</h1>
+    <!-- Wordcloud -->
+    <div id="wordcloudContainer" class="chartContainer">
+        <h3>Wordcloud</h3>
+        <script>      
+            displayWordCloud();
+        </script>
     </div>
 </div>
+<!--This section displays the individual posts-->
 <div id="viewPostsSection">
     {% include "viewPosts.html" %}
 </div>
+<!--
+    This section displays the user information, it is only displayed
+    when the user selects to view the sentiment of a specific redditor 
+-->
 <div id="userInfoContainer">
     {% if userInformation %}
         {% include "userInfo.html" %}

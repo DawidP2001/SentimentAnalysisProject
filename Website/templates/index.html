@@ -1,10 +1,18 @@
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.1.0/dist/wordcloud.min.js"></script>
+    <!--This is the main javascript file created for this project-->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <!--The 2 scripts below are imported to be used for the wordcloud chart-->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
+
     <title>Reddit Sentiment Analyser</title>
   </head>
   <body>

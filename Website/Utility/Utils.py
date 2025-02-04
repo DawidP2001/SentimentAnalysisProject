@@ -52,9 +52,11 @@ def reduceSizeOfSubredditList(keyList, itemList, size):
 # Also it adds the sentiment and score to the dictionary
 def seperateSentiments(queryList):
     sentimentList = []
+    # Extracts the titles from the queryList
     for a in queryList:
         sentimentList.append(a['title'])
 
+    # This contains the result of the sentiment as well as the title that was analyzed
     alist = s.analyseSentiment(sentimentList)
 
     positiveSentimentList = []
@@ -139,3 +141,99 @@ def extractData(results):
         authorList.append(post['author'])
     return titleList, subbredditList, authorList
 
+################################
+# Below are functions that deal with processing data to be in the breakdown section 
+############################
+
+def getBreakdownData(positiveSentimentList, neutralSentimentList, negativeSentimentList):
+    numberOfSubmissions = len(positiveSentimentList) + len(neutralSentimentList) + len(negativeSentimentList)
+    if len(positiveSentimentList) !=0:
+        positiveBreakdownMap = setBreakDownData(positiveSentimentList, numberOfSubmissions)
+    else:
+        positiveBreakdownMap = {
+            "PercentageOfOverall": 0,
+            "AverageScore": "N/A",
+            "AverageNumOfComments": "N/A",
+            "MostCommonWord": "N/A",
+            "AverageNumberOfUpvotes": "N/A",
+            "AverageUpvoteRatio": "N/A",
+            "MostCommonSubreddit": "N/A"
+        }
+    if len(neutralSentimentList) != 0:
+        neutralBreakdownMap = setBreakDownData(neutralSentimentList, numberOfSubmissions)
+    else:
+        neutralBreakdownMap = {
+            "PercentageOfOverall": 0,
+            "AverageScore": "N/A",
+            "AverageNumOfComments": "N/A",
+            "MostCommonWord": "N/A",
+            "AverageNumberOfUpvotes": "N/A",
+            "AverageUpvoteRatio": "N/A",
+            "MostCommonSubreddit": "N/A"
+        }
+    if len(negativeSentimentList) != 0:
+        negativeBreakdownMap = setBreakDownData(negativeSentimentList, numberOfSubmissions)
+    else:
+        negativeBreakdownMap = {
+            "PercentageOfOverall": 0,
+            "AverageScore": "N/A",
+            "AverageNumOfComments": "N/A",
+            "MostCommonWord": "N/A",
+            "AverageNumberOfUpvotes": "N/A",
+            "AverageUpvoteRatio": "N/A",
+            "MostCommonSubreddit": "N/A"
+        }
+    return positiveBreakdownMap, neutralBreakdownMap, negativeBreakdownMap
+
+def setBreakDownData(list, numberOfSubmissions):
+    percentageOfOverall = (len(list) / numberOfSubmissions) * 100
+    averageScore = 0
+    averageNumOfComments = 0
+    mostCommonWord = "N/A"
+    averageNumberOfUpvotes = 0
+    averageUpvoteRatio = 0
+    mostCommonSubreddit = "N/A"
+    numberOfElements = len(list)
+    for i in list:
+        averageScore += i['score']
+        averageNumOfComments += i['num_comments'] + 1
+        averageNumberOfUpvotes += i['upvotes']
+        averageUpvoteRatio += i['upvote_ratio']
+
+    # This section I get the average for some of the numerical values
+    averageScore = (averageScore / numberOfElements) * 100
+    averageNumOfComments = averageNumOfComments / numberOfElements
+    averageNumberOfUpvotes = (averageNumberOfUpvotes / numberOfElements)
+    averageUpvoteRatio = (averageUpvoteRatio / numberOfElements) * 100
+    # Here I get round up some of the numerical values
+    percentageOfOverall = round(percentageOfOverall, 0)
+    averageScore = round(averageScore, 2)
+    averageNumOfComments = round(averageNumOfComments, 0)
+    averageNumberOfUpvotes = round(averageNumberOfUpvotes, 0)
+    averageUpvoteRatio = round(averageUpvoteRatio, 0)
+
+    #Here I Convert from float to int to remove the decimal point
+    percentageOfOverall = int(percentageOfOverall)
+    averageNumOfComments = int(averageNumOfComments)
+    averageNumberOfUpvotes = int(averageNumberOfUpvotes)
+    averageUpvoteRatio = int(averageUpvoteRatio)
+
+    # In this section I add a % to some of the values
+    averageScore = str(averageScore) + "%"
+    averageUpvoteRatio = str(averageUpvoteRatio) + "%"
+    breakdownMap = {
+        "PercentageOfOverall": percentageOfOverall,
+        "AverageScore": averageScore,
+        "AverageNumOfComments": averageNumOfComments,
+        "MostCommonWord": mostCommonWord,
+        "AverageNumberOfUpvotes": averageNumberOfUpvotes,
+        "AverageUpvoteRatio": averageUpvoteRatio,
+        "MostCommonSubreddit": mostCommonSubreddit
+    }
+    return breakdownMap
+
+################################
+# Below are functions that deal with processing data to be displayed on charts
+################################
+def countWordOccurences():
+    pass
