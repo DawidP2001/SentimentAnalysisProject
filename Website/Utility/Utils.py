@@ -141,6 +141,10 @@ def extractData(results):
         authorList.append(post['author'])
     return titleList, subbredditList, authorList
 
+################################
+# Below are functions that deal with processing data to be in the breakdown section 
+############################
+
 def getBreakdownData(positiveSentimentList, neutralSentimentList, negativeSentimentList):
     numberOfSubmissions = len(positiveSentimentList) + len(neutralSentimentList) + len(negativeSentimentList)
     if len(positiveSentimentList) !=0:
@@ -223,3 +227,9 @@ def setBreakDownData(list, numberOfSubmissions):
         "MostCommonSubreddit": mostCommonSubreddit
     }
     return breakdownMap
+
+################################
+# Below are functions that deal with processing data to be displayed on charts
+################################
+def countWordOccurences():
+    pass
