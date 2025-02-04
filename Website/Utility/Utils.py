@@ -201,9 +201,9 @@ def setBreakDownData(list, numberOfSubmissions):
         averageUpvoteRatio += i['upvote_ratio']
 
     # This section I get the average for some of the numerical values
-    averageScore = averageScore / numberOfElements
+    averageScore = (averageScore / numberOfElements) * 100
     averageNumOfComments = averageNumOfComments / numberOfElements
-    averageNumberOfUpvotes = (averageNumberOfUpvotes / numberOfElements) * 100
+    averageNumberOfUpvotes = (averageNumberOfUpvotes / numberOfElements)
     averageUpvoteRatio = (averageUpvoteRatio / numberOfElements) * 100
     # Here I get round up some of the numerical values
     percentageOfOverall = round(percentageOfOverall, 0)
@@ -217,6 +217,10 @@ def setBreakDownData(list, numberOfSubmissions):
     averageNumOfComments = int(averageNumOfComments)
     averageNumberOfUpvotes = int(averageNumberOfUpvotes)
     averageUpvoteRatio = int(averageUpvoteRatio)
+
+    # In this section I add a % to some of the values
+    averageScore = str(averageScore) + "%"
+    averageUpvoteRatio = str(averageUpvoteRatio) + "%"
     breakdownMap = {
         "PercentageOfOverall": percentageOfOverall,
         "AverageScore": averageScore,
