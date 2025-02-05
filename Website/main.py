@@ -84,14 +84,7 @@ def submitUser():
     rawData = r.queryUser(redditor, typeOfPost, typeOfSearch, searchTimeFrame, querySize) 
 
     # Below prepares the data for the page to be displayed
-    datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
-    titleList, subbredditList, authorList = Utils.extractData(datalist)
-    keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
-    positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
-    # This section below gets the variables used for the breakdown table
-    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
-        positiveSentimentList, neutralSentimentList, negativeSentimentList)
-    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, user, authorList)
+    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = prepareDataForChartPage(rawData, user)
     setRedditorData(redditor)
 
     return render_template(
@@ -116,15 +109,7 @@ def submitSubrredit():
     rawData = r.querySubreddit(subreddit, searchType, querySize, searchTimeFrame) # Contains all the raw data from the query to the Reddit Api
     
     # Below prepares the data for the page to be displayed
-    datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
-    titleList, subbredditList, authorList = Utils.extractData(datalist)
-    keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
-    positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
-    # This section below gets the variables used for the breakdown table
-    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
-        positiveSentimentList, neutralSentimentList, negativeSentimentList)
-    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, subreddit, authorList)
-
+    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = prepareDataForChartPage(rawData, subreddit)
     return render_template(
             'index.html',
             form=False, 
@@ -144,35 +129,7 @@ def submitComment():
     sortBy = request.form['sortByComments'] # 
     querySize = request.form["querySizeComment"] # This contains the size of the query
     rawData = r.queryComment(searchType, contents, sortBy, querySize) # Contains all the raw data from the query to the Reddit Api
-    
-    # Below prepares the data for the page to be displayed
-    datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
-    titleList, subbredditList, authorList = Utils.extractData(datalist)
-    keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
-    positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
-    # This section below gets the variables used for the breakdown table
-    poisitiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
-        positiveSentimentList, neutralSentimentList, negativeSentimentList)
-    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, contents, authorList)
-
-@app.route('/showChartsDomainSearch', methods=['POST'])
-def submitDomain():
-    # Below extracts data from the form
-    searchContents = request.form["searchDomain"] # This contains the topic from the search
-    typeOfSearch = request.form["typeOfSearchDomain"] # This contains the subreddit from the search
-    searchTimeFrame = request.form['searchTimeFrameDomain'] # 
-    querySize = request.form["querySizeDomain"] # This contains the size of the query
-    rawData = r.queryDomain(searchContents, typeOfSearch, searchTimeFrame, querySize) # Contains all the raw data from the query to the Reddit Api
-    # Below prepares the data for the page to be displayed
-    datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
-    titleList, subbredditList, authorList = Utils.extractData(datalist)
-    keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
-    positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
-    # This section below gets the variables used for the breakdown table
-    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
-        positiveSentimentList, neutralSentimentList, negativeSentimentList)
-    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, searchContents, authorList)
-
+    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = prepareDataForChartPage(rawData, contents)
 
     return render_template(
             'index.html',
@@ -185,6 +142,30 @@ def submitDomain():
             negativeBreakdownData=negativeBreakdownData
         )
 
+@app.route('/showChartsDomainSearch', methods=['POST'])
+def submitDomain():
+    # Below extracts data from the form
+    searchContents = request.form["searchDomain"] # This contains the topic from the search
+    typeOfSearch = request.form["typeOfSearchDomain"] # This contains the subreddit from the search
+    searchTimeFrame = request.form['searchTimeFrameDomain'] # 
+    querySize = request.form["querySizeDomain"] # This contains the size of the query
+    rawData = r.queryDomain(searchContents, typeOfSearch, searchTimeFrame, querySize) # Contains all the raw data from the query to the Reddit Api
+    # Below prepares the data for the page to be displayed
+    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = prepareDataForChartPage(rawData, searchContents)
+
+    return render_template(
+            'index.html',
+            form=False, 
+            charts=True,
+            scrollToContact=False,
+            userInformation=False,
+            positiveBreakdownData=positiveBreakdownData,
+            neutralBreakdownData=neutralBreakdownData,
+            negativeBreakdownData=negativeBreakdownData
+        )
+############################################################################################################
+# This section deals with setting the session variables
+############################################################################################################
 # This function is used to set session variables
 def setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, 
                    itemList, search, authorList):
@@ -214,6 +195,23 @@ def setRedditorData(redditor):
         session["redditorIsSuspended"] = "False"
     session["redditorLinkKarma"] = redditor.link_karma
     session["redditorName"] = redditor.name
+
+############################################################################################################
+# Other section
+############################################################################################################
+# This function is used to prepare the data for the chart page
+def prepareDataForChartPage(rawData, contents):
+     # Below prepares the data for the page to be displayed
+    datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
+    titleList, subbredditList, authorList = Utils.extractData(datalist)
+    keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
+    positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
+    # This section below gets the variables used for the breakdown table
+    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
+        positiveSentimentList, neutralSentimentList, negativeSentimentList)
+    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, contents, authorList)
+
+    return positiveBreakdownData, neutralBreakdownData, negativeBreakdownData
 
 if __name__ == '__main__':  
    app.run()  

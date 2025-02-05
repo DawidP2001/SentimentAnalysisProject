@@ -269,7 +269,7 @@ def convertWordCountsForWordCloud(wordCounts):
 # This section deals with converting the data into a pandas dataframe
 ################################
 
-##########THIS ISNT BEING USED ANWYHERE ATM ##############
+# This function converts the data into a pandas dataframe
 def convertPostsToDataFrame(positiveSentimentList, neutralSentimentList, negativeSentimentList):
     positivedf = pd.DataFrame(positiveSentimentList)
     neutraldf = pd.DataFrame(neutralSentimentList)
