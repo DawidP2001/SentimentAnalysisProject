@@ -183,11 +183,13 @@ function displayWordCloud(wordCloudData){
   var containerHeight = document.getElementById("sentimentVSEngagementSection").offsetHeight;
   
   var margin = {top: 10, right: 10, bottom: 10, left: 10};
-  var width = containerWidth;
-  var height = containerHeight;
+  var width = 500;
+  var height = 500;
   
   // append the svg object to the body of the page
   var svg = d3.select("#wordcloudContainer").append("svg")
+    .attr("width", width)
+    .attr("height", height)
       .attr("id", "wordcloudSVG")
     .append("g")
       .attr("transform",
@@ -239,6 +241,7 @@ function displayWordCloud(wordCloudData){
     return words;
   }
 }
+
 /*
 //////////////////////////////////
 
