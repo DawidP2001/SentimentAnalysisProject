@@ -11,6 +11,9 @@ import praw
 #from Utility import SenitmentAnalyser as s
 from Utility import testSenitmentAnalyser as s
 import datetime
+import pandas as pd
+import re
+import nltk
 
 def countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList):
     resultArray = [len(positiveSentimentList) , len(neutralSentimentList), len(negativeSentimentList)]
@@ -235,5 +238,41 @@ def setBreakDownData(list, numberOfSubmissions):
 ################################
 # Below are functions that deal with processing data to be displayed on charts
 ################################
-def countWordOccurences():
-    pass
+def getDataForWordCloud(positiveSentimentList, neutralSentimentList, negativeSentimentList):
+    wordCounts = countWordOccurences(positiveSentimentList, neutralSentimentList, negativeSentimentList)
+    wordCloudData = convertWordCountsForWordCloud(wordCounts)
+    return wordCloudData
+
+def countWordOccurences(positiveSentimentList, neutralSentimentList, negativeSentimentList):
+    nltk.download('stopwords')
+    
+    df = convertPostsToDataFrame(positiveSentimentList, neutralSentimentList, negativeSentimentList)
+    wordList = []
+    stopWords = set(nltk.corpus.stopwords.words('english'))
+    for ___, row in df.iterrows():
+        wordList.append(row['title'])
+    wordString = " ".join(wordList)
+    wordString = re.sub(r'[^a-zA-Z\s]', '', wordString).lower()
+    words = wordString.split()
+    filteredWords = [word for word in words if word not in stopWords]
+    wordCounts = Counter(filteredWords)
+    return wordCounts
+
+def convertWordCountsForWordCloud(wordCounts):
+    wordCloudString = "["
+    for word, count in wordCounts.items():
+        wordCloudString+= "{\"word\": \"" + word + "\", \"size\": \"" + str(count) + "\"},"
+    wordCloudString = wordCloudString[:-1]
+    wordCloudString += "]"
+    return wordCloudString
+##############################
+# This section deals with converting the data into a pandas dataframe
+################################
+
+# This function converts the data into a pandas dataframe
+def convertPostsToDataFrame(positiveSentimentList, neutralSentimentList, negativeSentimentList):
+    positivedf = pd.DataFrame(positiveSentimentList)
+    neutraldf = pd.DataFrame(neutralSentimentList)
+    negativedf = pd.DataFrame(negativeSentimentList)
+    df = pd.concat([positivedf, neutraldf, negativedf], ignore_index=True)
+    return df

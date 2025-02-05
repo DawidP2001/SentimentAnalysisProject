@@ -277,6 +277,10 @@ Section for only the chart page
   height: 600px;
   width: 600px;
 }
+#wordcloudSVG{
+  width:  500px;
+  height: 500px;
+}
 /*
 //////////////////////////////////
 

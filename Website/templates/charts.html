@@ -59,8 +59,9 @@
     <!-- Wordcloud -->
     <div id="wordcloudContainer" class="chartContainer">
         <h3>Wordcloud</h3>
+        <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.0.1/dist/wordcloud.min.js"></script>
         <script>      
-            displayWordCloud();
+            displayWordCloud("{{ wordCloudData }}");
         </script>
     </div>
 </div>
