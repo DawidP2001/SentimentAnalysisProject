@@ -261,7 +261,7 @@ def countWordOccurences(positiveSentimentList, neutralSentimentList, negativeSen
 def convertWordCountsForWordCloud(wordCounts):
     wordCloudString = "["
     for word, count in wordCounts.items():
-        wordCloudString+= "{word: \"" + word + "\", size: \"" + str(count) + "\"},"
+        wordCloudString+= "{\"word\": \"" + word + "\", \"size\": \"" + str(count) + "\"},"
     wordCloudString = wordCloudString[:-1]
     wordCloudString += "]"
     return wordCloudString

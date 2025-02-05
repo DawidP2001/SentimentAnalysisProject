@@ -171,21 +171,24 @@ function sentimentVSEngagementSection(){
 }
 
 // This function creates the word cloud for the top keywords
+// A lot of the code was taken from here: https://d3-graph-gallery.com/graph/wordcloud_size.html
 function displayWordCloud(wordCloudData){
   // List of words
   wordCloudData = wordCloudData.replace(/&#34;/g, '"');
-  console.log(wordCloudData);
   var myWords = JSON.parse(wordCloudData);
+  myWords = scaleWords(myWords);
 
   // set the dimensions and margins of the graph
-  var margin = {top: 10, right: 10, bottom: 10, left: 10},
-      width = 450 - margin.left - margin.right,
-      height = 450 - margin.top - margin.bottom;
+  var containerWidth = document.getElementById("sentimentVSEngagementSection").offsetWidth;
+  var containerHeight = document.getElementById("sentimentVSEngagementSection").offsetHeight;
+  
+  var margin = {top: 10, right: 10, bottom: 10, left: 10};
+  var width = containerWidth;
+  var height = containerHeight;
   
   // append the svg object to the body of the page
   var svg = d3.select("#wordcloudContainer").append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("id", "wordcloudSVG")
     .append("g")
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
@@ -218,6 +221,22 @@ function displayWordCloud(wordCloudData){
             return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
           })
           .text(function(d) { return d.text; });
+  }
+  // This function is used to scale the words in the word cloud to an appropriate size
+  function scaleWords(words){
+    var minSize = 10;
+    var maxSize = 60;
+
+    words.forEach(word => word.size = Number(word.size));
+    // This is the scaling function that will be applied to the words size
+    var fontSizeScale = d3.scaleLinear()
+    .domain([d3.min(words, d => d.size), d3.max(words, d => d.size)])
+    .range([minSize, maxSize]); // Min and max font sizes
+    
+    // Apply the scaling function to the size of the words
+    words.forEach(word => word.size = fontSizeScale(word.size));
+    
+    return words;
   }
 }
 /*
