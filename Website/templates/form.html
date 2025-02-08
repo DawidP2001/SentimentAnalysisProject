@@ -13,25 +13,39 @@
             <button class="tab" onclick="selectTab(event, 'searchBarComment')">Comments</button>
             <button class="tab" onclick="selectTab(event, 'searchBarDomain')">Domain</button>
         </div>
+        <!--This section contains the form to analyze a certain topic-->
         <div id="searchBarTopic" class="tabContent">
             <form class='searchForm' action="/showChartsGeneralSearch" method="post">
                 <table class="formTable">
                     <tr>
-                        <td><label for="searchTopic">Topic:</label></td>
-                        <td><input id='searchTopic' name='searchTopic' type="text"></td>
-                    </tr>
-                    <tr>
+                        <td><label for="searchTopic">Topic:<span style="color: red;">*</span></label></td>
                         <td>
+                            <input id='searchTopic' name='searchTopic' type="text" placeholder="topic" required>
                             <div class="tooltip">
-                                <label for="subredditSearchTopic">Subreddit:</label>
-                                <span class="tooltiptext">Tooltip text</span>
+                                <i class="fa fa-info-circle" class="tooltip"></i>
+                                <span class="tooltiptext">Enter here the topic you want to analyze</span>
                             </div>
                         </td>
-                        <td><input id="subredditSearchTopic" name='subredditSearchTopic' type='text'></td>
                     </tr>
                     <tr>
-                        <td><label for="querySizeTopic">Amount of posts to extract:</label></td>
-                        <td><input id="querySizeTopic" name="querySizeTopic" type="number" min="1" max="100" value="10"></td>
+                        <td><label for="subredditSearchTopic">Subreddit:</label></td>
+                        <td>
+                            <input id="subredditSearchTopic" name='subredditSearchTopic' type='text' placeholder="subbreddit">
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip"></i>
+                                <span class="tooltiptext">Search for your topic in a specific subreddit</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="querySizeTopic">Amount of posts to extract:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id="querySizeTopic" name="querySizeTopic" type="number" min="1" max="100" value="10">
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the max amount of posts to analyze</span>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnTopic"  type="submit" onclick="showLoader()"></td>
@@ -39,24 +53,35 @@
                 </table>
             </form>
         </div>
+        <!--This section content of a specific redditors account-->
         <div id="searchBarUser" class="tabContent">
             <form class ='searchForm' action="/showChartsUserSearch" method="post">
                 <table class="formTable">
                     <tr>
-                        <td><label for="searchUser">User:</label></label></td>
-                        <td><input id='searchUser' name='searchUser' type="text"></td>
+                        <td><label for="searchUser">User:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id='searchUser' name='searchUser' type="text" placeholder="redditor" required>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the redditor who's posts or comments you want analyzed</span>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
-                        <td><label for="typeOfPostUser">Type of Post:</label></td>
+                        <td><label for="typeOfPostUser">Type of Post:<span style="color: red;">*</span></label></td>
                         <td>
                             <input type="radio" id="postRadioUser" name="postTypeRadioUser" value="submissions" onclick="showTypeOfPostUserRow()" checked>
                             <label for="postRadioUser">Posts</label><br>
                             <input type="radio" id="commentRadioUser" name="postTypeRadioUser" value="comments" onclick="showTypeOfPostUserRow()">
                             <label for="commentRadioUser">Comments</label>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify whether you want the redditors comments or posts to be analyzed</span>
+                            </div>
                         </td>
                     </tr>
                     <tr id="typeOfPostUserRow">
-                        <td><label for="typeOfSearchUser">Search By:</label></td>
+                        <td><label for="typeOfSearchUser">Search By:<span style="color: red;">*</span></label></td>
                         <td>
                             <select id="typeOfSearchUser" name="typeOfSearchUser" onchange="typeOfSearchChange(this)">
                                 <option value="hot">Hot</option>
@@ -73,11 +98,21 @@
                                 <option value="day">Today</option>
                                 <option value="hour">This hour</option>
                             </select>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify which posts or comments to extract</span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="querySizeUser">Amount of posts to extract:</label></td>
-                        <td><input id="querySizeUser" name="querySizeUser" type="number" min="1" max="100" value="10"></td>
+                        <td><label for="querySizeUser">Amount of posts to extract:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id="querySizeUser" name="querySizeUser" type="number" min="1" max="100" value="10">
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the max amount of posts to analyze</span>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnUser" type="submit" onclick="showLoader()"></td>
@@ -85,15 +120,22 @@
                 </table>
             </form>
         </div>
+        <!--This section contains form to analyze content of a specific subreddit-->
         <div id="searchBarSubreddit" class="tabContent">
             <form class ='searchForm' action="/showChartsSubredditSearch" method="post">
                 <table class="formTable">
                     <tr>
-                        <td><label for="searchSubreddit">Subreddit</label></label></td>
-                        <td><input id='searchSubreddit' name='searchSubreddit' type="text"></td>
+                        <td><label for="searchSubreddit">Subreddit<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id='searchSubreddit' name='searchSubreddit' type="text" placeholder="subbreddit" required>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the subreddit to analyze</span>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
-                        <td><label for="typeOfSearchSubreddit">Search By:</label></td>
+                        <td><label for="typeOfSearchSubreddit">Search By:<span style="color: red;">*</span></label></td>
                         <td>
                             <select id="typeOfSearchSubreddit" name="typeOfSearchSubreddit" onchange="typeOfSearchChange(this)">
                                 <option value="hot">Hot</option>
@@ -110,11 +152,21 @@
                                 <option value="day">Today</option>
                                 <option value="hour">This hour</option>
                             </select>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify which posts to extract</span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="querySizeSubreddit">Amount of posts to extract:</label></td>
-                        <td><input id="querySizeSubreddit" name="querySizeSubreddit" type="number" min="1" max="100" value="10"></td>
+                        <td><label for="querySizeSubreddit">Amount of posts to extract:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id="querySizeSubreddit" name="querySizeSubreddit" type="number" min="1" max="100" value="10">
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the max amount of posts to analyze</span>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnSubreddit" type="submit" onclick="showLoader()"></td>
@@ -122,20 +174,30 @@
                 </table>
             </form>
         </div>
+        <!--This section contains a form to anlyze content of a specific posts comment section-->
         <div id="searchBarComment" class="tabContent">
             <form class ='searchForm' action="/showChartsCommentSearch" method="post">
                 <table class="formTable">
                     <tr>
                         <td>
-                            <select id="typeOfSearchComment" name="typeOfSearchComment">
+                            <select id="typeOfSearchComment" name="typeOfSearchComment" onchange="typeOfPostSearchChanged(this)">
                                 <option value="link">Post Link</option>
                                 <option value="id">Post ID</option>
                             </select>
+                            <span style="color: red;">*</span>
                         </td>
-                        <td><input id='searchComment' name='searchComment' type="text"></td>
+                        <td>
+                            <input id='searchComment' name='searchComment' type="text" placeholder="https://www.reddit.com/r/rugbyunion/comments/1iku1ud/post_match_thread_england_v_france/" required>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Provide the link or the post Id (post id 
+                                    you can get from a previously analyzed post) to analyze a 
+                                    posts comment section</span>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
-                        <td><label for="sortByComments">Sort by:</label></td>
+                        <td><label for="sortByComments">Sort by:<span style="color: red;">*</span></label></td>
                         <td>
                             <select id="sortByComments" name="sortByComments">
                                 <option value="new">New</option>
@@ -143,11 +205,21 @@
                                 <option value="top">Top</option>
                                 <option value="controversial">Controversial</option>
                             </select>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify which comments to extract</span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="querySizeComment">Amount of posts to extract:</label></td>
-                        <td><input id="querySizeComment" name="querySizeComment" type="number" min="1" max="100" value="10"></td>
+                        <td><label for="querySizeComment">Amount of posts to extract:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id="querySizeComment" name="querySizeComment" type="number" min="1" max="100" value="10">
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the max amount of comments to analyze</span>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnComment" type="submit" onclick="showLoader()"></td>
@@ -155,15 +227,24 @@
                 </table>
             </form>
         </div>
+        <!--This section contains a form that handles input to anlyze posts containing references to certain link/domain-->
         <div id="searchBarDomain" class="tabContent">
             <form class='searchForm' action="/showChartsDomainSearch" method="post">
                 <table class="formTable">
                     <tr>
-                        <td><label for="searchDomain">Link:</label></td>
-                        <td><input id='searchDomain' name='searchDomain' type="text"></td>
+                        <td><label for="searchDomain">Domain:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id='searchDomain' name='searchDomain' type="text" placeholder="bbc.com" required>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the domain to analyze (domain 
+                                    relates to a specific website as a whole such as bbc.com and 
+                                    not specific links from it)</span>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
-                        <td><label for="typeOfSearchDomain">Search By:</label></td>
+                        <td><label for="typeOfSearchDomain">Search By:<span style="color: red;">*</span></label></td>
                         <td>
                             <select id="typeOfSearchDomain" name="typeOfSearchDomain" onchange="typeOfSearchChange(this)">
                                 <option value="hot">Hot</option>
@@ -181,11 +262,21 @@
                                 <option value="day">Today</option>
                                 <option value="hour">This hour</option>
                             </select>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify which posts to extract</span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="querySizeDomain">Maximum posts to extract:</label></td>
-                        <td><input id="querySizeDomain" name="querySizeDomain" type="number" min="1" max="100" value="10"></td>
+                        <td><label for="querySizeDomain">Maximum posts to extract:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id="querySizeDomain" name="querySizeDomain" type="number" min="1" max="100" value="10">
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify which posts to extract</span>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td class="submitBtnCell" colspan="2"><input id="sumbitBtnDomain"  type="submit" onclick="showLoader()"></td>

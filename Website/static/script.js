@@ -1,6 +1,30 @@
 /*
 //////////////////////////////////
 
+Section for the functions used on form.html
+
+//////////////////////////////////
+*/
+/** 
+ * This function changes the placeholder on the searchComment element based on which option 
+ * in typeOfSearchComment is selected 
+ * 
+ * @param {HTMLSelectElement} select - The dropdown that triggered the change event
+*/
+function typeOfPostSearchChanged(select){
+  commentInputField = document.getElementById("searchComment");
+  if (select.value == "link") {
+    commentInputField.value = "";
+    commentInputField.placeholder = "https://www.reddit.com/r/rugbyunion/comments/1iku1ud/post_match_thread_england_v_france/"
+  } else if (select.value == "id") {
+    commentInputField.value = "";
+    commentInputField.placeholder = 12345;
+  }
+}
+
+/*
+//////////////////////////////////
+
 Section for the charts displayed on the charts.html below
 
 //////////////////////////////////
