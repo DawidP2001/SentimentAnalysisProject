@@ -21,11 +21,13 @@ nav {
   align-items: center;
   position: sticky;
   top: 0;
+  z-index: 10;
 }
 
 nav * {
   margin: 0px 10px;
 }
+/* This is the tititle in the navigation bar */
 #navTitle{
   padding: 5px;
 }
