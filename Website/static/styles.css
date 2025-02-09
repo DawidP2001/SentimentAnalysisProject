@@ -118,6 +118,20 @@ h4 {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+/* This class styles the different icons on the website */
+.icons{
+  width: 40px;
+  height: 40px;
+  background: white; /* White circle background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%; /* Makes it a circle */
+  text-decoration: none;
+  color: black;
+  transition: 0.3s;
+  margin: 5px;
+}
 /*
 //////////////////////////////////
 
@@ -372,4 +386,34 @@ Section for userInfo.html
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/*
+//////////////////////////////////
+
+Section for footer
+
+//////////////////////////////////
+*/
+footer{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #fb5500;
+}
+.footerSection{
+  margin: 5px;
+}
+#footerIcons{
+  display: flex;
+}
+#footerSectionDivider{
+  border: 1px solid black;
+  width: 75%;
+}
+#githubIcon{
+  font-size: 20px;
+}
+#footerCopyrightSection{
+  color: #000000ba;
 }
