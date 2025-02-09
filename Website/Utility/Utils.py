@@ -1,9 +1,6 @@
-"""
-Author: Dawid Pionk
-Date: 25/01/2025
-Description: This file contains utility functions that are used in the main.py file
-"""
-
+#Author: Dawid Pionk
+#Date: 25/01/2025
+#Description: This file contains utility functions that are used in the main.py file
 
 from collections import Counter
 

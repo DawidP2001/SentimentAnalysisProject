@@ -1,6 +1,6 @@
 # Author: Dawid Pionk
-# Description: 
-# Date: 
+# Description: This file is the main file that manages the entire system
+# Date: 09/02/2025
 
 import datetime
 from flask import Flask, request, render_template, session
