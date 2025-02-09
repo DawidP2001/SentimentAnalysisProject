@@ -1,4 +1,9 @@
 /*
+Author: Dawid Pionk
+Description: This file contains majority of the javascript used by the website
+Date: 09/02/2025
+*/
+/*
 //////////////////////////////////
 
 Section for the functions used on form.html
