@@ -247,7 +247,7 @@ Section for extra information html
   align-items: center;
 }
 .textArea{
-  width: 80vw;
+  width: 60vw;
 }
 #bottomHomePage {
   background: linear-gradient(to bottom, transparent, #FF5700);

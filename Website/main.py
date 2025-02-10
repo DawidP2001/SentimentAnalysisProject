@@ -17,22 +17,26 @@ app.secret_key = os.getenv("Secret_Key")
 # This is the default page that gets opened when the website is accessed
 @app.route('/')
 def index():
+    trendingGoogleTopics = Utils.getGoogleTrends()
     return render_template( 
             'index.html',
             form=True, 
             charts=False,
             scrollToContact=False,
-            userInformation=False
+            userInformation=False,
+            trendingTopics=trendingGoogleTopics
         )
 
 @app.route('/#contactSection')
 def indexContact():
+    trendingGoogleTopics = Utils.getGoogleTrends()
     return render_template( 
             'index.html',
             form=True, 
             charts=False,
             scrollToContact=False,
-            userInformation=False
+            userInformation=False,
+            trendingTopics=trendingGoogleTopics
         )
 
 # This function is used to show the results of a topic search

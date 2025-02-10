@@ -11,6 +11,7 @@ import datetime
 import pandas as pd
 import re
 import nltk
+from pytrends.request import TrendReq
 
 def countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList):
     resultArray = [len(positiveSentimentList) , len(neutralSentimentList), len(negativeSentimentList)]
@@ -143,7 +144,7 @@ def extractData(results):
 
 ################################
 # Below are functions that deal with processing data to be in the breakdown section 
-############################
+################################
 
 def getBreakdownData(positiveSentimentList, neutralSentimentList, negativeSentimentList):
     numberOfSubmissions = len(positiveSentimentList) + len(neutralSentimentList) + len(negativeSentimentList)
@@ -273,3 +274,14 @@ def convertPostsToDataFrame(positiveSentimentList, neutralSentimentList, negativ
     negativedf = pd.DataFrame(negativeSentimentList)
     df = pd.concat([positivedf, neutraldf, negativedf], ignore_index=True)
     return df
+
+################################
+# This section deals with getting topics that are trending, so they could be displayed on the
+# trending section
+################################
+
+def getGoogleTrends() -> list:
+    pytrends = TrendReq(hl='en-GB', tz=360)
+    trending_searches = pytrends.trending_searches()
+    trendingSearchesList = trending_searches[0].tolist()
+    return trendingSearchesList
