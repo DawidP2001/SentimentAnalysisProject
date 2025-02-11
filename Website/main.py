@@ -82,7 +82,7 @@ def submitTopic():
             neutralBreakdownData=neutralBreakdownData,
             negativeBreakdownData=negativeBreakdownData,
             wordCloudData=wordCloudData,
-            data = jsonData
+            jsonData = jsonData
         )
 
 # This function is used to show the results of a user search	

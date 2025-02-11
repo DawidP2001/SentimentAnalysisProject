@@ -25,7 +25,7 @@ def addSentimentField(data):
     results = s.analyseSentiment(textList)
     labels = [entry["label"] for entry in results]
     scores = [entry["score"] for entry in results]
-    data['labels'] = labels
+    data['label'] = labels
     data['score'] = scores
     return data
 
