@@ -16,7 +16,7 @@ Date: 09/02/2025
 
 <div id="pieChartSection">
     <h1>Below is the breakdown of the sentiment of {{ session.search }}</h1>
-    <canvas id="myChart" width="400" height="200"></canvas>
+    <canvas id="pieChart" width="400" height="200"></canvas>
     <script>      
         displayPieChart(
             "{{ session.postTitleSentimentCount[0] }}", 

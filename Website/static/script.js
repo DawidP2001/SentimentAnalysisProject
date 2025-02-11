@@ -17,7 +17,9 @@ function setGlobalVariables(jsondata){
   setjsonData(jsondata);
 }
 function setjsonData(data){
+  console.log(data)
   jsonData = JSON.parse(data);
+  console.log(JSON.parse(data))
 }
 /*
 //////////////////////////////////
@@ -44,8 +46,8 @@ function typeOfPostSearchChanged(select){
 }
 /*
 //////////////////////////////////
-
-Section for the charts displayed on the charts.html below
+ 
+Section for extraInformation.html functions
 
 //////////////////////////////////
 */
@@ -70,7 +72,7 @@ function viewLessTrends(button){
 /*
 //////////////////////////////////
 
-Section for the charts displayed on the charts.html below
+Section for charts.html functions
 
 //////////////////////////////////
 */
@@ -80,7 +82,7 @@ function displayPieChart(positiveValue, neutralValue, negativeValue, searchTopic
   var yValues = [positiveValue, neutralValue, negativeValue];
   var barColors = ["green", "gray", "red"];
 
-  new Chart(document.getElementById('myChart'), {
+  new Chart(document.getElementById('pieChart'), {
       type: "pie",
       data: {
         labels: xValues,
@@ -100,8 +102,14 @@ function displayPieChart(positiveValue, neutralValue, negativeValue, searchTopic
       devicePixelRatio: 4
     });
 }
+
+/** This section contains function for the subreddit bar chart */
+
 // This function creates the bar chart for the subreddit count
 function displaySubredditBarChart(subKeyList, subItemList){
+  getBarChartData();
+
+
   // Sets up the X axis for bar chart
   subKeyListCleaned = subKeyList.replace(/&#39;/g, "'");
   subNameList = subKeyListCleaned.split(",");
@@ -119,6 +127,7 @@ function displaySubredditBarChart(subKeyList, subItemList){
     data: {
       labels: xValues,
       datasets: [{
+        label: "All",
         backgroundColor: barColors,
         data: yValues
       }]
@@ -141,6 +150,27 @@ function displaySubredditBarChart(subKeyList, subItemList){
     }
   });
 }
+function getBarChartData(){
+  console.log(jsonData);
+  let barData = {}
+  jsonData.forEach(entry => {
+    subreddit = entry.subreddit;
+    if (!(subreddit in barData)){
+      barData[subreddit] = [0,0,0];
+    }
+    if(entry.label="POSITIVE"){
+      barData[subreddit][0]+= 1
+    } else if (entry.label = "NEUTRAL"){
+      barData[subreddit][1]+= 1
+    } else if (entry.label = "NEGATIVE"){
+      barData[subreddit][2]+= 1
+    } else {
+      console.log("ERROR WITH getBarChartData() function");
+    }
+  });
+  console.log(barData)
+}
+
 // This function creates the line graph for the sentiment over time
 function sentimentOverTimeLineGraph(){
   var xValues = [1,2,3,4,5,6,7,8,9,10];
@@ -321,7 +351,7 @@ function setViewPostsSection(){
   jsonData.forEach(setViewPost);
 }
 function setViewPost(post){
-  console.log(post.label)
+  
 }
 /*
 //////////////////////////////////
