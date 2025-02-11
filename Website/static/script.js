@@ -158,11 +158,11 @@ function getBarChartData(){
     if (!(subreddit in barData)){
       barData[subreddit] = [0,0,0];
     }
-    if(entry.label="POSITIVE"){
+    if(entry.label=="POSITIVE"){
       barData[subreddit][0]+= 1
-    } else if (entry.label = "NEUTRAL"){
+    } else if (entry.label == "NEUTRAL"){
       barData[subreddit][1]+= 1
-    } else if (entry.label = "NEGATIVE"){
+    } else if (entry.label == "NEGATIVE"){
       barData[subreddit][2]+= 1
     } else {
       console.log("ERROR WITH getBarChartData() function");
