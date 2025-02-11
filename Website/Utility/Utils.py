@@ -282,6 +282,12 @@ def convertPostsToDataFrame(positiveSentimentList, neutralSentimentList, negativ
 
 def getGoogleTrends() -> list:
     pytrends = TrendReq(hl='en-GB', tz=360)
-    trending_searches = pytrends.trending_searches()
-    trendingSearchesList = trending_searches[0].tolist()
-    return trendingSearchesList
+    worldwideTrending = pytrends.trending_searches()
+    irelandTrending = pytrends.trending_searches(pn='ireland')
+    ukTrending = pytrends.trending_searches(pn='united_kingdom')
+    usTrending = pytrends.trending_searches(pn='united_states')
+    worldwideTrendingList = worldwideTrending[0].tolist()
+    irelandTrendingList = irelandTrending[0].tolist()
+    ukTrendingList = ukTrending[0].tolist()
+    usTrendingList = usTrending[0].tolist()
+    return worldwideTrendingList, irelandTrendingList, ukTrendingList, usTrendingList

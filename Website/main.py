@@ -17,14 +17,17 @@ app.secret_key = os.getenv("Secret_Key")
 # This is the default page that gets opened when the website is accessed
 @app.route('/')
 def index():
-    trendingGoogleTopics = Utils.getGoogleTrends()
+    worldwideTrendingList, irelandTrendingList, ukTrendingList, usTrendingList = Utils.getGoogleTrends()
     return render_template( 
             'index.html',
             form=True, 
             charts=False,
             scrollToContact=False,
             userInformation=False,
-            trendingTopics=trendingGoogleTopics
+            worldwideTrendingList=worldwideTrendingList,
+            irelandTrendingList=irelandTrendingList,
+            ukTrendingList=ukTrendingList,
+            usTrendingList=usTrendingList
         )
 
 @app.route('/#contactSection')
