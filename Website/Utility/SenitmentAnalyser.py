@@ -22,7 +22,6 @@ def analyseSentiment(data):
         i+=1
     return results
 
-
 ################
 # CREATE A SENTIMENT ANALYSIS SECTION FOR IMAGES, GIFS AND VIDEOS ETC...
 ################

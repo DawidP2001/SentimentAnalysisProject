@@ -6,6 +6,7 @@ import datetime
 from flask import Flask, request, render_template, session
 from Utility import Reddit as r
 from Utility import Utils
+from Utility import DataHandler as d
 import os
 from collections import Counter
 
@@ -16,22 +17,26 @@ app.secret_key = os.getenv("Secret_Key")
 # This is the default page that gets opened when the website is accessed
 @app.route('/')
 def index():
+    trendingGoogleTopics = Utils.getGoogleTrends()
     return render_template( 
             'index.html',
             form=True, 
             charts=False,
             scrollToContact=False,
-            userInformation=False
+            userInformation=False,
+            trendingTopics=trendingGoogleTopics
         )
 
 @app.route('/#contactSection')
 def indexContact():
+    trendingGoogleTopics = Utils.getGoogleTrends()
     return render_template( 
             'index.html',
             form=True, 
             charts=False,
             scrollToContact=False,
-            userInformation=False
+            userInformation=False,
+            trendingTopics=trendingGoogleTopics
         )
 
 # This function is used to show the results of a topic search
@@ -56,7 +61,16 @@ def submitTopic():
     positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
         positiveSentimentList, neutralSentimentList, negativeSentimentList)
     wordCloudData = Utils.getDataForWordCloud(positiveSentimentList, neutralSentimentList, negativeSentimentList)
+    
+    # Testing ####################################
     setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, search, authorList)
+    if subreddit != "":
+        rawData = r.queryAPI(search, subreddit, querySize)
+    else:
+       rawData = r.queryAPI(search, "all", querySize) # Contains all the raw data from the query to the Reddit Api
+    data = d.extractData(rawData)
+    jsonData = d.converDataToJSON(data)
+    # Testing ####################################
 
     return render_template(
             'index.html',
@@ -67,7 +81,8 @@ def submitTopic():
             positiveBreakdownData=positiveBreakdownData,
             neutralBreakdownData=neutralBreakdownData,
             negativeBreakdownData=negativeBreakdownData,
-            wordCloudData=wordCloudData
+            wordCloudData=wordCloudData,
+            jsonData = jsonData
         )
 
 # This function is used to show the results of a user search	

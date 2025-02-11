@@ -56,42 +56,14 @@ Date: 09/02/2025
     <div id="bottomHomePage">
         <div class="textArea">
             <h1>Trending Topics</h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo lectus in metus tristique, 
-                id mattis eros porta. Praesent congue accumsan maximus. Phasellus enim eros, convallis nec leo luctus,
-                mattis consequat nisi. Nam fringilla interdum erat, at dapibus purus iaculis at. Proin scelerisque lacus
-                eu ligula varius egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia 
-                curae; Phasellus eros massa, semper in magna non, efficitur gravida urna. Donec auctor in justo fringilla placerat. 
-                Nulla sodales feugiat turpis nec malesuada. Aliquam in leo vel libero lacinia pellentesque. Phasellus ornare 
-                eros tellus, sodales porttitor odio tincidunt nec. Pellentesque quis ipsum ac orci pharetra ullamcorper quis eget 
-                nibh. In feugiat consectetur leo tincidunt convallis.
-            </p>
-        </div>
-        <div class="textArea">
-            <h1>User Reviews</h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo lectus in metus tristique, 
-                id mattis eros porta. Praesent congue accumsan maximus. Phasellus enim eros, convallis nec leo luctus,
-                mattis consequat nisi. Nam fringilla interdum erat, at dapibus purus iaculis at. Proin scelerisque lacus
-                eu ligula varius egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia 
-                curae; Phasellus eros massa, semper in magna non, efficitur gravida urna. Donec auctor in justo fringilla placerat. 
-                Nulla sodales feugiat turpis nec malesuada. Aliquam in leo vel libero lacinia pellentesque. Phasellus ornare 
-                eros tellus, sodales porttitor odio tincidunt nec. Pellentesque quis ipsum ac orci pharetra ullamcorper quis eget 
-                nibh. In feugiat consectetur leo tincidunt convallis.
-            </p>
-        </div>
-        <div class="textArea">
-            <h1>FAQ</h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo lectus in metus tristique, 
-                id mattis eros porta. Praesent congue accumsan maximus. Phasellus enim eros, convallis nec leo luctus,
-                mattis consequat nisi. Nam fringilla interdum erat, at dapibus purus iaculis at. Proin scelerisque lacus
-                eu ligula varius egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia 
-                curae; Phasellus eros massa, semper in magna non, efficitur gravida urna. Donec auctor in justo fringilla placerat. 
-                Nulla sodales feugiat turpis nec malesuada. Aliquam in leo vel libero lacinia pellentesque. Phasellus ornare 
-                eros tellus, sodales porttitor odio tincidunt nec. Pellentesque quis ipsum ac orci pharetra ullamcorper quis eget 
-                nibh. In feugiat consectetur leo tincidunt convallis.
-            </p>
+            <table>
+                <th>Google Trending Topics</th>
+                {% for topic in trendingTopics %}
+                    <tr>
+                        <td>{{ topic }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>
 </div>

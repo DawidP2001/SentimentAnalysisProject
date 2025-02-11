@@ -8,6 +8,12 @@ Date: 09/02/2025
     This pie chart displays what is the divide between the positive,
     neutral and negative posts
 -->
+<!--Sets global variables-->
+<script>
+    setGlobalVariables({{ jsonData | tojson | safe }});
+    setViewPostsSection();
+</script>
+
 <div id="pieChartSection">
     <h1>Below is the breakdown of the sentiment of {{ session.search }}</h1>
     <canvas id="myChart" width="400" height="200"></canvas>

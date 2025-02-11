@@ -6,6 +6,22 @@ Date: 09/02/2025
 /*
 //////////////////////////////////
 
+Section for global variables
+
+//////////////////////////////////
+*/
+
+let jsonData;
+
+function setGlobalVariables(data){
+  setjsonData(data);
+}
+function setjsonData(data){
+  jsonData = JSON.parse(data);
+}
+/*
+//////////////////////////////////
+
 Section for the functions used on form.html
 
 //////////////////////////////////
@@ -270,7 +286,19 @@ function displayWordCloud(wordCloudData){
     return words;
   }
 }
+/*
+//////////////////////////////////
 
+Section for the view posts section
+
+//////////////////////////////////
+*/
+function setViewPostsSection(){
+  jsonData.forEach(setViewPost);
+}
+function setViewPost(post){
+  console.log(post.label)
+}
 /*
 //////////////////////////////////
 
@@ -449,4 +477,8 @@ function showTypeOfPostUserRow(){
 function hideTypeOfPostUserRow(){
   typeOfPost = document.getElementById("typeOfPostUserRow");
   typeOfPost.style.display = "none";
+}
+
+function displaySentiment(data){
+
 }
