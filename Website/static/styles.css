@@ -3,56 +3,6 @@ Author: Dawid Pionk
 Date: 05/12/2024
 Description: Contains css styles for this project
 */
-
-/*
-//////////////////////////////////
-
-Section for the navigation bar
-
-//////////////////////////////////
-*/
-nav {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #f1efef;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-nav * {
-  margin: 0px 10px;
-}
-/* This is the tititle in the navigation bar */
-#navTitle{
-  padding: 5px;
-}
-#navLinks {
-  display: flex;
-  align-self: stretch;
-}
-#navLinks a{
-  color: black;
-  height: 100%;
-  text-align: center;
-  padding: 0px 5px;
-  display: flex;
-  align-items: center;
-}
-/* Change the color of links on hover */
-#navLinks a:hover {
-  background-color: #FF5700;
-  color: black;
-}
-/* Add a color to the active/current link */
-#navLinks a.active {
-  background-color: #FF5700;
-  color: white;
-}
 /*
 //////////////////////////////////
 
@@ -132,10 +82,61 @@ h4 {
   transition: 0.3s;
   margin: 5px;
 }
+
 /*
 //////////////////////////////////
 
-Section for only the form page
+Section for the navigation bar
+
+//////////////////////////////////
+*/
+nav {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f1efef;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav * {
+  margin: 0px 10px;
+}
+/* This is the tititle in the navigation bar */
+#navTitle{
+  padding: 5px;
+}
+#navLinks {
+  display: flex;
+  align-self: stretch;
+}
+#navLinks a{
+  color: black;
+  height: 100%;
+  text-align: center;
+  padding: 0px 5px;
+  display: flex;
+  align-items: center;
+}
+/* Change the color of links on hover */
+#navLinks a:hover {
+  background-color: #FF5700;
+  color: black;
+}
+/* Add a color to the active/current link */
+#navLinks a.active {
+  background-color: #FF5700;
+  color: white;
+}
+
+/*
+//////////////////////////////////
+
+Section for form.html styling
 
 //////////////////////////////////
 */
@@ -237,17 +238,34 @@ Section for only the form page
 /*
 //////////////////////////////////
 
-Section for extra information html
+Section for extraInformation.html styling
 
 //////////////////////////////////
 */
+.textArea{
+  width: 60vw;
+}
+.trendingTopic{
+  border-top: 1px solid white;
+  padding: 5px;
+}
+#trendingTopicsTable{
+  background: #FF8b60;
+  box-shadow: 15px 15px 20px grey;
+  border: 3px solid white;
+}
+#trendingSection{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+#trendingButtons{
+  text-align: center;
+}
 #additionalInformation{
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.textArea{
-  width: 60vw;
 }
 #bottomHomePage {
   background: linear-gradient(to bottom, transparent, #FF5700);

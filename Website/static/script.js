@@ -13,8 +13,8 @@ Section for global variables
 
 let jsonData;
 
-function setGlobalVariables(data){
-  setjsonData(data);
+function setGlobalVariables(jsondata){
+  setjsonData(jsondata);
 }
 function setjsonData(data){
   jsonData = JSON.parse(data);
@@ -42,7 +42,31 @@ function typeOfPostSearchChanged(select){
     commentInputField.placeholder = 12345;
   }
 }
+/*
+//////////////////////////////////
 
+Section for the charts displayed on the charts.html below
+
+//////////////////////////////////
+*/
+function viewMoreTrends(button){
+  table = document.getElementById("trendingTopicsTable");
+  rows = table.rows;
+  for(i=6;i<rows.length-1;i++){
+    rows[i].removeAttribute("hidden");
+  }
+  button.hidden = true;
+  document.getElementById("viewLessTrends").removeAttribute("hidden");
+}
+function viewLessTrends(button){
+  table = document.getElementById("trendingTopicsTable");
+  rows = table.rows;
+  for(i=6;i<rows.length-1;i++){
+    rows[i].hidden = true;
+  }
+  button.hidden = true;
+  document.getElementById("viewMoreTrends").removeAttribute("hidden");
+}
 /*
 //////////////////////////////////
 
