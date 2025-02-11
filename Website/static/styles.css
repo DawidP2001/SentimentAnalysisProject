@@ -354,6 +354,8 @@ Section for viewPosts.html
 }
 #sentimentPostsSection {
   display: flex;
+  overflow: scroll;
+  height: 400px;
 }
 .sentimentSection {
   text-align: center;
