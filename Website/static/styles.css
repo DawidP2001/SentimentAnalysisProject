@@ -291,6 +291,7 @@ Section for only the chart.html
 .chartContainer {
   width: 50%;
   min-height: 400px;
+  min-width: 400px;
   display: flex;
   justify-content: center;
 }
