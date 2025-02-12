@@ -44,8 +44,8 @@ function typeOfPostSearchChanged(select){
 }
 /*
 //////////////////////////////////
-
-Section for the charts displayed on the charts.html below
+ 
+Section for extraInformation.html functions
 
 //////////////////////////////////
 */
@@ -70,17 +70,19 @@ function viewLessTrends(button){
 /*
 //////////////////////////////////
 
-Section for the charts displayed on the charts.html below
+Section for charts.html functions
 
 //////////////////////////////////
 */
+/** This section contains function for the pie Chart */
+
 // This is a simple Pie Chart that displays the proportion of sentiment for the querry user made
-function displayPieChart(positiveValue, neutralValue, negativeValue, searchTopic){
+function displayPieChart(searchTopic){
   var xValues = ["Positive", "Neutral", "Negative"];
-  var yValues = [positiveValue, neutralValue, negativeValue];
+  var yValues = getValuesForPieChart();
   var barColors = ["green", "gray", "red"];
 
-  new Chart(document.getElementById('myChart'), {
+  new Chart(document.getElementById('pieChart'), {
       type: "pie",
       data: {
         labels: xValues,
@@ -95,33 +97,55 @@ function displayPieChart(positiveValue, neutralValue, negativeValue, searchTopic
           text: `Overall Sentiment of ${searchTopic}`
         }
       },
-      responsive: true,
-      maintainAspectRatio: true,
-      devicePixelRatio: 4
+      responsive: false,
+      maintainAspectRatio: false,
     });
 }
-// This function creates the bar chart for the subreddit count
-function displaySubredditBarChart(subKeyList, subItemList){
-  // Sets up the X axis for bar chart
-  subKeyListCleaned = subKeyList.replace(/&#39;/g, "'");
-  subNameList = subKeyListCleaned.split(",");
-  var xValues = subKeyListCleaned.replace(/[\[\]']+/g, '').split(',').map(item => item.trim());;
-  
-  // Sets up the y axis for bar  chart
-  subItemList = subItemList.replace(/[\[\]]/g, '');
-  subCountList = subItemList.split(",");
-  var yValues = subCountList.map(Number);
+function getValuesForPieChart(){
+  let positiveValue = 0;
+  let neutralValue = 0;
+  let negativeValue = 0;
+  jsonData.forEach(entry => {
+    if(entry.label === "POSITIVE"){
+      positiveValue += 1;
+    } else if(entry.label === "NEUTRAL"){
+      neutralValue += 1;
+    } else if (entry.label === "NEGATIVE"){
+      negativeValue += 1;
+    }
+  })
+  return [positiveValue, neutralValue, negativeValue];
+}
+/** This section contains function for the subreddit bar chart */
 
-  var barColors = "red"; // Sets color 
+// This function creates the bar chart for the subreddit count
+function displaySubredditBarChart(){
+  let barChartDatasets = getBarChartDatasets();
+  let positiveDataset = barChartDatasets[0];
+  let neutralDataset = barChartDatasets[1];
+  let negativeDataset = barChartDatasets[2];
+  let xValues = barChartDatasets[3];
   // Creates the bar chart
   new Chart(document.getElementById('subredditBarChart'), {
     type: "bar",
     data: {
       labels: xValues,
       datasets: [{
-        backgroundColor: barColors,
-        data: yValues
-      }]
+        label: "Positive",
+        backgroundColor: "green",
+        data: positiveDataset,
+      },
+      {
+        label: "Neutral",
+        backgroundColor: "grey",
+        data: neutralDataset
+      },
+      {
+        label: "Negative",
+        backgroundColor: "red",
+        data: negativeDataset
+      }
+    ]
     },
     options: {
       title: {
@@ -129,17 +153,54 @@ function displaySubredditBarChart(subKeyList, subItemList){
         text: `Subreddit Occurences`
       },
       scales: {
-        yAxes: [{
-            ticks: {
-                beginAtZero: true
-            }
-        }]
+          x: {
+            stacked: true
+        },
+        y: {
+            // Set stacked to true on the y-axis to stack bars
+            beginAtZero: true // Start the y-axis at 0
+        }
       },
       responsive: true,
       maintainAspectRatio: true,
-      devicePixelRatio: 4
+    } 
+  });
+}
+function getBarChartData(){
+  let barData = {}
+  jsonData.forEach(entry => {
+    subreddit = entry.subreddit;
+    if (!(subreddit in barData)){
+      barData[subreddit] = [0,0,0];
+    }
+    if(entry.label=="POSITIVE"){
+      barData[subreddit][0]+= 1
+    } else if (entry.label == "NEUTRAL"){
+      barData[subreddit][1]+= 1
+    } else if (entry.label == "NEGATIVE"){
+      barData[subreddit][2]+= 1
+    } else {
+      console.log("ERROR WITH getBarChartData() function");
     }
   });
+  return barData;
+}
+function getBarChartDatasets(){
+  barData = getBarChartData();
+  let xValues = Object.keys(barData);
+  let positiveDataset = [];
+  let neutralDataset = [];
+  let negativeDataset = [];
+  
+  xValues.forEach(entry => {
+    positiveCount = barData[entry][0];
+    neutralCount = barData[entry][1];
+    negativeCount = barData[entry][2];
+    positiveDataset.push(positiveCount);
+    neutralDataset.push(neutralCount);
+    negativeDataset.push(negativeCount);
+  })
+  return [positiveDataset, neutralDataset, negativeDataset, xValues];
 }
 // This function creates the line graph for the sentiment over time
 function sentimentOverTimeLineGraph(){
@@ -321,7 +382,7 @@ function setViewPostsSection(){
   jsonData.forEach(setViewPost);
 }
 function setViewPost(post){
-  console.log(post.label)
+  
 }
 /*
 //////////////////////////////////

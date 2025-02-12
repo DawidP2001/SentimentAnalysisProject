@@ -14,16 +14,11 @@ Date: 09/02/2025
     setViewPostsSection();
 </script>
 
-<div id="pieChartSection">
+<div id="pieChartSection" class="chartContainer">
     <h1>Below is the breakdown of the sentiment of {{ session.search }}</h1>
-    <canvas id="myChart" width="400" height="200"></canvas>
+    <canvas id="pieChart" width="400" height="400"></canvas>
     <script>      
-        displayPieChart(
-            "{{ session.postTitleSentimentCount[0] }}", 
-            "{{ session.postTitleSentimentCount[1] }}", 
-            "{{ session.postTitleSentimentCount[2] }}",
-            "{{ session.search }}"
-        );
+        displayPieChart("{{ session.search }}");
     </script>
 </div>
 <!--This section displays the breakdown of the sentiment of the posts-->
@@ -41,10 +36,7 @@ Date: 09/02/2025
     <div id="subredditBarChartSection" class="chartContainer">
         <canvas id="subredditBarChart" class="chart"></canvas>
         <script>      
-            displaySubredditBarChart(
-                "{{ session.subKeyList }}",
-                "{{ session.subItemList }}"
-            );
+            displaySubredditBarChart();
         </script>
     </div>
     <!-- Sentiment Over Time       -->

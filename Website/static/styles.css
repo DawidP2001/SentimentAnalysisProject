@@ -277,7 +277,7 @@ Section for extraInformation.html styling
 /*
 //////////////////////////////////
 
-Section for only the chart page
+Section for only the chart.html
 
 //////////////////////////////////
 */
@@ -289,10 +289,20 @@ Section for only the chart page
   align-items: center;
 }
 .chartContainer {
+  width: 50%;
+  min-height: 400px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+}
+#pieChart {
+  max-width: 400px;
+  max-height: 400px;
+}
+#pieChartSection {
+  display: flex;
   align-items: center;
-  width: 70%;
+  justify-content: center;
+  flex-direction: column;
 }
 #moreChartSection h2 {
   margin: 10px;
@@ -354,6 +364,8 @@ Section for viewPosts.html
 }
 #sentimentPostsSection {
   display: flex;
+  overflow: scroll;
+  height: 400px;
 }
 .sentimentSection {
   text-align: center;
