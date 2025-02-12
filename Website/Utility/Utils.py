@@ -144,6 +144,7 @@ def extractData(results):
 
 ################################
 # Below are functions that deal with processing data to be in the breakdown section 
+# Note: Currently unused switched to processing this data in the front end instead
 ################################
 
 def getBreakdownData(positiveSentimentList, neutralSentimentList, negativeSentimentList):

@@ -374,6 +374,372 @@ function displayWordCloud(wordCloudData){
 /*
 //////////////////////////////////
 
+Section for breakdown.html
+
+//////////////////////////////////
+
+*/
+/**
+ * Sets the data in the breakdown table in breakdown.html page
+ *
+ */
+function setBreakdownData(){
+  let size = jsonData.length;
+  // Variables for percentage of overall row
+  let positiveCountPercentOfOverall = 0;
+  let neutralCountPercentOfOverall = 0;
+  let negativeCountPercentOfOverall = 0;
+
+  //Variables for average score
+  let positiveScore = 0;
+  let neutralScore = 0;
+  let negativeScore = 0;
+
+  //Variables for average number of comments
+  let positiveNumOfComments = 0;
+  let neutralNumOfComments = 0;
+  let negativeNumOfComments = 0;
+
+  //Variables for average number of upvotes
+  let positiveAverageNumOfUpvotes = 0;
+  let neutralAverageNumOfUpvotes = 0;
+  let negativeAverageNumOfUpvotes = 0;
+
+  //Average upvote ratio
+  let positiveUpvoteRatio = 0;
+  let neutralUpvoteRatio = 0;
+  let negativeUpvoteRatio = 0;
+
+  //Variables for most common subreddit
+  
+
+  jsonData.forEach(entry => {
+    if(entry.label == "POSITIVE"){
+      positiveCountPercentOfOverall++;
+      positiveScore += entry.score;
+      positiveNumOfComments += entry.num_comments;
+      positiveAverageNumOfUpvotes += entry.upvotes;
+      positiveUpvoteRatio += entry.upvote_ratio;
+    } else if (entry.label == "NEUTRAL"){
+      neutralCountPercentOfOverall++;
+      neutralScore += entry.score;
+      neutralNumOfComments += entry.num_comments;
+      neutralAverageNumOfUpvotes += entry.upvotes;
+      neutralUpvoteRatio += entry.upvote_ratio;
+    } else if (entry.label == "NEGATIVE"){
+      negativeCountPercentOfOverall++;
+      negativeScore += entry.score;
+      negativeNumOfComments += entry.num_comments;
+      negativeAverageNumOfUpvotes += entry.upvotes;
+      negativeUpvoteRatio += entry.upvote_ratio;
+    }
+  });
+  setBreakdownPercentageOfOverall(positiveCountPercentOfOverall, 
+    neutralCountPercentOfOverall, negativeCountPercentOfOverall, size);
+  setAverageScore(positiveScore, neutralScore, negativeScore, size);
+  setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, size);
+  setMostCommonWords();
+  setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOfUpvotes, 
+    negativeAverageNumOfUpvotes, size);
+  setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, size);
+  setMostCommonSubreddit();
+}
+
+/**
+ * Sets the percentage of overall row in the breakdown table
+ *
+ * @param {string} positiveCount - The number of positive posts whos sentiment was analyzed
+ * @param {string} neutralCount - The number of neutral posts whos sentiment was analyzed
+ * @param {string} negativeCount - The number of negative posts whos sentiment was analyzed
+ * @param {number} size - The size of the jsonData variable
+ */
+function setBreakdownPercentageOfOverall(positiveCount, neutralCount, negativeCount, size){
+  if(positiveCount > 0){
+    let positivePercent = Math.round((positiveCount / size) * 100) + "%";
+    document.getElementById("percentageOfOverallPositive").innerHTML = positivePercent;
+  } else {
+    document.getElementById("percentageOfOverallPositive").innerHTML = "0%";
+  }
+  if(neutralCount > 0){
+    let neutralPercent = Math.round((neutralCount / size) * 100) + "%";
+    document.getElementById("percentageOfOverallNeutral").innerHTML = neutralPercent;
+  } else {
+    document.getElementById("percentageOfOverallNeutral").innerHTML = "0%";
+  }
+  if(negativeCount > 0){
+    let negativePercent = Math.round((negativeCount / size) * 100) + "%";
+    document.getElementById("percentageOfOverallNegative").innerHTML = negativePercent;
+  } else {
+    document.getElementById("percentageOfOverallNegative").innerHTML = "0%";
+  }
+}
+/**
+ * Sets the average score row in the breakdown table
+ *
+ * @param {string} positiveScore - The sum of all scores from the positive posts whos sentiment was analyzed
+ * @param {string} neutralScore - The sum of all scores from the neutral posts whos sentiment was analyzed
+ * @param {string} negativeScore - The sum of all scores from the negative posts whos sentiment was analyzed
+ * @param {number} size - The size of the jsonData variable
+ */
+function setAverageScore(positiveScore, neutralScore, negativeScore, size){
+  if(positiveScore > 0){
+    let fieldContents = Math.round((positiveCount / size) * 100) + "%";
+    document.getElementById("averageScorePositive").innerHTML = positiveField;
+  } else {
+    document.getElementById("averageScorePositive").innerHTML = "N/A";
+  }
+  if(neutralScore > 0){
+    let fieldContents = Math.round((neutralScore / size) * 100) + "%";
+    document.getElementById("averageScoreNeutral").innerHTML = fieldContents;
+  } else {
+    document.getElementById("averageScoreNeutral").innerHTML = "N/A";
+  }
+  if(negativeScore > 0){
+    let fieldContents = Math.round((negativeScore / size) * 100) + "%";
+    document.getElementById("averageScoreNegative").innerHTML = fieldContents;
+  } else {
+    document.getElementById("averageScoreNegative").innerHTML = "N/A";
+  }
+}
+/**
+ * Sets the Average Number of Comments row in the breakdown table
+ *
+ * @param {string} positiveNumOfComments - The sum of all comments from the positive posts whos sentiment was analyzed
+ * @param {string} neutralNumOfComments - The sum of all comments from the neutral posts whos sentiment was analyzed
+ * @param {string} negativeNumOfComments - The sum of all comments from the negative posts whos sentiment was analyzed
+ * @param {number} size - The size of the jsonData variable
+ */
+function setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, size){
+  if(positiveNumOfComments>0){
+    let fieldContents = Math.round(positiveNumOfComments/size);
+    document.getElementById("averageNumberOfCommentsPositive").innerHTML = fieldContents;
+  } else {
+    document.getElementById("averageNumberOfCommentsPositive").innerHTML = "N/A";
+  }
+  if(neutralNumOfComments>0){
+    let fieldContents = Math.round(neutralNumOfComments/size);
+    document.getElementById("averageNumberOfCommentsNeutral").innerHTML = fieldContents;
+  } else {
+    document.getElementById("averageNumberOfCommentsNeutral").innerHTML = "N/A";
+  }
+  if (negativeNumOfComments>0){
+    let fieldContents = Math.round(negativeNumOfComments/size);
+    document.getElementById("averageNumberOfCommentsNegative").innerHTML = fieldContents;
+  } else {
+    document.getElementById("averageNumberOfCommentsNegative").innerHTML = "N/A";
+  }
+}
+/**
+ * Sets the Most Common Words row in the breakdown table
+ */
+function setMostCommonWords(){
+  /**
+  * Gets the list of words in a piece of text
+  *
+  * @param {string} text - The sum of all comments from the positive posts whos sentiment was analyzed
+  * @returns {object} - Returns an array of strings from a piece of text
+  */
+  function getWordList(text){
+    text = text.toLowerCase().replace(/[^\w\s]/g, '');
+    words = text.split(/\s+/);
+    return words;
+  }
+    /**
+  * Counts how much each word appeared in the array
+  *
+  * @param {string} words - An Array of Strings
+  * @returns {object} - Returns an object containing a key value pair of each word and the amount of time it appeared
+  */
+  function countWords(words){
+    const wordCount = {};
+    words.forEach(word => {
+      wordCount[word] = (wordCount[word] || 0) + 1;
+    });
+    return wordCount;
+  }
+  /**
+  * Finds out which word appeared the most amount of times
+  *
+  * @param {string} wordCount - An object containing a key value pair of each word and the amount of time it appeared
+  * @returns {string} - Returns the most common word in the passed in argument
+  */
+  function findMostCommonWord(wordCount){
+    let mostCommonWord = '';
+    let maxCount = 0;
+  
+    for (const word in wordCount) {
+      if (wordCount[word] > maxCount) {
+        mostCommonWord = word;
+        maxCount = wordCount[word];
+      }
+    }
+    return mostCommonWord;
+  }
+  positiveText = "";
+  neutralText = "";
+  negativeText = "";
+
+  jsonData.forEach(entry => {
+    if (entry.label === "POSITIVE"){
+      positiveText += " " + entry.title + " " + entry.selfText;
+    } else if (entry.label === "NEUTRAL"){
+      neutralText += " " + entry.title + " " + entry.selfText;
+    } else if (entry.label === "NEGATIVE"){
+      negativeText += " " + entry.title + " " + entry.selfText;
+    }
+  })
+
+  let positiveWords = getWordList(positiveText);
+  let neutralWords = getWordList(neutralText);
+  let negativeWords = getWordList(negativeText);
+
+  let postiveWordCount = countWords(positiveWords);
+  let neutralWordCount = countWords(neutralWords);
+  let negativeWordCount = countWords(negativeWords);
+
+  let positiveMostCommonWord = findMostCommonWord(postiveWordCount);
+  let neutralMostCommonWord = findMostCommonWord(neutralWordCount);
+  let negativeMostCommonWord = findMostCommonWord(negativeWordCount);
+
+  if (positiveMostCommonWord === ''){
+    positiveMostCommonWord = "N/A";
+  }
+  if (neutralMostCommonWord === ''){
+    neutralMostCommonWord = "N/A";
+  }
+  if (negativeMostCommonWord === ''){
+    negativeMostCommonWord = "N/A";
+  }
+
+  document.getElementById("mostCommonWordPositive").innerHTML = positiveMostCommonWord;
+  document.getElementById("mostCommonWordNeutral").innerHTML = neutralMostCommonWord;
+  document.getElementById("mostCommonWordNegative").innerHTML = negativeMostCommonWord;
+}
+  /**
+  * Sets the Average Number Of Upvotes row in the breakdown table
+  *
+ * @param {string} positiveAverageNumOfUpvotes - The sum of all the upvotes from the positive posts whos sentiment was analyzed
+ * @param {string} neutralAverageNumOfUpvotes - The sum of all the upvotes from the neutral posts whos sentiment was analyzed
+ * @param {string} negativeAverageNumOfUpvotes - The sum of all the upvotes from the negative posts whos sentiment was analyzed
+ * @param {number} size - The size of the jsonData variable
+  */
+function setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOfUpvotes, 
+  negativeAverageNumOfUpvotes, size){
+    if(positiveAverageNumOfUpvotes>0){
+      let fieldContents = Math.round(positiveAverageNumOfUpvotes/size);
+      document.getElementById("averageNumberOfUpvotesPositive").innerHTML = fieldContents;
+    } else {
+      document.getElementById("averageNumberOfUpvotesPositive").innerHTML = "N/A";
+    }
+    if(neutralAverageNumOfUpvotes>0){
+      let fieldContents = Math.round(neutralAverageNumOfUpvotes/size);
+      document.getElementById("averageNumberOfUpvotesNeutral").innerHTML = fieldContents;
+    } else {
+      document.getElementById("averageNumberOfUpvotesNeutral").innerHTML = "N/A";
+    }
+    if (negativeAverageNumOfUpvotes>0){
+      let fieldContents = Math.round(negativeAverageNumOfUpvotes/size);
+      document.getElementById("averageNumberOfUpvotesNegative").innerHTML = fieldContents;
+    } else {
+      document.getElementById("averageNumberOfUpvotesNegative").innerHTML = "N/A";
+    }
+}
+  /**
+  * Sets the Average Number Of Upvotes row in the breakdown table
+  *
+ * @param {string} positiveUpvoteRatio - The sum of all the upvotes ratios from the positive posts whos sentiment was analyzed
+ * @param {string} neutralUpvoteRatio - The sum of all the upvotes ratios from the neutral posts whos sentiment was analyzed
+ * @param {string} negativeUpvoteRatio - The sum of all the upvotes ratios from the negative posts whos sentiment was analyzed
+ * @param {number} size - The size of the jsonData variable
+  */
+function setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, size){
+  if(positiveUpvoteRatio>0){
+    let fieldContents = Math.round(positiveUpvoteRatio/size * 100) + "%";
+    document.getElementById("averageUpvoteRatioPositive").innerHTML = fieldContents;
+  } else {
+    document.getElementById("averageUpvoteRatioPositive").innerHTML = "N/A";
+  }
+  if(neutralUpvoteRatio>0){
+    let fieldContents = Math.round(neutralUpvoteRatio/size * 100) + "%";
+    document.getElementById("averageUpvoteRatioNeutral").innerHTML = fieldContents;
+  } else {
+    document.getElementById("averageUpvoteRatioNeutral").innerHTML = "N/A";
+  }
+  if (negativeUpvoteRatio>0){
+    let fieldContents = Math.round(negativeUpvoteRatio/size * 100) + "%";
+    document.getElementById("averageUpvoteRatioNegative").innerHTML = fieldContents;
+  } else {
+    document.getElementById("averageUpvoteRatioNegative").innerHTML = "N/A";
+  }
+}
+  /**
+  * Sets the most common subreddit row in the breakdown table
+  */
+function setMostCommonSubreddit(){
+  let positiveSubredditCount = [];
+  let neutralSubredditCount = [];
+  let negativeSubredditCount = [];
+  jsonData.forEach(entry => {
+    const subreddit = entry.subreddit;
+    if(entry.label === "POSITIVE"){
+      if(!(subreddit in positiveSubredditCount)){
+        positiveSubredditCount[subreddit] = 1;
+      } else {
+        positiveSubredditCount[subreddit] += 1
+      }
+    } else if (entry.label === "NEUTRAL"){
+      if(!(subreddit in neutralSubredditCount)){
+        neutralSubredditCount[subreddit] = 1;
+      } else {
+        neutralSubredditCount[subreddit] += 1
+      }
+    } else if (entry.label === "NEGATIVE"){
+      if(!(subreddit in negativeSubredditCount)){
+        negativeSubredditCount[subreddit] = 1;
+      } else {
+        negativeSubredditCount[subreddit] += 1
+      }
+    }
+  });
+  /**
+  * Sets the Average Number Of Upvotes row in the breakdown table
+  *
+  * @param {object} subredditCount - An object of key value pairs of subreddits and the amount of times they appeared
+  * @returns {string} - Returns the key (subreddit) with the largest value
+  */
+  function getLargestSubreddit(subredditCount){
+    maxSize = 0;
+    maxSubreddit = "";
+    for (subreddit in subredditCount){
+      if (subredditCount[subreddit] > maxSize){
+        maxSize = subredditCount[subreddit];
+        maxSubreddit = subreddit;
+      }
+    }
+    return maxSubreddit;
+  }
+  if(Object.keys(positiveSubredditCount).length > 0){
+    fieldContents = getLargestSubreddit(positiveSubredditCount);
+    document.getElementById("mostCommonSubredditPositive").innerHTML = fieldContents;
+  } else {
+    document.getElementById("mostCommonSubredditPositive").innerHTML = "N/A";
+  }
+  if(Object.keys(neutralSubredditCount).length > 0){
+    fieldContents = getLargestSubreddit(neutralSubredditCount);
+    document.getElementById("mostCommonSubredditNeutral").innerHTML = fieldContents;
+  } else {
+    document.getElementById("mostCommonSubredditNeutral").innerHTML = "N/A";
+  }
+  if(Object.keys(negativeSubredditCount).length > 0){
+    fieldContents = getLargestSubreddit(negativeSubredditCount);
+    document.getElementById("mostCommonSubredditNegative").innerHTML = fieldContents;
+  } else {
+    document.getElementById("mostCommonSubredditNegative").innerHTML = "N/A";
+  } 
+}
+/*
+//////////////////////////////////
+
 Section for the view posts section
 
 //////////////////////////////////
