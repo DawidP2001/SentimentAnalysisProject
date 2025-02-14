@@ -32,14 +32,17 @@ def index():
 
 @app.route('/#contactSection')
 def indexContact():
-    trendingGoogleTopics = Utils.getGoogleTrends()
+    worldwideTrendingList, irelandTrendingList, ukTrendingList, usTrendingList = Utils.getGoogleTrends()
     return render_template( 
             'index.html',
             form=True, 
             charts=False,
             scrollToContact=False,
             userInformation=False,
-            trendingTopics=trendingGoogleTopics
+            worldwideTrendingList=worldwideTrendingList,
+            irelandTrendingList=irelandTrendingList,
+            ukTrendingList=ukTrendingList,
+            usTrendingList=usTrendingList
         )
 
 # This function is used to show the results of a topic search
