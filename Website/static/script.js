@@ -12,12 +12,18 @@ Section for global variables
 */
 
 let jsonData;
+let search;
 
-function setGlobalVariables(jsondata){
+function setGlobalVariables(jsondata, searchTopic){
   setjsonData(jsondata);
+  setSearch(searchTopic);
 }
 function setjsonData(data){
   jsonData = JSON.parse(data);
+}
+function setSearch(searchTopic){
+  searchTopic = searchTopic.toLowerCase();
+  search = searchTopic;
 }
 /*
 //////////////////////////////////
@@ -125,6 +131,7 @@ function displaySubredditBarChart(){
   let neutralDataset = barChartDatasets[1];
   let negativeDataset = barChartDatasets[2];
   let xValues = barChartDatasets[3];
+  let maxY = getMaxXValue(positiveDataset, neutralDataset, negativeDataset,xValues)
   // Creates the bar chart
   new Chart(document.getElementById('subredditBarChart'), {
     type: "bar",
@@ -157,14 +164,30 @@ function displaySubredditBarChart(){
             stacked: true
         },
         y: {
-            // Set stacked to true on the y-axis to stack bars
-            beginAtZero: true // Start the y-axis at 0
+            stacked: true,
+            beginAtZero: true, // Start the y-axis at 0
+            max: maxY
         }
       },
       responsive: true,
       maintainAspectRatio: true,
     } 
   });
+}
+function getMaxXValue(positiveDataset, neutralDataset, negativeDataset, xValues){
+  let totalValues = [];
+  let maxY = 0;
+  for (let i=0;i<xValues.length;i++){
+    let total = positiveDataset[i] + neutralDataset[i] + negativeDataset[i];
+    totalValues.push(total);
+  }
+  for (let i=0; i<totalValues.length;i++){
+    let num = totalValues[i];
+    if (num > maxY){
+      maxY = num;
+    }
+  }
+  return maxY;
 }
 function getBarChartData(){
   let barData = {}
@@ -302,12 +325,10 @@ function sentimentVSEngagementSection(){
 
 // This function creates the word cloud for the top keywords
 // A lot of the code was taken from here: https://d3-graph-gallery.com/graph/wordcloud_size.html
-function displayWordCloud(wordCloudData){
+function displayWordCloud(){
   // List of words
-  wordCloudData = wordCloudData.replace(/&#34;/g, '"');
-  var myWords = JSON.parse(wordCloudData);
+  let myWords = getDataForWorldCloud();
   myWords = scaleWords(myWords);
-
   // set the dimensions and margins of the graph
   var containerWidth = document.getElementById("sentimentVSEngagementSection").offsetWidth;
   var containerHeight = document.getElementById("sentimentVSEngagementSection").offsetHeight;
@@ -370,6 +391,27 @@ function displayWordCloud(wordCloudData){
     
     return words;
   }
+}
+function getDataForWorldCloud(){
+  let text = "";
+  jsonData.forEach(entry =>{
+    text += " " + entry.title + " " + entry.selftext;
+  });
+  let words = getWordList(text);
+  let filteredWords = removeWords(words);
+  wordCount = countWords(filteredWords);
+  let formattedWords = convertToWorldCloudFormat(wordCount);
+  return formattedWords;
+}
+function convertToWorldCloudFormat(wordCount){
+  let formattedWords = [];
+  for(let word in wordCount){
+    formattedWords.push({
+      word: word,
+      size: wordCount[word]
+    });
+  };
+  return formattedWords;
 }
 /*
 //////////////////////////////////
@@ -533,30 +575,7 @@ function setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, ne
  * Sets the Most Common Words row in the breakdown table
  */
 function setMostCommonWords(){
-  /**
-  * Gets the list of words in a piece of text
-  *
-  * @param {string} text - The sum of all comments from the positive posts whos sentiment was analyzed
-  * @returns {object} - Returns an array of strings from a piece of text
-  */
-  function getWordList(text){
-    text = text.toLowerCase().replace(/[^\w\s]/g, '');
-    words = text.split(/\s+/);
-    return words;
-  }
-    /**
-  * Counts how much each word appeared in the array
-  *
-  * @param {string} words - An Array of Strings
-  * @returns {object} - Returns an object containing a key value pair of each word and the amount of time it appeared
-  */
-  function countWords(words){
-    const wordCount = {};
-    words.forEach(word => {
-      wordCount[word] = (wordCount[word] || 0) + 1;
-    });
-    return wordCount;
-  }
+
   /**
   * Finds out which word appeared the most amount of times
   *
@@ -614,6 +633,38 @@ function setMostCommonWords(){
   document.getElementById("mostCommonWordPositive").innerHTML = positiveMostCommonWord;
   document.getElementById("mostCommonWordNeutral").innerHTML = neutralMostCommonWord;
   document.getElementById("mostCommonWordNegative").innerHTML = negativeMostCommonWord;
+}
+/**
+* Gets the list of words in a piece of text
+*
+* @param {string} text - The sum of all comments from the positive posts whos sentiment was analyzed
+* @returns {object} - Returns an array of strings from a piece of text
+*/
+function getWordList(text){
+  text = text.toLowerCase().replace(/[^\w\s]/g, '');
+  words = text.split(/\s+/);
+  words = removeWords(words);
+  return words;
+}
+  /**
+* Counts how much each word appeared in the array
+*
+* @param {string} words - An Array of Strings
+* @returns {object} - Returns an object containing a key value pair of each word and the amount of time it appeared
+*/
+function countWords(words){
+  const wordCount = {};
+  words.forEach(word => {
+    wordCount[word] = (wordCount[word] || 0) + 1;
+  });
+  return wordCount;
+}
+function removeWords(words){
+  let searchWord = search;
+  let removeList = [searchWord, '', 'undefined'];
+  let filteredWords = sw.removeStopwords(words);
+  filteredWords = sw.removeStopwords(filteredWords, removeList);
+  return filteredWords;
 }
   /**
   * Sets the Average Number Of Upvotes row in the breakdown table
@@ -764,7 +815,10 @@ function addPost(entry, section){
     class="modalBtn"
       data-title="${entry.title}"
       data-subreddit="${entry.subreddit}"
-      data-score="${entry.score}"
+      data-compoundScore="${entry.compoundScore}"
+      data-positiveScore="${entry.positiveScore}"
+      data-neutralScore="${entry.neutralScore}"
+      data-negativeScore="${entry.negativeScore}"
       data-author="${entry.author}" 
       data-created="${entry.created_utc}"
       data-numComments="${entry.num_comments}"
@@ -775,7 +829,7 @@ function addPost(entry, section){
       data-selfText="${entry.selftext}"
       onclick="postClicked(this)">           
           Text: ${entry.title}<br>
-          Score:${entry.score}<br>
+          Score:${entry.compoundScore}<br>
     </button>`;
     section.innerHTML += htmlString;
 }
@@ -869,9 +923,9 @@ function postClicked(button){
   selfTextSection = document.getElementById("selfTextSection");
   selfTextSection.innerHTML = selfText;
 
-  score = button.getAttribute("data-score");
-  scoreSection = document.getElementById("scoreSection");
-  scoreSection.innerHTML = score;
+  compoundScore = button.getAttribute("data-compoundScore");
+  compoundScoreSection = document.getElementById("compoundScoreSection");
+  compoundScoreSection.innerHTML = compoundScore;
 
   author = button.getAttribute("data-author");
   authorSection = document.getElementById("authorSection");
@@ -894,9 +948,9 @@ function postClicked(button){
   permalinkSection = document.getElementById("permalinkSection");
   permalinkSection.innerHTML = `<a href=${permalink}>link</>`;
 
-  score = button.getAttribute("data-upvotes");
-  scoreSection = document.getElementById("upvotesSection");
-  scoreSection.innerHTML = score;
+  upvotes = button.getAttribute("data-upvotes");
+  upvotesSection = document.getElementById("upvotesSection");
+  upvotesSection.innerHTML = upvotes;
 
   upvoteRatio = button.getAttribute("data-upvoteRatio");
   upvoteRatioSection = document.getElementById("upvoteRatioSection");

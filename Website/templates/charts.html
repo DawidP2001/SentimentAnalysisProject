@@ -10,14 +10,14 @@ Date: 09/02/2025
 -->
 <!--Sets global variables-->
 <script>
-    setGlobalVariables({{ jsonData | tojson | safe }});
+    setGlobalVariables({{ jsonData | tojson | safe }}, '{{ search }}');
 </script>
 
 <div id="pieChartSection" class="chartContainer">
-    <h1>Below is the breakdown of the sentiment of {{ session.search }}</h1>
+    <h1>Below is the breakdown of the sentiment of {{ search }}</h1>
     <canvas id="pieChart" width="400" height="400"></canvas>
     <script>      
-        displayPieChart("{{ session.search }}");
+        displayPieChart("{{ search }}");
     </script>
 </div>
 <!--This section displays the breakdown of the sentiment of the posts-->
@@ -69,6 +69,14 @@ Date: 09/02/2025
     </div>
     <div>
         <h1>Place a bar chart here where the user can see sentiment across subreddits</h1>
+    </div>
+    <div>
+        <h3>Bubble chart for sentiment vs engagement</h3>
+        <h4>
+            X-Axis: Number of comments
+            Y-Axis: Sentiment
+            
+        </h4>
     </div>
 </div>
 <!--This section displays the individual posts-->

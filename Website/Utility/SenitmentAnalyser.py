@@ -3,6 +3,8 @@
 #Description: This File stores code required for sentiment analysis of the posts
 
 from transformers import pipeline
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from Utility import DataHandler as d
 
 #This function analyses sentiment of passed in text
 #param data: The text to analyse
@@ -22,6 +24,22 @@ def analyseSentiment(data):
         i+=1
     return results
 
+def getSentimentScores(data):
+    analyzer = SentimentIntensityAnalyzer()
+    results = []
+    for text in data:
+        scores = analyzer.polarity_scores(text)
+        label=""
+        if(scores['pos']>=scores['neu'] and scores['pos'] >= scores['neg']):
+            label = 'POSITIVE'
+        elif(scores['neu'] >= scores['pos'] and scores['neu'] >= scores['neg']):
+            label = 'NEUTRAL'
+        elif(scores['neg'] >= scores['pos'] and scores['neg'] >= scores['neu']):
+            label = 'NEGATIVE'
+        results.append({"text":text, "label": label, "positiveScore": scores['pos'], 
+                      "neutralScore": scores['neu'], "negativeScore": scores['neg'], 
+                      "compoundScore": scores['compound']})
+    return results
 ################
 # CREATE A SENTIMENT ANALYSIS SECTION FOR IMAGES, GIFS AND VIDEOS ETC...
 ################

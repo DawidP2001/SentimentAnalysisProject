@@ -55,28 +55,9 @@ def submitTopic():
     if subreddit != "":
         rawData = r.queryAPI(search, subreddit, querySize)
     else:
-########### Change this so that random posts are taken from random subrreddits instead from all ##########
-        rawData = r.queryAPI(search, "all", querySize) # Contains all the raw data from the query to the Reddit Api
-
-    # Below prepares the data for the page to be displayed
-    datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
-    titleList, subbredditList, authorList = Utils.extractData(datalist)
-    keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
-    positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
-    # This section below gets the variables used for the breakdown table
-    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
-        positiveSentimentList, neutralSentimentList, negativeSentimentList)
-    wordCloudData = Utils.getDataForWordCloud(positiveSentimentList, neutralSentimentList, negativeSentimentList)
-    
-    # Testing ####################################
-    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, search, authorList)
-    if subreddit != "":
-        rawData = r.queryAPI(search, subreddit, querySize)
-    else:
-       rawData = r.queryAPI(search, "all", querySize) # Contains all the raw data from the query to the Reddit Api
+      rawData = r.queryAPI(search, "all", querySize) # Contains all the raw data from the query to the Reddit Api
     data = d.extractData(rawData)
     jsonData = d.converDataToJSON(data)
-    # Testing ####################################
 
     return render_template(
             'index.html',
@@ -84,11 +65,8 @@ def submitTopic():
             charts=True,
             scrollToContact=False,
             userInformation=False,
-            positiveBreakdownData=positiveBreakdownData,
-            neutralBreakdownData=neutralBreakdownData,
-            negativeBreakdownData=negativeBreakdownData,
-            wordCloudData=wordCloudData,
-            jsonData = jsonData
+            jsonData = jsonData,
+            search = search
         )
 
 # This function is used to show the results of a user search	
@@ -105,7 +83,8 @@ def submitUser():
     rawData = r.queryUser(redditor, typeOfPost, typeOfSearch, searchTimeFrame, querySize) 
 
     # Below prepares the data for the page to be displayed
-    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = prepareDataForChartPage(rawData, user)
+    data = d.extractData(rawData)
+    jsonData = d.converDataToJSON(data)
     setRedditorData(redditor)
 
     return render_template(
@@ -114,9 +93,8 @@ def submitUser():
             charts=True,
             scrollToContact=False,
             userInformation=True,
-            positiveBreakdownData=positiveBreakdownData,
-            neutralBreakdownData=neutralBreakdownData,
-            negativeBreakdownData=negativeBreakdownData
+            jsonData = jsonData,
+            search = user
         )
 
 # This function is used to show the results of a subreddit search
@@ -130,16 +108,16 @@ def submitSubrredit():
     rawData = r.querySubreddit(subreddit, searchType, querySize, searchTimeFrame) # Contains all the raw data from the query to the Reddit Api
     
     # Below prepares the data for the page to be displayed
-    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = prepareDataForChartPage(rawData, subreddit)
+    data = d.extractData(rawData)
+    jsonData = d.converDataToJSON(data)
     return render_template(
             'index.html',
             form=False, 
             charts=True,
             scrollToContact=False,
             userInformation=False,
-            positiveBreakdownData=positiveBreakdownData,
-            neutralBreakdownData=neutralBreakdownData,
-            negativeBreakdownData=negativeBreakdownData
+            jsonData = jsonData,
+            search = subreddit
         )
 
 @app.route('/showChartsCommentSearch', methods=['POST'])
@@ -150,17 +128,16 @@ def submitComment():
     sortBy = request.form['sortByComments'] # 
     querySize = request.form["querySizeComment"] # This contains the size of the query
     rawData = r.queryComment(searchType, contents, sortBy, querySize) # Contains all the raw data from the query to the Reddit Api
-    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = prepareDataForChartPage(rawData, contents)
-
+    data = d.extractData(rawData)
+    jsonData = d.converDataToJSON(data)
     return render_template(
             'index.html',
             form=False, 
             charts=True,
             scrollToContact=False,
             userInformation=False,
-            positiveBreakdownData=positiveBreakdownData,
-            neutralBreakdownData=neutralBreakdownData,
-            negativeBreakdownData=negativeBreakdownData
+            jsonData = jsonData,
+            search = "Post Comments"
         )
 
 @app.route('/showChartsDomainSearch', methods=['POST'])
@@ -172,7 +149,8 @@ def submitDomain():
     querySize = request.form["querySizeDomain"] # This contains the size of the query
     rawData = r.queryDomain(searchContents, typeOfSearch, searchTimeFrame, querySize) # Contains all the raw data from the query to the Reddit Api
     # Below prepares the data for the page to be displayed
-    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = prepareDataForChartPage(rawData, searchContents)
+    data = d.extractData(rawData)
+    jsonData = d.converDataToJSON(data)
 
     return render_template(
             'index.html',
@@ -180,25 +158,12 @@ def submitDomain():
             charts=True,
             scrollToContact=False,
             userInformation=False,
-            positiveBreakdownData=positiveBreakdownData,
-            neutralBreakdownData=neutralBreakdownData,
-            negativeBreakdownData=negativeBreakdownData
+            jsonData = jsonData,
+            search = searchContents
         )
 ############################################################################################################
 # This section deals with setting the session variables
 ############################################################################################################
-# This function is used to set session variables
-def setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, 
-                   itemList, search, authorList):
-    session['positiveSentimentList'] = positiveSentimentList
-    session['neutralSentimentList'] = neutralSentimentList
-    session['negativeSentimentList'] = negativeSentimentList
-    session['subKeyList'] = keyList # Contains the keys for subbreddit chart
-    session['subItemList'] = itemList # Contains the values for subbreddit chart
-    session['search'] = search # Contains the search topic
-    session['postTitleSentimentCount'] = Utils.countLables(positiveSentimentList, 
-                                                           neutralSentimentList, negativeSentimentList) #Contains the count of sentiment values
-    session['authorList'] = authorList
 
 # Sets the session variables for redditor data
 def setRedditorData(redditor):
@@ -216,23 +181,6 @@ def setRedditorData(redditor):
         session["redditorIsSuspended"] = "False"
     session["redditorLinkKarma"] = redditor.link_karma
     session["redditorName"] = redditor.name
-
-############################################################################################################
-# Other section
-############################################################################################################
-# This function is used to prepare the data for the chart page
-def prepareDataForChartPage(rawData, contents):
-     # Below prepares the data for the page to be displayed
-    datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
-    titleList, subbredditList, authorList = Utils.extractData(datalist)
-    keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
-    positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
-    # This section below gets the variables used for the breakdown table
-    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
-        positiveSentimentList, neutralSentimentList, negativeSentimentList)
-    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, contents, authorList)
-
-    return positiveBreakdownData, neutralBreakdownData, negativeBreakdownData
 
 if __name__ == '__main__':  
    app.run()  

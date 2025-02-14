@@ -22,11 +22,17 @@ def addExtraFields(data):
 
 def addSentimentField(data):
     textList = data['title'].tolist()
-    results = s.analyseSentiment(textList)
+    results = s.getSentimentScores(textList)
     labels = [entry["label"] for entry in results]
-    scores = [entry["score"] for entry in results]
+    positiveScores = [entry["positiveScore"] for entry in results]
+    neutralScores = [entry["neutralScore"] for entry in results]
+    negativeScores = [entry["negativeScore"] for entry in results]
+    compoundScores = [entry["negativeScore"] for entry in results]
     data['label'] = labels
-    data['score'] = scores
+    data['positiveScore'] = positiveScores
+    data['neutralScore'] = neutralScores
+    data['negativeScore'] = negativeScores
+    data['compoundScore'] = compoundScores
     return data
 
 def dataToDictionary(submission):
