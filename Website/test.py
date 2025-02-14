@@ -5,11 +5,7 @@ from Utility import Utils
 import os
 from collections import Counter
 from pytrends.request import TrendReq
-"""
+from Utility import SenitmentAnalyser as s
+
 rawData = r.queryAPI("Poland", "all", 50)
-data = d.extractData(rawData)
-print(data.head())
-data.to_excel("C:\\Users\\dawid\\Desktop\\reddit_sentiment.xlsx", index=False)
-"""
-print(Utils.getGoogleTrends())
-#Utils.getGoogleTrends().to_excel("C:\\Users\\dawid\\Desktop\\reddit_sentiment.xlsx", index=False)
+print(s.getSentimentScores(rawData))

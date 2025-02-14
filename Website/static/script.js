@@ -664,7 +664,6 @@ function removeWords(words){
   let removeList = [searchWord, '', 'undefined'];
   let filteredWords = sw.removeStopwords(words);
   filteredWords = sw.removeStopwords(filteredWords, removeList);
-  console.log(filteredWords);
   return filteredWords;
 }
   /**
@@ -816,7 +815,10 @@ function addPost(entry, section){
     class="modalBtn"
       data-title="${entry.title}"
       data-subreddit="${entry.subreddit}"
-      data-score="${entry.score}"
+      data-compoundScore="${entry.compoundScore}"
+      data-positiveScore="${entry.positiveScore}"
+      data-neutralScore="${entry.neutralScore}"
+      data-negativeScore="${entry.negativeScore}"
       data-author="${entry.author}" 
       data-created="${entry.created_utc}"
       data-numComments="${entry.num_comments}"
@@ -827,7 +829,7 @@ function addPost(entry, section){
       data-selfText="${entry.selftext}"
       onclick="postClicked(this)">           
           Text: ${entry.title}<br>
-          Score:${entry.score}<br>
+          Score:${entry.compoundScore}<br>
     </button>`;
     section.innerHTML += htmlString;
 }
@@ -921,9 +923,9 @@ function postClicked(button){
   selfTextSection = document.getElementById("selfTextSection");
   selfTextSection.innerHTML = selfText;
 
-  score = button.getAttribute("data-score");
-  scoreSection = document.getElementById("scoreSection");
-  scoreSection.innerHTML = score;
+  compoundScore = button.getAttribute("data-compoundScore");
+  compoundScoreSection = document.getElementById("compoundScoreSection");
+  compoundScoreSection.innerHTML = compoundScore;
 
   author = button.getAttribute("data-author");
   authorSection = document.getElementById("authorSection");
@@ -946,9 +948,9 @@ function postClicked(button){
   permalinkSection = document.getElementById("permalinkSection");
   permalinkSection.innerHTML = `<a href=${permalink}>link</>`;
 
-  score = button.getAttribute("data-upvotes");
-  scoreSection = document.getElementById("upvotesSection");
-  scoreSection.innerHTML = score;
+  upvotes = button.getAttribute("data-upvotes");
+  upvotesSection = document.getElementById("upvotesSection");
+  upvotesSection.innerHTML = upvotes;
 
   upvoteRatio = button.getAttribute("data-upvoteRatio");
   upvoteRatioSection = document.getElementById("upvoteRatioSection");
