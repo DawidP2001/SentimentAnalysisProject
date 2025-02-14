@@ -745,7 +745,42 @@ Section for the view posts section
 //////////////////////////////////
 */
 function setViewPostsSection(){
-  jsonData.forEach(setViewPost);
+  jsonData.forEach(entry => {
+    if(entry.label === "POSITIVE"){
+      section = document.getElementById("positiveSentimentSection");
+      addPost(entry, section)
+    } else if (entry.label === "NEUTRAL"){
+      section = document.getElementById("neutralSentimentSection");
+      addPost(entry, section)
+    } else if (entry.label === "NEGATIVE"){
+      section = document.getElementById("negativeSentimentSection");
+      addPost(entry, section)
+    }
+  });
+}
+function addPost(entry, section){
+  htmlString = 
+  `<button
+    class="modalBtn"
+      data-title="${entry.title}"
+      data-subreddit="${entry.subreddit}"
+      data-score="${entry.score}"
+      data-author="${entry.author}" 
+      data-created="${entry.created_utc}"
+      data-numComments="${entry.num_comments}"
+      data-over18="${entry.over_18}"
+      data-permalink="${entry.permalink}"
+      data-upvotes="${entry.upvotes}"
+      data-upvoteRatio="${entry.upvote_ratio}"
+      data-selfText="${entry.selftext}"
+      onclick="postClicked(this)">           
+          Text: ${entry.title}<br>
+          Score:${entry.score}<br>
+    </button>`;
+    section.innerHTML += htmlString;
+}
+function seperateIntoLists(){
+
 }
 function setViewPost(post){
   

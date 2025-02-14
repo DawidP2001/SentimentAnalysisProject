@@ -14,15 +14,6 @@ app = Flask(__name__)
 
 app.secret_key = os.getenv("Secret_Key")
 
-"""
-TODO tommorrow:
-    1. Bar chart fixed.
-    2. View posts readjustted to jsonData
-    3. Pie chart readjusted
-"""
-
-
-
 # This is the default page that gets opened when the website is accessed
 @app.route('/')
 def index():
@@ -41,14 +32,17 @@ def index():
 
 @app.route('/#contactSection')
 def indexContact():
-    trendingGoogleTopics = Utils.getGoogleTrends()
+    worldwideTrendingList, irelandTrendingList, ukTrendingList, usTrendingList = Utils.getGoogleTrends()
     return render_template( 
             'index.html',
             form=True, 
             charts=False,
             scrollToContact=False,
             userInformation=False,
-            trendingTopics=trendingGoogleTopics
+            worldwideTrendingList=worldwideTrendingList,
+            irelandTrendingList=irelandTrendingList,
+            ukTrendingList=ukTrendingList,
+            usTrendingList=usTrendingList
         )
 
 # This function is used to show the results of a topic search
