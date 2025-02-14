@@ -12,12 +12,18 @@ Section for global variables
 */
 
 let jsonData;
+let search;
 
-function setGlobalVariables(jsondata){
+function setGlobalVariables(jsondata, searchTopic){
   setjsonData(jsondata);
+  setSearch(searchTopic);
 }
 function setjsonData(data){
   jsonData = JSON.parse(data);
+}
+function setSearch(searchTopic){
+  searchTopic = searchTopic.toLowerCase();
+  search = searchTopic;
 }
 /*
 //////////////////////////////////
@@ -125,6 +131,7 @@ function displaySubredditBarChart(){
   let neutralDataset = barChartDatasets[1];
   let negativeDataset = barChartDatasets[2];
   let xValues = barChartDatasets[3];
+  let maxY = getMaxXValue(positiveDataset, neutralDataset, negativeDataset,xValues)
   // Creates the bar chart
   new Chart(document.getElementById('subredditBarChart'), {
     type: "bar",
@@ -157,14 +164,30 @@ function displaySubredditBarChart(){
             stacked: true
         },
         y: {
-            // Set stacked to true on the y-axis to stack bars
-            beginAtZero: true // Start the y-axis at 0
+            stacked: true,
+            beginAtZero: true, // Start the y-axis at 0
+            max: maxY
         }
       },
       responsive: true,
       maintainAspectRatio: true,
     } 
   });
+}
+function getMaxXValue(positiveDataset, neutralDataset, negativeDataset, xValues){
+  let totalValues = [];
+  let maxY = 0;
+  for (let i=0;i<xValues.length;i++){
+    let total = positiveDataset[i] + neutralDataset[i] + negativeDataset[i];
+    totalValues.push(total);
+  }
+  for (let i=0; i<totalValues.length;i++){
+    let num = totalValues[i];
+    if (num > maxY){
+      maxY = num;
+    }
+  }
+  return maxY;
 }
 function getBarChartData(){
   let barData = {}
@@ -375,7 +398,7 @@ function getDataForWorldCloud(){
     text += " " + entry.title + " " + entry.selftext;
   });
   let words = getWordList(text);
-  let filteredWords = sw.removeStopwords(words);
+  let filteredWords = removeWords(words);
   wordCount = countWords(filteredWords);
   let formattedWords = convertToWorldCloudFormat(wordCount);
   return formattedWords;
@@ -620,7 +643,7 @@ function setMostCommonWords(){
 function getWordList(text){
   text = text.toLowerCase().replace(/[^\w\s]/g, '');
   words = text.split(/\s+/);
-  words = sw.removeStopwords(words);
+  words = removeWords(words);
   return words;
 }
   /**
@@ -636,7 +659,14 @@ function countWords(words){
   });
   return wordCount;
 }
-
+function removeWords(words){
+  let searchWord = search;
+  let removeList = [searchWord, '', 'undefined'];
+  let filteredWords = sw.removeStopwords(words);
+  filteredWords = sw.removeStopwords(filteredWords, removeList);
+  console.log(filteredWords);
+  return filteredWords;
+}
   /**
   * Sets the Average Number Of Upvotes row in the breakdown table
   *
