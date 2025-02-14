@@ -55,25 +55,7 @@ def submitTopic():
     if subreddit != "":
         rawData = r.queryAPI(search, subreddit, querySize)
     else:
-########### Change this so that random posts are taken from random subrreddits instead from all ##########
-        rawData = r.queryAPI(search, "all", querySize) # Contains all the raw data from the query to the Reddit Api
-
-    # Below prepares the data for the page to be displayed
-    datalist = Utils.createDictList(rawData) # Contains the data in a list of dictionaries
-    titleList, subbredditList, authorList = Utils.extractData(datalist)
-    keyList, itemList = Utils.convertSubOccurencesForJs(Counter(subbredditList))
-    positiveSentimentList, neutralSentimentList, negativeSentimentList  =  Utils.seperateSentiments(datalist)
-    # This section below gets the variables used for the breakdown table
-    positiveBreakdownData, neutralBreakdownData, negativeBreakdownData = Utils.getBreakdownData(
-        positiveSentimentList, neutralSentimentList, negativeSentimentList)
-    wordCloudData = Utils.getDataForWordCloud(positiveSentimentList, neutralSentimentList, negativeSentimentList)
-    
-    # Testing ####################################
-    setSessionData(positiveSentimentList, neutralSentimentList, negativeSentimentList, keyList, itemList, search, authorList)
-    if subreddit != "":
-        rawData = r.queryAPI(search, subreddit, querySize)
-    else:
-       rawData = r.queryAPI(search, "all", querySize) # Contains all the raw data from the query to the Reddit Api
+      rawData = r.queryAPI(search, "all", querySize) # Contains all the raw data from the query to the Reddit Api
     data = d.extractData(rawData)
     jsonData = d.converDataToJSON(data)
     # Testing ####################################
@@ -84,10 +66,6 @@ def submitTopic():
             charts=True,
             scrollToContact=False,
             userInformation=False,
-            positiveBreakdownData=positiveBreakdownData,
-            neutralBreakdownData=neutralBreakdownData,
-            negativeBreakdownData=negativeBreakdownData,
-            wordCloudData=wordCloudData,
             jsonData = jsonData
         )
 

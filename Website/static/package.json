@@ -1,0 +1,23 @@
+{
+  "name": "sentimentanalysisproject",
+  "version": "1.0.0",
+  "description": "1. License: Reddit Sentiment Analyzer © 2024 by Dawid Pionk is licensed under GNU General Public License as published by the Free Software Foundation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DawidP2001/SentimentAnalysisProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DawidP2001/SentimentAnalysisProject/issues"
+  },
+  "homepage": "https://github.com/DawidP2001/SentimentAnalysisProject#readme",
+  "dependencies": {
+    "stopword": "^3.1.4"
+  }
+}

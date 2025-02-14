@@ -302,12 +302,10 @@ function sentimentVSEngagementSection(){
 
 // This function creates the word cloud for the top keywords
 // A lot of the code was taken from here: https://d3-graph-gallery.com/graph/wordcloud_size.html
-function displayWordCloud(wordCloudData){
+function displayWordCloud(){
   // List of words
-  wordCloudData = wordCloudData.replace(/&#34;/g, '"');
-  var myWords = JSON.parse(wordCloudData);
+  let myWords = getDataForWorldCloud();
   myWords = scaleWords(myWords);
-
   // set the dimensions and margins of the graph
   var containerWidth = document.getElementById("sentimentVSEngagementSection").offsetWidth;
   var containerHeight = document.getElementById("sentimentVSEngagementSection").offsetHeight;
@@ -370,6 +368,27 @@ function displayWordCloud(wordCloudData){
     
     return words;
   }
+}
+function getDataForWorldCloud(){
+  let text = "";
+  jsonData.forEach(entry =>{
+    text += " " + entry.title + " " + entry.selftext;
+  });
+  let words = getWordList(text);
+  let filteredWords = sw.removeStopwords(words);
+  wordCount = countWords(filteredWords);
+  let formattedWords = convertToWorldCloudFormat(wordCount);
+  return formattedWords;
+}
+function convertToWorldCloudFormat(wordCount){
+  let formattedWords = [];
+  for(let word in wordCount){
+    formattedWords.push({
+      word: word,
+      size: wordCount[word]
+    });
+  };
+  return formattedWords;
 }
 /*
 //////////////////////////////////
@@ -533,30 +552,7 @@ function setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, ne
  * Sets the Most Common Words row in the breakdown table
  */
 function setMostCommonWords(){
-  /**
-  * Gets the list of words in a piece of text
-  *
-  * @param {string} text - The sum of all comments from the positive posts whos sentiment was analyzed
-  * @returns {object} - Returns an array of strings from a piece of text
-  */
-  function getWordList(text){
-    text = text.toLowerCase().replace(/[^\w\s]/g, '');
-    words = text.split(/\s+/);
-    return words;
-  }
-    /**
-  * Counts how much each word appeared in the array
-  *
-  * @param {string} words - An Array of Strings
-  * @returns {object} - Returns an object containing a key value pair of each word and the amount of time it appeared
-  */
-  function countWords(words){
-    const wordCount = {};
-    words.forEach(word => {
-      wordCount[word] = (wordCount[word] || 0) + 1;
-    });
-    return wordCount;
-  }
+
   /**
   * Finds out which word appeared the most amount of times
   *
@@ -615,6 +611,32 @@ function setMostCommonWords(){
   document.getElementById("mostCommonWordNeutral").innerHTML = neutralMostCommonWord;
   document.getElementById("mostCommonWordNegative").innerHTML = negativeMostCommonWord;
 }
+/**
+* Gets the list of words in a piece of text
+*
+* @param {string} text - The sum of all comments from the positive posts whos sentiment was analyzed
+* @returns {object} - Returns an array of strings from a piece of text
+*/
+function getWordList(text){
+  text = text.toLowerCase().replace(/[^\w\s]/g, '');
+  words = text.split(/\s+/);
+  words = sw.removeStopwords(words);
+  return words;
+}
+  /**
+* Counts how much each word appeared in the array
+*
+* @param {string} words - An Array of Strings
+* @returns {object} - Returns an object containing a key value pair of each word and the amount of time it appeared
+*/
+function countWords(words){
+  const wordCount = {};
+  words.forEach(word => {
+    wordCount[word] = (wordCount[word] || 0) + 1;
+  });
+  return wordCount;
+}
+
   /**
   * Sets the Average Number Of Upvotes row in the breakdown table
   *
