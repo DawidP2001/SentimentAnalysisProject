@@ -14,15 +14,6 @@ app = Flask(__name__)
 
 app.secret_key = os.getenv("Secret_Key")
 
-"""
-TODO tommorrow:
-    1. Bar chart fixed.
-    2. View posts readjustted to jsonData
-    3. Pie chart readjusted
-"""
-
-
-
 # This is the default page that gets opened when the website is accessed
 @app.route('/')
 def index():

@@ -4,7 +4,6 @@ Description: This file is responsible for displaying each individual post, its s
             information associated with it
 Date: 09/02/2025
 -->
-
 <!--This section lets you sort the order of the posts that are displayed-->
 <h2>Sorting under construction</h2>
 <div id="sentimentPostsSortSection">
@@ -20,77 +19,14 @@ Date: 09/02/2025
 <h1>Add here section to download to excel or csv</h1>
 <!--This section displays the sentiment sections as well as the posts within each sentiment list-->
 <div id="sentimentPostsSection">
-    <div class="sentimentSection">
+    <div class="sentimentSection" id="positiveSentimentSection">
         <h1>Positive Section</h1>
-{% for entry in session.positiveSentimentList %}
-        <div>
-            <button 
-            class="modalBtn"
-            data-title="{{ entry['title'] }}"
-            data-subreddit="{{ entry['subreddit'] }}"
-            data-score="{{ entry['score'] }}"
-            data-author="{{ entry['author'] }}" 
-            data-created="{{ entry['created_utc'] }}"
-            data-numComments="{{ entry['num_comments'] }}"
-            data-over18="{{ entry['over_18'] }}"
-            data-permalink="{{ entry['permalink'] }}"
-            data-upvotes="{{ entry['upvotes'] }}"
-            data-upvoteRatio="{{ entry['upvote_ratio'] }}"
-            data-selfText="{{ entry['selftext'] }}"
-            onclick="postClicked(this)">
-                Text: {{ entry['title'] }}<br>
-                Score: {{ entry['score'] }}<br>
-            </button>
-        </div>
-{% endfor %}
     </div>
-    <div class="sentimentSection">
+    <div class="sentimentSection" id="neutralSentimentSection">
         <h1>Neutral Section</h1>
-{% for entry in session.neutralSentimentList %}
-        <div>
-            <button 
-            class="modalBtn"
-            data-title="{{ entry['title'] }}"
-            data-subreddit="{{ entry['subreddit'] }}"
-            data-score="{{ entry['score'] }}"
-            data-author="{{ entry['author'] }}" 
-            data-created="{{ entry['created_utc'] }}"
-            data-numComments="{{ entry['num_comments'] }}"
-            data-over18="{{ entry['over_18'] }}"
-            data-permalink="{{ entry['permalink'] }}"
-            data-upvotes="{{ entry['upvotes'] }}"
-            data-upvoteRatio="{{ entry['upvote_ratio'] }}"
-            data-selfText="{{ entry['selftext'] }}"
-            onclick="postClicked(this)">           
-                Text: {{ entry['title'] }}<br>
-                Score: {{ entry['score'] }}<br>
-            </button>
-        </div>
-{% endfor %}
     </div>
-    <div class="sentimentSection">
+    <div class="sentimentSection" id="negativeSentimentSection">
         <h1>Negative Section</h1>
-{% for entry in session.negativeSentimentList %}
-        <div>
-            <button 
-            class="modalBtn"
-            data-title="{{ entry['title'] }}"
-            data-subreddit="{{ entry['subreddit'] }}"
-            data-score="{{ entry['score'] }}"
-            data-author="{{ entry['author'] }}" 
-            data-created="{{ entry['created_utc'] }}"
-            data-numComments="{{ entry['num_comments'] }}"
-            data-over18="{{ entry['over_18'] }}"
-            data-permalink="{{ entry['permalink'] }}"
-            data-upvotes="{{ entry['upvotes'] }}"
-            data-upvoteRatio="{{ entry['upvote_ratio'] }}"
-            data-selfText="{{ entry['selftext'] }}"
-            onclick="postClicked(this)">
-                Text: {{ entry['title'] }}<br>
-                Score: {{ entry['score'] }}<br>
-            </button>
-        </div>
-{% endfor %}
     </div>
 </div>
 
@@ -179,6 +115,7 @@ Date: 09/02/2025
     </table>
   </div>
 </div>
+<script>setViewPostsSection()</script>
 <!--Listeners for dealing with the modals-->
 <script>
 var modal = document.getElementById("myModal");
