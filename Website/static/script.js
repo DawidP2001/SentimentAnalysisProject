@@ -227,14 +227,25 @@ function getBarChartDatasets(){
 }
 // This function creates the line graph for the sentiment over time
 function sentimentOverTimeLineGraph(){
-  var xValues = [1,2,3,4,5,6,7,8,9,10];
-  var yValues = [1,2,3,4,5,4,3,2,1,0];
+  getTimeFrame()
+  var xValues = [];
+  var yValues = [];
+  jsonData.forEach(entry =>{
+    xValues.push(entry.created_utc);
+    yValues.push(entry.compoundScore);
+  });
+  for (let i=0;i<xValues.length;i++){
+    date = new Date(Number(xValues[i]));
+    let formattedDate = date.toISOString().slice(0, 19).replace("T", " ");
+    xValues[i] = formattedDate
+  }
 
   new Chart(document.getElementById("sentimentOverTimeLineGraph"), {
     type: "line",
     data: {
       labels: xValues,
       datasets: [{
+        label: "Sentiment",
         fill: false,
         pointRadius: 1,
         borderColor: "rgba(255,0,0,0.5)",
@@ -252,6 +263,19 @@ function sentimentOverTimeLineGraph(){
     }
   });
 
+}
+function getTimeFrame(){
+  let lowestTime = jsonData[0].created_utc;
+  let highestTime = jsonData[0].created_utc;
+  jsonData.forEach(entry=>{
+    createdTime = entry.created_utc;
+    if(lowestTime>createdTime){
+      lowestTime = createdTime;
+    }
+    if(highestTime < createdTime){
+      highestTime = createdTime;
+    }
+  })
 }
 // This function creates the bar chart for the top keywords by sentiment
 function topKeywordsBySentimentBarChart(){
