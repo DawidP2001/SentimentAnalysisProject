@@ -27,19 +27,21 @@ def analyseSentiment(data):
 def getSentimentScores(data):
     analyzer = SentimentIntensityAnalyzer()
     results = []
-    for text in data:
+    textList = data['title'].tolist()
+    for text in textList:
         scores = analyzer.polarity_scores(text)
         label=""
-        if(scores['pos']>=scores['neu'] and scores['pos'] >= scores['neg']):
+        if(scores['compound']>0.333):
             label = 'POSITIVE'
-        elif(scores['neu'] >= scores['pos'] and scores['neu'] >= scores['neg']):
-            label = 'NEUTRAL'
-        elif(scores['neg'] >= scores['pos'] and scores['neg'] >= scores['neu']):
+        elif(scores['compound']<-0.333):
             label = 'NEGATIVE'
+        else:
+            label = 'NEUTRAL'
         results.append({"text":text, "label": label, "positiveScore": scores['pos'], 
                       "neutralScore": scores['neu'], "negativeScore": scores['neg'], 
                       "compoundScore": scores['compound']})
     return results
+
 ################
 # CREATE A SENTIMENT ANALYSIS SECTION FOR IMAGES, GIFS AND VIDEOS ETC...
 ################

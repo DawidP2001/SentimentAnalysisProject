@@ -827,6 +827,7 @@ function addPost(entry, section){
       data-upvotes="${entry.upvotes}"
       data-upvoteRatio="${entry.upvote_ratio}"
       data-selfText="${entry.selftext}"
+      data-url="${entry.url}"
       onclick="postClicked(this)">           
           Text: ${entry.title}<br>
           Score:${entry.compoundScore}<br>
@@ -927,13 +928,27 @@ function postClicked(button){
   compoundScoreSection = document.getElementById("compoundScoreSection");
   compoundScoreSection.innerHTML = compoundScore;
 
+  positiveScore = button.getAttribute("data-positiveScore");
+  positiveScoreSection = document.getElementById("positiveScoreSection");
+  positiveScoreSection.innerHTML = positiveScore;
+
+  neutralScore = button.getAttribute("data-neutralScore");
+  neutralScoreSection = document.getElementById("neutralScoreSection");
+  neutralScoreSection.innerHTML = neutralScore;
+
+  negativeScore = button.getAttribute("data-negativeScore");
+  negativeScoreSection = document.getElementById("negativeScoreSection");
+  negativeScoreSection.innerHTML = negativeScore;
+
   author = button.getAttribute("data-author");
   authorSection = document.getElementById("authorSection");
   authorSection.innerHTML = author;
 
   created = button.getAttribute("data-created");
   creationTimeSection = document.getElementById("creationTimeSection");
-  creationTimeSection.innerHTML = created;
+  date = new Date(Number(created));
+  let formattedDate = date.toISOString().slice(0, 19).replace("T", " ");
+  creationTimeSection.innerHTML = formattedDate.toString();
 
   numComments = button.getAttribute("data-numComments");
   numCommentsSection = document.getElementById("numCommentsSection");
@@ -955,6 +970,10 @@ function postClicked(button){
   upvoteRatio = button.getAttribute("data-upvoteRatio");
   upvoteRatioSection = document.getElementById("upvoteRatioSection");
   upvoteRatioSection.innerHTML = upvoteRatio;
+
+  url = button.getAttribute("data-url");
+  urlSection = document.getElementById("urlSection");
+  urlSection.innerHTML = `<a href="${url}">link</a>`;
 }
 
 // Shows the loader when the user submits a form
