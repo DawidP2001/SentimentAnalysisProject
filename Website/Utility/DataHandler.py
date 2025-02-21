@@ -72,7 +72,7 @@ def dataToDictionary(submission):
             "permalink": submission.permalink,
             "upvotes": submission.score,
             "upvote_ratio": "N/A",
-            "selftext": "N/A",
+            "selftext": submission.body,
             "Type" : "Comment",
             "url": "N/A",
             "content": "N/A",

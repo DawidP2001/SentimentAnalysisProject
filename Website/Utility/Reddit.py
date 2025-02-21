@@ -69,10 +69,11 @@ def queryComment(searchType, contents, sortBy, querySize):
         submission = reddit.submission(url=contents)    
     elif searchType == "id":
         submission = reddit.submission(id=contents)
-
+        
+    submission.comment_sort = sortBy
     submission.comments.replace_more(limit=0) #This is set to 0 to remove all MoreComments objects
     # This is done so it wouldnt dig to deep into the comments hierarchy
-    submission.comment_sort = sortBy
+    
     # Below returns a certain amount of comments as a flat list
     querySizeInt = int(querySize)
     commentsList = submission.comments.list()[:querySizeInt] 

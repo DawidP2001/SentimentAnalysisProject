@@ -39,7 +39,7 @@ Date: 09/02/2025
             </td>
         </table>
     </div>
-    <div class="textArea">
+    <div class="textArea" id="featureSection">
         <h1>Features</h1>
         <p>
             Sentiment Analysis based on different criteria such as:
@@ -90,3 +90,12 @@ Date: 09/02/2025
         </div>
     </div>
 </div>
+{% if scrollToTrending %}
+    <script>
+        scrollToElement("trendingSection")
+        console.log("scrolling to trending")
+    </script>
+{% endif%}
+{% if scrollToAbout %}
+    <script>scrollToElement("featureSection")</script>
+{% endif %}
