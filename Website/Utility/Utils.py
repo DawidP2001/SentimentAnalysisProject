@@ -3,7 +3,7 @@
 #Description: This file contains utility functions that are used in the main.py file
 
 from collections import Counter
-
+import logging
 import praw
 #from Utility import SenitmentAnalyser as s
 from Utility import testSenitmentAnalyser as s
@@ -11,7 +11,6 @@ import datetime
 import pandas as pd
 import re
 import nltk
-from pytrends.request import TrendReq
 
 def countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList):
     resultArray = [len(positiveSentimentList) , len(neutralSentimentList), len(negativeSentimentList)]
@@ -281,14 +280,72 @@ def convertPostsToDataFrame(positiveSentimentList, neutralSentimentList, negativ
 # trending section
 ################################
 
-def getGoogleTrends() -> list:
-    pytrends = TrendReq(hl='en-GB', tz=360)
-    worldwideTrending = pytrends.trending_searches()
-    irelandTrending = pytrends.trending_searches(pn='ireland')
-    ukTrending = pytrends.trending_searches(pn='united_kingdom')
-    usTrending = pytrends.trending_searches(pn='united_states')
-    worldwideTrendingList = worldwideTrending[0].tolist()
-    irelandTrendingList = irelandTrending[0].tolist()
-    ukTrendingList = ukTrending[0].tolist()
-    usTrendingList = usTrending[0].tolist()
-    return worldwideTrendingList, irelandTrendingList, ukTrendingList, usTrendingList
+def getGoogleTrendsPytrends() -> list:
+    """
+        Gets the trenidng topics from google trends using the pytrends library
+        Note: This method no longer used since pytrends is not working properly, switched to using feedparser
+
+        Returns: 
+            list: 4 lists of trending topics worldwide, in Ireland, in the UK and in the US
+    """
+    
+    from pytrends.request import TrendReq
+    try:
+        pytrends = TrendReq(hl='en-GB', tz=360)
+        worldwideTrending = pytrends.trending_searches()
+        irelandTrending = pytrends.trending_searches(pn='ireland')
+        ukTrending = pytrends.trending_searches(pn='united_kingdom')
+        usTrending = pytrends.trending_searches(pn='united_states')
+        worldwideTrendingList = worldwideTrending[0].tolist()
+        irelandTrendingList = irelandTrending[0].tolist()
+        ukTrendingList = ukTrending[0].tolist()
+        usTrendingList = usTrending[0].tolist()
+        return worldwideTrendingList, irelandTrendingList, ukTrendingList, usTrendingList
+    except Exception as e:
+        print("Utils.getGoogleTrend() Failed :" + str(e))
+        return ["Google Trend Failed"], [], [], []
+
+
+def getGoogleTrendingTopics() -> list[list, list, list, list]:
+    """
+    Gets the trenidng topics from google trends using the feedparser library
+
+    Returns: 
+        list[list, list, list, list]: 4 lists of trending topics worldwide, in Ireland, in the UK and in the US
+    """
+    import feedparser
+    from feedparser import FeedParserDict
+    def getGoogleTrendingList(feed: FeedParserDict) -> list:
+        """
+            Gets the trending topics from the feedparser dictionary
+
+            Args:
+                feed (FeedParserDict): The feedparser dictionary
+            Returns: 
+                list: A list of trending topics
+        """
+        googleList = []
+        for entry in feed.entries:
+            googleList.append(entry.title)
+        return googleList
+    # Google Trends RSS feed for the U.S.
+    try:
+        rss_url_worldwide = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=US"
+        rss_url_ireland = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=IE"
+        rss_url_uk = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=GB"
+        rss_url_us = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=US"
+        
+        feedWorldwide = feedparser.parse(rss_url_worldwide)
+        feedIreland = feedparser.parse(rss_url_ireland)
+        feedUK = feedparser.parse(rss_url_uk)
+        feedUS = feedparser.parse(rss_url_us)
+
+        worldwideTrendingList = getGoogleTrendingList(feedWorldwide)
+        irelandTrendingList = getGoogleTrendingList(feedIreland)  
+        ukTrendingList = getGoogleTrendingList(feedUK)
+        usTrendingList = getGoogleTrendingList(feedUS)
+
+        return [worldwideTrendingList, irelandTrendingList, ukTrendingList, usTrendingList]
+    except Exception as e:
+        logging.error(f"getGoogleTrendingTopics() Failed: {e}")
+        return [[], [], [], []]  # Return empty lists instead of a placeholder message

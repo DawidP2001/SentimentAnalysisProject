@@ -17,7 +17,11 @@ app.secret_key = os.getenv("Secret_Key")
 # This is the default page that gets opened when the website is accessed
 @app.route('/')
 def index():
-    worldwideTrendingList, irelandTrendingList, ukTrendingList, usTrendingList = Utils.getGoogleTrends()
+    googleTrendingTopics = Utils.getGoogleTrendingTopics()
+    worldwideTrendingList = googleTrendingTopics[0]
+    irelandTrendingList = googleTrendingTopics[1]
+    ukTrendingList = googleTrendingTopics[2]
+    usTrendingList = googleTrendingTopics[3]
     return render_template( 
             'index.html',
             form=True, 

@@ -5,6 +5,10 @@ This file will deal with changing the data into a pandaFrame and storing it
 import praw
 import datetime
 import pandas as pd
+import requests
+import numpy as np
+from io import BytesIO
+from PIL import Image
 from Utility import SenitmentAnalyser as s
 
 def converDataToJSON(data):
@@ -21,8 +25,7 @@ def addExtraFields(data):
     return data
 
 def addSentimentField(data):
-    textList = data['title'].tolist()
-    results = s.getSentimentScores(textList)
+    results = s.getSentimentScores(data)
     labels = [entry["label"] for entry in results]
     positiveScores = [entry["positiveScore"] for entry in results]
     neutralScores = [entry["neutralScore"] for entry in results]
@@ -48,7 +51,10 @@ def dataToDictionary(submission):
             "upvotes": submission.score,
             "upvote_ratio": submission.upvote_ratio,
             "selftext": submission.selftext,
-            "Type": "Post"
+            "Type": "Post",
+            "url": submission.url,
+            "content": "N/A",
+            "contentType": "N/A"
         }
     if type(submission) is praw.models.reddit.comment.Comment:
         author = "N/A"
@@ -67,7 +73,10 @@ def dataToDictionary(submission):
             "upvotes": submission.score,
             "upvote_ratio": "N/A",
             "selftext": "N/A",
-            "Type" : "Comment"
+            "Type" : "Comment",
+            "url": "N/A",
+            "content": "N/A",
+            "contentType": "N/A"
         }
 # This function converts the submissions into a list of dictionaries
 def createDictList(submissions):
@@ -75,3 +84,34 @@ def createDictList(submissions):
     for submission in submissions:
         list.append(dataToDictionary(submission))
     return list
+########################################################################
+###### ##CURRENTLY NOT IMPLEMENTED
+def extractContent(data):
+    url = data['url']
+    if "i.redd.it" in url:
+        image_array = extractImages(data['url'])
+        data['content'] = image_array
+        data['contentType'] = "Single Image"
+    elif "v.redd.it" in url:
+        extractVideos()
+    elif "www.reddit.com/gallery/" in url:
+        extractGallery()
+    else:
+        extractArticles()
+
+# Most likely gonna use AI to implement this section
+def extractArticles():
+    pass
+
+def extractImages(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        image = Image.open(BytesIO(response.content))  # Load into PIL Image
+        image_array = np.array(image)  # Convert to NumPy array
+    return image_array
+
+def extractVideos():
+    pass
+
+def extractGallery():
+    pass
