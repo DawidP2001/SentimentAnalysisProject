@@ -248,6 +248,7 @@ Section for extraInformation.html styling
 .trendingTopic{
   border-top: 1px solid white;
   padding: 5px;
+  text-align: center;
 }
 #trendingTopicsTable{
   background: #FF8b60;

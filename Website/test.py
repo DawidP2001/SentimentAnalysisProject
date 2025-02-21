@@ -5,7 +5,7 @@ from Utility import Utils
 import os
 from collections import Counter
 from pytrends.request import TrendReq
-from Utility import SenitmentAnalyser as s
+#from Utility import SenitmentAnalyser as s
 from textblob import TextBlob
 
 
@@ -19,6 +19,18 @@ for t in text:
     polarity.append(t + " - " + str(TextBlob(t).sentiment.polarity))
 print(text)
 """
+"""
 rawData = r.queryAPI("Poland", "all", 100)
 for entry in rawData:
     print(entry.url)
+"""
+
+import feedparser
+
+# Google Trends RSS feed for the U.S.
+rss_url = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=US"
+
+feed = feedparser.parse(rss_url)
+print(feed)
+for entry in feed.entries:
+    print(entry.title)  # Trending search term
