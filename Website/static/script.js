@@ -834,6 +834,14 @@ function setViewPostsSection(){
   });
 }
 function addPost(entry, section){
+  if(entry.title == "N/A"){
+    text = entry.selftext;
+    if(text.length > 50){
+      text = text.substring(0, 50) + "...";
+    }
+  } else {
+    text = entry.title;
+  }
   htmlString = 
   `<button
     class="modalBtn"
@@ -853,7 +861,7 @@ function addPost(entry, section){
       data-selfText="${entry.selftext}"
       data-url="${entry.url}"
       onclick="postClicked(this)">           
-          Text: ${entry.title}<br>
+          Text: ${text}<br>
           Score:${entry.compoundScore}<br>
     </button>`;
     section.innerHTML += htmlString;
@@ -923,9 +931,11 @@ function selectTab(evt, section) {
 }
 
 // This function scrolls to a given element
-function scrollToElement(evt, section){
+function scrollToElement(section){
   element = document.getElementById(section);
-  element.scrollIntoView()
+  let offset = 50; // Adjust this value for desired spacing
+  let elementPosition = element.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
 }
 
 // This function is called when the user clicks a specifc post on the view posts page

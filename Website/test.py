@@ -24,13 +24,5 @@ rawData = r.queryAPI("Poland", "all", 100)
 for entry in rawData:
     print(entry.url)
 """
-
-import feedparser
-
-# Google Trends RSS feed for the U.S.
-rss_url = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=US"
-
-feed = feedparser.parse(rss_url)
-print(feed)
-for entry in feed.entries:
-    print(entry.title)  # Trending search term
+import nltk
+nltk.download('vader_lexicon')

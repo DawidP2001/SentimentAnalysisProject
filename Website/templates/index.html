@@ -33,11 +33,15 @@ Date: 09/02/2025
         <h1>Reddit Sentiment explorer</h1>
       </div>
       <div id="navLinks">
-        <a href="/">Home</a>
-        <a href="#">Trending</a>
-        <a href="#">Features</a>
-        <a href="#">About</a>
-        <a href="/#contactSection">Contact</a>
+          {% if form %}
+            <a href="/">Home</a>
+            <a href="#trendingSection">Trending</a>
+            <a href="#featureSection">About</a>
+          {% else %}
+            <a href="/">Home</a>
+            <a href="/Trending">Trending</a>
+            <a href="/About">About</a>
+          {% endif %}
       </div>
     </nav>
     <div id="content">
@@ -59,5 +63,11 @@ Date: 09/02/2025
       </div>
       <span id="footerCopyrightSection" class="footerSection"><i class="fa fa-copyright" aria-hidden="true"></i> 2025 Dawid Pionk</span>
     </footer>
+    {% if scrollToTrending %}
+    <script>
+        scrollToElement("trendingSection")
+        console.log("scrolling to trending")
+    </script>
+  {% endif%}
   </body>
 </html>

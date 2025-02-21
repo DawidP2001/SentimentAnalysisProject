@@ -17,6 +17,9 @@ app.secret_key = os.getenv("Secret_Key")
 # This is the default page that gets opened when the website is accessed
 @app.route('/')
 def index():
+    """
+    This function is used to show the default page
+    """
     googleTrendingTopics = Utils.getGoogleTrendingTopics()
     worldwideTrendingList = googleTrendingTopics[0]
     irelandTrendingList = googleTrendingTopics[1]
@@ -26,7 +29,8 @@ def index():
             'index.html',
             form=True, 
             charts=False,
-            scrollToContact=False,
+            scrollToTrending=False,
+            scrollToAbout=False,
             userInformation=False,
             worldwideTrendingList=worldwideTrendingList,
             irelandTrendingList=irelandTrendingList,
@@ -34,20 +38,46 @@ def index():
             usTrendingList=usTrendingList
         )
 
-@app.route('/#contactSection')
-def indexContact():
-    worldwideTrendingList, irelandTrendingList, ukTrendingList, usTrendingList = Utils.getGoogleTrends()
+@app.route('/Trending')
+def scrollToTrending():
+    googleTrendingTopics = Utils.getGoogleTrendingTopics()
+    worldwideTrendingList = googleTrendingTopics[0]
+    irelandTrendingList = googleTrendingTopics[1]
+    ukTrendingList = googleTrendingTopics[2]
+    usTrendingList = googleTrendingTopics[3]
     return render_template( 
             'index.html',
             form=True, 
             charts=False,
-            scrollToContact=False,
+            scrollToTrending=True,
+            scrollToAbout=False,
             userInformation=False,
             worldwideTrendingList=worldwideTrendingList,
             irelandTrendingList=irelandTrendingList,
             ukTrendingList=ukTrendingList,
             usTrendingList=usTrendingList
         )
+
+@app.route('/About')
+def scrollToAbout():
+    googleTrendingTopics = Utils.getGoogleTrendingTopics()
+    worldwideTrendingList = googleTrendingTopics[0]
+    irelandTrendingList = googleTrendingTopics[1]
+    ukTrendingList = googleTrendingTopics[2]
+    usTrendingList = googleTrendingTopics[3]
+    return render_template( 
+            'index.html',
+            form=True, 
+            charts=False,
+            scrollToTrending=False,
+            scrollToAbout=True,
+            userInformation=False,
+            worldwideTrendingList=worldwideTrendingList,
+            irelandTrendingList=irelandTrendingList,
+            ukTrendingList=ukTrendingList,
+            usTrendingList=usTrendingList
+        )
+
 
 # This function is used to show the results of a topic search
 @app.route('/showChartsGeneralSearch', methods=['POST'])
@@ -67,7 +97,8 @@ def submitTopic():
             'index.html',
             form=False, 
             charts=True,
-            scrollToContact=False,
+            scrollToTrending=False,
+            scrollToAbout=False,
             userInformation=False,
             jsonData = jsonData,
             search = search
@@ -95,7 +126,8 @@ def submitUser():
             'index.html',
             form=False, 
             charts=True,
-            scrollToContact=False,
+            scrollToTrending=False,
+            scrollToAbout=False,
             userInformation=True,
             jsonData = jsonData,
             search = user
@@ -118,7 +150,8 @@ def submitSubrredit():
             'index.html',
             form=False, 
             charts=True,
-            scrollToContact=False,
+            scrollToTrending=False,
+            scrollToAbout=False,
             userInformation=False,
             jsonData = jsonData,
             search = subreddit
@@ -138,7 +171,8 @@ def submitComment():
             'index.html',
             form=False, 
             charts=True,
-            scrollToContact=False,
+            scrollToTrending=False,
+            scrollToAbout=False,
             userInformation=False,
             jsonData = jsonData,
             search = "Post Comments"
@@ -160,7 +194,8 @@ def submitDomain():
             'index.html',
             form=False, 
             charts=True,
-            scrollToContact=False,
+            scrollToTrending=False,
+            scrollToAbout=False,
             userInformation=False,
             jsonData = jsonData,
             search = searchContents
