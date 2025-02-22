@@ -8,7 +8,7 @@ from Utility import Reddit as r
 from Utility import Utils
 from Utility import DataHandler as d
 import os
-from collections import Counter
+import logging
 
 app = Flask(__name__)
 
@@ -115,12 +115,12 @@ def submitUser():
     querySize = request.form["querySizeUser"]
     # Contains all the raw data from the query to the Reddit Api
     redditor = r.getRedditor(user)
+    redditorData = d.redditorToDictionary(redditor)
     rawData = r.queryUser(redditor, typeOfPost, typeOfSearch, searchTimeFrame, querySize) 
 
     # Below prepares the data for the page to be displayed
     data = d.extractData(rawData)
     jsonData = d.converDataToJSON(data)
-    setRedditorData(redditor)
 
     return render_template(
             'index.html',
@@ -130,7 +130,8 @@ def submitUser():
             scrollToAbout=False,
             userInformation=True,
             jsonData = jsonData,
-            search = user
+            search = user,
+            redditorData = redditorData
         )
 
 # This function is used to show the results of a subreddit search
@@ -200,26 +201,5 @@ def submitDomain():
             jsonData = jsonData,
             search = searchContents
         )
-############################################################################################################
-# This section deals with setting the session variables
-############################################################################################################
-
-# Sets the session variables for redditor data
-def setRedditorData(redditor):
-    session["redditorCommentKarma"] = redditor.comment_karma
-    session["redditorCreatedUTC"] = datetime.datetime.fromtimestamp(redditor.created_utc)
-    session["redditorID"] = redditor.id
-    session["redditorIsEmployee"] = redditor.is_employee
-    session["redditorIsMod"] = redditor.is_mod
-    session["redditorIsGold"] = redditor.is_gold
-    try:
-        session["redditorIsSuspended"] = redditor.is_suspended
-    except AttributeError:
-        session["redditorIsSuspended"] = "False"
-    finally:
-        session["redditorIsSuspended"] = "False"
-    session["redditorLinkKarma"] = redditor.link_karma
-    session["redditorName"] = redditor.name
-
 if __name__ == '__main__':  
    app.run()  
