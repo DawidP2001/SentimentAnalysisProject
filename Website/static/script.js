@@ -356,8 +356,8 @@ function displayWordCloud(){
   let myWords = getDataForWorldCloud();
   myWords = scaleWords(myWords);
   // set the dimensions and margins of the graph
-  var containerWidth = document.getElementById("sentimentVSEngagementSection").offsetWidth;
-  var containerHeight = document.getElementById("sentimentVSEngagementSection").offsetHeight;
+  var containerWidth = document.getElementById("sentimentOverTimeLineGraph").offsetWidth;
+  var containerHeight = document.getElementById("sentimentOverTimeLineGraph").offsetHeight;
   
   var margin = {top: 10, right: 10, bottom: 10, left: 10};
   var width = 500;
