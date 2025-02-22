@@ -171,6 +171,8 @@ function displaySubredditBarChart(){
       },
       responsive: true,
       maintainAspectRatio: true,
+      width: 800,  // Width of the canvas
+      height: 400  // Height of the canvas
     } 
   });
 }
@@ -437,6 +439,145 @@ function convertToWorldCloudFormat(wordCount){
   };
   return formattedWords;
 }
+
+function setSentimentAndCommentsSection(){
+
+  let positiveScatterData = [];
+  let neutralScatterData = [];
+  let negativeScatterData = [];
+     
+    jsonData.forEach(entry => { 
+      if(entry.label === "POSITIVE"){
+        positiveScatterData.push({
+          x: entry.num_comments,
+          y: entry.compoundScore,
+        });
+      } else if (entry.label === "NEUTRAL"){
+        neutralScatterData.push({
+          x: entry.num_comments,
+          y: entry.compoundScore,
+        });
+      } else if (entry.label === "NEGATIVE"){
+        negativeScatterData.push({
+          x: entry.num_comments,
+          y: entry.compoundScore,
+        });
+      }
+    });
+
+  const data = {
+    datasets: [{
+      label: 'Positive',
+      data: positiveScatterData,
+      backgroundColor: 'rgb(0, 255, 0)'
+    }, {
+      label: 'Neutral',
+      data: neutralScatterData,
+      backgroundColor: 'rgb(99, 99, 99)'
+    }, {
+      label: 'Negative',
+      data: negativeScatterData,
+      backgroundColor: 'rgb(255, 0, 0)'
+    }]
+  };
+
+  const config = {
+    type: 'scatter',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          title: {
+            display: true,
+            text: 'Sentiment',
+          },
+          max: 1,
+          min: -1,
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Number of Comments'
+          }
+        }
+      },
+      responsive: true,
+    }
+  };
+
+  const ctx = document.getElementById('sentimentAndCommentsChart').getContext('2d');
+  new Chart(ctx, config);
+}
+
+function setSentimentAndUpvotesSection(){
+
+  let positiveScatterData = [];
+  let neutralScatterData = [];
+  let negativeScatterData = [];
+     
+    jsonData.forEach(entry => { 
+      if(entry.label === "POSITIVE"){
+        positiveScatterData.push({
+          x: entry.upvotes,
+          y: entry.compoundScore,
+        });
+      } else if (entry.label === "NEUTRAL"){
+        neutralScatterData.push({
+          x: entry.upvotes,
+          y: entry.compoundScore,
+        });
+      } else if (entry.label === "NEGATIVE"){
+        negativeScatterData.push({
+          x: entry.upvotes,
+          y: entry.compoundScore,
+        });
+      }
+    });
+
+  const data = {
+    datasets: [{
+      label: 'Positive',
+      data: positiveScatterData,
+      backgroundColor: 'rgb(0, 255, 0)'
+    }, {
+      label: 'Neutral',
+      data: neutralScatterData,
+      backgroundColor: 'rgb(99, 99, 99)'
+    }, {
+      label: 'Negative',
+      data: negativeScatterData,
+      backgroundColor: 'rgb(255, 0, 0)'
+    }]
+  };
+
+  const config = {
+    type: 'scatter',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          title: {
+            display: true,
+            text: 'Sentiment',
+          },
+          max: 1,
+          min: -1,
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Number of Upvotes'
+          }
+        }
+      },
+      responsive: true,
+    }
+  };
+
+  const ctx = document.getElementById('sentimentAndUpvotesChart').getContext('2d');
+  new Chart(ctx, config);
+}
+
 /*
 //////////////////////////////////
 

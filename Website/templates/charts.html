@@ -47,20 +47,6 @@ Date: 09/02/2025
             sentimentOverTimeLineGraph();
         </script>
     </div>
-    <!-- Top Keywords by Sentimnet -->
-    <div id="topKeywordsBySentimentSection" class="chartContainer">
-        <canvas id="topKeywordsBySentimentBarChart" class="chart"></canvas>
-        <script>      
-            topKeywordsBySentimentBarChart();
-        </script>
-    </div>
-    <!-- Sentiment vs. Engagement  -->
-    <div id="sentimentVSEngagementSection" class="chartContainer">
-        <canvas id="sentimentVSEngagementScatterGraph" class="chart"></canvas>
-        <script>      
-            sentimentVSEngagementSection();
-        </script>
-    </div>
     <!-- Wordcloud -->
     <div id="wordcloudContainer" class="chartContainer">
         <h3>Wordcloud</h3>
@@ -70,15 +56,18 @@ Date: 09/02/2025
         </script>
     </div>
     <div>
-        <h1>Place a bar chart here where the user can see sentiment across subreddits</h1>
+        <h3>Scatter Graph for sentiment vs Comment numbers</h3>
+        <canvas id="sentimentAndCommentsChart" class="chart" width="800" height="400"></canvas>
+        <script>      
+            setSentimentAndCommentsSection();
+        </script>
     </div>
     <div>
-        <h3>Bubble chart for sentiment vs engagement</h3>
-        <h4>
-            X-Axis: Number of comments
-            Y-Axis: Sentiment
-            
-        </h4>
+        <h3>Scatter Graph for sentiment vs Upvotes numbers</h3>
+        <canvas id="sentimentAndUpvotesChart" class="chart" width="800" height="400"></canvas>
+        <script>      
+            setSentimentAndUpvotesSection();
+        </script>
     </div>
 </div>
 <!--This section displays the individual posts-->

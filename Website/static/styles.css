@@ -109,6 +109,7 @@ nav * {
 /* This is the tititle in the navigation bar */
 #navTitle{
   padding: 5px;
+  display: flex;
 }
 #navLinks {
   display: flex;
