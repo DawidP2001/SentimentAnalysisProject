@@ -10,6 +10,7 @@ import numpy as np
 from io import BytesIO
 from PIL import Image
 from Utility import SenitmentAnalyser as s
+import logging
 
 def converDataToJSON(data):
     return data.to_json(orient='records')
@@ -78,6 +79,25 @@ def dataToDictionary(submission):
             "content": "N/A",
             "contentType": "N/A"
         }
+def redditorToDictionary(redditor):
+    try:
+        redditorIsSuspended = redditor.is_suspended
+    except Exception as e:
+        logging.error(f"redditortoDictionary() Failed: {e}")
+        redditorIsSuspended = "False"
+    finally:
+        redditorIsSuspended = "False"
+    return {
+        "comment_karma": redditor.comment_karma,
+        "created_utc": datetime.datetime.fromtimestamp(redditor.created_utc),
+        "id": redditor.id,
+        "is_employee": redditor.is_employee,
+        "is_mod": redditor.is_mod,
+        "is_gold": redditor.is_gold,
+        "is_suspended": redditorIsSuspended,
+        "link_karma": redditor.link_karma,
+        "name": redditor.name
+    }
 # This function converts the submissions into a list of dictionaries
 def createDictList(submissions):
     list = []

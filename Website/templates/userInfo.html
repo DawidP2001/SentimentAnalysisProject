@@ -4,40 +4,43 @@ Description: This file is responsible for displaying redditors information that 
             It's only used when the user performs a query about a reddit user
 Date: 09/02/2025
 -->
+<script>
+    setRedditorJSONData({{ redditorData | tojson | safe }});
+</script>
 <div id="userInfo">
-    <h1>{{ session['redditorName'] }}</h1>
+    <h1>{{ redditorData['name'] }}</h1>
     <table>
         <tr>
             <td>Comment Karma</td>
-            <td>{{ session['redditorCommentKarma'] }}</td>
+            <td>{{ redditorData['comment_karma'] }}</td>
         </tr>
         <tr>
             <td>created_utc</td>
-            <td>{{ session['redditorCreatedUTC'] }}</td>
+            <td>{{ redditorData['created_utc'] }}</td>
         </tr>
         <tr>
             <td>redditorHasVerifiedEmail</td>
-            <td>{{ session['redditorID'] }}</td>
+            <td>{{ redditorData['id'] }}</td>
         </tr>
         <tr>
             <td>Is Employee?</td>
-            <td>{{ session['redditorIsEmployee'] }}</td>
+            <td>{{ redditorData['is_employee'] }}</td>
         </tr>
         <tr>
             <td>Does mod any subreddits?</td>
-            <td>{{ session['redditorIsMod'] }}</td>
+            <td>{{ redditorData['is_mod'] }}</td>
         </tr>
         <tr>
             <td>Does redditor has active Reddit Premium?</td>
-            <td>{{ session['redditorIsGold'] }}</td>
+            <td>{{ redditorData['is_gold'] }}</td>
         </tr>
         <tr>
             <td>Whether the user is suspended?</td>
-            <td>{{ session['redditorIsSuspended'] }}</td>
+            <td>{{ redditorData['is_suspended'] }}</td>
         </tr>
         <tr>
             <td>Redditor Link karma</td>
-            <td>{{ session['redditorLinkKarma'] }}</td>
+            <td>{{ redditorData['link_karma'] }}</td>
         </tr>
     </table>
 </div>

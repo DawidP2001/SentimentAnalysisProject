@@ -12,6 +12,7 @@ Section for global variables
 */
 
 let jsonData;
+let redditorJSONData;
 let search;
 
 function setGlobalVariables(jsondata, searchTopic){
@@ -24,6 +25,9 @@ function setjsonData(data){
 function setSearch(searchTopic){
   searchTopic = searchTopic.toLowerCase();
   search = searchTopic;
+}
+function setRedditorJSONData(data){
+  redditorJSONData = data;
 }
 /*
 //////////////////////////////////
@@ -1013,6 +1017,14 @@ function seperateIntoLists(){
 function setViewPost(post){
   
 }
+/*
+//////////////////////////////////
+
+Section for userInfo.html
+
+//////////////////////////////////
+*/
+
 /*
 //////////////////////////////////
 
