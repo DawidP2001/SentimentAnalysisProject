@@ -3,12 +3,13 @@
 # Date: 09/02/2025
 
 import datetime
-from flask import Flask, request, render_template, session
+from flask import Flask, request, render_template, session, send_file
 from Utility import Reddit as r
 from Utility import Utils
 from Utility import DataHandler as d
 import os
 import logging
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -40,6 +41,9 @@ def index():
 
 @app.route('/Trending')
 def scrollToTrending():
+    """
+    This function is used to scroll to the the trending section on the main page
+    """
     googleTrendingTopics = Utils.getGoogleTrendingTopics()
     worldwideTrendingList = googleTrendingTopics[0]
     irelandTrendingList = googleTrendingTopics[1]
@@ -60,6 +64,9 @@ def scrollToTrending():
 
 @app.route('/About')
 def scrollToAbout():
+    """
+    This function is used to scroll to the the about section on the main page
+    """
     googleTrendingTopics = Utils.getGoogleTrendingTopics()
     worldwideTrendingList = googleTrendingTopics[0]
     irelandTrendingList = googleTrendingTopics[1]
@@ -78,10 +85,12 @@ def scrollToAbout():
             usTrendingList=usTrendingList
         )
 
-
 # This function is used to show the results of a topic search
 @app.route('/showChartsGeneralSearch', methods=['POST'])
 def submitTopic():
+    """
+    This function is used to collect data from the main page form and display the sentiment analysis page for a topic.
+    """
     # Below extracts data from the form
     search = request.form["searchTopic"] # This contains the topic from the search
     subreddit = request.form["subredditSearchTopic"] # This contains the subreddit from the search
@@ -107,6 +116,9 @@ def submitTopic():
 # This function is used to show the results of a user search	
 @app.route('/showChartsUserSearch', methods=['POST'])
 def submitUser():
+    """
+    This function is used to collect data from the main page form and display the sentiment analysis page for a user.
+    """
     # Below extracts data from the form
     user = request.form["searchUser"] # This contains the topic from the search
     typeOfPost = request.form["postTypeRadioUser"] # This contains the subreddit from the search
@@ -137,6 +149,9 @@ def submitUser():
 # This function is used to show the results of a subreddit search
 @app.route('/showChartsSubredditSearch', methods=['POST'])
 def submitSubrredit():
+    """
+    This function is used to collect data from the main page form and display the sentiment analysis page for a subreddit.
+    """
     # Below extracts data from the form
     subreddit = request.form["searchSubreddit"] # This contains the topic from the search
     searchType = request.form["typeOfSearchSubreddit"] # This contains the subreddit from the search
@@ -160,6 +175,9 @@ def submitSubrredit():
 
 @app.route('/showChartsCommentSearch', methods=['POST'])
 def submitComment():
+    """
+    This function is used to collect data from the main page form and display the sentiment analysis page for a comment.
+    """
     # Below extracts data from the form
     searchType = request.form["typeOfSearchComment"] # This contains the topic from the search
     contents = request.form["searchComment"] # This contains the subreddit from the search
@@ -181,6 +199,9 @@ def submitComment():
 
 @app.route('/showChartsDomainSearch', methods=['POST'])
 def submitDomain():
+    """
+    This function is used to collect data from the main page form and display the sentiment analysis page for a domain.
+    """
     # Below extracts data from the form
     searchContents = request.form["searchDomain"] # This contains the topic from the search
     typeOfSearch = request.form["typeOfSearchDomain"] # This contains the subreddit from the search
@@ -201,5 +222,7 @@ def submitDomain():
             jsonData = jsonData,
             search = searchContents
         )
+
+
 if __name__ == '__main__':  
    app.run()  

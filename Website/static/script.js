@@ -736,19 +736,19 @@ function setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, ne
     let fieldContents = Math.round(positiveNumOfComments/positiveSize);
     document.getElementById("averageNumberOfCommentsPositive").innerHTML = fieldContents;
   } else {
-    document.getElementById("averageNumberOfCommentsPositive").innerHTML = "N/A";
+    document.getElementById("averageNumberOfCommentsPositive").innerHTML = 0;
   }
   if(neutralNumOfComments>0){
     let fieldContents = Math.round(neutralNumOfComments/neutralSize);
     document.getElementById("averageNumberOfCommentsNeutral").innerHTML = fieldContents;
   } else {
-    document.getElementById("averageNumberOfCommentsNeutral").innerHTML = "N/A";
+    document.getElementById("averageNumberOfCommentsNeutral").innerHTML = 0;
   }
   if (negativeNumOfComments>0){
     let fieldContents = Math.round(negativeNumOfComments/negativeSize);
     document.getElementById("averageNumberOfCommentsNegative").innerHTML = fieldContents;
   } else {
-    document.getElementById("averageNumberOfCommentsNegative").innerHTML = "N/A";
+    document.getElementById("averageNumberOfCommentsNegative").innerHTML = 0;
   }
 }
 /**
@@ -862,19 +862,19 @@ function setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOf
       let fieldContents = Math.round(positiveAverageNumOfUpvotes/positiveSize);
       document.getElementById("averageNumberOfUpvotesPositive").innerHTML = fieldContents;
     } else {
-      document.getElementById("averageNumberOfUpvotesPositive").innerHTML = "N/A";
+      document.getElementById("averageNumberOfUpvotesPositive").innerHTML = 0;
     }
     if(neutralAverageNumOfUpvotes>0){
       let fieldContents = Math.round(neutralAverageNumOfUpvotes/neutralSize);
       document.getElementById("averageNumberOfUpvotesNeutral").innerHTML = fieldContents;
     } else {
-      document.getElementById("averageNumberOfUpvotesNeutral").innerHTML = "N/A";
+      document.getElementById("averageNumberOfUpvotesNeutral").innerHTML = 0;
     }
     if (negativeAverageNumOfUpvotes>0){
       let fieldContents = Math.round(negativeAverageNumOfUpvotes/negativeSize);
       document.getElementById("averageNumberOfUpvotesNegative").innerHTML = fieldContents;
     } else {
-      document.getElementById("averageNumberOfUpvotesNegative").innerHTML = "N/A";
+      document.getElementById("averageNumberOfUpvotesNegative").innerHTML = 0;
     }
 }
   /**
@@ -1027,11 +1027,19 @@ function addPost(entry, section){
     </button>`;
     section.innerHTML += htmlString;
 }
-function seperateIntoLists(){
+function convertJSONToCSV(){
 
 }
-function setViewPost(post){
-  
+function downloadCSV(){
+  let csv = 'Type,Author,Compound Score,Content,Content Type,Created UTC,Label,Negative Score,Neutral Score,Number of Comments,Over 18, Permalink,Positive Score,Self Text,Subreddit,Title,Upvote Ratio,Upvotes,URL\n';
+  jsonData.forEach(entry => {
+    csv += `${entry.Type},${entry.author},${entry.compoundScore},${entry.content},${entry.contentType},${entry.created_utc},${entry.label},${entry.negativeScore},${entry.neutralScore},${entry.num_comments},${entry.over_18},${entry.permalink},${entry.positiveScore},${entry.selftext},${entry.subreddit},${entry.title},${entry.positiveScore},${entry.upvote_ratio},${entry.upvotes},${entry.url}\n`;
+  });
+  let hiddenElement = document.createElement('a');
+  hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+  hiddenElement.target = '_blank';
+  hiddenElement.download = 'RedditData.csv';
+  hiddenElement.click();
 }
 /*
 //////////////////////////////////
