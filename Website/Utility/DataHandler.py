@@ -31,7 +31,7 @@ def addSentimentField(data):
     positiveScores = [entry["positiveScore"] for entry in results]
     neutralScores = [entry["neutralScore"] for entry in results]
     negativeScores = [entry["negativeScore"] for entry in results]
-    compoundScores = [entry["negativeScore"] for entry in results]
+    compoundScores = [entry["compoundScore"] for entry in results]
     data['label'] = labels
     data['positiveScore'] = positiveScores
     data['neutralScore'] = neutralScores

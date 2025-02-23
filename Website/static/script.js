@@ -620,39 +620,44 @@ function setBreakdownData(){
   let positiveUpvoteRatio = 0;
   let neutralUpvoteRatio = 0;
   let negativeUpvoteRatio = 0;
-
-  //Variables for most common subreddit
   
+  // Counts the amount of each sentiment
+  let positiveSize = 0;
+  let neutralSize = 0;
+  let negativeSize = 0;
 
   jsonData.forEach(entry => {
     if(entry.label == "POSITIVE"){
       positiveCountPercentOfOverall++;
-      positiveScore += entry.score;
+      positiveScore += entry.compoundScore;
       positiveNumOfComments += entry.num_comments;
       positiveAverageNumOfUpvotes += entry.upvotes;
       positiveUpvoteRatio += entry.upvote_ratio;
+      positiveSize += 1;
     } else if (entry.label == "NEUTRAL"){
       neutralCountPercentOfOverall++;
-      neutralScore += entry.score;
+      neutralScore += entry.compoundScore;
       neutralNumOfComments += entry.num_comments;
       neutralAverageNumOfUpvotes += entry.upvotes;
       neutralUpvoteRatio += entry.upvote_ratio;
+      neutralSize += 1;
     } else if (entry.label == "NEGATIVE"){
       negativeCountPercentOfOverall++;
-      negativeScore += entry.score;
+      negativeScore += entry.compoundScore;
       negativeNumOfComments += entry.num_comments;
       negativeAverageNumOfUpvotes += entry.upvotes;
       negativeUpvoteRatio += entry.upvote_ratio;
+      negative += 1;
     }
   });
   setBreakdownPercentageOfOverall(positiveCountPercentOfOverall, 
     neutralCountPercentOfOverall, negativeCountPercentOfOverall, size);
-  setAverageScore(positiveScore, neutralScore, negativeScore, size);
-  setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, size);
+  setAverageScore(positiveScore, neutralScore, negativeScore, positiveSize, neutralSize, negativeSize);
+  setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, positiveSize, neutralSize, negativeSize);
   setMostCommonWords();
   setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOfUpvotes, 
-    negativeAverageNumOfUpvotes, size);
-  setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, size);
+    negativeAverageNumOfUpvotes, positiveSize, neutralSize, negativeSize);
+  setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, positiveSize, neutralSize, negativeSize);
   setMostCommonSubreddit();
 }
 
@@ -690,23 +695,25 @@ function setBreakdownPercentageOfOverall(positiveCount, neutralCount, negativeCo
  * @param {string} positiveScore - The sum of all scores from the positive posts whos sentiment was analyzed
  * @param {string} neutralScore - The sum of all scores from the neutral posts whos sentiment was analyzed
  * @param {string} negativeScore - The sum of all scores from the negative posts whos sentiment was analyzed
- * @param {number} size - The size of the jsonData variable
+ * @param {number} positiveSize - The samount of positive posts whos sentiment was analyzed
+ * @param {number} neutralSize - The amount of neutral posts whos sentiment was analyzed
+ * @param {number} negativeSize - The amount of negative posts whos sentiment was analyzed
  */
-function setAverageScore(positiveScore, neutralScore, negativeScore, size){
+function setAverageScore(positiveScore, neutralScore, negativeScore, positiveSize, neutralSize, negativeSize){
   if(positiveScore > 0){
-    let fieldContents = Math.round((positiveCount / size) * 100) + "%";
-    document.getElementById("averageScorePositive").innerHTML = positiveField;
+    let fieldContents = Math.round((positiveScore / positiveSize) * 100) + "%";
+    document.getElementById("averageScorePositive").innerHTML = fieldContents;
   } else {
     document.getElementById("averageScorePositive").innerHTML = "N/A";
   }
   if(neutralScore > 0){
-    let fieldContents = Math.round((neutralScore / size) * 100) + "%";
+    let fieldContents = Math.round((neutralScore / neutralSize) * 100) + "%";
     document.getElementById("averageScoreNeutral").innerHTML = fieldContents;
   } else {
     document.getElementById("averageScoreNeutral").innerHTML = "N/A";
   }
   if(negativeScore > 0){
-    let fieldContents = Math.round((negativeScore / size) * 100) + "%";
+    let fieldContents = Math.round((negativeScore / negativeSize) * 100) + "%";
     document.getElementById("averageScoreNegative").innerHTML = fieldContents;
   } else {
     document.getElementById("averageScoreNegative").innerHTML = "N/A";
@@ -718,23 +725,26 @@ function setAverageScore(positiveScore, neutralScore, negativeScore, size){
  * @param {string} positiveNumOfComments - The sum of all comments from the positive posts whos sentiment was analyzed
  * @param {string} neutralNumOfComments - The sum of all comments from the neutral posts whos sentiment was analyzed
  * @param {string} negativeNumOfComments - The sum of all comments from the negative posts whos sentiment was analyzed
- * @param {number} size - The size of the jsonData variable
+ * @param {number} positiveSize - The samount of positive posts whos sentiment was analyzed
+ * @param {number} neutralSize - The amount of neutral posts whos sentiment was analyzed
+ * @param {number} negativeSize - The amount of negative posts whos sentiment was analyzed
  */
-function setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, size){
+function setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, 
+  positiveSize, neutralSize, negativeSize){
   if(positiveNumOfComments>0){
-    let fieldContents = Math.round(positiveNumOfComments/size);
+    let fieldContents = Math.round(positiveNumOfComments/positiveSize);
     document.getElementById("averageNumberOfCommentsPositive").innerHTML = fieldContents;
   } else {
     document.getElementById("averageNumberOfCommentsPositive").innerHTML = "N/A";
   }
   if(neutralNumOfComments>0){
-    let fieldContents = Math.round(neutralNumOfComments/size);
+    let fieldContents = Math.round(neutralNumOfComments/neutralSize);
     document.getElementById("averageNumberOfCommentsNeutral").innerHTML = fieldContents;
   } else {
     document.getElementById("averageNumberOfCommentsNeutral").innerHTML = "N/A";
   }
   if (negativeNumOfComments>0){
-    let fieldContents = Math.round(negativeNumOfComments/size);
+    let fieldContents = Math.round(negativeNumOfComments/negativeSize);
     document.getElementById("averageNumberOfCommentsNegative").innerHTML = fieldContents;
   } else {
     document.getElementById("averageNumberOfCommentsNegative").innerHTML = "N/A";
@@ -841,24 +851,26 @@ function removeWords(words){
  * @param {string} positiveAverageNumOfUpvotes - The sum of all the upvotes from the positive posts whos sentiment was analyzed
  * @param {string} neutralAverageNumOfUpvotes - The sum of all the upvotes from the neutral posts whos sentiment was analyzed
  * @param {string} negativeAverageNumOfUpvotes - The sum of all the upvotes from the negative posts whos sentiment was analyzed
- * @param {number} size - The size of the jsonData variable
+ * @param {number} positiveSize - The samount of positive posts whos sentiment was analyzed
+ * @param {number} neutralSize - The amount of neutral posts whos sentiment was analyzed
+ * @param {number} negativeSize - The amount of negative posts whos sentiment was analyzed
   */
 function setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOfUpvotes, 
-  negativeAverageNumOfUpvotes, size){
+  negativeAverageNumOfUpvotes, positiveSize, neutralSize, negativeSize){
     if(positiveAverageNumOfUpvotes>0){
-      let fieldContents = Math.round(positiveAverageNumOfUpvotes/size);
+      let fieldContents = Math.round(positiveAverageNumOfUpvotes/positiveSize);
       document.getElementById("averageNumberOfUpvotesPositive").innerHTML = fieldContents;
     } else {
       document.getElementById("averageNumberOfUpvotesPositive").innerHTML = "N/A";
     }
     if(neutralAverageNumOfUpvotes>0){
-      let fieldContents = Math.round(neutralAverageNumOfUpvotes/size);
+      let fieldContents = Math.round(neutralAverageNumOfUpvotes/neutralSize);
       document.getElementById("averageNumberOfUpvotesNeutral").innerHTML = fieldContents;
     } else {
       document.getElementById("averageNumberOfUpvotesNeutral").innerHTML = "N/A";
     }
     if (negativeAverageNumOfUpvotes>0){
-      let fieldContents = Math.round(negativeAverageNumOfUpvotes/size);
+      let fieldContents = Math.round(negativeAverageNumOfUpvotes/negativeSize);
       document.getElementById("averageNumberOfUpvotesNegative").innerHTML = fieldContents;
     } else {
       document.getElementById("averageNumberOfUpvotesNegative").innerHTML = "N/A";
@@ -870,23 +882,26 @@ function setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOf
  * @param {string} positiveUpvoteRatio - The sum of all the upvotes ratios from the positive posts whos sentiment was analyzed
  * @param {string} neutralUpvoteRatio - The sum of all the upvotes ratios from the neutral posts whos sentiment was analyzed
  * @param {string} negativeUpvoteRatio - The sum of all the upvotes ratios from the negative posts whos sentiment was analyzed
- * @param {number} size - The size of the jsonData variable
+ * @param {number} positiveSize - The samount of positive posts whos sentiment was analyzed
+ * @param {number} neutralSize - The amount of neutral posts whos sentiment was analyzed
+ * @param {number} negativeSize - The amount of negative posts whos sentiment was analyzed
   */
-function setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, size){
+function setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, 
+  positiveSize, neutralSize, negativeSize){
   if(positiveUpvoteRatio>0){
-    let fieldContents = Math.round(positiveUpvoteRatio/size * 100) + "%";
+    let fieldContents = Math.round(positiveUpvoteRatio/positiveSize * 100) + "%";
     document.getElementById("averageUpvoteRatioPositive").innerHTML = fieldContents;
   } else {
     document.getElementById("averageUpvoteRatioPositive").innerHTML = "N/A";
   }
   if(neutralUpvoteRatio>0){
-    let fieldContents = Math.round(neutralUpvoteRatio/size * 100) + "%";
+    let fieldContents = Math.round(neutralUpvoteRatio/neutralSize * 100) + "%";
     document.getElementById("averageUpvoteRatioNeutral").innerHTML = fieldContents;
   } else {
     document.getElementById("averageUpvoteRatioNeutral").innerHTML = "N/A";
   }
   if (negativeUpvoteRatio>0){
-    let fieldContents = Math.round(negativeUpvoteRatio/size * 100) + "%";
+    let fieldContents = Math.round(negativeUpvoteRatio/negativeSize * 100) + "%";
     document.getElementById("averageUpvoteRatioNegative").innerHTML = fieldContents;
   } else {
     document.getElementById("averageUpvoteRatioNegative").innerHTML = "N/A";
