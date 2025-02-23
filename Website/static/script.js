@@ -636,6 +636,7 @@ function setBreakdownData(){
       positiveSize += 1;
     } else if (entry.label == "NEUTRAL"){
       neutralCountPercentOfOverall++;
+      console.log(entry.compoundScore);
       neutralScore += entry.compoundScore;
       neutralNumOfComments += entry.num_comments;
       neutralAverageNumOfUpvotes += entry.upvotes;
@@ -647,7 +648,7 @@ function setBreakdownData(){
       negativeNumOfComments += entry.num_comments;
       negativeAverageNumOfUpvotes += entry.upvotes;
       negativeUpvoteRatio += entry.upvote_ratio;
-      negative += 1;
+      negativeSize += 1;
     }
   });
   setBreakdownPercentageOfOverall(positiveCountPercentOfOverall, 
@@ -706,13 +707,13 @@ function setAverageScore(positiveScore, neutralScore, negativeScore, positiveSiz
   } else {
     document.getElementById("averageScorePositive").innerHTML = "N/A";
   }
-  if(neutralScore > 0){
+  if(neutralScore > 0 || neutralScore < 0){
     let fieldContents = Math.round((neutralScore / neutralSize) * 100) + "%";
     document.getElementById("averageScoreNeutral").innerHTML = fieldContents;
   } else {
-    document.getElementById("averageScoreNeutral").innerHTML = "N/A";
+    document.getElementById("averageScoreNeutral").innerHTML = 0;
   }
-  if(negativeScore > 0){
+  if(negativeScore < 0){
     let fieldContents = Math.round((negativeScore / negativeSize) * 100) + "%";
     document.getElementById("averageScoreNegative").innerHTML = fieldContents;
   } else {
@@ -840,7 +841,7 @@ function countWords(words){
 }
 function removeWords(words){
   let searchWord = search;
-  let removeList = [searchWord, '', 'undefined'];
+  let removeList = [searchWord, '', 'undefined', 'why', 'when'];
   let filteredWords = sw.removeStopwords(words);
   filteredWords = sw.removeStopwords(filteredWords, removeList);
   return filteredWords;
