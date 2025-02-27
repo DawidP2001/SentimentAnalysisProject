@@ -45,11 +45,11 @@ h4 {
   margin: 5px;
   padding: 5px;
 }
-
 /* Tooltip container */
 .tooltip {
   position: relative;
   display: inline-block;
+  opacity: 1;
 }
 
 /* Tooltip text */
@@ -100,7 +100,7 @@ nav {
   align-items: center;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1000000;
 }
 
 nav * {
@@ -214,6 +214,9 @@ Section for form.html styling
 .formTable {
   border-spacing: 10px;
 }
+table.formTable td {
+  padding-bottom: 1rem;
+}
 /* Loader for after submit form is clicked */
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
@@ -256,6 +259,9 @@ Section for extraInformation.html styling
   box-shadow: 15px 15px 20px grey;
   border: 3px solid white;
 }
+#trendingTopicsTable th{
+  text-align: center;
+}
 #trendingSection{
   display: flex;
   justify-content: center;
@@ -264,6 +270,11 @@ Section for extraInformation.html styling
 }
 #trendingButtons{
   text-align: center;
+  border-top: 1px solid white;
+}
+#viewMoreTrends{
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 #additionalInformation{
   display: flex;
@@ -373,6 +384,7 @@ Section for viewPosts.html
 #sentimentPostsSection {
   display: flex;
   overflow: scroll;
+  overflow-x: auto;
   height: 400px;
 }
 .sentimentSection {

@@ -20,7 +20,7 @@ def analyseSentiment(data):
             label = 'NEUTRAL'
         elif results[i]['label'] == 'LABEL_2':
             label = 'POSITIVE'
-        results[i] = {"Text":text, "label": label, "score": results[i]['score']}
+        results[i] = {"Text":text, "robertaLabel": label, "robertaConfidenceScore": results[i]['score']}
         i+=1
     return results
 
