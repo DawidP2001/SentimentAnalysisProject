@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falling Emojis Animation</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffb74d; /* Light orange background */
+      font-family: Arial, sans-serif;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 4em;
+      animation: fall 3s infinite ease-in-out;
+    }
+
+    .emoji:nth-child(1) {
+      animation-duration: 4s;
+    }
+    
+    .emoji:nth-child(2) {
+      animation-duration: 5s;
+    }
+    
+    .emoji:nth-child(3) {
+      animation-duration: 6s;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100vh); /* Start above the screen */
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh); /* Fall to the bottom */
+        opacity: 0;
+      }
+    }
+
+    /* Customize emoji classes */
+    .smiley { color: #ffeb3b; }
+    .sad { color: #f44336; }
+    .angry { color: #e64a19; }
+  </style>
+</head>
+<body>
+
+  <!-- Smiley, Sad, and Angry Emoji Faces -->
+  <div class="emoji smiley">😊</div>
+  <div class="emoji sad">😞</div>
+  <div class="emoji angry">😡</div>
+  <div class="emoji smiley">😊</div>
+  <div class="emoji sad">😞</div>
+  <div class="emoji angry">😡</div>
+<div>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1>aa</h1>
+    <h1 style="min-width:100vh;">aa</h1>
+</div>
+</body>
+</html>

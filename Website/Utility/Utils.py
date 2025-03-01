@@ -330,10 +330,10 @@ def getGoogleTrendingTopics() -> list[list, list, list, list]:
         return googleList
     # Google Trends RSS feed for the U.S.
     try:
-        rss_url_worldwide = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=US"
-        rss_url_ireland = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=IE"
-        rss_url_uk = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=GB"
-        rss_url_us = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=US"
+        rss_url_worldwide = "https://trends.google.com/trending/rss?geo=US"
+        rss_url_ireland = "https://trends.google.com/trending/rss?geo=IE"
+        rss_url_uk = "https://trends.google.com/trending/rss?geo=GB"
+        rss_url_us = "https://trends.google.com/trending/rss?geo=US"
         
         feedWorldwide = feedparser.parse(rss_url_worldwide)
         feedIreland = feedparser.parse(rss_url_ireland)

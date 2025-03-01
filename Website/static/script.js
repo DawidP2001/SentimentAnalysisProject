@@ -636,7 +636,6 @@ function setBreakdownData(){
       positiveSize += 1;
     } else if (entry.label == "NEUTRAL"){
       neutralCountPercentOfOverall++;
-      console.log(entry.compoundScore);
       neutralScore += entry.compoundScore;
       neutralNumOfComments += entry.num_comments;
       neutralAverageNumOfUpvotes += entry.upvotes;
@@ -1027,16 +1026,21 @@ function addPost(entry, section){
     </button>`;
     section.innerHTML += htmlString;
 }
-function convertJSONToCSV(){
-
-}
 function downloadCSV(){
   let csv = 'Type,Author,Compound Score,Content,Content Type,Created UTC,Label,Negative Score,Neutral Score,Number of Comments,Over 18, Permalink,Positive Score,Self Text,Subreddit,Title,Upvote Ratio,Upvotes,URL\n';
+  i=0;
   jsonData.forEach(entry => {
-    csv += `${entry.Type},${entry.author},${entry.compoundScore},${entry.content},${entry.contentType},${entry.created_utc},${entry.label},${entry.negativeScore},${entry.neutralScore},${entry.num_comments},${entry.over_18},${entry.permalink},${entry.positiveScore},${entry.selftext},${entry.subreddit},${entry.title},${entry.positiveScore},${entry.upvote_ratio},${entry.upvotes},${entry.url}\n`;
+    console.log(i + " " + entry.title);
+    i++;
+    title = entry.title.replace(/"/g, '""').replace(/,/g, '').replace(/\n/g, ' ').replace(/\r/g, ' ');
+    selftext = entry.selftext.replace(/"/g, '""').replace(/,/g, '').replace(/\n/g, ' ').replace(/\r/g, ' ');
+    csv += `"${entry.Type}","${entry.author}","${entry.compoundScore}","${entry.content}","${entry.contentType}","${entry.created_utc}","${entry.label}","${entry.negativeScore}",` +
+    `"${entry.neutralScore}","${entry.num_comments}","${entry.over_18}","${entry.permalink}","${entry.positiveScore}","${selftext}","${entry.subreddit}","${title}",` +
+    `"${entry.upvote_ratio}","${entry.upvotes}","${entry.url}"\n`;
   });
+  console.log(csv)
   let hiddenElement = document.createElement('a');
-  hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+  hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
   hiddenElement.target = '_blank';
   hiddenElement.download = 'RedditData.csv';
   hiddenElement.click();
