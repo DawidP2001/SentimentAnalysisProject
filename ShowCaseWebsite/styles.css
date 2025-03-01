@@ -1,0 +1,103 @@
+/*/////////////////////////////////////////
+    NAVBAR SECTION
+//////////////////////////////////////////*/
+nav{
+    align-content: center;
+    z-index: 100;
+}
+nav li {
+    margin-right: 1rem;
+}
+/*/////////////////////////////////////////
+    HERO SECTION
+//////////////////////////////////////////*/
+#heroWrapper{
+    background-color: #de6b28;
+    background: linear-gradient(135deg, #FF4500, #FF8717, #d1c497);
+    z-index: 0;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#hero{
+    min-height: 100vh;
+    height: 100%;
+    align-content: center;
+}
+#heroText{
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0);
+}
+@keyframes float {
+    0% {
+      transform: translateY(0); /* Start at the normal position */
+    }
+    50% {
+      transform: translateY(-5rem); /* Move up */
+    }
+    100% {
+      transform: translateY(0); /* Move back to the original position */
+    }
+  }
+  
+  .float-up-down {
+    animation: float 5s ease-in-out infinite; /* Apply the animation */
+  }
+  
+
+  .emoji {
+    position: absolute;
+    font-size: 4em;
+    animation: fall 3s infinite ease-in-out;
+  }
+
+  .emoji:nth-child(1) {
+    animation-duration: 4s;
+  }
+  
+  .emoji:nth-child(2) {
+    animation-duration: 5s;
+  }
+  
+  .emoji:nth-child(3) {
+    animation-duration: 6s;
+  }
+  .emoji:nth-child(4) {
+    animation-duration: 7s;
+  }
+  
+  .emoji:nth-child(5) {
+    animation-duration: 9s;
+  }
+  
+  .emoji:nth-child(6) {
+    animation-duration: 8s;
+  }
+  @keyframes fall {
+    0% {
+      transform: translateX(-100px); /* Start above the screen */
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.2;
+    }
+    100% {
+      transform: translateX(calc(100vw + 100px)); /* Fall to the bottom */
+      opacity: 0.5;
+    }
+  }
+
+  .smiley { 
+    color: #ffeb3b; 
+    top: 10vh;
+}
+  .sad { 
+    color: #f44336; 
+    top: 40vh;
+}
+  .angry { 
+    color: #e64a19; 
+    top: 80vh;
+}
