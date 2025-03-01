@@ -30,6 +30,7 @@ nav li {
     z-index: 10;
     background-color: rgba(0, 0, 0, 0);
 }
+
 @keyframes float {
     0% {
       transform: translateY(0); /* Start at the normal position */
