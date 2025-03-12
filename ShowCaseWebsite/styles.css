@@ -1,15 +1,38 @@
 /*/////////////////////////////////////////
-    NAVBAR SECTION
+    Other SECTION
 //////////////////////////////////////////*/
+html{
+  scroll-behavior: smooth;
+}
 body{
   overflow-x: hidden;
 }
-nav{
+/*/////////////////////////////////////////
+    NAVBAR SECTION
+//////////////////////////////////////////*/
+.navbar{
     align-content: center;
     z-index: 100;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px 0;
+    background-color: transparent;
+    transition: background 0.3s ease, padding 0.3s ease;
+}
+.scrolled {
+    background: #fd7e14;
+    opacity: 0.96;
+    padding: 10px 0;
 }
 nav li {
     margin-right: 1rem;
+}
+.nav-link.active{
+  color: black;
 }
 /*/////////////////////////////////////////
     HERO SECTION
@@ -151,16 +174,13 @@ nav li {
         rgba(0, 0, 0, 0.6) 0px 30px 40px -10px,  /* Stronger main shadow */
         rgba(0, 0, 0, 0.4) 0px 0px 20px; /* Soft outer glow */
 }
-.sectionSpacing{
-  margin-top: 5rem;
-  margin-bottom: 5rem;
-}
 
 /*/////////////////////////////////////////
-    HERO SECTION
+    FOOTER SECTION
 //////////////////////////////////////////*/
 footer{
   text-align: center;
+  background: #4d4741f6;
 }
 footer p{
   margin: 0;
