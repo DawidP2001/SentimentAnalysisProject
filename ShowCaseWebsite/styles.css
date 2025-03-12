@@ -1,6 +1,9 @@
 /*/////////////////////////////////////////
     NAVBAR SECTION
 //////////////////////////////////////////*/
+body{
+  overflow-x: hidden;
+}
 nav{
     align-content: center;
     z-index: 100;
@@ -19,6 +22,8 @@ nav li {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    margin-top: 0rem;
+    overflow-x: hidden;
 }
 
 #hero{
@@ -86,7 +91,7 @@ nav li {
     }
     100% {
       transform: translateX(calc(100vw + 100px)); /* Fall to the bottom */
-      opacity: 0.5;
+      opacity: 0;
     }
   }
 
@@ -101,4 +106,62 @@ nav li {
   .angry { 
     color: #e64a19; 
     top: 80vh;
+}
+
+.card img {
+  height: 150px; /* Ensure uniform image height */
+  object-fit: contain; /* Prevent distortion */
+  padding: 10px;
+  background-color: #fff;
+  border: 2px solid #de6b28;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.card{
+  margin: 1rem;
+  background-color: #de6b28;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  text-align: center;
+}
+
+.section-title{
+  text-align: center;
+}
+.section-title::after {
+  content: "";
+  width: 80px;
+  height: 4px;
+  background-color: #f4a261;
+  display: block;
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+.section-subtitle{
+  text-align: center;
+  margin: 1rem;
+  opacity: 0.8;
+}
+
+.card-group a{
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  text-decoration: none; /* Remove default underline */
+}
+.card-group a:hover{
+  transform: scale(1.05); /* Slight enlargement */
+  box-shadow: 
+        rgba(0, 0, 0, 0.6) 0px 30px 40px -10px,  /* Stronger main shadow */
+        rgba(0, 0, 0, 0.4) 0px 0px 20px; /* Soft outer glow */
+}
+.sectionSpacing{
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+/*/////////////////////////////////////////
+    HERO SECTION
+//////////////////////////////////////////*/
+footer{
+  text-align: center;
+}
+footer p{
+  margin: 0;
 }
