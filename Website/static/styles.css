@@ -142,7 +142,6 @@ Section for form.html styling
 //////////////////////////////////
 */
 #introduction {
-  background: linear-gradient(to bottom, #FF5700, transparent);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -150,18 +149,19 @@ Section for form.html styling
   flex-wrap: nowrap;
   align-items: center;
   padding-bottom: 40px;
+  height: 100vh;
 }
 
 #formSection{
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
   flex-direction: column;
   border: 3px solid white;
-  padding: 0;
+  padding: 20px; /* Add padding for spacing */
   box-shadow: 15px 15px 20px grey;
   background: #FF8b60;
+  transition: width 0.5s ease, height 0.5s ease;
 }
 /*This is the submit button for the forms*/
 #sumbitBtn {
@@ -197,7 +197,15 @@ Section for form.html styling
 
 .tabContent {
   display: none;
-  padding: 6px 12px;
+  padding: 10px;
+  height: auto;
+  transition: all 0.5s ease-in-out; /* Smooth animation for height and padding */
+}
+
+/* Active tab content */
+.tabContent.active {
+  display: block;
+  transition: width 0.5s ease, height 0.5s ease;
 }
 
 .submitBtnCell {
@@ -206,9 +214,6 @@ Section for form.html styling
 
 .searchForm{
   border-spacing: 10px;
-}
-.tabContent{
-  border: 1px solid blakc;
 }
 
 .formTable {
@@ -238,6 +243,16 @@ table.formTable td {
 /* This sets the time frames on the form to be hidden at the start */
 .timeFrameSearch {
   display: none;
+}
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animated-bg {
+  background: linear-gradient(-45deg, #FF4500, #FF6A13, #d37518, #FF4500);
+  background-size: 300% 300%;
+  animation: gradientAnimation 10s ease infinite;
 }
 /*
 //////////////////////////////////
@@ -466,4 +481,94 @@ footer{
 }
 #footerCopyrightSection{
   color: #000000ba;
+}
+
+
+
+
+
+/*Testing*/
+
+/* Modern Filled Tabs */
+.modern-tabs {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+  transition: width 0.5s ease, height 0.5s ease;
+}
+
+.modern-tabs .nav-tabs {
+  border: none;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.modern-tabs .nav-link {
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  color: #6c757d;
+  transition: all 0.3s ease;
+}
+
+.modern-tabs .nav-link:hover {
+  background: #f8f9fa;
+  color: #0d6efd;
+}
+
+.modern-tabs .nav-link.active {
+  background: #0d6efd;
+  color: white;
+}
+
+/* Content Resize Animation */
+.tab-pane {
+  max-height: 0; /* Initially collapsed */
+  overflow: hidden; /* Hide overflow to make sure content doesn't spill out */
+  transition: max-height 0.5s ease-out, opacity 0.3s ease-out;
+}
+
+/* When tab is active, expand */
+.tab-pane.show {
+  max-height: 500px; /* Max height, adjust based on content size */
+  opacity: 1; /* Fade in */
+}
+
+/* Fading effect */
+.tab-pane.fade {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.tab-pane.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1s ease;
+}
+
+/* Keep the tab content hidden by default until activated */
+.tab-pane {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.tab-pane.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1s ease;
+}
+
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(10px);
+  }
+
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }

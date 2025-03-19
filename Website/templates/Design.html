@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.1.0/dist/wordcloud.min.js"></script>
+
+    <!--The 2 scripts below are imported to be used for the wordcloud chart-->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
+    <!--This imports a stopword package-->
+    <script src="https://cdn.jsdelivr.net/npm/stopword/dist/stopword.umd.min.js"></script>
+    <!--This imports icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Bootstrap Imports-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!--Native CSS-->
+    <link rel="stylesheet" href="../static/styles.css">
+    <!--This is the main javascript file created for this project-->
+    <script src="../static/script.js"></script>
+    </head>
+    <body>
+        <nav id="navbar" class="navbar navbar-light d-flex justify-content-around">
+            <span class="navbar-brand">Reddit Sentiment Analyser</span>
+            <ul class="navbar-nav d-none d-sm-flex flex-row">
+                <li class="nav-item">
+                    <a class="nav-link" href="/" data-section="home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Trending" data-section="trending">Trending</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/About" data-section="about">About</a>
+                </li>
+            </ul>
+        </nav>
+        <!--
+Author: Dawid Pionk 
+Description: This html contains the forms for each of the queries the user can make about a specific
+            subjects sentiment
+Date: 09/02/2025
+-->
+<!--This form -->
+<section id="introduction" class="animated-bg">
+    <h1>Discover unique insights on Reddit</h1>
+    <h4>
+      Here you can enter any topic, give selected paramters and be given a detailed report
+    </h4>
+    <h3>Have a go below</h3>
+    <div id="formSection" class="my-auto">
+        <div class="tabSection my-5">
+            <button class="tab active" onclick="selectTab(event, 'searchBarTopic')">Topic</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarUser')">User</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarSubreddit')">Subreddit</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarComment')">Comments</button>
+            <button class="tab" onclick="selectTab(event, 'searchBarDomain')">Domain</button>
+        </div>
+        <!--This section contains the form to analyze a certain topic-->
+        <div id="searchBarTopic" class="tabContent">
+            <form class='searchForm' action="/showChartsGeneralSearch" method="post">
+                <table class="formTable">
+                    <tr>
+                        <td><label for="searchTopic">Topic:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id='searchTopic' name='searchTopic' type="text" placeholder="topic" required>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip"></i>
+                                <span class="tooltiptext">Enter here the topic you want to analyze</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="subredditSearchTopic">Subreddit:</label></td>
+                        <td>
+                            <input id="subredditSearchTopic" name='subredditSearchTopic' type='text' placeholder="subbreddit">
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip"></i>
+                                <span class="tooltiptext">Search for your topic in a specific subreddit</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="querySizeTopic">Amount of posts to extract:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id="querySizeTopic" name="querySizeTopic" type="number" min="1" max="100" value="10">
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the max amount of posts to analyze</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="submitBtnCell" colspan="2"><input id="sumbitBtnTopic"  type="submit" onclick="showLoader()"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <!--This section content of a specific redditors account-->
+        <div id="searchBarUser" class="tabContent">
+            <form class ='searchForm' action="/showChartsUserSearch" method="post">
+                <table class="formTable">
+                    <tr>
+                        <td><label for="searchUser">User:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id='searchUser' name='searchUser' type="text" placeholder="redditor" required>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the redditor who's posts or comments you want analyzed</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="typeOfPostUser">Type of Post:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input type="radio" id="postRadioUser" name="postTypeRadioUser" value="submissions" onclick="showTypeOfPostUserRow()" checked>
+                            <label for="postRadioUser">Posts</label><br>
+                            <input type="radio" id="commentRadioUser" name="postTypeRadioUser" value="comments" onclick="showTypeOfPostUserRow()">
+                            <label for="commentRadioUser">Comments</label>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify whether you want the redditors comments or posts to be analyzed</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="typeOfPostUserRow">
+                        <td><label for="typeOfSearchUser">Search By:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <select id="typeOfSearchUser" name="typeOfSearchUser" onchange="typeOfSearchChange(this)">
+                                <option value="hot">Hot</option>
+                                <option value="new">New</option>
+                                <option value="rising">Rising</option>
+                                <option value="top">Top</option>
+                                <option value="controversial">Controversial</option>
+                            </select>
+                            <select id="searchTimeFrameUser" class="timeFrameSearch" name="searchTimeFrameUser">
+                                <option value="all">All</option>
+                                <option value="year">This Year</option>
+                                <option value="month">This Month</option>
+                                <option value="week">This Week</option>
+                                <option value="day">Today</option>
+                                <option value="hour">This hour</option>
+                            </select>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify which posts or comments to extract</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="querySizeUser">Amount of posts to extract:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id="querySizeUser" name="querySizeUser" type="number" min="1" max="100" value="10">
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the max amount of posts to analyze</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="submitBtnCell" colspan="2"><input id="sumbitBtnUser" type="submit" onclick="showLoader()"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <!--This section contains form to analyze content of a specific subreddit-->
+        <div id="searchBarSubreddit" class="tabContent">
+            <form class ='searchForm' action="/showChartsSubredditSearch" method="post">
+                <table class="formTable">
+                    <tr>
+                        <td><label for="searchSubreddit">Subreddit<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id='searchSubreddit' name='searchSubreddit' type="text" placeholder="subbreddit" required>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the subreddit to analyze</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="typeOfSearchSubreddit">Search By:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <select id="typeOfSearchSubreddit" name="typeOfSearchSubreddit" onchange="typeOfSearchChange(this)">
+                                <option value="hot">Hot</option>
+                                <option value="new">New</option>
+                                <option value="rising">Rising</option>
+                                <option value="top">Top</option>
+                                <option value="controversial">Controversial</option>
+                            </select>
+                            <select id="searchTimeFrameSubreddit" class="timeFrameSearch" name="searchTimeFrameSubreddit">
+                                <option value="all">All</option>
+                                <option value="year">This Year</option>
+                                <option value="month">This Month</option>
+                                <option value="week">This Week</option>
+                                <option value="day">Today</option>
+                                <option value="hour">This hour</option>
+                            </select>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify which posts to extract</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="querySizeSubreddit">Amount of posts to extract:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id="querySizeSubreddit" name="querySizeSubreddit" type="number" min="1" max="100" value="10">
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the max amount of posts to analyze</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="submitBtnCell" colspan="2"><input id="sumbitBtnSubreddit" type="submit" onclick="showLoader()"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <!--This section contains a form to anlyze content of a specific posts comment section-->
+        <div id="searchBarComment" class="tabContent">
+            <form class ='searchForm' action="/showChartsCommentSearch" method="post">
+                <table class="formTable">
+                    <tr>
+                        <td>
+                            <select id="typeOfSearchComment" name="typeOfSearchComment" onchange="typeOfPostSearchChanged(this)">
+                                <option value="link">Post Link</option>
+                                <option value="id">Post ID</option>
+                            </select>
+                            <span style="color: red;">*</span>
+                        </td>
+                        <td>
+                            <input id='searchComment' name='searchComment' type="text" placeholder="https://www.reddit.com/r/rugbyunion/comments/1iku1ud/post_match_thread_england_v_france/" required>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Provide the link or the post Id (post id 
+                                    you can get from a previously analyzed post) to analyze a 
+                                    posts comment section</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="sortByComments">Sort by:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <select id="sortByComments" name="sortByComments">
+                                <option value="new">New</option>
+                                <option value="old">Old</option>
+                                <option value="top">Top</option>
+                                <option value="controversial">Controversial</option>
+                            </select>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify which comments to extract</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="querySizeComment">Amount of posts to extract:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id="querySizeComment" name="querySizeComment" type="number" min="1" max="100" value="10">
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the max amount of comments to analyze</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="submitBtnCell" colspan="2"><input id="sumbitBtnComment" type="submit" onclick="showLoader()"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <!--This section contains a form that handles input to anlyze posts containing references to certain link/domain-->
+        <div id="searchBarDomain" class="tabContent">
+            <form class='searchForm' action="/showChartsDomainSearch" method="post">
+                <table class="formTable">
+                    <tr>
+                        <td><label for="searchDomain">Domain:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id='searchDomain' name='searchDomain' type="text" placeholder="bbc.com" required>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify the domain to analyze (domain 
+                                    relates to a specific website as a whole such as bbc.com and 
+                                    not specific links from it)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="typeOfSearchDomain">Search By:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <select id="typeOfSearchDomain" name="typeOfSearchDomain" onchange="typeOfSearchChange(this)">
+                                <option value="hot">Hot</option>
+                                <option value="new">New</option>
+                                <option value="rising">Rising</option>
+                                <option value="randomRising">Random Rising</option>
+                                <option value="top">Top</option>
+                                <option value="controversial">Controversial</option>
+                            </select>
+                            <select id="searchTimeFrameDomain" class="timeFrameSearch" name="searchTimeFrameDomain">
+                                <option value="all">All</option>
+                                <option value="year">This Year</option>
+                                <option value="month">This Month</option>
+                                <option value="week">This Week</option>
+                                <option value="day">Today</option>
+                                <option value="hour">This hour</option>
+                            </select>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify which posts to extract</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="querySizeDomain">Maximum posts to extract:<span style="color: red;">*</span></label></td>
+                        <td>
+                            <input id="querySizeDomain" name="querySizeDomain" type="number" min="1" max="100" value="10">
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                <span class="tooltiptext">Specify which posts to extract</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="submitBtnCell" colspan="2"><input id="sumbitBtnDomain"  type="submit" onclick="showLoader()"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="modern-tabs mb-5">
+            <ul class="nav nav-tabs" id="filledTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab">
+                        Topic
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab">
+                        User
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab">
+                        Subreddit
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab">
+                        Comments
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab">
+                        Domain
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="filledTabsContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel">
+                    <table class="formTable">
+                        <tr>
+                            <td><label for="searchTopic">Topic:<span style="color: red;">*</span></label></td>
+                            <td>
+                                <input id='searchTopic' name='searchTopic' type="text" placeholder="topic" required>
+                                <div class="tooltip">
+                                    <i class="fa fa-info-circle" class="tooltip"></i>
+                                    <span class="tooltiptext">Enter here the topic you want to analyze</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="subredditSearchTopic">Subreddit:</label></td>
+                            <td>
+                                <input id="subredditSearchTopic" name='subredditSearchTopic' type='text' placeholder="subbreddit">
+                                <div class="tooltip">
+                                    <i class="fa fa-info-circle" class="tooltip"></i>
+                                    <span class="tooltiptext">Search for your topic in a specific subreddit</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="querySizeTopic">Amount of posts to extract:<span style="color: red;">*</span></label></td>
+                            <td>
+                                <input id="querySizeTopic" name="querySizeTopic" type="number" min="1" max="100" value="10">
+                                <div class="tooltip">
+                                    <i class="fa fa-info-circle" class="tooltip" aria-hidden="true"></i>
+                                    <span class="tooltiptext">Specify the max amount of posts to analyze</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="submitBtnCell" colspan="2"><input id="sumbitBtnTopic"  type="submit" onclick="showLoader()"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel">
+                    <h4>Profile Content</h4>
+                    <p>This is the profile tab content with modern filled style.</p>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel">
+                    <h4>Contact Content</h4>
+                    <p>This is the contact tab content with modern filled style.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+</section>
+<section>
+    <h1>aa</h1>
+</section>
+<div id="formModal" class="modal">
+    <div class="loader"></div>
+</div>
+<script>
+    window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        // Remove the loader
+        const loader = document.getElementById('formModal');
+        if (loader) {
+            loader.style.display = 'none';
+        }
+    }
+    });
+</script>
+    </body>
+</html>
