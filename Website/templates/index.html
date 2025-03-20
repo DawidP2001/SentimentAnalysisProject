@@ -33,20 +33,33 @@ Date: 09/02/2025
     {% if scrollToContact %}
       <script>scrollToElement("contactSection")</script>
     {% endif%}
-    <nav>
-      <div id="navTitle">
-        <img src="">
-        <h1>Reddit Sentiment explorer</h1>
-      </div>
+    <nav id="navbar" class="navbar navbar-light d-flex justify-content-around">
+      <span class="navbar-brand">Reddit Sentiment Analyser</span>
       <div id="navLinks">
           {% if form %}
-            <a href="/">Home</a>
-            <a href="#trendingSection">Trending</a>
-            <a href="#featureSection">About</a>
+          <ul class="navbar-nav d-none d-sm-flex flex-row">
+            <li class="nav-item">
+                <a class="nav-link" href="/" data-section="home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#trendingSection" data-section="trending">Trending</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#featureSection" data-section="about">About</a>
+            </li>
+          </ul>
           {% else %}
-            <a href="/">Home</a>
-            <a href="/Trending">Trending</a>
-            <a href="/About">About</a>
+          <ul class="navbar-nav d-none d-sm-flex flex-row">
+            <li class="nav-item">
+                <a class="nav-link" href="/" data-section="home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Trending" data-section="trending">Trending</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/About" data-section="about">About</a>
+            </li>
+          </ul>
           {% endif %}
       </div>
     </nav>

@@ -19,6 +19,7 @@ html{
 body {
   overflow-y: auto;
   margin: 0;
+  overflow-x: hidden;
 }
 #content {
   display: flex;
@@ -90,50 +91,42 @@ Section for the navigation bar
 
 //////////////////////////////////
 */
-nav {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #f1efef;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  position: sticky;
+#navbar{
+  align-content: center;
+  z-index: 100;
+  position: fixed;
   top: 0;
-  z-index: 1000000;
-}
-
-nav * {
-  margin: 0px 10px;
-}
-/* This is the tititle in the navigation bar */
-#navTitle{
-  padding: 5px;
+  width: 100%;
   display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px 0;
+  background-color: transparent;
+  transition: background 0.6s ease, padding 0.6s ease;
 }
-#navLinks {
-  display: flex;
-  align-self: stretch;
+#navbar.scrolled {
+  background: var(--primary);
+  backdrop-filter: blur(5px);
+  padding: 10px 0;
+  opacity: 0.8;
 }
-#navLinks a{
-  color: black;
-  height: 100%;
-  text-align: center;
-  padding: 0px 5px;
-  display: flex;
-  align-items: center;
+nav li {
+  margin-right: 1rem;
 }
-/* Change the color of links on hover */
-#navLinks a:hover {
-  background-color: #FF5700;
-  color: black;
+.navbar-brand{
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
-/* Add a color to the active/current link */
-#navLinks a.active {
-  background-color: #FF5700;
-  color: white;
+.nav-link{
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
-
+.nav-link.active{
+color: black;
+}
 /*
 //////////////////////////////////
 
@@ -141,27 +134,19 @@ Section for form.html styling
 
 //////////////////////////////////
 */
-#introduction {
-  background: linear-gradient(to bottom, #FF5700, transparent);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-wrap: nowrap;
-  align-items: center;
-  padding-bottom: 40px;
+#hero{
+  height: 100vh;
 }
-
 #formSection{
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
   flex-direction: column;
   border: 3px solid white;
-  padding: 0;
+  padding: 20px; /* Add padding for spacing */
   box-shadow: 15px 15px 20px grey;
   background: #FF8b60;
+  transition: width 0.5s ease, height 0.5s ease;
 }
 /*This is the submit button for the forms*/
 #sumbitBtn {
@@ -197,7 +182,15 @@ Section for form.html styling
 
 .tabContent {
   display: none;
-  padding: 6px 12px;
+  padding: 10px;
+  height: auto;
+  transition: all 0.5s ease-in-out; /* Smooth animation for height and padding */
+}
+
+/* Active tab content */
+.tabContent.active {
+  display: block;
+  transition: width 0.5s ease, height 0.5s ease;
 }
 
 .submitBtnCell {
@@ -206,9 +199,6 @@ Section for form.html styling
 
 .searchForm{
   border-spacing: 10px;
-}
-.tabContent{
-  border: 1px solid blakc;
 }
 
 .formTable {
@@ -238,6 +228,17 @@ table.formTable td {
 /* This sets the time frames on the form to be hidden at the start */
 .timeFrameSearch {
   display: none;
+}
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-bg {
+  background: linear-gradient(-45deg, #FF4500, #FF6A13, #ec851d, #FF4500);
+  background-size: 300% 300%;
+  animation: gradientAnimation 10s ease infinite;
 }
 /*
 //////////////////////////////////
@@ -466,4 +467,53 @@ footer{
 }
 #footerCopyrightSection{
   color: #000000ba;
+}
+
+
+
+
+
+/*Testing*/
+.rounded-bg {
+  z-index: -1;
+  background-color: var(--green);
+  background: linear-gradient(-45deg, #FF4500, #FF6A13, #d37518, #FF4500);
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  transition: bottom .3s ease-in-out;
+  position: absolute;
+  inset: 0% 0% 33%;
+  overflow: visible;
+}
+@media (max-width: 576px) {
+  .rounded-bg {
+    inset: 0% 0% 0%;
+  }
+}
+@media (min-width: 576px) {
+  .rounded-bg {
+    inset: 0% 0% 0%;
+    ;
+  }
+}
+@media (min-width: 768px) {
+  .rounded-bg {
+    inset: 0% 0% 37%;
+    scale: 1.7;
+  }
+}
+@media (min-width: 992px) {
+  .rounded-bg {
+    inset: 0% 0% 37%;
+  }
+}
+@media (min-width: 1200px) {
+  .rounded-bg {
+    inset: 0% 0% 37%;
+  }
+}
+@media (min-width: 1400px) {
+  .rounded-bg {
+    inset: 0% 0% 37%;
+  }
 }
