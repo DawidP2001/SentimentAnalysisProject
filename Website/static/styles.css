@@ -134,16 +134,9 @@ Section for form.html styling
 
 //////////////////////////////////
 */
-#introduction {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
- 
-  flex-wrap: nowrap;
-  align-items: center;
-  padding-bottom: 40px;
+#hero{
+  height: 100vh;
 }
-
 #formSection{
   display: flex;
   justify-content: center;
@@ -241,15 +234,11 @@ table.formTable td {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
 .animated-bg {
-  background: linear-gradient(-45deg, #FF4500, #FF6A13, #d37518, #FF4500);
+  background: linear-gradient(-45deg, #FF4500, #FF6A13, #ec851d, #FF4500);
   background-size: 300% 300%;
   animation: gradientAnimation 10s ease infinite;
-  border-bottom-right-radius: 50%;
-  border-bottom-left-radius: 50%;
-  inset: 0% 0% 37%;
-  overflow: visible;
-  transform: scale(1.4);
 }
 /*
 //////////////////////////////////
