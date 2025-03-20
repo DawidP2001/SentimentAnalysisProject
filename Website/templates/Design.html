@@ -22,17 +22,17 @@
     <script src="../static/script.js"></script>
     </head>
     <body>
-        <nav id="navbar" class="navbar navbar-light d-flex justify-content-around">
-            <span class="navbar-brand">Reddit Sentiment Analyser</span>
+        <nav id="navbar" class="navbar d-flex justify-content-around">
+            <span class="navbar-brand">Reddit Sentiment Analyzer</span>
             <ul class="navbar-nav d-none d-sm-flex flex-row">
                 <li class="nav-item">
-                    <a class="nav-link" href="/" data-section="home">Home</a>
+                    <a class="nav-link" href="#" data-section="about">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Trending" data-section="trending">Trending</a>
+                    <a class="nav-link" href="#trending" data-section="technologies">Treding</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/About" data-section="about">About</a>
+                    <a class="nav-link" href="#about" data-section="about">About</a>
                 </li>
             </ul>
         </nav>
@@ -43,14 +43,15 @@ Description: This html contains the forms for each of the queries the user can m
 Date: 09/02/2025
 -->
 <!--This form -->
-<section id="introduction" class="animated-bg">
-    <h1>Discover unique insights on Reddit</h1>
+<section id="introduction" >
+    <div class="rounded-bg h-80 h-sm-80 h-md-80 h-lg-80 h-xl-80 h-xxl-80 w-100"></div>
+    <h1 class="display-1 mt-5">Discover unique insights on Reddit</h1>
     <h4>
       Here you can enter any topic, give selected paramters and be given a detailed report
     </h4>
     <h3>Have a go below</h3>
-    <div id="formSection" class="my-auto">
-        <div class="tabSection my-5">
+    <div id="formSection" class="p-0">
+        <div class="tabSection mb-2">
             <button class="tab active" onclick="selectTab(event, 'searchBarTopic')">Topic</button>
             <button class="tab" onclick="selectTab(event, 'searchBarUser')">User</button>
             <button class="tab" onclick="selectTab(event, 'searchBarSubreddit')">Subreddit</button>
@@ -327,6 +328,30 @@ Date: 09/02/2025
                     </tr>
                 </table>
             </form>
+        </div>
+    </div>
+    <p class="h4 my-5">How can sentiment analysis benefit you</p>
+    <div class="row">
+        <div class="container col-3">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">Lorem ipsum asas asasf afsas</p>
+                </div> 
+            </div>
+        </div>
+        <div class="container col-3">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">Lorem ipsum asas asasf afsas</p>
+                </div> 
+            </div>
+        </div>
+        <div class="container col-3">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">Lorem ipsum asas asasf afsas</p>
+                </div> 
+            </div>
         </div>
     </div>
 </section>
