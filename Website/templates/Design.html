@@ -36,18 +36,11 @@
                 </li>
             </ul>
         </nav>
-        <!--
-Author: Dawid Pionk 
-Description: This html contains the forms for each of the queries the user can make about a specific
-            subjects sentiment
-Date: 09/02/2025
--->
-<!--This form -->
 <section id="hero" class="animated-bg">
 <section  class="container-fluid col-10 d-flex justify-content-center align-items-center h-100">
     <div class="row">
         <div class="col-6 d-flex justify-content-center align-items-center">
-            <div id="formSection" class="p-0">
+            <div id="formSection" class="p-0 rounded">
                 <div class="tabSection mb-2">
                     <button class="tab active" onclick="selectTab(event, 'searchBarTopic')">Topic</button>
                     <button class="tab" onclick="selectTab(event, 'searchBarUser')">User</button>
@@ -90,7 +83,7 @@ Date: 09/02/2025
                                 </td>
                             </tr>
                             <tr>
-                                <td class="submitBtnCell" colspan="2"><input id="sumbitBtnTopic"  type="submit" onclick="showLoader()"></td>
+                                <td class="submitBtnCell" colspan="2"><input id="sumbitBtnTopic" class="btn btn-primary" type="submit" onclick="showLoader()"></td>
                             </tr>
                         </table>
                     </form>
@@ -157,7 +150,7 @@ Date: 09/02/2025
                                 </td>
                             </tr>
                             <tr>
-                                <td class="submitBtnCell" colspan="2"><input id="sumbitBtnUser" type="submit" onclick="showLoader()"></td>
+                                <td class="submitBtnCell" colspan="2"><input id="sumbitBtnUser" class="btn btn-primary"  type="submit" onclick="showLoader()"></td>
                             </tr>
                         </table>
                     </form>
@@ -211,7 +204,7 @@ Date: 09/02/2025
                                 </td>
                             </tr>
                             <tr>
-                                <td class="submitBtnCell" colspan="2"><input id="sumbitBtnSubreddit" type="submit" onclick="showLoader()"></td>
+                                <td class="submitBtnCell" colspan="2"><input id="sumbitBtnSubreddit" class="btn btn-primary"  type="submit" onclick="showLoader()"></td>
                             </tr>
                         </table>
                     </form>
@@ -264,7 +257,7 @@ Date: 09/02/2025
                                 </td>
                             </tr>
                             <tr>
-                                <td class="submitBtnCell" colspan="2"><input id="sumbitBtnComment" type="submit" onclick="showLoader()"></td>
+                                <td class="submitBtnCell" colspan="2"><input id="sumbitBtnComment" class="btn btn-primary" type="submit" onclick="showLoader()"></td>
                             </tr>
                         </table>
                     </form>
@@ -321,7 +314,7 @@ Date: 09/02/2025
                                 </td>
                             </tr>
                             <tr>
-                                <td class="submitBtnCell" colspan="2"><input id="sumbitBtnDomain"  type="submit" onclick="showLoader()"></td>
+                                <td class="submitBtnCell" colspan="2"><input id="sumbitBtnDomain" class="btn btn-primary"   type="submit" onclick="showLoader()"></td>
                             </tr>
                         </table>
                     </form>
@@ -329,18 +322,18 @@ Date: 09/02/2025
             </div>
         </div>
         <div class="col-6 d-flex justify-content-center align-items-center flex-column">
-            <h1 class="display-1 mt-5">Discover unique insights on Reddit</h1>
+            <h1 class="display-1 mt-5 text-white">Discover unique insights on Reddit</h1>
             <h4>
             Here you can enter any topic, give selected paramters and be given a detailed report
             </h4>
-            <h3>Have a go below</h3>
         </div>
     </div>
+    
 </section>
 </section>
 <section id="google-table-section">
     <h1 class="h1">Google Trending Topics</h1>
-    <table>
+    <table id="trendingTopicsTable">
         <tr>
             <th>Index</th>
             <th>Topic</th>
@@ -384,7 +377,7 @@ Date: 09/02/2025
             <td>Google</td>
         </tr>
         <tr colspan="5">
-            <td><button>More</button></td>
+            <td><button class="btn btn-primary">More</button></td>
         </tr>
     </table>
 </section>
