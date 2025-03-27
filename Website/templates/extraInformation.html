@@ -7,8 +7,8 @@ Date: 09/02/2025
 <div id="additionalInformation">
 <!--This section contains the table with the google trending topics-->
     <div class="textArea" id="trendingSection">
-        <h1>Google Trending Topics</h1>
-        <table id="trendingTopicsTable">
+        <h1 class="section-heading">Google Trending Topics</h1>
+        <table id="trendingTopicsTable" class="rounded">
             <th>Index</th>
             <th>Global</th>
             <th>Ireland</th>
@@ -34,13 +34,13 @@ Date: 09/02/2025
             {% endif %}
             {% endfor %}
             <td colspan="5" id="trendingButtons">
-                <input type="button"  id="viewMoreTrends" value="View More" onclick="viewMoreTrends(this)">
-                <input type="button"  id="viewLessTrends" value="View Less" onclick="viewLessTrends(this)" hidden>
+                <input type="button"  id="viewMoreTrends" class="btn btn-primary" value="View More" onclick="viewMoreTrends(this)">
+                <input type="button"  id="viewLessTrends" class="btn btn-primary" value="View Less" onclick="viewLessTrends(this)" hidden>
             </td>
         </table>
     </div>
     <div class="textArea" id="featureSection">
-        <h1>Features</h1>
+        <h1 class="section-heading">Features</h1>
         <p>
             Sentiment Analysis based on different criteria such as:
             <ul>
@@ -62,7 +62,7 @@ Date: 09/02/2025
         </p>
     </div>
     <div class="textArea">
-        <h1>How can Sentiment Analaysis Benefit You</h1>
+        <h1 class="section-heading">How can Sentiment Analaysis Benefit You</h1>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo lectus in metus tristique, 
             id mattis eros porta. Praesent congue accumsan maximus. Phasellus enim eros, convallis nec leo luctus,
@@ -76,7 +76,7 @@ Date: 09/02/2025
     </div>
     <div id="bottomHomePage">
         <div class="textArea">
-            <h1>How does it work</h1>
+            <h1 class="section-heading">How does it work</h1>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo lectus in metus tristique, 
                 id mattis eros porta. Praesent congue accumsan maximus. Phasellus enim eros, convallis nec leo luctus,
