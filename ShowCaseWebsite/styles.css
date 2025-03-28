@@ -180,7 +180,18 @@ nav li {
 footer{
   text-align: center;
   background: #4d4741f6;
+  overflow: visible;
 }
 footer p{
   margin: 0;
+}
+a.icon-link.mx-2 {
+  display: inline-block;
+  text-decoration: none;
+  color: #ff6127;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+footer a.icon-link.mx-2:hover {
+  transform: scale(1.1) !important; 
+  color: #ff4400; /* Change the color on hover */
 }
