@@ -15,11 +15,13 @@ html{
   padding: 0px;
   font-family: 'Roboto', sans-serif;
   scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 body {
   overflow-y: auto;
   margin: 0;
   overflow-x: hidden;
+  width: 100vw;
 }
 #content {
   display: flex;
@@ -48,7 +50,6 @@ h4 {
 }
 /* Tooltip container */
 .tooltip {
-  position: relative;
   display: inline-block;
   opacity: 1;
 }
@@ -69,20 +70,21 @@ h4 {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
-/* This class styles the different icons on the website */
+/* This class styles the different icons on the website 
 .icons{
   width: 40px;
   height: 40px;
-  background: white; /* White circle background */
+  background: white; 
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%; /* Makes it a circle */
+  border-radius: 50%; 
   text-decoration: none;
   color: black;
   transition: 0.3s;
   margin: 5px;
 }
+*/
 .section-heading{
   text-align: center;
   margin: 1rem;
@@ -98,6 +100,27 @@ h4 {
   margin: 0.5rem auto; /* Center the line */
   border-radius: 5px;
 }
+a.icon-link.mx-2{
+  text-decoration: none;
+  color: #ff6127;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+a.icon-link.mx-2:hover{
+  transform: scale(1.1);
+  color: #ff4400;
+}
+.btn-primary {
+  background-color: #FF5700;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #ff4400;
+  color: white;
+  transform: scale(1.1);
+  border: none;
+}
 /*
 //////////////////////////////////
 
@@ -106,20 +129,16 @@ Section for the navigation bar
 //////////////////////////////////
 */
 #navbar{
-  align-content: center;
   z-index: 100;
   position: fixed;
   top: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding: 15px 0;
+  max-width: 100vw;
+  width: 100vw;
   background-color: transparent;
   transition: background 0.6s ease, padding 0.6s ease;
 }
 #navbar.scrolled {
-  background: var(--primary);
+  background: #FF5700;
   backdrop-filter: blur(5px);
   padding: 10px 0;
   opacity: 0.8;
@@ -141,6 +160,22 @@ nav li {
 .nav-link.active{
 color: black;
 }
+.form-corntrol{
+  display: inline-block;
+  padding-right: 0;
+  width: 2px;
+}
+@media (max-width: 768px){
+  #formSection{
+    max-width: 90vw;
+  }
+}
+@media (min-width: 768px){
+  .navbar-collapse{
+    flex-basis: 0;
+    flex-grow: 0;
+  }
+}
 /*
 //////////////////////////////////
 
@@ -148,20 +183,10 @@ Section for form.html styling
 
 //////////////////////////////////
 */
-.btn-primary {
-  background-color: #fff3eb;
-  color: black;
-  border: #fc652f 2px solid;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.btn-primary:hover {
-  background-color: #ffb07c;
-  color: black;
-  border: #fc652f 2px solid;
-  transform: scale(1.1);
-}
+
 #hero{
   height: 100vh;
+  width: 100vw;
 }
 #formSection{
   display: flex;
@@ -265,6 +290,7 @@ table.formTable td {
   background: linear-gradient(-45deg, #ff5e00, #ff9532, #ff6b16, #8f3502);
   background-size: 300% 300%;
   animation: gradientAnimation 10s ease infinite;
+  width: 100vw;
 }
 /*
 //////////////////////////////////
@@ -273,6 +299,30 @@ Section for extraInformation.html styling
 
 //////////////////////////////////
 */
+.card img {
+  min-height: 5rem;
+  object-fit: contain; /* Prevent distortion */
+  background-color: #fff;
+  border: 0.5rem solid #de6b28;
+}
+.card{
+  margin: 1rem;
+  background-color: #de6b28;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  min-width: 18rem;
+  max-width: 18rem;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.card:hover{
+  transform: scale(1.05); /* Slight enlargement */
+  box-shadow: 
+        rgba(0, 0, 0, 0.6) 0px 30px 40px -10px,  /* Stronger main shadow */
+        rgba(0, 0, 0, 0.4) 0px 0px 20px; /* Soft outer glow */
+}
+.card-group a{
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  text-decoration: none; /* Remove default underline */
+}
 .textArea{
   width: 60vw;
 }
@@ -310,13 +360,6 @@ Section for extraInformation.html styling
 }
 #featureSection{
   scroll-margin-top: 75px;
-}
-#bottomHomePage {
-  background: linear-gradient(to bottom, transparent, #FF5700);
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 /*
 //////////////////////////////////
@@ -473,26 +516,9 @@ Section for footer
 //////////////////////////////////
 */
 footer{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background: #fb5500;
+  text-align: center;
+  background: #4d4741f6;
 }
-.footerSection{
-  margin: 5px;
+footer p{
+  margin: 0;
 }
-#footerIcons{
-  display: flex;
-}
-#footerSectionDivider{
-  border: 1px solid black;
-  width: 75%;
-}
-#githubIcon{
-  font-size: 20px;
-}
-#footerCopyrightSection{
-  color: #000000ba;
-}
-
-

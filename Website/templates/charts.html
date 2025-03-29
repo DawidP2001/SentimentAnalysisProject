@@ -11,10 +11,12 @@ Date: 09/02/2025
 <!--Sets global variables-->
 <script>
     setGlobalVariables({{ jsonData | tojson | safe }}, '{{ search }}');
+    const navbar = document.getElementById("navbar");
+    navbar.classList.add("scrolled");
 </script>
 
-<div id="pieChartSection" class="chartContainer">
-    <h1>Below is the breakdown of the sentiment of {{ search }}</h1>
+<div id="pieChartSection" class="chartContainer" style="margin-top: 4rem;">
+    <h1 class="section-heading">Below is the breakdown of the sentiment of {{ search }}</h1>
     <canvas id="pieChart" width="400" height="400"></canvas>
     <script>      
         displayPieChart("{{ search }}");
@@ -22,18 +24,18 @@ Date: 09/02/2025
 </div>
 <!--This section displays the breakdown of the sentiment of the posts-->
 {% include "breakdown.html" %}
-<div id="buttonSection">
-    <button onclick="moreGraphsClicked()">View More Graphs</button>
-    <button onclick="viewPostsClicked()">View Specific Posts</button>
+<div id="buttonSection" class="my-4">
+    <button onclick="moreGraphsClicked()" class="btn btn-primary m-2">View More Graphs</button>
+    <button onclick="viewPostsClicked()" class="btn btn-primary m-2">View Specific Posts</button>
     {% if userInformation %}
-    <button onclick="userInfoButtonClicked()">View User Information</button>
+    <button onclick="userInfoButtonClicked()" class="btn btn-primary m-2">View User Information</button>
     {% endif %}
 </div>
 <!--This section displays the more detailed graphs-->
 <div id="moreChartSection">
      <!-- Bar Chart for Subreddits -->
     <div id="subredditBarChartSection" class="chartContainer">
-        <h3>Post per Subreddit</h3>
+        <h3 class="section-heading">Post per Subreddit</h3>
         <canvas id="subredditBarChart" class="chart"></canvas>
         <script>      
             displaySubredditBarChart();
@@ -41,7 +43,7 @@ Date: 09/02/2025
     </div>
     <!-- Sentiment Over Time       -->
     <div id="sentimentOverTimeSection" class="chartContainer">
-        <h3>Sentiment Over Time</h3>
+        <h3 class="section-heading">Sentiment Over Time</h3>
         <canvas id="sentimentOverTimeLineGraph" class="chart"></canvas>
         <script>      
             sentimentOverTimeLineGraph();
@@ -49,21 +51,21 @@ Date: 09/02/2025
     </div>
     <!-- Wordcloud -->
     <div id="wordcloudContainer" class="chartContainer">
-        <h3>Wordcloud</h3>
+        <h3 class="section-heading">Wordcloud</h3>
         <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.0.1/dist/wordcloud.min.js"></script>
         <script>      
             displayWordCloud("{{ wordCloudData }}");
         </script>
     </div>
     <div>
-        <h3>Scatter Graph for sentiment vs Comment numbers</h3>
+        <h3 class="section-heading">Scatter Graph for sentiment vs Comment numbers</h3>
         <canvas id="sentimentAndCommentsChart" class="chart" width="800" height="400"></canvas>
         <script>      
             setSentimentAndCommentsSection();
         </script>
     </div>
     <div>
-        <h3>Scatter Graph for sentiment vs Upvotes numbers</h3>
+        <h3 class="section-heading">Scatter Graph for sentiment vs Upvotes numbers</h3>
         <canvas id="sentimentAndUpvotesChart" class="chart" width="800" height="400"></canvas>
         <script>      
             setSentimentAndUpvotesSection();

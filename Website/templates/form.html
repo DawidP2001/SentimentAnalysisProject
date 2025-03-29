@@ -290,12 +290,12 @@ Date: 09/02/2025
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-6 d-flex justify-content-center align-items-center flex-column">
-            <h1 class="display-1 mt-5 text-white">Discover unique insights on Reddit</h1>
-            <h4>
-            Here you can enter any topic, give selected paramters and be given a detailed report
-            </h4>
+            <div class="col-6 d-flex justify-content-center align-items-center flex-column">
+                <h1 class="display-1 mt-5 text-white">Discover unique insights on Reddit</h1>
+                <h4>
+                    Enter any topic and be given a detailed report on the sentiment of the posts and comments related to it.
+                </h4>
+            </div>
         </div>
     </section>
 </div>
@@ -311,5 +311,16 @@ Date: 09/02/2025
             loader.style.display = 'none';
         }
     }
+    });
+    window.addEventListener("scroll", function () {
+    const navbar = document.getElementById("navbar");
+    const icons = document.querySelectorAll(".tooltip"); // Target the icons
+        if (window.scrollY > 50 ) {
+            navbar.classList.add("scrolled");
+            //icons.forEach(icon => icon.classList.add("blurred")); // Add blur effect
+        } else {
+            navbar.classList.remove("scrolled");
+            //icons.forEach(icon => icon.classList.remove("blurred")); // Remove blur effect
+        }
     });
 </script>
