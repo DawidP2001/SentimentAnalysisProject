@@ -16,7 +16,7 @@ Date: 09/02/2025
 </script>
 
 <div id="pieChartSection" class="chartContainer" style="margin-top: 4rem;">
-    <h1 class="section-heading">Below is the breakdown of the sentiment of {{ search }}</h1>
+    <h1 class="section-heading display-1">Below is the breakdown of the sentiment of {{ search }}</h1>
     <canvas id="pieChart" width="400" height="400"></canvas>
     <script>      
         displayPieChart("{{ search }}");
@@ -34,7 +34,7 @@ Date: 09/02/2025
 <!--This section displays the more detailed graphs-->
 <div id="moreChartSection">
      <!-- Bar Chart for Subreddits -->
-    <div id="subredditBarChartSection" class="chartContainer">
+    <div id="subredditBarChartSection" class="chartContainer my-5">
         <h3 class="section-heading">Post per Subreddit</h3>
         <canvas id="subredditBarChart" class="chart"></canvas>
         <script>      
@@ -42,7 +42,7 @@ Date: 09/02/2025
         </script>
     </div>
     <!-- Sentiment Over Time       -->
-    <div id="sentimentOverTimeSection" class="chartContainer">
+    <div id="sentimentOverTimeSection" class="chartContainer  my-5">
         <h3 class="section-heading">Sentiment Over Time</h3>
         <canvas id="sentimentOverTimeLineGraph" class="chart"></canvas>
         <script>      
@@ -50,21 +50,21 @@ Date: 09/02/2025
         </script>
     </div>
     <!-- Wordcloud -->
-    <div id="wordcloudContainer" class="chartContainer">
+    <div id="wordcloudContainer" class="chartContainer  my-5">
         <h3 class="section-heading">Wordcloud</h3>
         <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.0.1/dist/wordcloud.min.js"></script>
         <script>      
             displayWordCloud("{{ wordCloudData }}");
         </script>
     </div>
-    <div>
-        <h3 class="section-heading">Scatter Graph for sentiment vs Comment numbers</h3>
+    <div class="my-5">
+        <h3 class="section-heading ">Scatter Graph for sentiment vs Comment numbers</h3>
         <canvas id="sentimentAndCommentsChart" class="chart" width="800" height="400"></canvas>
         <script>      
             setSentimentAndCommentsSection();
         </script>
     </div>
-    <div>
+    <div class="my-5">
         <h3 class="section-heading">Scatter Graph for sentiment vs Upvotes numbers</h3>
         <canvas id="sentimentAndUpvotesChart" class="chart" width="800" height="400"></canvas>
         <script>      
