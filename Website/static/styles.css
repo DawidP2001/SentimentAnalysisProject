@@ -108,18 +108,58 @@ a.icon-link.mx-2{
 a.icon-link.mx-2:hover{
   transform: scale(1.1);
   color: #ff4400;
-}
-.btn-primary {
-  background-color: #FF5700;
-  color: white;
+}.btn-primary {
+  background-color: #FF5700 !important;
+  color: white !important;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  border: none;
+  border: none !important;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  outline: none !important;
+  box-shadow: none !important;
 }
+
 .btn-primary:hover {
-  background-color: #ff4400;
-  color: white;
+  background-color: #ff4400 !important;
   transform: scale(1.1);
-  border: none;
+}
+
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:focus-visible {
+  background-color: #f8430c !important; /* Darker shade on click */
+  color: white !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: scale(1.05);
+}
+
+/* Outline Primary Button */
+.btn-outline-primary {
+  background-color: transparent !important;
+  color: #FF5700 !important;
+  border: 2px solid #FF5700 !important;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: #FF5700 !important;
+  color: white !important;
+  transform: scale(1.1);
+}
+
+.btn-outline-primary:active,
+.btn-outline-primary:focus,
+.btn-outline-primary:focus-visible {
+  background-color: transparent !important;
+  border-color: #FF5700 !important;
+  color: #FF5700 !important;
+  transform: scale(1);
+  box-shadow: none !important;
 }
 /*
 //////////////////////////////////
@@ -176,6 +216,7 @@ color: black;
     flex-grow: 0;
   }
 }
+
 /*
 //////////////////////////////////
 
@@ -410,6 +451,7 @@ Section for only the chart.html
 #wordcloudSVG{
   width:  500px;
   height: 500px;
+  align-self: center;
 }
 /*
 //////////////////////////////////
@@ -425,13 +467,21 @@ Section for breakdown.html
   justify-content: center;
 }
 #breakdownTable{
-  border: solid 1px black;
+  background: #FF8b60;
+  box-shadow: 15px 15px 20px grey;
+  border: 3px solid white;
 }
 #breakdownTable td{
-  border: solid 1px black;
+  border-top: 1px solid white;
+  padding: 5px;
+  text-align: center;
+  border-right: 1px dashed white;
+}
+#breakdownTable td:first-child {
+  text-align: left; /* Align the first cell of each row to the left */
 }
 #breakdownTable th{
-  border: solid 1px black;
+  text-align: center;
 }
 #breadownTable tr{
   border: solid 1px black;
@@ -453,9 +503,6 @@ Section for viewPosts.html
 }
 #sentimentPostsSection {
   display: flex;
-  overflow: scroll;
-  overflow-x: auto;
-  height: 400px;
 }
 .sentimentSection {
   text-align: center;
@@ -463,9 +510,11 @@ Section for viewPosts.html
 }
 .sentimentSection button {
   width: 100%;
-  margin: 5px;
+  box-sizing: border-box;
 }
-
+.modalBtn{
+  border:2px solid rgba(77, 71, 65, 0.965);
+}
 
 /* Style for the background of a modal */
 .modal {

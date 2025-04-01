@@ -84,6 +84,34 @@ Section for charts.html functions
 
 //////////////////////////////////
 */
+// This function is called when the view more grpahs button is cl;icked
+function moreGraphsClicked(){
+  userInfo = document.getElementById("userInfoContainer");
+  chartsSection = document.getElementById("moreChartSection");
+  postSection = document.getElementById("viewPostsSection");
+  userInfo.style.display = "none";
+  chartsSection.style.display = "flex";
+  postSection.style.display = "none";
+}
+
+// This function is called when the view specific posts button is clicked
+function viewPostsClicked(){
+  userInfo = document.getElementById("userInfoContainer");
+  chartsSection = document.getElementById("moreChartSection");
+  postSection = document.getElementById("viewPostsSection");
+  userInfo.style.display = "none";
+  chartsSection.style.display = "none";
+  postSection.style.display = "block";
+}
+// This function is called when the user clicks the extra user information button
+function userInfoButtonClicked(){
+  userInfo = document.getElementById("userInfoContainer");
+  chartsSection = document.getElementById("moreChartSection");
+  postSection = document.getElementById("viewPostsSection");
+  userInfo.style.display = "block";
+  chartsSection.style.display = "none";
+  postSection.style.display = "none";
+}
 /** This section contains function for the pie Chart */
 
 // This is a simple Pie Chart that displays the proportion of sentiment for the querry user made
@@ -996,15 +1024,15 @@ function setViewPostsSection(){
 function addPost(entry, section){
   if(entry.title == "N/A"){
     text = entry.selftext;
-    if(text.length > 50){
-      text = text.substring(0, 50) + "...";
-    }
   } else {
     text = entry.title;
   }
+  if(text.length > 100){
+    text = text.substring(0, 100) + "...";
+  }
   htmlString = 
   `<button
-    class="modalBtn"
+    class="modalBtn my-2"
       data-title="${entry.title}"
       data-subreddit="${entry.subreddit}"
       data-compoundScore="${entry.compoundScore}"
@@ -1048,77 +1076,10 @@ function downloadCSV(){
 /*
 //////////////////////////////////
 
-Section for userInfo.html
+Section for ViewPosts.html
 
 //////////////////////////////////
 */
-
-/*
-//////////////////////////////////
-
-Section for other
-
-//////////////////////////////////
-*/
-// This function is called when the view more grpahs button is cl;icked
-function moreGraphsClicked(){
-  userInfo = document.getElementById("userInfoContainer");
-  chartsSection = document.getElementById("moreChartSection");
-  postSection = document.getElementById("viewPostsSection");
-  userInfo.style.display = "none";
-  chartsSection.style.display = "flex";
-  postSection.style.display = "none";
-}
-
-// This function is called when the view specific posts button is clicked
-function viewPostsClicked(){
-  userInfo = document.getElementById("userInfoContainer");
-  chartsSection = document.getElementById("moreChartSection");
-  postSection = document.getElementById("viewPostsSection");
-  userInfo.style.display = "none";
-  chartsSection.style.display = "none";
-  postSection.style.display = "block";
-}
-// This function is called when the user clicks the extra user information button
-function userInfoButtonClicked(){
-  userInfo = document.getElementById("userInfoContainer");
-  chartsSection = document.getElementById("moreChartSection");
-  postSection = document.getElementById("viewPostsSection");
-  userInfo.style.display = "block";
-  chartsSection.style.display = "none";
-  postSection.style.display = "none";
-}
-
-// This function is called when the user clicks the post button
-function postButtonClicked(){
-  expandableArea = document.getElementById("expandablePostDetails");
-  expandableArea.style.display = "flex";
-  expandableArea.style.flexDirection = "row";
-  expandableArea.style.justifyContent = "space-around";
-}
-
-// This section is responsible for displaying the form associated with a tab
-function selectTab(evt, section) {
-  document.getElementById("searchBarTopic").style.display = "none";
-  tabcontent = document.getElementsByClassName("tabContent");
-  tab = document.getElementsByClassName("tab");
-  // Hides other tab content and turns off the active element
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-    tab[i].className = tab[i].className.replace(" active", "");
-  }
-  document.getElementById(section).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-
-// This function scrolls to a given element
-function scrollToElement(section){
-  element = document.getElementById(section);
-  let offset = 50; // Adjust this value for desired spacing
-  let elementPosition = element.getBoundingClientRect().top + window.scrollY;
-  window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
-}
-
 // This function is called when the user clicks a specifc post on the view posts page
 function postClicked(button){
   var modal = document.getElementById("myModal");
@@ -1190,6 +1151,46 @@ function postClicked(button){
   urlSection = document.getElementById("urlSection");
   urlSection.innerHTML = `<a href="${url}">link</a>`;
 }
+
+/*
+//////////////////////////////////
+
+Section for other
+
+//////////////////////////////////
+*/
+
+
+// This function is called when the user clicks the post button
+function postButtonClicked(){
+  expandableArea = document.getElementById("expandablePostDetails");
+  expandableArea.style.display = "flex";
+  expandableArea.style.flexDirection = "row";
+  expandableArea.style.justifyContent = "space-around";
+}
+
+// This section is responsible for displaying the form associated with a tab
+function selectTab(evt, section) {
+  document.getElementById("searchBarTopic").style.display = "none";
+  tabcontent = document.getElementsByClassName("tabContent");
+  tab = document.getElementsByClassName("tab");
+  // Hides other tab content and turns off the active element
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+    tab[i].className = tab[i].className.replace(" active", "");
+  }
+  document.getElementById(section).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// This function scrolls to a given element
+function scrollToElement(section){
+  element = document.getElementById(section);
+  let offset = 50; // Adjust this value for desired spacing
+  let elementPosition = element.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
+}
+
 
 // Shows the loader when the user submits a form
 function showLoader(){

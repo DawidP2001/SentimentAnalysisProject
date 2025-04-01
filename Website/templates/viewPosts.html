@@ -4,30 +4,19 @@ Description: This file is responsible for displaying each individual post, its s
             information associated with it
 Date: 09/02/2025
 -->
-<!--This section lets you sort the order of the posts that are displayed-->
-<h2>Sorting under construction</h2>
-<div id="sentimentPostsSortSection">
-    <input type="button" value="Sort by Score" onclick="sortPostsByScore()">
-    <input type="button" value="Sort by Subreddit" onclick="">
-    <input type="button" value="Sort by Date" onclick="sortPostsByDate()">
-    <div id="dateSortSection">
-        <input type="date" id="fromDate" name="fromDate">
-        <input type="date" id="toDate" name="toDate">
-        <input type="button" value="Filter by Date" onclick="filterPostsByDate()">
-    </div>
+<div class="container mb-5 d-flex flex-column align-items-center">
+    <button class="btn btn-outline-primary mb-3" onclick="downloadCSV()">Download CSV</button>
 </div>
-<h1>Add here section to download to excel or csv</h1>
-<button onclick="downloadCSV()">Download CSV</button>
 <!--This section displays the sentiment sections as well as the posts within each sentiment list-->
 <div id="sentimentPostsSection">
-    <div class="sentimentSection" id="positiveSentimentSection">
-        <h1>Positive Section</h1>
+    <div class="sentimentSection mx-3" id="positiveSentimentSection">
+        <h1 class="section-heading">Positive Section</h1>
     </div>
-    <div class="sentimentSection" id="neutralSentimentSection">
-        <h1>Neutral Section</h1>
+    <div class="sentimentSection mx-3" id="neutralSentimentSection">
+        <h1 class="section-heading">Neutral Section</h1>
     </div>
-    <div class="sentimentSection" id="negativeSentimentSection">
-        <h1>Negative Section</h1>
+    <div class="sentimentSection mx-3" id="negativeSentimentSection">
+        <h1 class="section-heading">Negative Section</h1>
     </div>
 </div>
 <!-- This Modal contains detail information of each post -->
