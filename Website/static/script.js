@@ -1049,8 +1049,8 @@ function addPost(entry, section){
       data-selfText="${entry.selftext}"
       data-url="${entry.url}"
       onclick="postClicked(this)">           
-          Text: ${text}<br>
-          Score:${entry.compoundScore}<br>
+          ${text}<br>
+          Score: ${entry.compoundScore}<br>
     </button>`;
     section.innerHTML += htmlString;
 }

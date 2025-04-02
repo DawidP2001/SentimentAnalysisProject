@@ -514,6 +514,14 @@ Section for viewPosts.html
 }
 .modalBtn{
   border:2px solid rgba(77, 71, 65, 0.965);
+  background-color: #ffbb9b;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+.modalBtn:hover{
+  background-color: #ff4400;
+  transform: scale(1.1);
 }
 
 /* Style for the background of a modal */
