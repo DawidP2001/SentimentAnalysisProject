@@ -34,6 +34,12 @@ nav li {
 .nav-link.active{
   color: black;
 }
+.nav-link{
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
 /*/////////////////////////////////////////
     HERO SECTION
 //////////////////////////////////////////*/
