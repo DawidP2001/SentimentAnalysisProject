@@ -1137,7 +1137,7 @@ function postClicked(button){
   permalink = button.getAttribute("data-permalink");
   permalink = `https://www.reddit.com/${permalink}`;
   permalinkSection = document.getElementById("permalinkSection");
-  permalinkSection.innerHTML = `<a href=${permalink}>link</>`;
+  permalinkSection.innerHTML = `<a class="btn btn-primary" href=${permalink}>View Post</a>`;
 
   upvotes = button.getAttribute("data-upvotes");
   upvotesSection = document.getElementById("upvotesSection");
