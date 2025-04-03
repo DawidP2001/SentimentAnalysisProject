@@ -1049,8 +1049,8 @@ function addPost(entry, section){
       data-selfText="${entry.selftext}"
       data-url="${entry.url}"
       onclick="postClicked(this)">           
-          Text: ${text}<br>
-          Score:${entry.compoundScore}<br>
+          ${text}<br>
+          Score: ${entry.compoundScore}<br>
     </button>`;
     section.innerHTML += htmlString;
 }
@@ -1137,7 +1137,7 @@ function postClicked(button){
   permalink = button.getAttribute("data-permalink");
   permalink = `https://www.reddit.com/${permalink}`;
   permalinkSection = document.getElementById("permalinkSection");
-  permalinkSection.innerHTML = `<a href=${permalink}>link</>`;
+  permalinkSection.innerHTML = `<a class="btn btn-primary" href=${permalink}>View Post</a>`;
 
   upvotes = button.getAttribute("data-upvotes");
   upvotesSection = document.getElementById("upvotesSection");

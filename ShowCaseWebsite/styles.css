@@ -34,6 +34,12 @@ nav li {
 .nav-link.active{
   color: black;
 }
+.nav-link{
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
 /*/////////////////////////////////////////
     HERO SECTION
 //////////////////////////////////////////*/
@@ -173,6 +179,19 @@ nav li {
   box-shadow: 
         rgba(0, 0, 0, 0.6) 0px 30px 40px -10px,  /* Stronger main shadow */
         rgba(0, 0, 0, 0.4) 0px 0px 20px; /* Soft outer glow */
+}
+#technologies .card-group .card{
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+#technologies .card-group .card:hover{
+  transform: scale(1.05); /* Slight enlargement */
+  box-shadow: 
+        rgba(0, 0, 0, 0.6) 0px 30px 40px -10px,  /* Stronger main shadow */
+        rgba(0, 0, 0, 0.4) 0px 0px 20px; /* Soft outer glow */
+}
+#features .text-secondary{
+  font-weight: bold;
+  text-align: center;
 }
 /*/////////////////////////////////////////
     FOOTER SECTION
