@@ -1084,7 +1084,8 @@ Section for ViewPosts.html
 function postClicked(button){
   var modal = document.getElementById("myModal");
   modal.style.display = "block";
-
+  document.body.classList.add("modal-open"); // Disable background scroll
+  
   title= button.getAttribute("data-title");
   titleSection = document.getElementById("titleSection");
   titleSection.innerHTML = title;
@@ -1146,12 +1147,7 @@ function postClicked(button){
   upvoteRatio = button.getAttribute("data-upvoteRatio");
   upvoteRatioSection = document.getElementById("upvoteRatioSection");
   upvoteRatioSection.innerHTML = upvoteRatio;
-
-  url = button.getAttribute("data-url");
-  urlSection = document.getElementById("urlSection");
-  urlSection.innerHTML = `<a href="${url}">link</a>`;
 }
-
 /*
 //////////////////////////////////
 
