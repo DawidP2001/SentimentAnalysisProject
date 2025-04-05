@@ -25,19 +25,19 @@ Date: 09/02/2025
     <table class="modal-table">
         <tr>
             <td class="modal-heading">Title:</td>
-            <td>
-                <h3 id="titleSection" class="modal-text"></h3>
+            <td colspan="3">
+                <p id="titleSection" class="modal-text"></p>
             </td>
         </tr>
         <tr>
             <td class="modal-heading">Contents:</td>
-            <td>
+            <td colspan="3">
                 <p id="selfTextSection" class="modal-text"></p>
             </td>
         </tr>
         <tr>
             <td class="modal-heading">Subreddit:</td>
-            <td>
+            <td colspan="3">
                 <p id="subredditSection" class="modal-text"></p>
             </td>
         </tr>
@@ -82,23 +82,18 @@ Date: 09/02/2025
             </td>
         </tr>
         <tr>
-            <td class="modal-heading">Link:</td>
-            <td>
-                <p id="permalinkSection" class="modal-text"></p>
-            </td>
             <td class="modal-heading">Upvotes:</td>
             <td>
                 <p id="upvotesSection" class="modal-text"></p>
             </td>
-        </tr>
-        <tr>
             <td class="modal-heading">Upvotes Ratio:</td>
             <td>
                 <p id="upvoteRatioSection" class="modal-text"></p>
             </td>
-            <td class="modal-heading">URL:</td>
-            <td>
-                <p id="urlSection" class="modal-text"></p>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <p id="permalinkSection" class="modal-text" style="text-align:center"></p>
             </td>
         </tr>
     </table>
@@ -113,6 +108,7 @@ var buttons = document.getElementsByClassName("modalBtn");
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    document.body.classList.remove("modal-open");
   }
 }
 </script>

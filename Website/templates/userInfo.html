@@ -8,39 +8,39 @@ Date: 09/02/2025
     setRedditorJSONData({{ redditorData | tojson | safe }});
 </script>
 <div id="userInfo">
-    <h1>{{ redditorData['name'] }}</h1>
-    <table>
+    <h1 class="section-heading">{{ redditorData['name'] }}</h1>
+    <table class="modal-table">
         <tr>
-            <td>Comment Karma</td>
-            <td>{{ redditorData['comment_karma'] }}</td>
+            <td class="modal-heading">Comment Karma</td>
+            <td class="modal-text">{{ redditorData['comment_karma'] }}</td>
         </tr>
         <tr>
-            <td>created_utc</td>
-            <td>{{ redditorData['created_utc'] }}</td>
+            <td class="modal-heading">Created On</td>
+            <td class="modal-text">{{ redditorData['created_utc'] }}</td>
         </tr>
         <tr>
-            <td>redditorHasVerifiedEmail</td>
-            <td>{{ redditorData['id'] }}</td>
+            <td class="modal-heading">Verified Email</td>
+            <td class="modal-text">{{ redditorData['id'] }}</td>
         </tr>
         <tr>
-            <td>Is Employee?</td>
-            <td>{{ redditorData['is_employee'] }}</td>
+            <td class="modal-heading">Reddit Employee</td>
+            <td class="modal-text">{{ redditorData['is_employee'] }}</td>
         </tr>
         <tr>
-            <td>Does mod any subreddits?</td>
-            <td>{{ redditorData['is_mod'] }}</td>
+            <td class="modal-heading">Does mod any subreddits?</td>
+            <td class="modal-text">{{ redditorData['is_mod'] }}</td>
         </tr>
         <tr>
-            <td>Does redditor has active Reddit Premium?</td>
+            <td class="modal-heading">Reddit Premium Account</td>
             <td>{{ redditorData['is_gold'] }}</td>
         </tr>
         <tr>
-            <td>Whether the user is suspended?</td>
-            <td>{{ redditorData['is_suspended'] }}</td>
+            <td class="modal-heading">Suspended Account</td>
+            <td class="modal-text">{{ redditorData['is_suspended'] }}</td>
         </tr>
         <tr>
-            <td>Redditor Link karma</td>
-            <td>{{ redditorData['link_karma'] }}</td>
+            <td class="modal-heading">Redditor Link karma</td>
+            <td class="modal-text">{{ redditorData['link_karma'] }}</td>
         </tr>
     </table>
 </div>
