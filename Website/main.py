@@ -1,6 +1,10 @@
-# Author: Dawid Pionk
-# Description: This file is the main file that manages the entire system
-# Date: 09/02/2025
+"""
+@file main.py
+@brief This file is the main entry point for the Sentiment Analysis Project.
+@details It manages the Flask application, routes, and interactions with the Reddit API and other utilities.
+@date 28/04/2025
+@author Dawid Pionk
+"""
 
 import datetime
 from flask import Flask, request, render_template, session, send_file
@@ -15,11 +19,12 @@ app = Flask(__name__)
 
 app.secret_key = os.getenv("Secret_Key")
 
-# This is the default page that gets opened when the website is accessed
 @app.route('/')
 def index():
     """
-    This function is used to show the default page
+    This function is used to show the default page.
+
+    @return Rendered HTML template for the index page.
     """
     googleTrendingTopics = Utils.getGoogleTrendingTopics()
     worldwideTrendingList = googleTrendingTopics[0]
@@ -43,6 +48,8 @@ def index():
 def scrollToTrending():
     """
     This function is used to scroll to the the trending section on the main page
+
+    @return Rendered HTML template for the index page at the trending section.
     """
     googleTrendingTopics = Utils.getGoogleTrendingTopics()
     worldwideTrendingList = googleTrendingTopics[0]
@@ -66,6 +73,8 @@ def scrollToTrending():
 def scrollToAbout():
     """
     This function is used to scroll to the the about section on the main page
+
+    @return Rendered HTML template for the index page at the about section.
     """
     googleTrendingTopics = Utils.getGoogleTrendingTopics()
     worldwideTrendingList = googleTrendingTopics[0]
@@ -90,6 +99,8 @@ def scrollToAbout():
 def submitTopic():
     """
     This function is used to collect data from the main page form and display the sentiment analysis page for a topic.
+
+    @return Rendered HTML template for the sentiment analysis page for a topic.
     """
     # Below extracts data from the form
     search = request.form["searchTopic"] # This contains the topic from the search
@@ -118,6 +129,8 @@ def submitTopic():
 def submitUser():
     """
     This function is used to collect data from the main page form and display the sentiment analysis page for a user.
+
+    @return Rendered HTML template for the sentiment analysis page for a user.
     """
     # Below extracts data from the form
     user = request.form["searchUser"] # This contains the topic from the search
@@ -151,6 +164,8 @@ def submitUser():
 def submitSubrredit():
     """
     This function is used to collect data from the main page form and display the sentiment analysis page for a subreddit.
+
+    @return Rendered HTML template for the sentiment analysis page for a subreddit.
     """
     # Below extracts data from the form
     subreddit = request.form["searchSubreddit"] # This contains the topic from the search
@@ -177,6 +192,8 @@ def submitSubrredit():
 def submitComment():
     """
     This function is used to collect data from the main page form and display the sentiment analysis page for a comment.
+
+    @return Rendered HTML template for the sentiment analysis page for a post.
     """
     # Below extracts data from the form
     searchType = request.form["typeOfSearchComment"] # This contains the topic from the search
@@ -201,6 +218,8 @@ def submitComment():
 def submitDomain():
     """
     This function is used to collect data from the main page form and display the sentiment analysis page for a domain.
+
+    @return Rendered HTML template for the sentiment analysis page for a domain.
     """
     # Below extracts data from the form
     searchContents = request.form["searchDomain"] # This contains the topic from the search

@@ -1,15 +1,22 @@
-#Author: Dawid Pionk
-#Date: 05/12/2024
-#Description: This File stores code required for sentiment analysis of the posts
+"""
+@file SentimenAnalyser.py
+@brief This file contains functions used to analyse sentiment of text using the VADER and RoBERTa models.
+@date 27/04/2025
+@author Dawid Pionk
+"""
 
 from transformers import pipeline
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from Utility import DataHandler as d
 
-#This function analyses sentiment of passed in text
-#param data: The text to analyse
-#return: A list containing the text, Classification and score
 def analyseSentiment(data):
+    """
+    @brief This function analyses sentiment of passed in text using the RoBERTa model.
+
+    @param data - The text to analyse.
+
+    @return A list containing the text, Classification and score.
+    """
     sentiment_pipeline = pipeline(model='cardiffnlp/twitter-roberta-base-sentiment')
     results = sentiment_pipeline(data)
     i=0
@@ -25,6 +32,13 @@ def analyseSentiment(data):
     return results
 
 def getSentimentScores(data):
+    """
+    @brief This function analyzes the sentiment of post titles and text and returns sentiment scores.
+
+    @param data - A DataFrame containing Reddit post data, where the 'title' column will be used for sentiment analysis.
+
+    @return A list of dictionaries, each containing the initial data with sentiment scores and labels.
+    """
     analyzer = SentimentIntensityAnalyzer()
     results = []
     textList = data['title'].tolist()

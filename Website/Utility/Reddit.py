@@ -1,7 +1,8 @@
 """
-Author: Dawid Pionk
-Date: 25/01/2025
-Description: This file contains functions which are used to query the Reddit API using praw
+@file Reddit.py
+@brief This file contains functions used to query the Reddit API using PRAW.
+@date 27/04/2025
+@author Dawid Pionk
 """
 
 import praw
@@ -17,17 +18,42 @@ reddit = praw.Reddit(
     client_secret=APP_SECRET,
     user_agent="SentimentAnalysisTool/v1.0 by xxx_madlad_xxx"
 )
-# This function queries the Reddit API for a specific subreddit
 def queryAPI(query: str, subreddit: str, querySize: str):
+    """
+    @brief This function queries the Reddit API for a specific subreddit
+
+    @param query - The topic to search for
+    @param subreddit - The name of the subreddit to search within.
+    @param querySize - The number of results to retrieve, specified as a string.
+
+    @return A list of search results (Reddit submission objects) matching the query.
+    """
     qeuerySizeInt = int(querySize)
     results = reddit.subreddit(subreddit).search(query, limit=qeuerySizeInt)
     return results
 
 def getRedditor(userString: str):
-    return reddit.redditor(userString)
+    """
+    @brief Retrieves a Redditor object
 
-# This function extracts data from a user search
+    @param userString - The username of the Redditor to be fetched.
+
+    @return A Redditor object
+    """
+    return reddit.redditor(userString)
+ 
 def queryUser(redditor: str, typeOfPost: str, typeOfSearch: str, searchTimeFrame: str, querySize: str):
+    """
+    @brief This function extracts data from a user search
+
+    @param redditor - The Redditor whose posts or comments are to be queried.
+    @param typeOfPost - Specifies whether to search for 'submissions' or 'comments'.
+    @param typeOfSearch - Defines the type of search (e.g., 'hot', 'new', 'top', 'controversial' for submissions).
+    @param searchTimeFrame - Specifies the time frame for searching 'top' or 'controversial' posts (e.g., 'week', 'month').
+    @param querySize - The number of results to retrieve (specified as a string, will be converted to integer).
+
+    @return A list of submission or comment objects based on the specified query parameters.
+    """
     querySizeInt = int(querySize)
     # This is for searching for redditors submissions
     if typeOfPost == "submissions":
@@ -49,8 +75,17 @@ def queryUser(redditor: str, typeOfPost: str, typeOfSearch: str, searchTimeFrame
     elif typeOfPost == "downvoted":
         return redditor.downvoted(limit=querySizeInt)
     
-# This function extracts specific data from a subreddit
 def querySubreddit(subreddit: str, type: str, querySize: str, timeFrame: str):
+    """
+    @brief This function extracts specific data from a subreddit
+
+    @param subreddit - The name of the subreddit to query.
+    @param type - Specifies the type of posts to retrieve (e.g., 'hot', 'new', 'top', 'controversial').
+    @param querySize - The number of posts to retrieve (specified as a string, will be converted to integer).
+    @param timeFrame - A time filter for 'top' or 'controversial' posts (e.g., 'week', 'month').
+
+    @return A list of submission objects from the specified subreddit based on the search criteria.
+    """
     querySizeInt = int(querySize)
     if type == "hot":
         return reddit.subreddit(subreddit).hot(limit=querySizeInt)
@@ -63,8 +98,17 @@ def querySubreddit(subreddit: str, type: str, querySize: str, timeFrame: str):
     else:
         return reddit.subreddit(subreddit).hot(limit=querySizeInt)
 
-# This function queries the Reddit API for comments from a post
 def queryComment(searchType, contents, sortBy, querySize):
+    """
+    @brief This function queries the Reddit API for comments from a post
+
+    @param searchType - Type of search, can be either "link" (URL) or "id" (Post ID).
+    @param contents - The URL or post ID to fetch comments for.
+    @param sortBy - The sorting criteria for comments
+    @param querySize - The maximum number of comments to return
+
+    @return A list of comment objects, limited to the specified query size.
+    """
     if searchType == "link":
         submission = reddit.submission(url=contents)    
     elif searchType == "id":
@@ -79,8 +123,17 @@ def queryComment(searchType, contents, sortBy, querySize):
     commentsList = submission.comments.list()[:querySizeInt] 
     return commentsList
 
-# This function queries the Reddit API for a specific domains
 def queryDomain(searchContents, typeOfSearch, searchTimeFrame, querySize):
+    """
+    @brief This function queries the Reddit API for a specific domains
+
+    @param searchContents - The domain or URL to search for posts related to (e.g., 'example.com').
+    @param typeOfSearch - Specifies the type of posts to retrieve
+    @param searchTimeFrame - A time filter for "top" or "controversial" posts. Options include 'hour', 'day', 'week', 'month', 'year', 'all'.
+    @param querySize - The number of posts to retrieve
+
+    @return A list of posts related to the specified domain, filtered by the specified search criteria.
+    """
     querySizeInt = int(querySize)
     match typeOfSearch:
         case "hot":
