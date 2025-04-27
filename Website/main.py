@@ -7,7 +7,7 @@
 """
 
 import datetime
-from flask import Flask, request, render_template, session, send_file
+from flask import Flask, request, render_template, redirect, url_for
 from Utility import Reddit as r
 from Utility import Utils
 from Utility import DataHandler as d
@@ -242,6 +242,44 @@ def submitDomain():
             search = searchContents
         )
 
+@app.errorhandler(Exception)
+def handle_exception(e):
+    """
+    Handles all unhandled exceptions and redirects to the home page.
+
+    @param e - The exception object.
+
+    @return Redirect to the home page.
+    """
+    logging.error(f"An unexpected error occurred: {e}")
+    return redirect(url_for('error', message="An unexpected error occurred."))
+
+@app.route('/error', defaults={'message': 'An unknown error occurred'})
+@app.route('/error/<message>')
+def error(message):
+    """
+    This function is used to show the default page with an error message.
+
+    @return Rendered HTML template for the index page.
+    """
+    googleTrendingTopics = Utils.getGoogleTrendingTopics()
+    worldwideTrendingList = googleTrendingTopics[0]
+    irelandTrendingList = googleTrendingTopics[1]
+    ukTrendingList = googleTrendingTopics[2]
+    usTrendingList = googleTrendingTopics[3]
+    return render_template( 
+            'index.html',
+            form=True, 
+            charts=False,
+            scrollToTrending=False,
+            scrollToAbout=False,
+            userInformation=False,
+            worldwideTrendingList=worldwideTrendingList,
+            irelandTrendingList=irelandTrendingList,
+            ukTrendingList=ukTrendingList,
+            usTrendingList=usTrendingList,
+            errorMessage=message
+        )
 
 if __name__ == '__main__':  
    app.run()  
