@@ -1,8 +1,10 @@
-/*
-Author: Dawid Pionk
-Description: This file contains majority of the javascript used by the website
-Date: 09/02/2025
-*/
+/**
+ * @file script.js
+ * @brief This file contains the majority of the JavaScript used by the website.
+ * @details It includes functions for handling forms, charts, modals, and other interactive elements on the website.
+ * @date 27/04/2025
+ * @author Dawid Pionk
+ */
 /*
 //////////////////////////////////
 
@@ -15,17 +17,34 @@ let jsonData;
 let redditorJSONData;
 let search;
 
+/**
+ * @brief Sets global variables for the application.
+ * @param {string} jsondata - The JSON data to set.
+ * @param {string} searchTopic - The search topic to set.
+ */
 function setGlobalVariables(jsondata, searchTopic){
   setjsonData(jsondata);
   setSearch(searchTopic);
 }
+/**
+ * @brief Parses and sets the JSON data.
+ * @param {string} data - The JSON data to parse and set.
+ */
 function setjsonData(data){
   jsonData = JSON.parse(data);
 }
+/**
+ * @brief Sets the search topic in lowercase.
+ * @param {string} searchTopic - The search topic to set.
+ */
 function setSearch(searchTopic){
   searchTopic = searchTopic.toLowerCase();
   search = searchTopic;
 }
+/**
+ * @brief Sets the Redditor JSON data.
+ * @param {Object} data - The Redditor JSON data to set.
+ */
 function setRedditorJSONData(data){
   redditorJSONData = data;
 }
@@ -37,7 +56,7 @@ Section for the functions used on form.html
 //////////////////////////////////
 */
 /** 
- * This function changes the placeholder on the searchComment element based on which option 
+ * @brief This function changes the placeholder on the searchComment element based on which option 
  * in typeOfSearchComment is selected 
  * 
  * @param {HTMLSelectElement} select - The dropdown that triggered the change event
@@ -59,6 +78,10 @@ Section for extraInformation.html functions
 
 //////////////////////////////////
 */
+/**
+ * @brief Displays more rows in the trending topics table.
+ * @param {HTMLButtonElement} button - The button that triggered the event.
+ */
 function viewMoreTrends(button){
   table = document.getElementById("trendingTopicsTable");
   rows = table.rows;
@@ -68,6 +91,10 @@ function viewMoreTrends(button){
   button.hidden = true;
   document.getElementById("viewLessTrends").removeAttribute("hidden");
 }
+/**
+ * @brief Hides extra rows in the trending topics table.
+ * @param {HTMLButtonElement} button - The button that triggered the event.
+ */
 function viewLessTrends(button){
   table = document.getElementById("trendingTopicsTable");
   rows = table.rows;
@@ -84,7 +111,9 @@ Section for charts.html functions
 
 //////////////////////////////////
 */
-// This function is called when the view more grpahs button is cl;icked
+/**
+ * @brief Toggles whether the graphs are displayed 
+ */
 function moreGraphsClicked(){
   userInfo = document.getElementById("userInfoContainer");
   chartsSection = document.getElementById("moreChartSection");
@@ -93,8 +122,9 @@ function moreGraphsClicked(){
   chartsSection.style.display = "flex";
   postSection.style.display = "none";
 }
-
-// This function is called when the view specific posts button is clicked
+/**
+ * @brief This function is called when the view specific posts button is clicked
+ */
 function viewPostsClicked(){
   userInfo = document.getElementById("userInfoContainer");
   chartsSection = document.getElementById("moreChartSection");
@@ -103,7 +133,9 @@ function viewPostsClicked(){
   chartsSection.style.display = "none";
   postSection.style.display = "block";
 }
-// This function is called when the user clicks the extra user information button
+/**
+ * @brief This function is called when the user clicks the extra user information button
+ */
 function userInfoButtonClicked(){
   userInfo = document.getElementById("userInfoContainer");
   chartsSection = document.getElementById("moreChartSection");
@@ -114,7 +146,11 @@ function userInfoButtonClicked(){
 }
 /** This section contains function for the pie Chart */
 
-// This is a simple Pie Chart that displays the proportion of sentiment for the querry user made
+
+/**
+ * @brief This is a simple Pie Chart that displays the proportion of sentiment for the querry user made
+ * @param {string} searchTopic - The topic for the setniment analysis
+ */
 function displayPieChart(searchTopic){
   var xValues = ["Positive", "Neutral", "Negative"];
   var yValues = getValuesForPieChart();
@@ -139,6 +175,10 @@ function displayPieChart(searchTopic){
       maintainAspectRatio: false,
     });
 }
+/**
+ * @brief Calculates the counts of positive, neutral, and negative sentiments from the dataset for the pie chart.
+ * @return {number[]} Array containing the counts for each sentiment type (positive, neutral, negative).
+ */
 function getValuesForPieChart(){
   let positiveValue = 0;
   let neutralValue = 0;
@@ -156,7 +196,9 @@ function getValuesForPieChart(){
 }
 /** This section contains function for the subreddit bar chart */
 
-// This function creates the bar chart for the subreddit count
+/**
+ * @brief This function creates the bar chart for the subreddit count
+ */
 function displaySubredditBarChart(){
   let barChartDatasets = getBarChartDatasets();
   let positiveDataset = barChartDatasets[0];
@@ -208,6 +250,14 @@ function displaySubredditBarChart(){
     } 
   });
 }
+/**
+ * @brief Calculates the maximum value across all sentiment values to determine the y-axis for the chart.
+ * @param {number[]} positiveDataset - The dataset containing the positive sentiment values.
+ * @param {number[]} neutralDataset - The dataset containing the neutral sentiment values.
+ * @param {number[]} negativeDataset - The dataset containing the negative sentiment values.
+ * @param {string[]} xValues - The labels for the x-axis.
+ * @return {number} The maximum y-value for the chart.
+ */
 function getMaxXValue(positiveDataset, neutralDataset, negativeDataset, xValues){
   let totalValues = [];
   let maxY = 0;
@@ -223,6 +273,10 @@ function getMaxXValue(positiveDataset, neutralDataset, negativeDataset, xValues)
   }
   return maxY;
 }
+/**
+ * @brief Gets the data for the bar chart, counting the occurrences of each sentiment type for each subreddit.
+ * @return {Object} An object containing subreddits as keys and an array of sentiment counts [positive, neutral, negative] as values.
+ */
 function getBarChartData(){
   let barData = {}
   jsonData.forEach(entry => {
@@ -242,6 +296,10 @@ function getBarChartData(){
   });
   return barData;
 }
+/**
+ * @brief Retrieves the sentiment datasets for the bar chart, including positive, neutral, and negative counts.
+ * @return {Array} An array containing three sentiment datasets (positive, neutral, negative) and the x-axis labels (subreddits).
+ */
 function getBarChartDatasets(){
   barData = getBarChartData();
   let xValues = Object.keys(barData);
@@ -259,7 +317,9 @@ function getBarChartDatasets(){
   })
   return [positiveDataset, neutralDataset, negativeDataset, xValues];
 }
-// This function creates the line graph for the sentiment over time
+/**
+ * @brief This function creates the line graph for the sentiment over time
+ */
 function sentimentOverTimeLineGraph(){
   getTimeFrame()
   var xValues = [];
@@ -298,6 +358,9 @@ function sentimentOverTimeLineGraph(){
   });
 
 }
+/**
+ * @brief Determines the lowest and highest timestamps from the dataset.
+ */
 function getTimeFrame(){
   let lowestTime = jsonData[0].created_utc;
   let highestTime = jsonData[0].created_utc;
@@ -311,7 +374,9 @@ function getTimeFrame(){
     }
   })
 }
-// This function creates the bar chart for the top keywords by sentiment
+/**
+ * @brief This function creates the bar chart for the top keywords by sentiment
+ */
 function topKeywordsBySentimentBarChart(){
   var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
   var yValues = [55, 49, 44, 24, 15];
@@ -344,7 +409,9 @@ function topKeywordsBySentimentBarChart(){
     }
   });
 }
-// This function creates the scatter graph for sentiment vs engagement
+/**
+ * @brief This function creates the scatter graph for sentiment vs engagement
+ */
 function sentimentVSEngagementSection(){
   const xyValues = [
     {x:50, y:7},
@@ -380,9 +447,10 @@ function sentimentVSEngagementSection(){
     }
   });
 }
-
-// This function creates the word cloud for the top keywords
-// A lot of the code was taken from here: https://d3-graph-gallery.com/graph/wordcloud_size.html
+/**
+ * @brief This function creates the word cloud for the top keywords
+ * @note A lot of the code was taken from here: https://d3-graph-gallery.com/graph/wordcloud_size.html
+ */
 function displayWordCloud(){
   // List of words
   let myWords = getDataForWorldCloud();
@@ -415,8 +483,13 @@ function displayWordCloud(){
     .on("end", draw);
   layout.start();
   
-  // This function takes the output of 'layout' above and draw the words
-  // Wordcloud features that are THE SAME from one word to the other can be here
+  /**
+   * @brief This function takes the output of 'layout' above and draw the words
+   * 
+   * Wordcloud features that are THE SAME from one word to the other can be here
+   * 
+   * @param {*} words an array of words to be drawn in the word cloud
+   */
   function draw(words) {
     svg
       .append("g")
@@ -433,7 +506,11 @@ function displayWordCloud(){
           })
           .text(function(d) { return d.text; });
   }
-  // This function is used to scale the words in the word cloud to an appropriate size
+  /**
+   * @brief This function is used to scale the words in the word cloud to an appropriate size
+   * @param {Array} words - An array of word objects containing text and size data.
+   * @return {Array} The modified array of words with scaled sizes.
+   */
   function scaleWords(words){
     var minSize = 10;
     var maxSize = 60;
@@ -450,6 +527,10 @@ function displayWordCloud(){
     return words;
   }
 }
+/**
+ * @brief Prepares the data from JSON data for the word cloud.
+ * @return {Array} The processed words formatted for the word cloud.
+ */
 function getDataForWorldCloud(){
   let text = "";
   jsonData.forEach(entry =>{
@@ -461,6 +542,11 @@ function getDataForWorldCloud(){
   let formattedWords = convertToWorldCloudFormat(wordCount);
   return formattedWords;
 }
+/**
+ * @brief Converts the word count data into the format required for the word cloud.
+ * @param {Object} wordCount - An object containing word counts where keys are words and values are frequencies.
+ * @return {Array} An array of objects, each containing a word and its corresponding size.
+ */
 function convertToWorldCloudFormat(wordCount){
   let formattedWords = [];
   for(let word in wordCount){
@@ -471,7 +557,9 @@ function convertToWorldCloudFormat(wordCount){
   };
   return formattedWords;
 }
-
+/**
+ * @brief Prepares and renders a scatter plot showing the relationship between sentiment scores and number of comments.
+ */
 function setSentimentAndCommentsSection(){
 
   let positiveScatterData = [];
@@ -540,7 +628,9 @@ function setSentimentAndCommentsSection(){
   const ctx = document.getElementById('sentimentAndCommentsChart').getContext('2d');
   new Chart(ctx, config);
 }
-
+/**
+ * @brief Prepares and renders a scatter plot showing the relationship between sentiment scores and number of upvotes.
+ */
 function setSentimentAndUpvotesSection(){
 
   let positiveScatterData = [];
@@ -616,10 +706,9 @@ function setSentimentAndUpvotesSection(){
 Section for breakdown.html
 
 //////////////////////////////////
-
 */
 /**
- * Sets the data in the breakdown table in breakdown.html page
+ * @brief Sets the data in the breakdown table in breakdown.html page
  *
  */
 function setBreakdownData(){
@@ -779,7 +868,7 @@ function setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, ne
   }
 }
 /**
- * Sets the Most Common Words row in the breakdown table
+ * @brief Sets the Most Common Words row in the breakdown table
  */
 function setMostCommonWords(){
 
@@ -866,6 +955,11 @@ function countWords(words){
   });
   return wordCount;
 }
+/**
+ * @brief Removes specified stopwords and a custom set of words from the provided list of words.
+ * @param {Array} words - An array of words to be filtered.
+ * @return {Array} The filtered array of words.
+ */
 function removeWords(words){
   let searchWord = search;
   let removeList = [searchWord, '', 'undefined', 'why', 'when'];
@@ -1007,6 +1101,9 @@ Section for the view posts section
 
 //////////////////////////////////
 */
+/**
+ * @brief Fills in the sentiment sections (Positive, Neutral, Negative) with posts based on their sentiment labels.
+ */
 function setViewPostsSection(){
   jsonData.forEach(entry => {
     if(entry.label === "POSITIVE"){
@@ -1021,6 +1118,11 @@ function setViewPostsSection(){
     }
   });
 }
+/**
+ * @brief Adds a single post into a specified section of the view posts page.
+ * @param {object} entry - The post entry object containing post data.
+ * @param {HTMLElement} section - The section element where the post will be added.
+ */
 function addPost(entry, section){
   if(entry.title == "N/A"){
     text = entry.selftext;
@@ -1054,6 +1156,9 @@ function addPost(entry, section){
     </button>`;
     section.innerHTML += htmlString;
 }
+/**
+ * @brief This function is called when the user clicks the download CSV button.
+ */
 function downloadCSV(){
   let csv = 'Type,Author,Compound Score,Content,Content Type,Created UTC,Label,Negative Score,Neutral Score,Number of Comments,Over 18, Permalink,Positive Score,Self Text,Subreddit,Title,Upvote Ratio,Upvotes,URL\n';
   i=0;
@@ -1079,8 +1184,11 @@ function downloadCSV(){
 Section for ViewPosts.html
 
 //////////////////////////////////
-*/
-// This function is called when the user clicks a specifc post on the view posts page
+*/ 
+/**
+ * @brief This function is called when the user clicks a specifc post on the view posts page
+ * @param {HTMLElement} button - The button element that was clicked.
+ */
 function postClicked(button){
   var modal = document.getElementById("myModal");
   modal.style.display = "block";
@@ -1155,17 +1263,20 @@ Section for other
 
 //////////////////////////////////
 */
-
-
-// This function is called when the user clicks the post button
+/**
+ * @brief This function is called when the user clicks the post button
+ */
 function postButtonClicked(){
   expandableArea = document.getElementById("expandablePostDetails");
   expandableArea.style.display = "flex";
   expandableArea.style.flexDirection = "row";
   expandableArea.style.justifyContent = "space-around";
 }
-
-// This section is responsible for displaying the form associated with a tab
+/**
+ * @brief This section is responsible for displaying the form associated with a tab
+ * @param {Object} evt - The event object that triggered the function.
+ * @param {string} section - The ID of the section to be displayed.
+ */
 function selectTab(evt, section) {
   document.getElementById("searchBarTopic").style.display = "none";
   tabcontent = document.getElementsByClassName("tabContent");
@@ -1178,30 +1289,36 @@ function selectTab(evt, section) {
   document.getElementById(section).style.display = "block";
   evt.currentTarget.className += " active";
 }
-
-// This function scrolls to a given element
+/**
+ * @brief This function scrolls to a given element
+ * @param {string} section - The ID of the section to be scrolled to.
+ */
 function scrollToElement(section){
   element = document.getElementById(section);
   let offset = 50; // Adjust this value for desired spacing
   let elementPosition = element.getBoundingClientRect().top + window.scrollY;
   window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
 }
-
-
-// Shows the loader when the user submits a form
+/**
+ * @brief Shows the loader when the user submits a form
+ */
 function showLoader(){
   loader = document.getElementById("formModal");
   loader.style.display = "block";
 }
-
-// This function displays the time frame dropdown list in the subreddit form
+/**
+ * @brief This function displays the time frame dropdown list in the subreddit form
+ * @param {string} target - The ID of the target element to be displayed.
+ */
 function showTimeFrameDropDown(target){
   timeFrame = document.getElementById(target);
   timeFrame.style.display = "inline-block";
 }
-
-// This function hides the time frame dropdown list in the subreddit form
-function hideTimeFrameDropDown(targets){
+/**
+ * @brief This function hides the time frame dropdown list in the subreddit form
+ * @param {string} target - The ID of the target element to be hidden.
+ */
+function hideTimeFrameDropDown(target){
   timeFrame = document.getElementById(target);
   timeFrame.style.display = "none";
 }
@@ -1239,17 +1356,17 @@ function typeOfSearchChange(select){
       break;
   }
 }
-
+/**
+ * @brief Displays the "Type of Post" row in the user interface by setting its display style to "table-row".
+ */
 function showTypeOfPostUserRow(){
   typeOfPost = document.getElementById("typeOfPostUserRow");
   typeOfPost.style.display = "table-row";
 }
-
+/**
+ * @brief Hides the "Type of Post" row in the user interfac
+ */
 function hideTypeOfPostUserRow(){
   typeOfPost = document.getElementById("typeOfPostUserRow");
   typeOfPost.style.display = "none";
-}
-
-function displaySentiment(data){
-
 }

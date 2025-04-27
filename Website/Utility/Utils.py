@@ -1,25 +1,45 @@
-#Author: Dawid Pionk
-#Date: 25/01/2025
-#Description: This file contains utility functions that are used in the main.py file
+"""
+@file Utils.py
+@brief This file contains functions that are used for several miscellaneous tasks, such as data processing, sentiment analysis, and Google Trends retrieval.
+@date 28/04/2025
+@author Dawid Pionk
+"""
 
 from collections import Counter
 import logging
 import praw
-#from Utility import SenitmentAnalyser as s
-from Utility import testSenitmentAnalyser as s
+from Utility import SenitmentAnalyser as s
 import datetime
 import pandas as pd
 import re
 import nltk
 
 def countLables(positiveSentimentList, neutralSentimentList, negativeSentimentList):
+    """
+    @brief This function counts the number of items in the provided sentiment lists.
+
+    @param positiveSentimentList - A list containing posts or comments labeled as positive sentiment.
+    @param neutralSentimentList - A list containing posts or comments labeled as neutral sentiment.
+    @param negativeSentimentList - A list containing posts or comments labeled as negative sentiment.
+
+    @return A list containing the counts of positive, neutral, and negative sentiment items in the respective lists.
+    """
     resultArray = [len(positiveSentimentList) , len(neutralSentimentList), len(negativeSentimentList)]
     return resultArray
 
-# Converts the return of the counter method into 2
-# lists that can be then passed into the javascript function
-# used to display the bar chart for unique subreddits
 def convertSubOccurencesForJs(subredditCounter):
+    """
+    @brief This function converts subreddit occurrences for use in JavaScript visualization.
+
+    Converts the return of the counter method into 2 lists that can be then passed into the javascript function
+    used to display the bar chart for unique subreddits
+
+    @param subredditCounter - A dictionary containing subreddit names as keys and their respective occurrence counts as values.
+
+    @return A tuple containing two lists: 
+            - The first list contains the sorted subreddit names.
+            - The second list contains the sorted occurrence counts, aligned with the subreddits.
+    """
     maxSize = 25 # Used to set the max size of the subreddit list
     keys = subredditCounter.keys()
     keyList = []
@@ -30,8 +50,18 @@ def convertSubOccurencesForJs(subredditCounter):
     keyList, itemList = sortSubredditOccurences(keyList, itemList)
     keyList, itemList = reduceSizeOfSubredditList(keyList, itemList, maxSize)
     return keyList, itemList
-# Sorts the items in the lists in descending order
+
 def sortSubredditOccurences(keyList, itemList):
+    """
+    @brief Sorts the items in the lists in descending order
+
+    @param keyList - A list of subreddit names.
+    @param itemList - A list of corresponding occurrence counts for each subreddit.
+
+    @return A tuple containing:
+            - The sorted list of subreddit names (`keyList`).
+            - The sorted list of occurrence counts (`itemList`), in descending order.
+    """
     for i in range(len(itemList)):
         for j in range(i, len(itemList)):
             if itemList[i] < itemList[j]:
@@ -42,15 +72,35 @@ def sortSubredditOccurences(keyList, itemList):
                 keyList[i] = keyList[j]
                 keyList[j] = temp
     return keyList, itemList
-# This function reduces the size of the subreddit list to a specific size
+
 def reduceSizeOfSubredditList(keyList, itemList, size):
+    """
+    @brief This function reduces the size of the subreddit list to a specific size
+
+    @param keyList - A list of subreddit names to be reduced.
+    @param itemList - A list of corresponding occurrence counts for each subreddit.
+    @param size - The maximum size to which the lists should be reduced.
+
+    @return A tuple containing:
+            - The list of subreddit names (`keyList`).
+            - The list of occurrence counts (`itemList`)
+    """
     if len(keyList) > size:
         keyList = keyList[:size]
         itemList = itemList[:size]
     return keyList, itemList
-# This function takes a list of dictionaries and seperates them into 3 lists based on their sentiment
-# Also it adds the sentiment and score to the dictionary
+
 def seperateSentiments(queryList):
+    """
+    @brief This function takes a list of dictionaries and seperates them into 3 lists based on their sentiment
+
+    @param queryList - A list of dictionaries where each dictionary contains information about a post, including a 'title' field that will be analyzed for sentiment.
+
+    @return A tuple containing three lists:
+            - `positiveSentimentList`: A list of posts with a positive sentiment.
+            - `neutralSentimentList`: A list of posts with a neutral sentiment.
+            - `negativeSentimentList`: A list of posts with a negative sentiment.
+    """
     sentimentList = []
     # Extracts the titles from the queryList
     for a in queryList:
@@ -77,8 +127,14 @@ def seperateSentiments(queryList):
             queryList[i]['score'] = alist[i]['score']
     return positiveSentimentList, neutralSentimentList, negativeSentimentList
 
-# This function converts the data from the submission object into a dictionary entry
 def dataToDictionary(submission):
+    """
+    @brief This function converts the data from the submission object into a dictionary entry
+
+    @param submission - A Reddit submission or comment object to be converted to a dictionary
+
+    @return A dictionary containing key attributes of the submission or comment
+    """
     if type(submission) is praw.models.reddit.submission.Submission:
         return {
             "title": submission.title,
@@ -109,29 +165,56 @@ def dataToDictionary(submission):
             "upvotes": submission.score,
             "upvote_ratio": "N/A"
         }
-# This function converts the submissions into a list of dictionaries
 def createDictList(submissions):
+    """
+    @brief This function converts the submissions into a list of dictionaries
+
+    @param submission - A Reddit submission or comment object to be converted to a dictionary
+
+    @return A dlist of dictionaries containing key attributes of the submission or comment
+    """    
     list = []
     for submission in submissions:
         list.append(dataToDictionary(submission))
     return list
 
-# This function extracts the titles of the posts from query
 def extractPostTitles(query):
+    """
+    @brief This function extracts the titles of the posts from query
+
+    @param query - A list of Reddit posts or comments from which titles will be extracted.
+
+    @return A list of titles from the provided posts or comments.
+    """
     resultList = []
     for post in query:
         resultList.append(post.title)
     return resultList
 
-# This function extracts the subreddits from the results of the query
 def extractPostSubreddits(results):
+    """
+    @brief This function extracts the subreddits from the results of the query
+
+    @param results - A list of Reddit posts or comments from which subreddit information will be extracted.
+
+    @return A list of subreddits from the provided posts or comments.
+    """
     resultList = []
     for post in results:
         resultList.append(post.subreddit)
     return resultList
 
-# This function extracts specific information from the results of a query
 def extractData(results):
+    """
+    @brief This function extracts specific information from the results of a query
+
+    @param results - A list of Reddit posts or comments from which titles, subreddits, and authors will be extracted.
+
+    @return A tuple containing three lists: 
+            - A list of post titles
+            - A list of subreddits
+            - A list of authors
+    """
     titleList = []
     subbredditList = []
     authorList = []
@@ -147,6 +230,9 @@ def extractData(results):
 ################################
 
 def getBreakdownData(positiveSentimentList, neutralSentimentList, negativeSentimentList):
+    """
+    @brief NOT IN USE ANYMORE, THIS FUNCTION IS NOT USED ANYWHERE IN THE CODE
+    """
     numberOfSubmissions = len(positiveSentimentList) + len(neutralSentimentList) + len(negativeSentimentList)
     if len(positiveSentimentList) !=0:
         positiveBreakdownMap = setBreakDownData(positiveSentimentList, numberOfSubmissions)
@@ -187,6 +273,9 @@ def getBreakdownData(positiveSentimentList, neutralSentimentList, negativeSentim
     return positiveBreakdownMap, neutralBreakdownMap, negativeBreakdownMap
 
 def setBreakDownData(list, numberOfSubmissions):
+    """
+    @brief NOT IN USE ANYMORE, THIS FUNCTION IS NOT USED ANYWHERE IN THE CODE
+    """
     percentageOfOverall = (len(list) / numberOfSubmissions) * 100
     averageScore = 0
     averageNumOfComments = 0
@@ -237,11 +326,17 @@ def setBreakDownData(list, numberOfSubmissions):
 # Below are functions that deal with processing data to be displayed on charts
 ################################
 def getDataForWordCloud(positiveSentimentList, neutralSentimentList, negativeSentimentList):
+    """
+    @brief NOT IN USE ANYMORE, THIS FUNCTION IS NOT USED ANYWHERE IN THE CODE
+    """
     wordCounts = countWordOccurences(positiveSentimentList, neutralSentimentList, negativeSentimentList)
     wordCloudData = convertWordCountsForWordCloud(wordCounts)
     return wordCloudData
 
 def countWordOccurences(positiveSentimentList, neutralSentimentList, negativeSentimentList):
+    """
+    @brief NOT IN USE ANYMORE, THIS FUNCTION IS NOT USED ANYWHERE IN THE CODE
+    """
     nltk.download('stopwords')
     
     df = convertPostsToDataFrame(positiveSentimentList, neutralSentimentList, negativeSentimentList)
@@ -257,6 +352,9 @@ def countWordOccurences(positiveSentimentList, neutralSentimentList, negativeSen
     return wordCounts
 
 def convertWordCountsForWordCloud(wordCounts):
+    """
+    @brief NOT IN USE ANYMORE, THIS FUNCTION IS NOT USED ANYWHERE IN THE CODE
+    """
     wordCloudString = "["
     for word, count in wordCounts.items():
         wordCloudString+= "{\"word\": \"" + word + "\", \"size\": \"" + str(count) + "\"},"
@@ -266,9 +364,16 @@ def convertWordCountsForWordCloud(wordCounts):
 ##############################
 # This section deals with converting the data into a pandas dataframe
 ################################
-
-# This function converts the data into a pandas dataframe
 def convertPostsToDataFrame(positiveSentimentList, neutralSentimentList, negativeSentimentList):
+    """
+    @brief This function converts the data into a pandas dataframe
+
+    @param positiveSentimentList - A list of positive sentiment posts to be converted into a DataFrame.
+    @param neutralSentimentList - A list of neutral sentiment posts to be converted into a DataFrame.
+    @param negativeSentimentList - A list of negative sentiment posts to be converted into a DataFrame.
+
+    @return A DataFrame containing all the posts from the three sentiment lists.
+    """
     positivedf = pd.DataFrame(positiveSentimentList)
     neutraldf = pd.DataFrame(neutralSentimentList)
     negativedf = pd.DataFrame(negativeSentimentList)

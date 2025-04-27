@@ -1,0 +1,89 @@
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:857: warning: argument 'string' of command @param is not found in the argument list of countWords(words)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:857: warning: The following parameter of countWords(words) is not documented:
+  parameter 'words'
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:845: warning: argument 'string' of command @param is not found in the argument list of getWordList(text)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:845: warning: The following parameter of getWordList(text) is not documented:
+  parameter 'text'
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:751: warning: argument 'string' of command @param is not found in the argument list of setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:751: warning: argument 'string' of command @param is not found in the argument list of setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:751: warning: argument 'string' of command @param is not found in the argument list of setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:751: warning: argument 'number' of command @param is not found in the argument list of setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:751: warning: argument 'number' of command @param is not found in the argument list of setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:751: warning: argument 'number' of command @param is not found in the argument list of setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:751: warning: The following parameters of setAverageNumOfComments(positiveNumOfComments, neutralNumOfComments, negativeNumOfComments, positiveSize, neutralSize, negativeSize) are not documented:
+  parameter 'positiveNumOfComments'
+  parameter 'neutralNumOfComments'
+  parameter 'negativeNumOfComments'
+  parameter 'positiveSize'
+  parameter 'neutralSize'
+  parameter 'negativeSize'
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:877: warning: argument 'string' of command @param is not found in the argument list of setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOfUpvotes, negativeAverageNumOfUpvotes, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:877: warning: argument 'string' of command @param is not found in the argument list of setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOfUpvotes, negativeAverageNumOfUpvotes, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:877: warning: argument 'string' of command @param is not found in the argument list of setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOfUpvotes, negativeAverageNumOfUpvotes, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:877: warning: argument 'number' of command @param is not found in the argument list of setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOfUpvotes, negativeAverageNumOfUpvotes, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:877: warning: argument 'number' of command @param is not found in the argument list of setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOfUpvotes, negativeAverageNumOfUpvotes, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:877: warning: argument 'number' of command @param is not found in the argument list of setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOfUpvotes, negativeAverageNumOfUpvotes, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:877: warning: The following parameters of setAverageNumOfUpvotes(positiveAverageNumOfUpvotes, neutralAverageNumOfUpvotes, negativeAverageNumOfUpvotes, positiveSize, neutralSize, negativeSize) are not documented:
+  parameter 'positiveAverageNumOfUpvotes'
+  parameter 'neutralAverageNumOfUpvotes'
+  parameter 'negativeAverageNumOfUpvotes'
+  parameter 'positiveSize'
+  parameter 'neutralSize'
+  parameter 'negativeSize'
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:721: warning: argument 'string' of command @param is not found in the argument list of setAverageScore(positiveScore, neutralScore, negativeScore, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:721: warning: argument 'string' of command @param is not found in the argument list of setAverageScore(positiveScore, neutralScore, negativeScore, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:721: warning: argument 'string' of command @param is not found in the argument list of setAverageScore(positiveScore, neutralScore, negativeScore, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:721: warning: argument 'number' of command @param is not found in the argument list of setAverageScore(positiveScore, neutralScore, negativeScore, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:721: warning: argument 'number' of command @param is not found in the argument list of setAverageScore(positiveScore, neutralScore, negativeScore, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:721: warning: argument 'number' of command @param is not found in the argument list of setAverageScore(positiveScore, neutralScore, negativeScore, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:721: warning: The following parameters of setAverageScore(positiveScore, neutralScore, negativeScore, positiveSize, neutralSize, negativeSize) are not documented:
+  parameter 'positiveScore'
+  parameter 'neutralScore'
+  parameter 'negativeScore'
+  parameter 'positiveSize'
+  parameter 'neutralSize'
+  parameter 'negativeSize'
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:908: warning: argument 'string' of command @param is not found in the argument list of setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:908: warning: argument 'string' of command @param is not found in the argument list of setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:908: warning: argument 'string' of command @param is not found in the argument list of setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:908: warning: argument 'number' of command @param is not found in the argument list of setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:908: warning: argument 'number' of command @param is not found in the argument list of setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:908: warning: argument 'number' of command @param is not found in the argument list of setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, positiveSize, neutralSize, negativeSize)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:908: warning: The following parameters of setAverageUpvoteRatio(positiveUpvoteRatio, neutralUpvoteRatio, negativeUpvoteRatio, positiveSize, neutralSize, negativeSize) are not documented:
+  parameter 'positiveUpvoteRatio'
+  parameter 'neutralUpvoteRatio'
+  parameter 'negativeUpvoteRatio'
+  parameter 'positiveSize'
+  parameter 'neutralSize'
+  parameter 'negativeSize'
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:693: warning: argument 'string' of command @param is not found in the argument list of setBreakdownPercentageOfOverall(positiveCount, neutralCount, negativeCount, size)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:693: warning: argument 'string' of command @param is not found in the argument list of setBreakdownPercentageOfOverall(positiveCount, neutralCount, negativeCount, size)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:693: warning: argument 'string' of command @param is not found in the argument list of setBreakdownPercentageOfOverall(positiveCount, neutralCount, negativeCount, size)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:693: warning: argument 'number' of command @param is not found in the argument list of setBreakdownPercentageOfOverall(positiveCount, neutralCount, negativeCount, size)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:693: warning: The following parameters of setBreakdownPercentageOfOverall(positiveCount, neutralCount, negativeCount, size) are not documented:
+  parameter 'positiveCount'
+  parameter 'neutralCount'
+  parameter 'negativeCount'
+  parameter 'size'
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:968: warning: setMostCommonSubreddit has @param documentation sections but no arguments
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:787: warning: setMostCommonWords has @param documentation sections but no arguments
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:40: warning: argument 'HTMLSelectElement' of command @param is not found in the argument list of typeOfPostSearchChanged(select)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:40: warning: The following parameter of typeOfPostSearchChanged(select) is not documented:
+  parameter 'select'
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:1210: warning: argument 'Object' of command @param is not found in the argument list of typeOfSearchChange(select)
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/script.js:1210: warning: The following parameter of typeOfSearchChange(select) is not documented:
+  parameter 'select'
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@arthurdenner' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@micalevisk' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@fabric' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@behzadmoradi' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@guysaar223' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@ConnorKrammer' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@GreXLin85' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@nanopx' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@virtual' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@JustroX' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@DavideViolante' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@rodfeal' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@BLKSerene' found as part of a <a>..</a> block
+C:/Users/dawid/Desktop/Repos/SentimentAnalysisProject/Website/static/node_modules/stopword/README.md:237: warning: Illegal command '@dsdenes' found as part of a <a>..</a> block
