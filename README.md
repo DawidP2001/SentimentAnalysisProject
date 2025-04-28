@@ -4,52 +4,11 @@
 
 3. Description Of Project: A website that analyses a given topic on reddit and displays its sentiment for the user
 
-4. ToDo: <br>
-    Done <br>
-    
-5. Potential Issues:<br>
-    Done<br>
+4. View code listings at: Documentation/CodeListings/index.html
+   1. Made using doxygen
 
-6. Ideas for potential features:<br>
-    Done<br>
+5. List Of technologies: Python-Flask, praw, html, css, js, chart.js, d3.js, others
 
-7. List Of Files:<br>
-    I.      Documentation directory - Stores documentation on this project<br>
-    II.     Testing Area directory - Used for testing<br>
-    III.    Website directory - contains code for the program<br>
-    IV.     Website/static directory - Contains the css and js used by flask<br>
-    V.      Website/templates directory - Contains html of the site<br>
-    VI.     Website/templates/charts.html - html with layout for the chart page<br>
-    VII.    Website/templates/extraInformation.html - Used by the index.html to store additional text<br>
-    VIII.   Website/templates/form.html - The form used by index.html<br>
-    IX.     Website/templates/index.html - The home page of the website<br>
-    X.      Website/templates/viewPosts.html - Used by charts.html to display posts<br>
-    XI.     Website/Utility directory - Contains different python functions used by flask<br>
-    XII.    Website/Utility/Reddit.py - Contains logic for queries to reddits API<br>
-    XIII.   Website/Utility/SentimentAnalyzer.py - Contains the model of sentiment analysis<br>
-    XIV.    Website/Utility/Utils.py - Miscellaneous functions used by the program<br>
-    XV.     Wesbsite/main.py - Main file that runs the program contains flask
+6. How to Run locally:  Run main.py then go to http://127.0.0.1:5000/
 
-8. List Of technologies: Python-Flask, praw, html, css, js, chart.js, d3.js, others
-
-9. How to Run:  Run main.py then go to http://127.0.0.1:5000/
-
-10. Website Link: https://dawidp.pythonanywhere.com/ 
-
-11. Citations:
-    Sentiment analaysis Pipeline:
-    @inproceedings{barbieri-etal-2020-tweeteval,
-        title = "{T}weet{E}val: Unified Benchmark and Comparative Evaluation for Tweet Classification",
-        author = "Barbieri, Francesco  and
-        Camacho-Collados, Jose  and
-        Espinosa Anke, Luis  and
-        Neves, Leonardo",
-        booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2020",
-        month = nov,
-        year = "2020",
-        address = "Online",
-        publisher = "Association for Computational Linguistics",
-        url = "https://aclanthology.org/2020.findings-emnlp.148",
-        doi = "10.18653/v1/2020.findings-emnlp.148",
-        pages = "1644--1650"
-    }
+7. Website Link: https://dawidp.pythonanywhere.com/ 
