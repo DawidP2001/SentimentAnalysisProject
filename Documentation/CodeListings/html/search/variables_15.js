@@ -1,0 +1,15 @@
+var searchData=
+[
+  ['vă_0',['vă',['../stopword_8cjs_8min_8js.html#a88734110e19eca01544274a52049ca63',1,'vă:&#160;stopword.cjs.min.js'],['../stopword_8umd_8min_8js.html#a069e5e4f7e801d61cb0316cf1b0a9f3c',1,'vă:&#160;stopword.umd.min.js']]],
+  ['vi_1',['vi',['../stopword_8cjs_8min_8js.html#af85278cbabf63ae6716350670ddb9b8c',1,'vi:&#160;stopword.cjs.min.js'],['../stopword_8umd_8min_8js.html#ae57f5df6978d7a48cdda2a02a2be6f50',1,'vi:&#160;stopword.umd.min.js']]],
+  ['vie_2',['vie',['../stopword_8cjs_8js.html#ac0fd45a2f4284f2b40ef4b76d086be2e',1,'vie:&#160;stopword.cjs.js'],['../stopword_8cjs_8min_8js.html#a8cbd052650d1cf629444b47f1275f845',1,'vie:&#160;stopword.cjs.min.js'],['../stopword_8umd_8js.html#ac0fd45a2f4284f2b40ef4b76d086be2e',1,'vie:&#160;stopword.umd.js'],['../stopword_8umd_8min_8js.html#a1c38e411c900e82371f35d4dbe4fecee',1,'vie:&#160;stopword.umd.min.js']]],
+  ['voştri_3',['voştri',['../stopword_8cjs_8min_8js.html#a487711addbc86282f9e5b751e10534f5',1,'voştri:&#160;stopword.cjs.min.js'],['../stopword_8umd_8min_8js.html#a1e2a8b000c13b633c314e3efc5f29447',1,'voştri:&#160;stopword.umd.min.js']]],
+  ['voastră_4',['voastră',['../stopword_8cjs_8min_8js.html#ad9cc49af27c020fde8bca31aaf86f318',1,'voastră:&#160;stopword.cjs.min.js'],['../stopword_8umd_8min_8js.html#a8f056e437298fe5645f90f17caecd0f9',1,'voastră:&#160;stopword.umd.min.js']]],
+  ['voastre_5',['voastre',['../stopword_8cjs_8min_8js.html#a51d23d6cdc606999cb43dd078414562c',1,'voastre:&#160;stopword.cjs.min.js'],['../stopword_8umd_8min_8js.html#a8cfeca9119717ffe4eccd3f1cdc1aed4',1,'voastre:&#160;stopword.umd.min.js']]],
+  ['voi_6',['voi',['../stopword_8cjs_8min_8js.html#a40157c37f2172fc98456fb93b5bc805a',1,'voi:&#160;stopword.cjs.min.js'],['../stopword_8umd_8min_8js.html#a10b412efd9a3c63a42edaafa99f64a7b',1,'voi:&#160;stopword.umd.min.js']]],
+  ['vostru_7',['vostru',['../stopword_8cjs_8min_8js.html#a09540640ea457cb5c44afdf708d614c8',1,'vostru:&#160;stopword.cjs.min.js'],['../stopword_8umd_8min_8js.html#a5f115fa695e3d2489be5f2212e7281cf',1,'vostru:&#160;stopword.umd.min.js']]],
+  ['vouă_8',['vouă',['../stopword_8cjs_8min_8js.html#a56c4fd0d09dfff22a95598e26eec6aed',1,'vouă:&#160;stopword.cjs.min.js'],['../stopword_8umd_8min_8js.html#a67cb500b781159d7680f1b9a98e7a7ec',1,'vouă:&#160;stopword.umd.min.js']]],
+  ['vreme_9',['vreme',['../stopword_8cjs_8min_8js.html#a1f449cdc9055ec0f0787ae369f34e62b',1,'vreme:&#160;stopword.cjs.min.js'],['../stopword_8umd_8min_8js.html#a21fe218e12d84cafcc879cadfb197029',1,'vreme:&#160;stopword.umd.min.js']]],
+  ['vreo_10',['vreo',['../stopword_8cjs_8min_8js.html#a9f72195d2b294fe4154fa8d8b79b0206',1,'vreo:&#160;stopword.cjs.min.js'],['../stopword_8umd_8min_8js.html#adbb3ee096325b18089c3cfa8534a2299',1,'vreo:&#160;stopword.umd.min.js']]],
+  ['vreun_11',['vreun',['../stopword_8cjs_8min_8js.html#a5d069fcc0fa4493a405a32a915ed65e3',1,'vreun:&#160;stopword.cjs.min.js'],['../stopword_8umd_8min_8js.html#ac495e7ff14964caa28ac17e4b708f72d',1,'vreun:&#160;stopword.umd.min.js']]]
+];
