@@ -1,0 +1,12 @@
+praw
+os
+python-dotenv
+tensorflow
+feedparser
+datetime
+pandas
+requests
+numpy
+Pillow
+transformers
+nltk
