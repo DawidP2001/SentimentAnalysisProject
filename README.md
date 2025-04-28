@@ -2,27 +2,16 @@
 
 2. Author: Dawid Pionk
 
-3. Description Of Project: A website that analyses a given topic and displays its sentiment for the user
+3. Description Of Project: A website that analyses a given topic on reddit and displays its sentiment for the user
 
 4. ToDo: <br>
-    I.   Charts<br>
-    II.  View Posts<br>
-    III. Guide Page<br>
-    IV.  Add Light and Dark mode<br>
-    V.   Extract more Information from the submission object for the table<br>
-    VI.  Generate the table of posts
+    Done <br>
     
 5. Potential Issues:<br>
-    I.  Fix environmental variables on pythonAnywhere<br>
-    II. Fix issue with resizing
+    Done<br>
 
 6. Ideas for potential features:<br>
-    I.      Analysis for images<br>
-    II.     Compare Sentiment<br>
-    III.    Accounts<br>
-    IV.     Previous Searches<br>
-    V.      Forum/Discussion Page<br>
-    VI.     Phone website<br>
+    Done<br>
 
 7. List Of Files:<br>
     I.      Documentation directory - Stores documentation on this project<br>
@@ -41,7 +30,7 @@
     XIV.    Website/Utility/Utils.py - Miscellaneous functions used by the program<br>
     XV.     Wesbsite/main.py - Main file that runs the program contains flask
 
-8. List Of technologies: Python-Flask, praw, transformers, dotenv
+8. List Of technologies: Python-Flask, praw, html, css, js, chart.js, d3.js, others
 
 9. How to Run:  Run main.py then go to http://127.0.0.1:5000/
 
