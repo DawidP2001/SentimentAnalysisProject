@@ -9,6 +9,8 @@
 
 5. List Of technologies: Python-Flask, praw, html, css, js, chart.js, d3.js, others
 
-6. How to Run locally:  Run main.py then go to http://127.0.0.1:5000/
+6. How to Run locally: 
+   1. Run prepare_project.py
+   2. Run main.py then go to http://127.0.0.1:5000/
 
 7. Website Link: https://dawidp.pythonanywhere.com/ 
